@@ -1,8 +1,8 @@
 # University of Toronto Software Core #
 
-# Overview #
+## Overview ##
 
-# Git & Development Workflow #
+## Git & Development Workflow ##
 
 ## Before you start... ##
 - Files more than a few MB in size should not pushed to the repo unless there is a good reason
