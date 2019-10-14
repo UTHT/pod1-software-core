@@ -15,7 +15,7 @@ The GIT workflow used here is not novel, it pulls a lot from ideas found here...
 [And here](https://nvie.com/posts/a-successful-git-branching-model/)
 
 To start off, here is what the branching schema looks like.
-![Branching Schema](README-resources/branch_schema.png)
+![Branching Schema](README-resources/branching_schema.png)
 
 ### What it means... ###
 
