@@ -1,4 +1,12 @@
+#include <lcm/lcm-cpp.hpp>
+
 int main(int argc, char*argv[]){
-  // Create LCM channel
-  return 1;
+  lcm::LCM lcm;
+
+  if(!lcm.good())
+      return 1;
+
+  /* Your application goes here */
+
+  return 0;
 }
