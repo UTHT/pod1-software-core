@@ -72,6 +72,10 @@ For details on each step, follow the link referenced above. I won't repeat.
 
 ## Installation guide ##
 
+The first thing is to init and update all submodules. Running `git submodule update --init --recursive` will accomplish this.
+
+To ensure LCM is setup properly, I suggest reading our [lcm-practice repo](https://github.com/utht/lcm-practice) and the [official lcm build instructions](https://lcm-proj.github.io/build_instructions.html) for more information.
+
 ### Dependencies ###
 - LCM (Lightweight Communications Marshalling)
   - To install LCM, follow the instructions here... [instructions to build LCM](https://lcm-proj.github.io/build_instructions.html)
