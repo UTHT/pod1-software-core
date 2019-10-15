@@ -79,3 +79,15 @@ To ensure LCM is setup properly, I suggest reading our [lcm-practice repo](https
 ### Dependencies ###
 - LCM (Lightweight Communications Marshalling)
   - To install LCM, follow the instructions here... [instructions to build LCM](https://lcm-proj.github.io/build_instructions.html)
+
+## Notes on Using LCM ##
+Firstly, this description is redundant information pulled from the [official documentation](https://lcm-proj.github.io/). But, frequent occurences to note.
+
+To generate the language-specific bindings...
+| Language | Command |
+| --- | --- |
+| C	| lcm-gen -c example_t.lcm |
+| C++	| lcm-gen -x example_t.lcm |
+| Python	| lcm-gen -p example_t.lcm |
+
+
