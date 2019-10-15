@@ -69,6 +69,16 @@ For details on each step, follow the link referenced above. I won't repeat.
 
 ### Commands to use when working ###
 
+### GIT Practice Instructions ###
+1. First is to read this entire README and follow any and all instalation instructions
+2. The code we will working with can be found a `software/git-practice`. For those who thought this was going to be a really complex practice, it's not, so I apologize ahead of time. This will be a **very** basic introduction
+3. Now is where we need to follow the guidelines setup for this workflow.
+  1. Checkout your team's respective `\*-dev` branch, branching from the `\*-stable`
+    - `git checkout -b infrastructures-dev infrastructures-stable`
+    - `git checkout -b communications-dev communications-stable`
+    - `git checkout -b controls-dev controls-stable`
+  2. This is how every sprint would start...
+  3.
 
 ## Installation guide ##
 
