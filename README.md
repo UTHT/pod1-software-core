@@ -84,6 +84,7 @@ To ensure LCM is setup properly, I suggest reading our [lcm-practice repo](https
 Firstly, this description is redundant information pulled from the [official documentation](https://lcm-proj.github.io/). But, frequent occurences to note.
 
 To generate the language-specific bindings...
+
 | Language | Command |
 | -------- | --------  |
 | C	| `lcm-gen -c example_t.lcm` |
