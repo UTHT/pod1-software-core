@@ -85,9 +85,7 @@ Firstly, this description is redundant information pulled from the [official doc
 
 To generate the language-specific bindings...
 | Language | Command |
-| --- | --- |
-| C	| lcm-gen -c example_t.lcm |
-| C++	| lcm-gen -x example_t.lcm |
-| Python	| lcm-gen -p example_t.lcm |
-
-
+| -------- | --------  |
+| C	| `lcm-gen -c example_t.lcm` |
+| C++	| `lcm-gen -x example_t.lcm` |
+| Python	| `lcm-gen -p example_t.lcm` |
