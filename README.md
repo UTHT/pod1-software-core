@@ -1,5 +1,7 @@
 # University of Toronto Hyperloop Team Software Core #
 
+## Directory Structure ##
+
 ## Overview ##
 
 ### The Three Teams ###
@@ -32,7 +34,7 @@ USE THE CLI!!
 
 The GIT workflow used here is not novel, it pulls a lot from ideas found here...
 [Here](https://blog.logrocket.com/the-git-workflow-you-need-how-to-deal-with-multiple-teams-in-a-single-repository-faf5bb17a6e4/)
-, [And here](https://nvie.com/posts/a-successful-git-branching-model/)
+, [and here](https://nvie.com/posts/a-successful-git-branching-model/)
 
 To start off, here is what the branching schema looks like. (This would represent, at a high level, a start/end to a sprint)
 ![Branching Schema](README-resources/branching_schema.png)
