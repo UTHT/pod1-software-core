@@ -74,10 +74,53 @@ For details on each step, follow the link referenced above. I won't repeat.
 
 The first thing is to init and update all submodules. Running `git submodule update --init --recursive` will accomplish this.
 
+### Installing LCM ###
 To ensure LCM is setup properly, I suggest reading our [lcm-practice repo](https://github.com/utht/lcm-practice) and the [official lcm build instructions](https://lcm-proj.github.io/build_instructions.html) for more information.
 
+#### This is for linux (I run Arch, it should work on Ubuntu/Debian also. For Mac, windows, or others, check the documentation [here](https://github.com/lcm-proj/lcm/blob/master/docs/content/build-instructions.md)
+
+Before getting started, make sure the LCM repository (Found in this repository at path `software/lcm` is checked out to `v1.4.0` (it should already be)
+To check this, run `git branch` -> you should see something like `(HEAD detached at v1.4.0)`
+If not, run `git checkout v1.4.0`
+
+The following packages are required:
+- build-essential
+- libglib2.0-dev
+
+The following packages are strongly recommended:
+- default-jdk (or openjdk-9-jdk)
+- python-dev
+
+Run the following commands
+
+```
+cd lcm
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
+Finally, run the following ... (This is for Arch, I am not 100% sure you need to do this for Arch/Debian. Check the [link](https://github.com/lcm-proj/lcm/blob/master/docs/content/build-instructions.md))
+```
+export LCM_INSTALL_DIR=/usr/local/lib
+sudo echo 'sudo echo $LCM_INSTALL_DIR > /etc/ld.so.conf.d/lcm.conf
+export PYTHON_VERSION=$(python -c "import sys; print(\"%s.%s\" % sys.version_info[:2])")
+export PYTHON_USER_SITE=$(python -m site --user-site)
+sudo echo "$LCM_INSTALL_DIR/python$PYTHON_VERSION/site-packages" > /usr/lib/python$PYTHON_VERSION/site-packages/lcm.pth
+```
+
+* note, I use `pyenv` to control python versions on my system, so I also added the `site-packages` location for my `python 3.7.3` installation to `/usr/lib/python$PYTHON_VERSION/site-packages/lcm  .pth`
+
+Additionally, you may need to configure pkgconfig to find lcm.pc
+`export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_LIBRARY_DIR/pkgconfig`
+
+**To check everything works**
+Go to `software/git-practice` and type `lcm-gen -p test_message.lcm`
+If no errors appear, and this generates a `test_message.py` file, then everything "should" work.
+
 ### Dependencies ###
-- LCM (Lightweight Communications Marshalling)
+- LCM  (Lightweight Communications Marshalling)
   - To install LCM, follow the instructions here... [instructions to build LCM](https://lcm-proj.github.io/build_instructions.html)
 
 ## Notes on Using LCM ##
