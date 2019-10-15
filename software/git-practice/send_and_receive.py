@@ -14,7 +14,7 @@ def sender(chanel: str):
 
     # Sample
     message.name = "Mathieu Tuli"
-    message.value = "TEST"
+    message.value = "TEST VALUE"
     _lcm.publish(chanel, message.encode())
     # End of sample
 
