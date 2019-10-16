@@ -70,15 +70,15 @@ For details on each step, follow the link referenced above. I won't repeat.
 ### Commands to use when working ###
 
 ### GIT Practice Instructions ###
-1. First is to read this entire README and follow any and all instalation instructions
-2. The code we will working with can be found a `software/git-practice`. For those who thought this was going to be a really complex practice, it's not, so I apologize ahead of time. This will be a **very** basic introduction
-3. Now is where we need to follow the guidelines setup for this workflow.
-  1. Each team has a `\*-dev` and `\*-stable` branch, which is currently all the same as master. For the purposes of this practice, you can directly create a new `feature` branch from your team's stable branch. In the future however, at the start of each sprint, you would create the branch from the `\*-dev` branch which would start off as a "clone" of the latest tag on your team's branch. If none of this makes sense to you, I suggest maybe reading on how the tutorials I mentioned and on concepts such as `git tagging` and what not. You can also reach out to me and ask.
+- First is to read this entire README and follow any and all instalation instructions
+- The code we will working with can be found a `software/git-practice`. For those who thought this was going to be a really complex practice, it's not, so I apologize ahead of time. This will be a **very** basic introduction
+- Now is where we need to follow the guidelines setup for this workflow.
+  - Each team has a `\*-dev` and `\*-stable` branch, which is currently all the same as master. For the purposes of this practice, you can directly create a new `feature` branch from your team's stable branch. In the future however, at the start of each sprint, you would create the branch from the `\*-dev` branch which would start off as a "clone" of the latest tag on your team's branch. If none of this makes sense to you, I suggest maybe reading on how the tutorials I mentioned and on concepts such as `git tagging` and what not. You can also reach out to me and ask.
     - The command you effectively issue then is as follows: Note, replace \*\*feature\*\* with your feature name. In this case, just use like your own name or something like `practice-Mat`
     - `git checkout -b infrastructures-**feature** infrastructures-stable`
     - `git checkout -b communications-**feature** communications-stable`
     - `git checkout -b controls-**feature** controls-stable`
-  2. Now the "feature" you are developping is really to just go into `send_and_receive.py` and edit the lines 21-22. Basically, just change the values of the LCM message and publish them. The key here is that you are all going to be editing the same lines, so once you're done, commit your changes and merge them to `\*-dev` -> your team's respective dev branch. You will run into merge conflicts, and make sure that you resolve them!! Don't overwrite other peoples' code, make sure the resulting file includes your lines and theirs!. At the end, I should be able to merge all the `\*-dev` branches and run the code to print everyone's messages.
+  - Now the "feature" you are developping is really to just go into `send_and_receive.py` and edit the lines 21-22. Basically, just change the values of the LCM message and publish them. The key here is that you are all going to be editing the same lines, so once you're done, commit your changes and merge them to `\*-dev` -> your team's respective dev branch. You will run into merge conflicts, and make sure that you resolve them!! Don't overwrite other peoples' code, make sure the resulting file includes your lines and theirs!. At the end, I should be able to merge all the `\*-dev` branches and run the code to print everyone's messages.
     - `git add send_and_receive.py` -> stage your changes for commit
     - `git status` -> always good practice to check what is staged and isn't before commiting to make sure you aren't doing anything wrong
     - `git commit` or `git commit -m ""` (if you just have a quick message. But be careful of message length!)
@@ -88,8 +88,8 @@ For details on each step, follow the link referenced above. I won't repeat.
     - `git merge team-name-feature-name` -> This "will" cause merge conflicts (if you are the first one making changes, then maybe not)
     - once you've merged, make sure everything is okay -> as in, your changes, + any changes that were there are not overwritten
     - `git push origin \*-dev` push changes to your team's dev branch
-  3. And that's it! As it stands, only select people are allowd to merge `\*-dev` and `\*-stable` branches, so once you merge to `\*-dev`, that's everything
-  4. You can now also delete your feature branch
+  - And that's it! As it stands, only select people are allowd to merge `\*-dev` and `\*-stable` branches, so once you merge to `\*-dev`, that's everything
+  - You can now also delete your feature branch
     - 'git branch -d team-name-feature-name` -> whatever your feature branch name was
 
 ## Installation guide ##
