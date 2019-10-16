@@ -21,6 +21,9 @@ def sender(chanel: str):
     # ADD CODE HERE
     ################
 
+    message.name = "Jay Mohile"
+    message.value = "It'sa me-a, Mario"
+    _lcm.publish(chanel, message.encode())
 
 def listener(channel, data):
     message = test_message.decode(data)
