@@ -18,7 +18,7 @@ def sender(chanel: str):
     _lcm.publish(chanel, message.encode())
     # End of sample
 
-    # ADD YOU SAMPLE HERE
+    # ADD YOUR SAMPLE CODE HERE
     ################
 
 
