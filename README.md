@@ -78,6 +78,7 @@ For details on each step, follow the link referenced above. I won't repeat.
 ### Commands to use when working ###
 
 ### GIT Practice Instructions ###
+**Note that this is purely introductory. Some concepts like `git rebasing` and maybe even `pull requests` will come later**
 - First is to read this entire README and follow any and all instalation instructions
 - The code we will working with can be found a `software/git-practice`. For those who thought this was going to be a really complex practice, it's not, so I apologize ahead of time. This will be a **very** basic introduction
 - Now is where we need to follow the guidelines setup for this workflow.
@@ -94,6 +95,7 @@ For details on each step, follow the link referenced above. I won't repeat.
     - now merge your changes with `\*-dev`...
     - `git checkout \*-dev` -> checkout your team's dev branch
     - `git merge team-name-feature-name` -> This "will" cause merge conflicts (if you are the first one making changes, then maybe not)
+    - to resolve merge conflicts, there are many ways. I won't describe them all, and leave it to you to research online. (However, I use `git mergetool`, and I've defined in the `~/.gitconfig` to use my `vim` editor to resolve merge conflicts)
     - once you've merged, make sure everything is okay -> as in, your changes, + any changes that were there are not overwritten
     - `git push origin \*-dev` push changes to your team's dev branch
   - And that's it! As it stands, only select people are allowd to merge `\*-dev` and `\*-stable` branches, so once you merge to `\*-dev`, that's everything
