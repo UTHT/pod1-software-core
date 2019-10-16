@@ -54,6 +54,14 @@ The basic idea...
   - Subsequently, each team's stables are merged to `master-dev` for further QA and final merging to `master`
 - Reference the links from above for more details...
 
+### Branch Naming Conventions ###
+- Every team has a `\*-stable` and `\*-dev` branch
+- `feature` branches are to named as follows:
+  - `infrastructures-(unique feature name)`
+  - `communications-(unique feature name)`
+  - `controls-(unique feature name)`
+  - The decision of (unique feature name) is up to you, but keep it short and informative
+
 ### Commit Message Formats ###
 [Reference](https://chris.beams.io/posts/git-commit/)
 The seven rules to follow...
@@ -91,6 +99,7 @@ For details on each step, follow the link referenced above. I won't repeat.
   - And that's it! As it stands, only select people are allowd to merge `\*-dev` and `\*-stable` branches, so once you merge to `\*-dev`, that's everything
   - You can now also delete your feature branch
     - 'git branch -d team-name-feature-name` -> whatever your feature branch name was
+    - 'git push -d origin team-name-feature-name` -> whatever your feature branch name was
 
 ## Installation guide ##
 
