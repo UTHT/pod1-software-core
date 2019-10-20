@@ -21,6 +21,10 @@ def sender(chanel: str):
     # ADD CODE HERE
     ################
 
+    message.name = "Forest Li"
+    message.value = "TEST"
+    _lcm.publish(chanel, message.encode())
+
 
 def listener(channel, data):
     message = test_message.decode(data)
