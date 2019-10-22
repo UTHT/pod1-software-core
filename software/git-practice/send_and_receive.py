@@ -20,9 +20,16 @@ def sender(chanel: str):
 
     # ADD CODE HERE
     ################
+<<<<<<< HEAD
     message.name = "Joseph"
     message.value = "test"
     _lcm.publish(chanel, message.encode())
+=======
+    message.name = "Rama"
+    message.value = "Rama is testing"
+    _lcm.publish(chanel, message.encode())
+
+>>>>>>> infrastructures-practice-Rama
 
 def listener(channel, data):
     message = test_message.decode(data)
