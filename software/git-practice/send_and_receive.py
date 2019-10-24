@@ -18,8 +18,8 @@ def sender(chanel: str):
     _lcm.publish(chanel, message.encode())
     # End of sample
 
-    # ADD CODE HERE
-    ################
+    message.value = "Divy Raval"
+    message.value "Git TEST VALUE"
 
 
 def listener(channel, data):
