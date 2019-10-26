@@ -8,10 +8,11 @@ import lcm
 from test_message import test_message
 
 
-def sender(chanel: str):
+def sender(channel: str):
     message = test_message()
     _lcm = lcm.LCM()
 
+<<<<<<< Updated upstream
     # Sample
     message.name = "Mathieu Tuli"
     message.value = "TEST VALUE"
@@ -21,6 +22,40 @@ def sender(chanel: str):
     message.name = "Divy Raval"
     message.value = "Git TEST VALUE"
     _lcm.publish(chanel, message.encode())
+=======
+    # # Sample
+    # message.name = "Mathieu Tuli"
+    # message.value = "TEST VALUE"
+    # _lcm.publish(channel, message.encode())
+    # # End of sample
+
+    message.name = "Divy Raval"
+    message.value = "Git TEST VALUE"
+    _lcm.publish(channel, message.encode())
+    # ADD CODE HERE
+    ################
+    # ADD CODE HERE
+    message.name = "Practice Test"
+    _lcm.publish(channel, message.encode())
+    # ADD CODE HERE
+    ################
+    # ADD CODE HERE
+    message.name = "RAFAY KALIM"
+    message.value = "test msg"
+    _lcm.publish(channel, message.encode())
+    ################
+    # ADD CODE HERE
+    ################
+    message.name = "Divy Raval"
+    message.value = "Git TEST VALUE"
+    _lcm.publish(channel, message.encode())
+    message.name = "Joseph"
+    message.value = "test"
+    _lcm.publish(channel, message.encode())
+    message.name = "Rama"
+    message.value = "Rama is testing"
+    _lcm.publish(channel, message.encode())
+>>>>>>> Stashed changes
 
 
 def listener(channel, data):
