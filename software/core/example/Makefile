@@ -1,4 +1,4 @@
-TARGET = git_practice
+TARGET = example
 BUILD_DIRS=build
 CFLAGS=`pkg-config --cflags lcm`
 LDFLAGS=`pkg-config --libs lcm`
@@ -7,7 +7,8 @@ $(shell mkdir -p $(BUILD_DIRS))
 INC=-Iinclude
 
 all: ${TARGET}
-git_practice: src/main.cpp
-	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/git_practice src/main.cpp
+example: src/send.cpp src/listen.cpp
+	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/send src/send.cpp
+	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/listen src/listen.cpp
 clean:
 	rm -f ${TARGET}
