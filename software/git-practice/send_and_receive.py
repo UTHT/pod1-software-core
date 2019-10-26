@@ -27,6 +27,11 @@ def sender(chanel: str):
     message.name = "Practice Test"
     _lcm.publish(chanel, message.encode())
     ################
+    # ADD CODE HERE
+    ################
+    message.name = "Divy Raval"
+    message.value = "Git TEST VALUE"
+    _lcm.publish(chanel, message.encode())
 
 
 def listener(channel, data):
