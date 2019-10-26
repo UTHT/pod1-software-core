@@ -12,11 +12,11 @@ def sender(chanel: str):
     message = test_message()
     _lcm = lcm.LCM()
 
-    # Sample
-    message.name = "Mathieu Tuli"
-    message.value = "TEST VALUE"
-    _lcm.publish(chanel, message.encode())
-    # End of sample
+    # # Sample
+    # message.name = "Mathieu Tuli"
+    # message.value = "TEST VALUE"
+    # _lcm.publish(chanel, message.encode())
+    # # End of sample
 
     message.name = "Divy Raval"
     message.value = "Git TEST VALUE"
@@ -31,6 +31,12 @@ def sender(chanel: str):
     ################
     message.name = "Divy Raval"
     message.value = "Git TEST VALUE"
+    _lcm.publish(chanel, message.encode())
+    message.name = "Joseph"
+    message.value = "test"
+    _lcm.publish(chanel, message.encode())
+    message.name = "Rama"
+    message.value = "Rama is testing"
     _lcm.publish(chanel, message.encode())
 
 
