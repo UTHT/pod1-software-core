@@ -19,6 +19,8 @@ def sender(chanel: str):
     # End of sample
 
     # ADD CODE HERE
+    message.name = "Practice Test"
+    _lcm.publish(chanel, message.encode())
     ################
 
     message.name = "Jay Mohile"
