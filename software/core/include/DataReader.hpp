@@ -3,11 +3,13 @@
 
 #include <sys/time.h>
 #include <stdbool.h>
-#include "Channel.hpp"
+#include "helper/IOPin.hpp"
+// #include "Channel.hpp" // To be implemented by Sabita and Shaziah
 
 class DataReader{
   private:
-    Channel channel;
+    // Channel channel;
+    struct IOPin io_pin;
   public:
     DataReader();
     ~DataReader();
