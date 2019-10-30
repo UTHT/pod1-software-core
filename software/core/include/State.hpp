@@ -1,8 +1,18 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-// This is just temporary until we have a STATES enum.
-enum STATES {};
+// Declare the states using enumeration 
+enum STATE {
+     ESTOP,
+     Off,
+     Debug,
+     Communication Check,
+     System Check,
+     Lock,
+     Arm,
+     Drive,
+     Brake	
+};
 
 class State {
     private:
