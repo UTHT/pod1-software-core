@@ -1,10 +1,13 @@
-#include <iostream>
+//#include <lcm/lcm-cpp.hpp>
+#if ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
 #include <stdio.h>
-#include <lcm/lcm-cpp.hpp>
-#include "include/controller.hpp"
-#include "lib/Arduino-PID-Library/PID_v1.h"
-#include "Arduino.h"
-#include "Stream.h"
+#include "../include/controller.hpp"
+#include "../lib/Arduino-PID-Library/PID_v1.h"
 
 int Controller::StateChange(int NewState) {
     
@@ -51,7 +54,7 @@ int Controller::StateChange(int NewState) {
         Brake.SetTunings(Brake_Kp, Brake_Ki, Brake_Kd, Brake_PoN);
         Brake.SetControllerDirection(Brake_Dir);
         Brake.SetMode(Brake_Mode);
-        Brake.SetOutputLimits(Brake_lower, MBrake_upper);
+        Brake.SetOutputLimits(Brake_lower, Brake_upper);
     }
     
     return 0;
@@ -68,8 +71,6 @@ Controller::Controller(int motor_pin, int brake_pin) :
     if (motor_pin > 0) { motor_input_pin = motor_pin;}
     if (brake_pin > 0) { brake_input_pin = brake_pin;}
 
-    // Arduino Library import Needed
-
     // Motor Controller is connected
     if (motor_input_pin != -1) {
         Motor_input = analogRead(motor_input_pin);
@@ -85,42 +86,7 @@ Controller::Controller(int motor_pin, int brake_pin) :
     time = millis();
 }
 
-Controller::~Controller() {
-
-    Essential_Channels.clear();
-    Motor_Channels.clear();
-    Brake_Channels.clear();
-}
-
-int Controller::setChannels(std::vector<std::string> Channels, int Type) {
-    
-    switch(Type) {
-        case 0: Essential_Channels = Channels;
-                break;
-        case 1: Motor_Channels = Channels;
-                break;
-        case 2: Brake_Channels = Channels;
-                break;
-
-        default: return -1;
-                break;
-    }
-
-    return 0;
-}
-
-std::vector<std::string> Controller::getChannels(int Type) {
-
-    switch(Type) {
-        case 0: return Essential_Channels;
-                
-        case 1: return Motor_Channels;
-                
-        case 2: return Brake_Channels;
-            
-        default: return (std::vector<std::string> {});
-    }
-}
+Controller::~Controller() {}
 
 int Controller::setmotor_pin(int motor_pin) {
 
@@ -157,11 +123,18 @@ int Controller::run() { // TODO:Add error checking to return error code on probl
     Sampletime = time - millis();
     time = millis();
 
-    Motor.SetSampleTime(Sampletime);
-    Motor.Compute();
+    if (motor_input_pin != -1) {
+        
+        Motor.SetSampleTime(Sampletime);
+        Motor.Compute();
+    }
 
-    Brake.SetSampleTime(Sampletime);
-    Brake.Compute();
+    if (brake_input_pin != -1) { 
+        
+        Brake.SetSampleTime(Sampletime);
+        Brake.Compute();
+    }
+    return 0;
 }
 
 bool Controller::motorshutdown() {

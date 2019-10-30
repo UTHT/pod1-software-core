@@ -1,9 +1,7 @@
 #ifndef controller_h
 #define controller_h
-#include <iostream>
 #include <stdio.h>
-#include <vector>
-#include "lib/Arduino-PID-Library/PID_v1.h"
+#include "../lib/Arduino-PID-Library/PID_v1.h"
 
 // Need to add functionality if output measurements occur with the same Arduino
 // Sensor class?
@@ -89,22 +87,21 @@ class Controller {
         const double Temperature_D[TotalStates] = {5.6, 5.9, 4.8};
         */
 
-        // Vector for Channels
-        // Vector or set to store channels?????
-        std::vector<std::string> Essential_Channels = {"IMPORTANT", "other bs"};
-        std::vector<std::string> Motor_Channels = {"IMPORTANTbrake stuff", "other bs"};
-        std::vector<std::string> Brake_Channels = {"IMPORTANTmotor stuff", "other bs"};
+        // Fixed Size Array due to memory concerns
+        // In practice, the channels names would be constant
+        // as well as the number of channels
+        #define Essential_Channels_MAXSIZE 15
+        #define Motor_Channels_MAXSIZE 15
+        #define Brake_Channels_MAXSIZE 15
+        String Essential_Channels[Essential_Channels_MAXSIZE] = {"IMPORTANT", "other bs"};
+        String Motor_Channels[Motor_Channels_MAXSIZE] = {"IMPORTANTbrake stuff", "other bs"};
+        String Brake_Channels[Brake_Channels_MAXSIZE] = {"IMPORTANTmotor stuff", "other bs"};
 
     public:
 
         Controller(int motor_pin, int brake_pin);
 
         ~Controller();
-
-        // setChannels is primarily for ease while debugging, ideally shouldn't be used
-        int setChannels(std::vector<std::string> Channels, int Type);
-
-        std::vector<std::string> getChannels(int Type);
 
         int setmotor_pin(int motor_pin);
 
