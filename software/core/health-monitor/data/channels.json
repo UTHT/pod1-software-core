@@ -1,0 +1,8 @@
+{
+    "TEMPLATE_CHANNEL": {
+        "tolFrequency": 30,
+        "tolBandwidth": 20,
+        "tolBytes": 10,
+        "isCritical": true
+    }
+}
