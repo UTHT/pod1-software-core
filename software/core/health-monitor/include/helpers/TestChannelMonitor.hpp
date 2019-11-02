@@ -3,7 +3,7 @@
 #include <string>
 
 // Processes singular channels
-class DataReader
+class TestChannelMonitor
 {
 private:
    // arbritrary data types
@@ -32,11 +32,11 @@ protected:
    }
 
 public:
-   DataReader(
+   TestChannelMonitor(
        double tolFrequency = 0,
        double tolBandwidth = 0,
        unsigned int tolBytes = 0);
-   ~DataReader();
+   ~TestChannelMonitor();
 
    // returns the state of the data readers
    bool get_state()
