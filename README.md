@@ -173,3 +173,5 @@ To generate the language-specific bindings...
 
 ### Example Code ###
 Example code can be found under `software/core/example`. To run it, first type `make` to build the exec. files. `cd` into the build folder, and run `./listen`. Either send that process to the background `ctrl-z` then `bg` or open a new terminal and run the `./send`.
+
+- testing if the remote repo has been set properly - joon
