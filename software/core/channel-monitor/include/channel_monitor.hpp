@@ -4,25 +4,25 @@ using namespace std;
 
 #include <string>
 #include <vector>
-#include <lcm/lcm-cpp.hpp>
 #include "../helper/enums.hpp"
-//#include "DataReader"
+//#include "Channel"
 
 // Temporary class (for now)
-class DataReader {
-    public:
-        double sensorValue;
-};
+// testing purposes
+// class Channel {
+//     public:
+//         double sensorValue;
+//         double frequencyValue;
+// };
 
 class ChannelMonitor{
-
     private:    
         string channel_name;
-        DataReader channel_data;
 
+        // Extra private members
+        Channel channel_data;
         double min_accepted_value;
         double max_accepted_value;
-
         double min_accepted_frequency;
         double max_accepted_frequency;
     
@@ -35,32 +35,37 @@ class ChannelMonitor{
             max_accepted_frequency = maxAcceptedFrequency;
         };
 
-        // We can use the default destructor
-        //~ChannelMonitor(){}
-
-        // Instead of passing the sensor value to the function, it can get the sensor
-        // value directly from the private class member. 
-        // May need to check for sync issues in this case
         bool isSensorValueInRange(double channel_sensor_value) {
             return (channel_sensor_value >= min_accepted_value) && (max_accepted_value >= channel_sensor_value);
         }
 
-        // Check the channel value
-        channelStatus check(){
-            channelStatus status = good;
+        // Check the channel value. Vector if there are multiple problems
+        vector<channelStatus> check(){
+            vector<channelStatus> statusOfChannel;
+            //channelStatus status = functioning;
 
-            // If the sensor value from the channel does not exist or is 0 
+            // Check the sensor value
             if(!channel_data.sensorValue || channel_data.sensorValue == 0) {
-                status = noValue;
+                statusOfChannel.push_back(noValue);
             } else if(!isSensorValueInRange(channel_data.sensorValue)) {
-                status = outOfRange;
+                statusOfChannel.push_back(outOfRange);
             }
 
-            return status;
+            // Check the frequency
+            if(channel_data.frequencyValue > max_accepted_frequency) {
+                statusOfChannel.push_back(highFrequency);
+            } else if(channel_data.frequencyValue < max_accepted_frequency) {
+                statusOfChannel.push_back(lowFrequency);
+            }
+
+            if(statusOfChannel.empty()) {
+                statusOfChannel.push_back(functioning);
+            }
+
+            return statusOfChannel;
         }
 
-        // Are we publishing this into the channel? Or just to other classes that may 
-        // need this information
+        // Will edit this based on the Channel class implementation
         void publish(){
 
         }
