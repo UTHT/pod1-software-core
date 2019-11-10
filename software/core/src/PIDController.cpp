@@ -14,7 +14,6 @@ PIDController::PIDController(const int pin, const int initialState, const int to
     Controller(&Input, &Output, goal, 0.0, 0.0, 0.0, P_ON_E, DIRECT)
                              
 {
-
     if (pin > 0) {
         
         controller_pin = pin;
@@ -118,7 +117,7 @@ int PIDController::StateChange(int NewState) {
     return 0;
 }
 
-int PIDController::run() { // TODO: Add error checking to return error code on problem
+int PIDController::update() { // TODO: Add error checking to return error code on problem
 
     if (controller_pin != -1) {
             

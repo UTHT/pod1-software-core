@@ -41,8 +41,6 @@ class PIDController {
 
         int getpin();
 
-        int run();
-
-        virtual bool shutdown();
+        int update();
 };
 #endif

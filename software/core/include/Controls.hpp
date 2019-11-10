@@ -31,8 +31,8 @@ class Controller {
 
         int StateChange(String StateName);
 
-        virtual int run();
+        virtual int run(); // Run through list of channels for updated sensor values and command instructions
 
-        virtual bool shutdown();
+        virtual bool shutdown(); // ESTOP command
 };
 #endif
