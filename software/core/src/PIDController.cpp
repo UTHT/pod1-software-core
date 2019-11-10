@@ -8,22 +8,6 @@
 #include <stdio.h>
 #include "../include/PIDController.hpp"
 
-int PIDController::StateChange(int NewState) {
-        
-    if (NewState >= TotalStates || NewState < 0) {return -1;}
-
-    currentState = NewState;
-
-    // Update Controller PID
-    goal = &(setpoint[currentState]); // PID Functions via a pointer reference to goal
-    Controller.SetTunings(kp[currentState], ki[currentState], kp[currentState], PoN[currentState]);
-    Controller.SetControllerDirection(dir[currentState]);
-    Controller.SetMode(PIDMode[currentState]);
-    Controller.SetOutputLimits(lowerLimit[currentState], upperLimit[currentState]);
-
-    return 0;
-}
-
 PIDController::PIDController(const int pin, const int initialState, const int totalStates, double *Kp, double *Ki, double *Kd, 
                              double* Setpoint, int* POn, int* Direction, int* Mode, double* upperlimit, double* lowerlimit) :
                             
@@ -38,6 +22,9 @@ PIDController::PIDController(const int pin, const int initialState, const int to
     }
     // TODO: error handling inside constructor
 
+    if (totalStates >= 1) { TotalStates = totalStates;}
+    else {/* TODO: ERROR HANDLING*/}
+
     kp = new double[totalStates];
     ki = new double[totalStates];
     kd = new double[totalStates];
@@ -49,10 +36,15 @@ PIDController::PIDController(const int pin, const int initialState, const int to
     lowerLimit = new double[totalStates];
 
     for (int i = 0; i < totalStates; i++) {
+        
+        if (Kp[i] >= 0 && Ki[i] >= 0 && Kd >= 0) {
 
-        kp[i] = Kp[i];
-        ki[i] = Ki[i];
-        kd[i] = Kd[i];
+            kp[i] = Kp[i];
+            ki[i] = Ki[i];
+            kd[i] = Kd[i];
+        
+        } else {/*TODO: ERROR HANDLE*/}
+
         setpoint[i] = Setpoint[i];
 
         if (POn[i] == P_ON_E || POn[i] == P_ON_M) {
@@ -108,6 +100,22 @@ int PIDController::setpin(const int pin) {
 int PIDController::getpin() {
 
     return controller_pin;
+}
+
+int PIDController::StateChange(int NewState) {
+        
+    if (NewState >= TotalStates || NewState < 0) {return -1;}
+
+    currentState = NewState;
+
+    // Update Controller PID
+    goal = &(setpoint[currentState]); // PID Functions via a pointer reference to goal
+    Controller.SetTunings(kp[currentState], ki[currentState], kp[currentState], PoN[currentState]);
+    Controller.SetControllerDirection(dir[currentState]);
+    Controller.SetMode(PIDMode[currentState]);
+    Controller.SetOutputLimits(lowerLimit[currentState], upperLimit[currentState]);
+
+    return 0;
 }
 
 int PIDController::run() { // TODO: Add error checking to return error code on problem

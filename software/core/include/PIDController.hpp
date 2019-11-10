@@ -43,6 +43,6 @@ class PIDController {
 
         int run();
 
-        //virtual bool shutdown();
+        virtual bool shutdown();
 };
 #endif

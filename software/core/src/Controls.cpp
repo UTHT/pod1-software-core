@@ -53,11 +53,3 @@ int Controller::StateChange(String StateName) {
     }
     return -1;
 }
-
-int Controller::run() { // TODO:Add error checking to return error code on problem
-
-    // Comms stuff
-
-    // if new state: call state StateChange
-    return 0;
-}

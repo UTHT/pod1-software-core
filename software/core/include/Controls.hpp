@@ -16,7 +16,7 @@ class Controller {
         // Controller States
         String* States = nullptr;
 
-        int TotalChannels;
+        int TotalChannels = 0;
         String* Channels = nullptr;
         // For now String array, later would be array of comm objects
         // where the remaining comms stuff would be handed off to the comms class
@@ -31,7 +31,7 @@ class Controller {
 
         int StateChange(String StateName);
 
-        int run();
+        virtual int run();
 
         virtual bool shutdown();
 };
