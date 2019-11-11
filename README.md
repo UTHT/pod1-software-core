@@ -1,5 +1,8 @@
 # University of Toronto Hyperloop Team Software Core #
 
+This respository holds all code developed for the University of Toronto Hyperloop Team. This code is placed online under an MIT for anyone interested in using the code in any capacity. If you would like to reach out and learn more, please do not hesitate to contact me
+    - [Mat](https://github.com/MathieuTuli)
+
 ## Directory Structure ##
 
 ## Overview ##
@@ -170,3 +173,4 @@ To generate the language-specific bindings...
 
 ### Example Code ###
 Example code can be found under `software/core/example`. To run it, first type `make` to build the exec. files. `cd` into the build folder, and run `./listen`. Either send that process to the background `ctrl-z` then `bg` or open a new terminal and run the `./send`.
+
