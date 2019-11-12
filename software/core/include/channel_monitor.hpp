@@ -4,20 +4,16 @@
 #include "channels/practice.hpp"
 #include <string>
 
-class ChannelMonitor{
+class ChannelMonitor {
 
     std::string channel_name;
     
     public:
-        ~ChannelMonitor(){}
+        ChannelMonitor();
+        ~ChannelMonitor();
 
-        void check(){
+        void check();
+        void publish();
+};
 
-        }
-
-        void publish(){
-
-        }
-
-}
 #endif
