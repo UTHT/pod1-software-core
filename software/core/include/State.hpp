@@ -1,18 +1,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-// Declare the states using enumeration 
-enum STATE {
-     ESTOP,
-     Off,
-     Debug,
-     Communication Check,
-     System Check,
-     Lock,
-     Arm,
-     Drive,
-     Brake	
-};
+#include "state_enum.hpp"
 
 class State {
     private:
