@@ -1,8 +1,8 @@
-#pragma once
+#ifndef HEALTHMONITOR_H
+#define HEALTHMONITOR_H
 
 #include <string>
 #include <vector>
-
 // We will also need to include some JSON or YAML Reader Library to read the files for channel config data
 
 // Verifies system health and adequate data flow
@@ -18,7 +18,11 @@ private:
    bool m_estop;
 
 public:
-   HealthMonitor(size_t numTestChannelMonitors = 0, const std::string &path = "");
+   /*
+      num_channel_monitors : how many channels are to be tested
+      path : path to config file 
+   */
+   HealthMonitor(size_t num_channel_monitors = 0, const std::string &path = "");
    ~HealthMonitor();
 
    // Describes High Level Functionality

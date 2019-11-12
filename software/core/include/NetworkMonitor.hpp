@@ -1,5 +1,6 @@
-#ifndef NetworkMonitor_h
-#define NetworkMonitor_h
+#ifndef NETWORKMONITOR_H
+#define NETWORKMONITOR_H
+
 #include <iostream>
 
 class NetworkMonitor {

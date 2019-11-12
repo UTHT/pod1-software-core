@@ -4,7 +4,7 @@ using namespace std;
 
 #include <string>
 #include <vector>
-#include "../helper/enums.hpp"
+#include "/helper/enums.hpp"
 //#include "Channel"
 
 // Temporary class (for now)
@@ -31,7 +31,7 @@ class ChannelMonitor{
         ChannelMonitor(double minAcceptedValue, double maxAcceptedValue, double minAcceptedFrequency, double maxAcceptedFrequency);
 
         // TODO : Check if this should be public?
-        bool isSensorValueInRange(double channel_sensor_value);
+        bool is_sensor_value_in_range(double channel_sensor_value);
 
         // Check the channel value. Vector if there are multiple problems
         vector<channelStatus> check();
