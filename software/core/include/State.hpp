@@ -1,8 +1,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-// This is just temporary until we have a STATES enum.
-enum STATES {};
+#include "state_enum.hpp"
 
 class State {
     private:
