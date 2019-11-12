@@ -4,18 +4,18 @@
 // Declare the states using a common header 
 // Common across all files by #include "state_enum.hpp" in the header
 
-enum STATE{
-
+enum STATE {
+	
 	ESTOP,
-	Off,
-	Debug,
-	CommCheck,
-	SysCheck,
-	Lock,
-	Arm,
-	Drive,
-	Brake
-}
+	OFF,
+	DEBUG,
+	COMMS_CHECK,
+	SYS_CHECK,
+	LOCK,
+	ARM,
+	DRIVE,
+	BRAKE
+};
 
 
 #endif 
