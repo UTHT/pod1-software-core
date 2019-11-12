@@ -1,19 +1,41 @@
-#ifndef CHANNEL_MONITOR
-#define CHANNEL_MONITOR
-#include <lcm/lcm-cpp.hpp>
-#include "channels/practice.hpp"
+#pragma once
+
+using namespace std;
+
 #include <string>
+#include <vector>
+#include "../helper/enums.hpp"
+//#include "Channel"
 
-class ChannelMonitor {
+// Temporary class (for now)
+// testing purposes
+// class Channel {
+//     public:
+//         double sensorValue;
+//         double frequencyValue;
+// };
 
-    std::string channel_name;
+class ChannelMonitor{
+    private:    
+        string channel_name;
+
+        // Extra private members
+        Channel channel_data;
+        double min_accepted_value;
+        double max_accepted_value;
+        double min_accepted_frequency;
+        double max_accepted_frequency;
     
     public:
-        ChannelMonitor();
-        ~ChannelMonitor();
+        // Constructor to initialize the ChannelMonitor class
+        ChannelMonitor(double minAcceptedValue, double maxAcceptedValue, double minAcceptedFrequency, double maxAcceptedFrequency);
 
-        void check();
+        // TODO : Check if this should be public?
+        bool isSensorValueInRange(double channel_sensor_value);
+
+        // Check the channel value. Vector if there are multiple problems
+        vector<channelStatus> check();
+
+        // Will edit this based on the Channel class implementation
         void publish();
-};
-
-#endif
+}
