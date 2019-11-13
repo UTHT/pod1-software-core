@@ -1,15 +1,13 @@
 #ifndef NETWORKMONITOR_H
 #define NETWORKMONITOR_H
 
-#include <iostream>
-
 class NetworkMonitor {
-    private:
+  private:
 
-    public:
+  public:
     NetworkMonitor();
     ~NetworkMonitor();
-    int run();
+    void run();
 
 };
 
