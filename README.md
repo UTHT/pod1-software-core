@@ -1,5 +1,8 @@
 # University of Toronto Hyperloop Team Software Core #
 
+This respository holds all code developed for the University of Toronto Hyperloop Team. This code is placed online under an MIT for anyone interested in using the code in any capacity. If you would like to reach out and learn more, please do not hesitate to contact me
+    - [Mat](https://github.com/MathieuTuli)
+
 ## Directory Structure ##
 
 ## Overview ##
@@ -138,7 +141,7 @@ sudo make install
 Finally, run the following ... (This is for Arch, I am not 100% sure you need to do this for Arch/Debian. Check the [link](https://github.com/lcm-proj/lcm/blob/master/docs/content/build-instructions.md))
 ```
 export LCM_INSTALL_DIR=/usr/local/lib
-sudo echo 'sudo echo $LCM_INSTALL_DIR > /etc/ld.so.conf.d/lcm.conf
+sudo echo $LCM_INSTALL_DIR > /etc/ld.so.conf.d/lcm.conf
 export PYTHON_VERSION=$(python -c "import sys; print(\"%s.%s\" % sys.version_info[:2])")
 export PYTHON_USER_SITE=$(python -m site --user-site)
 sudo echo "$LCM_INSTALL_DIR/python$PYTHON_VERSION/site-packages" > /usr/lib/python$PYTHON_VERSION/site-packages/lcm.pth
@@ -167,3 +170,7 @@ To generate the language-specific bindings...
 | C	| `lcm-gen -c example_t.lcm` |
 | C++	| `lcm-gen -x example_t.lcm` |
 | Python	| `lcm-gen -p example_t.lcm` |
+
+### Example Code ###
+Example code can be found under `software/core/example`. To run it, first type `make` to build the exec. files. `cd` into the build folder, and run `./listen`. Either send that process to the background `ctrl-z` then `bg` or open a new terminal and run the `./send`.
+
