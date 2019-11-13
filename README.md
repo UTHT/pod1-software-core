@@ -141,7 +141,7 @@ sudo make install
 Finally, run the following ... (This is for Arch, I am not 100% sure you need to do this for Arch/Debian. Check the [link](https://github.com/lcm-proj/lcm/blob/master/docs/content/build-instructions.md))
 ```
 export LCM_INSTALL_DIR=/usr/local/lib
-sudo echo 'sudo echo $LCM_INSTALL_DIR > /etc/ld.so.conf.d/lcm.conf
+sudo echo $LCM_INSTALL_DIR > /etc/ld.so.conf.d/lcm.conf
 export PYTHON_VERSION=$(python -c "import sys; print(\"%s.%s\" % sys.version_info[:2])")
 export PYTHON_USER_SITE=$(python -m site --user-site)
 sudo echo "$LCM_INSTALL_DIR/python$PYTHON_VERSION/site-packages" > /usr/lib/python$PYTHON_VERSION/site-packages/lcm.pth
