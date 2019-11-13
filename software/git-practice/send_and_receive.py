@@ -47,6 +47,10 @@ def sender(chanel: str):
     message.value = "hakerman"
     _lcm.publish(chanel, message.encode())
 
+    message.name = "Matthew Downing"
+    message.value = "Hello, It's me, I was wondering..."
+    _lcm.publish(chanel, message.encode())
+
 def listener(channel, data):
     message = test_message.decode(data)
     print(f"\nReceived test_message on {channel}")
