@@ -1,13 +1,18 @@
+#ifndef CHANNELSTATUS_H
+#define CHANNELSTATUS_H
+enum ChannelStatus {NO_VALUE, OUT_OF_RANGE,
+                    LOW_FREQUENCY, HIGH_FREQUENCY,
+                    FUNCTIONING};
+#endif
+
+// TODO (Mathieu) Why is this necessary?
+#ifndef CHANNELVARIABLE_H
+#define CHANNELVARIABLE_H
+enum ChannelVariable {SENSOR_VALUE, FREQUENCY_VALUE};
+#endif
+
 #ifndef ARDUINOBOARDS_H
 #define ARDUINOBOARDS_H
-
-// TODO : Check if we should have separate enum files for different things
-
-// Channel Class
-enum channelStatus {NO_VALUE, OUT_OF_RANGE, LOW_FREQUENCY, HIGH_FREQUENCY, FUNCTIONING};
-enum channelVariable {SENSOR_VALUE, FREQUENCY_VALUE};
-
-// Arduino Enums
-enum ArduinoBoards {FRONT_ANALOG, REAR_ANALOG, MOTOR_CONTROLLER, BRAKE_CONTROLLER};
-
+enum ArduinoBoards {FRONT_ANALOG, REAR_ANALOG,
+                    MOTOR_CONTROLLER, BRAKE_CONTROLLER};
 #endif
