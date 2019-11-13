@@ -12,7 +12,6 @@
 // TODO: Need to add functionality if sensors measurements occur with the same Arduino
 // Sensor class?
 
-class Channel{};
 class Controller {
   private:
     // defined in enums
