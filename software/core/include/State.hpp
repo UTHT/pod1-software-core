@@ -1,7 +1,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-#include "state_enum.hpp"
+#include "helper/enums.hpp"
 
 class State {
     private:
@@ -9,13 +9,14 @@ class State {
          * */
         STATES name;
     public:
+        State();
         State(STATES name);
-        ~State();
+        virtual ~State();
 
         /* Perform logic related to the current state and return when a state transition is desired. */
-        virtual State& run() = 0;
+        State& run();
 
-        STATES getName();
+        STATES get_name();
 };
 
 #endif /* STATE_HPP */
