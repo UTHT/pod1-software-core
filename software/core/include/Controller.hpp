@@ -17,18 +17,18 @@ class Controller {
   private:
     // defined in enums
     struct IOPin io_pin;
-    STATES current_state;
+    States current_state;
     int total_states;
     std::vector<Channel> channels;
 
   public:
     Controller();
     Controller(const struct IOPin io_pin,
-               const STATES current_state,
+               const States current_state,
                const int total_states,
                const std::vector<Channel> channels);
     virtual ~Controller();
-    int state_change(const STATES change_to);
+    int state_change(const States change_to);
     // Run through list of channels for updated sensor values and command instructions
     virtual int run();
    // ESTOP command
