@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <vector>
 
-#include "State.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
+#include "Channel.hpp"
+#include "State.hpp"
 // #include "../lib/Arduino-PID-Library/PID_v1.h"
 
 // TODO: Need to add functionality if sensors measurements occur with the same Arduino
@@ -21,6 +22,7 @@ class Controller {
     std::vector<Channel> channels;
 
   public:
+    Controller();
     Controller(const struct IOPin io_pin,
                const STATES current_state,
                const int total_states,
