@@ -2,6 +2,7 @@
 #define DATAPROCESSOR_H
 
 #include <vector>
+#include "Channel.hpp"
 
 class DataProcessor{
     protected:

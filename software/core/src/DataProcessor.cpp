@@ -1,17 +1,18 @@
-#include "DataProcessor.hpp"
 #include <vector>
 
-DataProcessor::DataProcessor(const std::vector<Channels> &list){
-        channelList = list;
+#include "DataProcessor.hpp"
+
+DataProcessor::DataProcessor(){
+}
+
+DataProcessor::DataProcessor(const std::vector<Channel> &list){
 }
 
 DataProcessor::~DataProcessor(){
-
 }
 
-int DataProcessor::run(){
-    for(int i =0; i < channelList.size(); ++i){
-        // get information from relevant channels
-        //
-    }
+void DataProcessor::run(){
+}
+
+void DataProcessor::process(){
 }

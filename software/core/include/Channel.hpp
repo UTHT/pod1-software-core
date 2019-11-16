@@ -9,7 +9,8 @@ class Channel{
     std::string name;
   public:
     Channel();
-    ~Channel();
+    Channel(const std::string name);
+    virtual ~Channel();
 
     // TODO: Populate the function parameters. Unclear still.
     // for get

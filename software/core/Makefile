@@ -7,6 +7,6 @@ INC=-Iinclude
 
 all: ${TARGET}
 core: src/main.cpp
-	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/main src/main.cpp
+	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/main src/*
 clean:
 	rm -f ${TARGET}

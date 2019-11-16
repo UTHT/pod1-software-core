@@ -1,11 +1,12 @@
-#include <iostream>
 #include "HealthMonitor.hpp"
 
-// Just some testing code for now. Will describe full code for class here in later sprints
+HealthMonitor::HealthMonitor(){
+}
+HealthMonitor::HealthMonitor(const std::string &file_name){
+}
+HealthMonitor::~HealthMonitor(){
+}
 
-int main(int argc, char const *argv[])
-{
-   HealthMonitor healthMonitor;
-   healthMonitor.run();
-   return 0;
+// Describes High Level Functionality
+void HealthMonitor::run(){
 }

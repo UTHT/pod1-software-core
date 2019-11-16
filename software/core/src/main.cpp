@@ -12,7 +12,7 @@
 #include "helper/enums.hpp"
 
 int main(int argc, char* argv[]){
-  Channel channel();
+  Channel channel("test");
   ChannelMonitor channel_monitor();
   DataReader data_reader();
   HealthMonitor health_monitor();
@@ -21,4 +21,5 @@ int main(int argc, char* argv[]){
   DataProcessor data_processor();
   State state();
   StateMachine state_machine();
+  return 0;
 }
