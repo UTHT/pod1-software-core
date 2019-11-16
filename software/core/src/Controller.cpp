@@ -4,14 +4,14 @@ Controller::Controller(){
 }
 Controller::Controller(
     const struct IOPin io_pin,
-    const STATES current_state,
+    const States current_state,
     const int total_states,
     const std::vector<Channel> channels){
 }
 
 Controller::~Controller(){
 }
-int Controller::state_change(const STATES change_to){
+int Controller::state_change(const States change_to){
   /// REPLACE
   return 0;
   ///

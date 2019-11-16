@@ -19,7 +19,7 @@ enum ArduinoBoards {FRONT_ANALOG, REAR_ANALOG,
 
 #ifndef STATEENUM_HPP
 #define STATEENUM_HPP
-enum STATES {
+enum States {
 	ESTOP,
 	OFF,
 	DEBUG,
