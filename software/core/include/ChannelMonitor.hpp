@@ -23,9 +23,9 @@ class ChannelMonitor{
         // For testing...
         ChannelMonitor();
         // Constructor to initialize the ChannelMonitor class
-        ChannelMonitor(Channel channel,
-                       double min_value, double max_value,
-                       double min_rtt, double max_rtt);
+        ChannelMonitor(Channel channel_init,
+                       double min_value_init, double max_value_init,
+                       double min_rtt_init, double max_rtt_init);
         ~ChannelMonitor();
 
         int check();
