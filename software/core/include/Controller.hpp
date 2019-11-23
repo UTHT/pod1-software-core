@@ -22,11 +22,12 @@ class Controller {
     std::vector<Channel> channels;
 
   public:
-    Controller();
+    
     Controller(const struct IOPin io_pin,
                const States current_state,
                const int total_states,
                const std::vector<Channel> channels);
+
     virtual ~Controller();
     int state_change(const States change_to);
     // Run through list of channels for updated sensor values and command instructions
