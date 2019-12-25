@@ -1,4 +1,9 @@
-#include <Arduino.h>
+#if ARDUINO >= 100
+    #include "Arduino.h"
+#else
+   // #include "WProgram.h"
+#endif
+
 #include <stdio.h>
 #include <vector>
 
@@ -17,7 +22,7 @@ Controller::Controller(
     this->io_pin = io_pin;
     this->channels = channels;
 
-    // Communications Channel Reader Object Declarations, etc
+    // Communications Object Declarations, etc
 }
 
 int Controller::state_change(const States change_to) {

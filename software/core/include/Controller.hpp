@@ -1,7 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <Arduino.h>
 #include <stdio.h>
 #include <vector>
 
@@ -9,7 +8,7 @@
 #include "Controller.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
-// #include "../lib/Arduino-PID-Library/PID_v1.h"
+// #include "PID_v1.h"
 
 class Controller {
   private:
