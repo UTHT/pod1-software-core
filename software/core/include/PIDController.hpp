@@ -7,16 +7,18 @@
 #include "State.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
-#include "PID_v1.h"
+#include "../lib/Arduino-PID-Library/PID_v1.h"
+#include "Channel.hpp"
 
 class PIDController {
     private:
         
         struct IOPin io_pin;
-        STATES current_state;
+        States current_state;
 
         double Input = 0;
         double Output = 0;
+        double goal = 0;
         std::vector<double> Kp;
         std::vector<double> Ki;
         std::vector<double> Kd;
@@ -27,18 +29,14 @@ class PIDController {
         std::vector<double> upperLimit;
         std::vector<double> lowerLimit;
 
-
-        // PID Library requires a pointer reference to the setpoint
-        double* goal;
-
         // PID Controller
         PID Controller;
 
     public:
 
         PIDController(const struct IOPin io_pin,
-                      const STATES current_state,
-                      const int total_states,
+                      const States current_state,
+                      const int total_States,
                       const std::vector<double> Kp,
                       const std::vector<double> Ki,
                       const std::vector<double> Kd,
@@ -58,7 +56,7 @@ class PIDController {
         struct IOPin getpin();
 
         // Update State Value upon state changes
-        void state_change(const STATES change_to);
+        void state_change(const States change_to);
 
         bool update();
 };

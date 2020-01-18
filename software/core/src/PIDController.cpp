@@ -8,15 +8,15 @@
 #include <stdio.h>
 #include <vector>
 
-#include "State.hpp"
-#include "helper/enums.hpp"
-#include "helper/IOPin.hpp"
-#include "PIDController.hpp"
+#include "../include/State.hpp"
+#include "../include/helper/enums.hpp"
+#include "../include/helper/IOPin.hpp"
+#include "../include/PIDController.hpp"
 
 
 PIDController::PIDController(const struct IOPin io_pin,
-                             const STATES current_state,
-                             const int total_states,
+                             const States current_state,
+                             const int total_States,
                              const std::vector<double> Kp,
                              const std::vector<double> Ki,
                              const std::vector<double> Kd,
@@ -27,7 +27,7 @@ PIDController::PIDController(const struct IOPin io_pin,
                              const std::vector<double> upperLimit,
                              const std::vector<double> lowerLimit) :
                             
-    Controller(&Input, &Output, goal, 0.0, 0.0, 0.0, P_ON_E, DIRECT)
+    Controller(&Input, &Output, &goal, 0.0, 0.0, 0.0, P_ON_E, DIRECT)
                              
 {   
     this->setpin(io_pin);
@@ -37,14 +37,14 @@ PIDController::PIDController(const struct IOPin io_pin,
     this->state_change(current_state);
 
     // TODO: error handling inside constructor
-    if (!(total_states == Kp.size() == Ki.size() == Kd.size() == 
+    if (!(total_States == Kp.size() == Ki.size() == Kd.size() == 
           Setpoint.size() == POn.size() == Direction.size() == 
           Mode.size() == upperLimit.size() == lowerLimit.size())) {
 
         /*TODO: ERROR HANDLE*/
     }
 
-    for (int i = 0; i < total_states; i++) {
+    for (int i = 0; i < total_States; i++) {
         
         if (Kp[i] < 0 || Ki[i] < 0 || Kd[i] < 0) {
             /*TODO: ERROR HANDLE*/
@@ -75,7 +75,7 @@ PIDController::PIDController(const struct IOPin io_pin,
     this->Mode = Mode;
     this->upperLimit = upperLimit;
     this->lowerLimit = lowerLimit;
-    this->goal = &(Setpoint[current_state]);
+    this->goal = Setpoint[current_state];
 }
 
 PIDController::PIDController(const PIDController & src) = default;
@@ -96,12 +96,12 @@ struct IOPin PIDController::getpin() {
     return this->io_pin;
 }
 
-void PIDController::state_change(const STATES change_to) {
+void PIDController::state_change(const States change_to) {
         
     current_state = change_to;
 
     // Update Controller PID
-    goal = &(Setpoint[current_state]); // PID Functions via a pointer reference to goal
+    goal = Setpoint[current_state]; // PID Functions via a pointer reference to goal
     Controller.SetTunings(Kp[current_state], Ki[current_state], Kp[current_state], PoN[current_state]);
     Controller.SetControllerDirection(Direction[current_state]);
     Controller.SetMode(Mode[current_state]);
