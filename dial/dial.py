@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 import sys
 
-class Window(QWidget):
+class dial(QWidget):
     def __init__(self,Max,Min,Val):
         QWidget.__init__(self)
         layout = QGridLayout()
@@ -18,9 +18,12 @@ class Window(QWidget):
         self.dial.valueChanged.connect(self.spin.setValue)
         self.spin.valueChanged.connect(self.dial.setValue)
 
+    def update(self,newval):
+        self.dial.valueChanged(newval)
 
 app = QApplication(sys.argv)
-screen = Window(100,0,20)
-screen.show()
+d = dial(100,0,50)
+d.show()
+# d.update(50)
 sys.exit(app.exec_())
 
