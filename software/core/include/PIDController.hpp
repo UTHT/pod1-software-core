@@ -58,7 +58,7 @@ class PIDController {
         struct IOPin getpin();
 
         // Update State Value upon state changes
-        int state_change(const STATES change_to);
+        void state_change(const STATES change_to);
 
         bool update();
 };

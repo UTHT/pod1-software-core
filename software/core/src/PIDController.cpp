@@ -96,7 +96,7 @@ struct IOPin PIDController::getpin() {
     return this->io_pin;
 }
 
-int PIDController::state_change(const STATES change_to) {
+void PIDController::state_change(const STATES change_to) {
         
     current_state = change_to;
 
@@ -106,7 +106,6 @@ int PIDController::state_change(const STATES change_to) {
     Controller.SetControllerDirection(Direction[current_state]);
     Controller.SetMode(Mode[current_state]);
     Controller.SetOutputLimits(lowerLimit[current_state], upperLimit[current_state]);
-    return 0;
 }
 
 bool PIDController::update() { // TODO: Add error checking to return error code on problem

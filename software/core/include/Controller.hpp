@@ -24,7 +24,7 @@ class Controller {
                const std::vector<Channel> channels);
 
     virtual ~Controller();
-    int state_change(const States change_to);
+    void state_change(const States change_to);
     // Run through list of channels for updated sensor values and command instructions
     virtual int run() = 0;
    // ESTOP command

@@ -25,10 +25,9 @@ Controller::Controller(
     // Communications Object Declarations, etc
 }
 
-int Controller::state_change(const States change_to) {
+void Controller::state_change(const States change_to) {
   
   this->current_state = change_to;
-  return 0;
 }
 
 // run() & shutdown() removed as Controller is the base class
