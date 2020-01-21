@@ -2,9 +2,13 @@
 
 DataReader::DataReader(){
 }
+
 DataReader::~DataReader(){
 }
-bool DataReader::get(const struct timeval timeout){
+
+// will populate some member var, return value says if updated or not
+bool DataReader::get(const std::string channel_name,
+                     const struct timeval timeout){
   /// REPLACE
   return true;
   ///
