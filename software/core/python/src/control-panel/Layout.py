@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QAc
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 
-#app = QApplication(sys.argv)
-
 class Layout():
     def __init__(self, list, layout_type):
         self.layout = None
@@ -30,15 +28,3 @@ class Layout():
     def returnLayout(self):
         return self.layout
 
-#button1 = QPushButton("button1")
-# button2 = QPushButton("button2")
-#list = [button1, button2]
-#window = QMainWindow()
-#x = Layout(list, "horizontal")
-#layout = x.returnLayout()
-#widget = QWidget()
-#widget.setLayout(layout)
-#window.setCentralWidget(widget)
-#window.show()
-
-#app.exec_()
