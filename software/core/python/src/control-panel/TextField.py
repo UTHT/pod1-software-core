@@ -3,111 +3,51 @@ Control Panel Text Field Widget
 '''
 from typing import Any
 
-from components import Colour
 
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton
+from PyQt5.QtCore import pyqtSlot
+
+from components import Coordinate  # Colour
+
 
 class TextField(QWidget):
-    def __init__(self, inputType: int, originX: int, originY: int) -> None:
-        # initialize text box
+    def __init__(self,
+                 input_type: Any,
+                 width: int,
+                 height: int,
+                 coordinates: Coordinate,) -> None:
         super().__init__()
-
-        # default width and height
-        self.textBox_width = 200
-        self.textBox_height = 27
-        
-        # at position (originX,originY)
-        self.x = originX
-        self.y = originY
-        
-        # expected type
-        # >>>>>>>>>>>> note: 0 - float | 1 - string <<<<<<<<<<<<<<<<
-        self.expectedType = inputType
-
-        # calling initUI
-        self.initUI()
-
+        self.width = width
+        self.height = height
+        self.coordinates = coordinates
+        self.input_type = input_type
+        self.widget = QLineEdit(self)
+        self.button = QPushButton('OK', self)
 
     def __str__(self) -> str:
-        ...
-
-    def initUI(self):
-        # create textbox
-        self.textbox = QLineEdit(self)
-        self.textbox.move(self.x, self.y)
-        self.textbox.resize(self.textBox_width, self.textBox_height)
-
-        # Create button
-        self.button = QPushButton('OK', self)
-        self.button.move(self.x + self.textBox_width + 5, self.y)
-        self.button.resize(50, self.textBox_height)
-        self.button.clicked.connect(self.on_click)
-        self.show()
-
+        return 'TextField'
 
     # Handle key presses
     # def keyPressEvent(self, qKeyEvent):
     #     if qKeyEvent.key() == 16777220: #enter key
     #         self.on_click()
-
     @pyqtSlot()
-    def on_click(self):
-        # print ("PARSING INPUTS NOW")
-        self.typeCheck(self.textbox.text())
-
+    def on_click(self) -> bool:
+        content = self.textbox.text()
+        return isinstance(content, type(self.input_type))
 
     def get_input(self) -> Any:
-        # print()
-        # print("get_input = ", self.textbox.text())
-        # print()
-        return self.textbox.text()
+        return self.widget.text()
 
-    def set_width(self, width: float) -> bool:
-        self.textBox_width = width
-        self.textbox.resize(self.textBox_width, self.textBox_height)
-
-    def set_height(self, height: float) -> bool:
-        self.textBox_height = height
-        self.textbox.resize(self.textBox_width, self.textBox_height)
-
-    # TODO: Note sure if best idea to use RGB or if use Hex for colour
-    def set_colour(self, colour: Colour) -> bool:
-        ...
-
-    # TODO : This should actually return the actual PyQT (or whatever lib we
-    #       use) widget, not None. Not sure if this is the best way
     def display(self) -> None:
-        ...
+        self.widget.move(self.coordinates.x, self.coordinates.y)
+        self.widget.resize(self.width, self.height)
 
-    # Helper Functions
-    def typeCheck(self, input) -> bool:
-        # if float...
-        if self.isFloat(input):
-            if self.expectedType==0:
-                # print("Input is accepted")
-                return True
-            else:
-                # print("Input is NOT accepted")
-                return False
-
-        # if string...
-        if not self.isFloat(input):
-            if self.expectedType==1:
-                # print("Input is accepted")
-                return True
-            else:
-                # print("Input is NOT accepted")
-                return False
-
-    def isFloat(self, input):
-        try:
-            float(input)
-            return True
-        except ValueError:
-            return False
+        # Create button
+        self.button.move(self.x + self.textBox_width + 5, self.y)
+        self.button.resize(50, self.textBox_height)
+        self.button.clicked.connect(self.on_click)
+        self.show()
 
 
 # Uncomment to test

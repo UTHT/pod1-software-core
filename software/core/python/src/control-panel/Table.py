@@ -55,6 +55,9 @@ class Table(QWidget):
         for i in range(0, rows):
             self.rows[i] = height
 
+    def __str__(self) -> str:
+        return 'Table'
+
     def update_cell(self, row: int, col: int, value: str) -> None:
         self.table.item(row, col).setText(value)
 
