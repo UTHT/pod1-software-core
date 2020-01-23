@@ -61,7 +61,7 @@ class Table(QWidget):
     def update_cell(self, row: int, col: int, value: str) -> None:
         self.table.item(row, col).setText(value)
 
-    def display(self) -> QWidget:
+    def initUI(self) -> None:
         for x, y in self.columns.items():
             self.table.setColumnWidth(x, y)
         for x, y in self.rows.items():

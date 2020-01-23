@@ -39,7 +39,7 @@ class TextField(QWidget):
     def get_input(self) -> Any:
         return self.widget.text()
 
-    def display(self) -> None:
+    def initUI(self) -> None:
         self.widget.move(self.coordinates.x, self.coordinates.y)
         self.widget.resize(self.width, self.height)
 
