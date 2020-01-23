@@ -44,7 +44,8 @@ class TextField(QWidget):
         self.widget.resize(self.width, self.height)
 
         # Create button
-        self.button.move(self.x + self.textBox_width + 5, self.y)
+        # TODO what?
+        self.button.move(self.coordinates.x + self.width, self.coordinates.y)
         self.button.resize(50, self.textBox_height)
         self.button.clicked.connect(self.on_click)
         self.show()

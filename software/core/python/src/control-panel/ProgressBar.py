@@ -3,11 +3,11 @@ Control Panel Progress Bar Widget
 '''
 from typing import Any
 
-import sys
 from PyQt5.QtWidgets import (QApplication, QProgressBar)
 
 
 app = QApplication([])
+
 
 class ProgressBar(QProgressBar):
     def __init__(self):
@@ -18,7 +18,6 @@ class ProgressBar(QProgressBar):
 
     def set_current(self, current: Any) -> None:
         self.setValue(current)
-        
 
     def set_min(self, min_value: Any) -> bool:
         if(min_value >= 0 and (isinstance(min_value, int) or isinstance(min_value, float))):
@@ -26,7 +25,6 @@ class ProgressBar(QProgressBar):
             return True
         else:
             return False
-        
 
     def set_max(self, max_value: Any) -> bool:
         if(max_value >= 0 and (isinstance(max_value, int) or isinstance(max_value, float))):
@@ -41,10 +39,10 @@ class ProgressBar(QProgressBar):
             return True
         else:
             return False
-    
+
     def set_geometry(self, width: float, height: float) -> bool:
         if(width >= 0 and (isinstance(width, int) or isinstance(width, float)) and height >= 0 and (isinstance(height, int) or isinstance(height, float))):
-            self.setGeometry(0,0,width,height)
+            self.setGeometry(0, 0, width, height)
             return True
         else:
             return False
@@ -53,5 +51,3 @@ class ProgressBar(QProgressBar):
     #       use) widget, not None. Not sure if this is the best way
     def display(self):
         return self
-
-
