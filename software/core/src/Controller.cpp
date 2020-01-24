@@ -7,10 +7,10 @@
 #include <stdio.h>
 #include <vector>
 
-#include "../include/State.hpp"
-#include "../include/Controller.hpp"
-#include "../include/helper/enums.hpp"
-#include "../include/helper/IOPin.hpp"
+#include "State.hpp"
+#include "Controller.hpp"
+#include "helper/enums.hpp"
+#include "helper/IOPin.hpp"
 
 Controller::Controller(
     const struct IOPin io_pin,

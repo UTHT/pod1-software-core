@@ -8,10 +8,10 @@
 #include <stdio.h>
 #include <vector>
 
-#include "../include/State.hpp"
-#include "../include/helper/enums.hpp"
-#include "../include/helper/IOPin.hpp"
-#include "../include/PIDController.hpp"
+#include "State.hpp"
+#include "helper/enums.hpp"
+#include "helper/IOPin.hpp"
+#include "PIDController.hpp"
 
 
 PIDController::PIDController(const struct IOPin io_pin,

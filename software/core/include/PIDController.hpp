@@ -5,10 +5,10 @@
 #include <vector>
 
 #include "State.hpp"
+#include "Channel.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
-#include "../lib/Arduino-PID-Library/PID_v1.h"
-#include "Channel.hpp"
+#include "PID_v1.h"
 
 class PIDController {
     private:
