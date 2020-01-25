@@ -89,6 +89,9 @@ def sender(channel: str):
     message.value = "hakerman"
     _lcm.publish(chanel, message.encode())
 
+    message.name = "Nandhini"
+    message.value = "Test"
+    _lcm.publish(channel, message.encode())
 
 def listener(channel, data):
     message = test_message.decode(data)
