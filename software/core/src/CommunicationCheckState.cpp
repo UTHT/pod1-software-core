@@ -1,18 +1,24 @@
 #include "CommunicationCheckState.hpp"
 
-CommunicationCheckState::CommunicationCheckState():comms_check(){}
-
-//constructor
-CommunicationCheckState::CommunicationCheckState():comms_check(){
-        //Define CommsCheck to initiate the SystemHealthState
-        }
-
-//check function to identify and evaluate each channel available
- States CommunicationCheckState::run(){
-        //TODO: Get all the channel inputs
-        //      Check with a predefined list
-        //      Check for any thresholds
-        //      If all channels look good (find a parameter to define good),
-        //      return commscheck=1
+CommunicationCheckState::CommunicationCheckState(){
+}
+CommunicationCheckState::CommunicationCheckState()}
+        //Define i=1,...n channels and required values to check the communication
 }
 
+CommunicationCheckState::~CommunicationCheckState(){
+}
+
+States CommunicationCheckState::commcheck(){
+	void.get();//Get the list of communication channels. 
+	//Create a if loop for checking the channels.
+	//notify a i connection missing.
+	//create a counter k++
+	          
+}
+States CommunicationCheckState::run(){
+	//if k=n,Go to SystemHealthCheck
+	//state = SysCheck
+	//else
+	//state = CommsCheck
+}
