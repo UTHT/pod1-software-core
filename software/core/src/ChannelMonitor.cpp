@@ -36,6 +36,18 @@ int ChannelMonitor::check(){
 }
 
 bool ChannelMonitor::publish(){
-  return true;
+  // Not sure where the MessageType class is defined to create the message 
+  // variable. (Channel publish method has one MessageType argument)
+
+  int current_status = check();
+  // MessageType msg;
+
+  if(current_status == ChannelStatus::FUNCTIONING) {
+    msg = "Functioning";
+  } else {
+    msg = "Malfunctioning"
+  }
+
+  return channel.pub(&msg);
 }
 
