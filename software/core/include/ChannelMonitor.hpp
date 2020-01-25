@@ -30,8 +30,8 @@ class ChannelMonitor{
 
         int check();
 
-        // Will edit this based on the Channel class implementation
-        bool publish();
+        // // Will edit this based on the Channel class implementation
+        // bool publish();
 };
 
 #endif

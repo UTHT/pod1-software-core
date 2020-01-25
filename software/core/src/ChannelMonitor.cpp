@@ -35,19 +35,19 @@ int ChannelMonitor::check(){
   return ChannelStatus::FUNCTIONING;
 }
 
-bool ChannelMonitor::publish(){
-  // Not sure where the MessageType class is defined to create the message 
-  // variable. (Channel publish method has one MessageType argument)
+// bool ChannelMonitor::publish(){
+//   // Not sure where the MessageType class is defined to create the message 
+//   // variable. (Channel publish method has one MessageType argument)
 
-  int current_status = check();
-  // MessageType msg;
+//   int current_status = check();
+//   // MessageType msg;
 
-  if(current_status == ChannelStatus::FUNCTIONING) {
-    msg = "Functioning";
-  } else {
-    msg = "Malfunctioning"
-  }
+//   if(current_status == ChannelStatus::FUNCTIONING) {
+//     msg = "Functioning";
+//   } else {
+//     msg = "Malfunctioning"
+//   }
 
-  return channel.pub(&msg);
-}
+//   return channel.pub(&msg);
+// }
 
