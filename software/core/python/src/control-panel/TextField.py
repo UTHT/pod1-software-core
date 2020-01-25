@@ -7,19 +7,19 @@ from typing import Any
 from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton
 from PyQt5.QtCore import pyqtSlot
 
-from components import Coordinate  # Colour
-
 
 class TextField(QWidget):
     def __init__(self,
                  input_type: Any,
                  width: int,
                  height: int,
-                 coordinates: Coordinate,) -> None:
+                 left: int,
+                 top: int) -> None:
         super().__init__()
         self.width = width
         self.height = height
-        self.coordinates = coordinates
+        self.left = left
+        self.top = top
         self.input_type = input_type
         self.widget = QLineEdit(self)
         self.button = QPushButton('OK', self)
@@ -40,7 +40,7 @@ class TextField(QWidget):
         return self.widget.text()
 
     def initUI(self) -> None:
-        self.widget.move(self.coordinates.x, self.coordinates.y)
+        self.widget.move(self.left, self.top)
         self.widget.resize(self.width, self.height)
 
         # Create button
