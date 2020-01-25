@@ -17,14 +17,25 @@ ChannelMonitor::~ChannelMonitor(){
 }
 
 int ChannelMonitor::check(){
-  /// REPLACE
-  return 0;
-  ///
+  // struct info = channel.handle();
+
+  // Check value 
+  if(info.value == NULL) {
+    return ChannelStatus::NO_VALUE;
+  } else if(info.value < min_value || info.value > max_value) {
+    return ChannelStatus::OUT_OF_RANGE;
+  } 
+
+  if(info.rtt > max_rtt) {
+    return ChannelStatus::HIGH_FREQUENCY;
+  } else if(info.rtt < min_rtt) {
+    return ChannelStatus::LOW_FREQUENCY;
+  }
+
+  return ChannelStatus::FUNCTIONING;
 }
 
 bool ChannelMonitor::publish(){
-  /// REPLACE
   return true;
-  ///
 }
 
