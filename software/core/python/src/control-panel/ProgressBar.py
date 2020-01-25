@@ -1,7 +1,7 @@
 '''
 Control Panel Progress Bar Widget
 '''
-from typing import Any
+from typing import Union
 
 from PyQt5.QtWidgets import (QApplication, QProgressBar)
 
@@ -10,42 +10,32 @@ app = QApplication([])
 
 
 class ProgressBar(QProgressBar):
-    def __init__(self):
+    def __init__(self,
+                 min_value: Union[int, float],
+                 max_value: Union[int, float],
+                 colour: str,
+                 top: int,
+                 left: int,
+                 width: int,
+                 height: int) -> None:
         super().__init__()
+        if not isinstance(min_value, int) or not isinstance(min_value, float) \
+                or not isinstance(max_value, int) or \
+                not isinstance(max_value, float):
+            raise
+        self.setMinimum(min_value)
+        self.setMaximum(max_value)
+        self.setStyleSheet("QProgressBar::chunk {background: %s}" % colour)
+        self.setGeometry(left, top, width, height)
 
     def __str__(self) -> str:
-        ...
+        return 'ProgressBar'
 
-    def set_current(self, current: Any) -> None:
+    def set_current(self, current: Union[int, float]) -> bool:
+        if not isinstance(current, int) or not isinstance(current, float):
+            return False
         self.setValue(current)
-
-    def set_min(self, min_value: Any) -> bool:
-        if(min_value >= 0 and (isinstance(min_value, int) or isinstance(min_value, float))):
-            self.setMinimum(min_value)
-            return True
-        else:
-            return False
-
-    def set_max(self, max_value: Any) -> bool:
-        if(max_value >= 0 and (isinstance(max_value, int) or isinstance(max_value, float))):
-            self.setMaximum(max_value)
-            return True
-        else:
-            return False
-
-    def set_colour(self, colour: str) -> bool:
-        if(isinstance(colour, str)):
-            self.setStyleSheet("QProgressBar::chunk {background: %s}" % colour)
-            return True
-        else:
-            return False
-
-    def set_geometry(self, width: float, height: float) -> bool:
-        if(width >= 0 and (isinstance(width, int) or isinstance(width, float)) and height >= 0 and (isinstance(height, int) or isinstance(height, float))):
-            self.setGeometry(0, 0, width, height)
-            return True
-        else:
-            return False
+        return True
 
     # TODO : This should actually return the actual PyQT (or whatever lib we
     #       use) widget, not None. Not sure if this is the best way
