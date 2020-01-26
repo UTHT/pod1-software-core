@@ -8,7 +8,7 @@ INC=-Iinclude
 
 all: ${TARGET}
 example: src/send.cpp src/listen.cpp
-	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/send src/send.cpp
-	g++ $(INC) $(CFLAGS) $(LDFLAGS) -o build/listen src/listen.cpp
+	g++ $(INC) -o build/send src/send.cpp $(CFLAGS) $(LDFLAGS)
+	g++ $(INC) -o build/listen src/listen.cpp $(CFLAGS) $(LDFLAGS)
 clean:
 	rm -f ${TARGET}

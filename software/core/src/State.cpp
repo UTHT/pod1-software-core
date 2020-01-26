@@ -1,9 +1,13 @@
 #include "State.hpp"
 
-State::State(STATES name) : name(name) {};
+State::State(){
+}
+State::State(States name) : name(name){
+}
 
-State::~State(){}
+State::~State(){
+}
 
-STATES State::get_name(){
+States State::get_name(){
     return this->name;
 }
