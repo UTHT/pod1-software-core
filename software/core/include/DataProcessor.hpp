@@ -6,14 +6,12 @@
 
 class DataProcessor{
     protected:
-        std::vector<Channel> channel_list;
+        std::vector<Channel> channels;
 
     public:
-        DataProcessor();
-        DataProcessor(const std::vector<Channel> & list);   //user-defined constructor
+        DataProcessor(const std::vector<Channel> & channels);   //user-defined constructor
         virtual ~DataProcessor();       //destructor
-        void run(); //iterate through all channels in channelList for raw data
-        void process();      //calculates and returns data specific for each instantiation
+        virtual float process() = 0;      //calculates and returns data specific for each instantiation
 };
 
 
