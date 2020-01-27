@@ -27,18 +27,18 @@ class StateMachine {
     double min_air_pressure_reserve;
     double min_air_pressure_secondary;
 
-    Channel state_channel;
-    Channel location_channel;
-    Channel imu_channel;
-    Channel motor_temp_channel;
-    Channel front_wheel_temp_channel;
-    Channel battery_temp_channel;
-    Channel battery_level_channel;
-    Channel gap_height_front_channel;
-    Channel gap_height_rear_channel;
+    // Channel state_channel;
+    // Channel location_channel;
+    // Channel imu_channel;
+    // Channel motor_temp_channel;
+    // Channel front_wheel_temp_channel;
+    // Channel battery_temp_channel;
+    // Channel battery_level_channel;
+    // Channel gap_height_front_channel;
+    // Channel gap_height_rear_channel;
     // Channel vibration_channel;
-    Channel pressure_reserve_channel;
-    Channel pressure_secondary_channel;
+    // Channel pressure_reserve_channel;
+    // Channel pressure_secondary_channel;
 
   public:
     StateMachine(const fs::path &config_file);
