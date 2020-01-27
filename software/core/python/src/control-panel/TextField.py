@@ -5,7 +5,7 @@ from typing import Any, Union
 
 import logging
 
-from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton, QVBoxLayout
 from PyQt5.QtCore import pyqtSlot
 
 
@@ -20,12 +20,15 @@ class TextField(QWidget):
                  parent: Any = None) -> None:
         super(TextField, self).__init__(parent)
         # TODO LAYOUT
-        self.widget = QLineEdit(self)
+        self.line_edit = QLineEdit(self)
         self.button = QPushButton('OK', self)
         self.callback = callback if callback is not None else self.on_click
         self.title = title
         self.setGeometry(left, top, width, height)
-        self.widget.resize(width, height)
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.line_edit)
+        self.layout.addWidget(self.button)
+        self.setLayout(self.layout)
 
         # self.button.move(self.coordinates.x + self.width, self.coordinates.y)
         # self.button.resize(50, self.textBox_height)
