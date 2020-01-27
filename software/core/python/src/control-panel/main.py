@@ -16,15 +16,17 @@ if __name__ == "__main__":
     window = QtWidgets.QWidget()
     window.setGeometry(0, 0, 300, 300)
 
-    Button(title='', width=50, height=50,
-           left=0, top=100, callback=None,
-           tool_tip='test',
-           parent=window)
-    Dial(title='', width=50, height=50,
-         left=0, top=0, min_value=0,
-         max_value=10,
-         parent=window)
-    ProgressBar(title='', width=50, height=50, left=100, top=0,
-                min_value=0, max_value=10, parent=window)
+    # Button(title='', width=50, height=50,
+    #        left=0, top=100, callback=None,
+    #        tool_tip='test',
+    #        parent=window)
+    # Dial(title='', width=50, height=50,
+    #      left=0, top=0, min_value=0,
+    #      max_value=10,
+    #      parent=window)
+    # ProgressBar(title='', width=50, height=50, left=100, top=0,
+    #             min_value=0, max_value=10, parent=window)
+    Table(title='', columns=5, rows=3, left=0,
+          top=0, height=5, width=10, parent=window)
     window.show()
     app.exec_()
