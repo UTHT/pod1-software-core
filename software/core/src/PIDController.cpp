@@ -26,26 +26,26 @@ PIDController::PIDController(const struct IOPin io_pin,
                              const std::vector<int> Mode,
                              const std::vector<double> upperLimit,
                              const std::vector<double> lowerLimit) :
-                            
+
     Controller(&Input, &Output, &goal, 0.0, 0.0, 0.0, P_ON_E, DIRECT)
-                             
-{   
+
+{
     this->setpin(io_pin);
     this->Input = analogRead(io_pin.pin_number);
-    
+
     // Set to Current State
     this->state_change(current_state);
 
     // TODO: error handling inside constructor
-    if (!(total_States == Kp.size() == Ki.size() == Kd.size() == 
-          Setpoint.size() == POn.size() == Direction.size() == 
+    if (!(total_States == Kp.size() == Ki.size() == Kd.size() ==
+          Setpoint.size() == POn.size() == Direction.size() ==
           Mode.size() == upperLimit.size() == lowerLimit.size())) {
 
         /*TODO: ERROR HANDLE*/
     }
 
     for (int i = 0; i < total_States; i++) {
-        
+
         if (Kp[i] < 0 || Ki[i] < 0 || Kd[i] < 0) {
             /*TODO: ERROR HANDLE*/
         }
@@ -56,12 +56,12 @@ PIDController::PIDController(const struct IOPin io_pin,
         }
 
         if (Direction[i] != DIRECT && Direction[i] != REVERSE) {
-            
+
             /*TODO: ERROR HANDLE */
         }
 
         if (Mode[i] == AUTOMATIC || Mode[i] == MANUAL) {
-            
+
             /*TODO: ERROR HANDLE */
         }
     }
@@ -83,7 +83,7 @@ PIDController::PIDController(const PIDController & src) = default;
 PIDController::~PIDController() = default;
 
 int PIDController::setpin(const struct IOPin io_pin) {
-    
+
     if (io_pin.pin_number < 0) {
         return -1;
     }
@@ -97,7 +97,7 @@ struct IOPin PIDController::getpin() {
 }
 
 void PIDController::state_change(const States change_to) {
-        
+
     current_state = change_to;
 
     // Update Controller PID
@@ -110,7 +110,7 @@ void PIDController::state_change(const States change_to) {
 
 bool PIDController::update() { // TODO: Add error checking to return error code on problem
 
-    bool status;        
+    bool status;
     Input = analogRead(io_pin.pin_number);
     status = Controller.Compute();
     analogWrite(io_pin.pin_number, Output);

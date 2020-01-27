@@ -26,7 +26,7 @@ Controller::Controller(
 }
 
 void Controller::state_change(const States change_to) {
-  
+
   this->current_state = change_to;
 }
 
