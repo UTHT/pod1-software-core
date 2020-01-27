@@ -26,7 +26,9 @@ if __name__ == "__main__":
     #      parent=window)
     # ProgressBar(title='', width=50, height=50, left=100, top=0,
     #             min_value=0, max_value=10, parent=window)
-    Table(title='', columns=5, rows=3, left=0,
+    Table(title='test', columns=5, rows=3, left=0,
           top=0, height=5, width=10, parent=window)
+    # TextField(title='', width=100, height=50, left=0,
+    #           top=0, callback=None, parent=window)
     window.show()
     app.exec_()
