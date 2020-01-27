@@ -43,4 +43,4 @@ class Dial():
         d = dial(100,0,50)
         d.show()
         sys.exit(app.exec_())
-        
+
