@@ -20,18 +20,18 @@ StateMachine::StateMachine(const fs::path &config_file){
   min_air_pressure_reserve = 0;
   min_air_pressure_secondary = 0;
 
-  state_channel = Channel();
-  location_channel = Channel();
-  imu_channel = Channel();
-  motor_temp_channel = Channel();
-  front_wheel_temp_channel = Channel();
-  battery_temp_channel = Channel();
-  battery_level_channel = Channel();
-  gap_height_front_channel = Channel();
-  gap_height_rear_channel = Channel();
-  // vibration_channel = Channel();
-  pressure_reserve_channel = Channel();
-  pressure_secondary_channel = Channel();
+  // state_channel = Channel("");
+  // location_channel = Channel("");
+  // imu_channel = Channel("");
+  // motor_temp_channel = Channel("");
+  // front_wheel_temp_channel = Channel("");
+  // battery_temp_channel = Channel("");
+  // battery_level_channel = Channel("");
+  // gap_height_front_channel = Channel("");
+  // gap_height_rear_channel = Channel("");
+  // vibration_channel = Channel("");
+  // pressure_reserve_channel = Channel("");
+  // pressure_secondary_channel = Channel("");
 }
 
 StateMachine::~StateMachine(){
@@ -43,7 +43,7 @@ void StateMachine::get_data(){
 void StateMachine::run(){
 
   while (true){
-    get_data();
+    // get_data();
     if(current_state == OFF){
     }
     else if(current_state == ESTOP){
