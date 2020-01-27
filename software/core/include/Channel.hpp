@@ -11,7 +11,6 @@ class Channel{
     std::string name;
     // std::string data;
   public:
-    Channel();
     Channel(const std::string name);
     virtual ~Channel();
 
@@ -21,8 +20,8 @@ class Channel{
     // for pub
     //    problem: what is the parameter?, as lcmtypes are not inherited, and each type
     //    is a custom class
-    
-    bool get( );
-    bool pub(const MessageType * msg);
+
+    bool get();
+    // bool pub(const MessageType * msg);
 };
 #endif
