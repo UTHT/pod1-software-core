@@ -12,7 +12,7 @@
 
 class PIDController {
     private:
-        
+
         struct IOPin io_pin;
         States current_state;
 
@@ -30,6 +30,7 @@ class PIDController {
         std::vector<double> lowerLimit;
 
         // PID Controller
+        // TODO naming convention
         PID Controller;
 
     public:

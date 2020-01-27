@@ -7,38 +7,37 @@
 #include "Channel.hpp"
 //#include <lcm/lcm-cpp.hpp>
 
-//passes pointer of data structure to channel handler for it
-//to update
-void lcm_channel_handler(estop_channel_flag* flag_struct);
-
 //data structure that channel will update
 struct estop_channel_flag
 {
     bool estop_raised;
     std::string raised_state_name;
 };
+//passes pointer of data structure to channel handler for it
+//to update
+void lcm_channel_handler(estop_channel_flag* flag_struct);
+
 
 //estop state
 class EstopState: public State{
 
-    private:
-        States name;
-        //poll for launch authorization 
-        estop_channel_flag estop_info;
+  private:
+    //poll for launch authorization
+    estop_channel_flag estop_info;
 
-    public:
+  public:
 
-    //default constructor
-    EstopState();
+  //default constructor
+  EstopState();
 
-    //primary constructor
-    EstopState(States name);
+  //primary constructor
+  EstopState(States name);
 
-    //check channels
-    States run();
+  //check channels
+  States run();
 
-    //destructor
-    ~EstopState();
+  //destructor
+  ~EstopState();
 };
 
 #endif

@@ -18,23 +18,19 @@ struct LCMTypeLaunchTrigger{
 class LockState: public State{
 
   private:
-    States name;
     Channel* launch_trigger_channel_ptr;
     LCMTypeLaunchTrigger launch_trigger;
 
   public:
-
-  //default constructor
-  LockState();
-
   //primary constructor
   LockState(States name);
+
+  //destructor
+  ~LockState();
 
   //check channels
   States run();
 
-  //destructor
-  ~LockState();
 };
 
 #endif

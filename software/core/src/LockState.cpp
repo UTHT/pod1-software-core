@@ -1,9 +1,6 @@
 
 #include "LockState.hpp"
 
-//default constructor
-LockState::LockState():State(){}
-
 //[call the same systems check executed within the 'SYS_CHECK' state]
 // >>>
 bool run_systems_diagnostic_check(){
@@ -15,7 +12,6 @@ bool run_systems_diagnostic_check(){
 //primary constructor
 LockState::LockState(States name):State(name){
 
-  this->name = name;
   this->launch_trigger_channel_ptr = new Channel("primary_launch_trigger");
   this->launch_trigger = LCMTypeLaunchTrigger();
 }

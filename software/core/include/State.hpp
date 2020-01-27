@@ -13,7 +13,7 @@ class State {
         virtual ~State();
 
         /* Perform logic related to the current state and return when a state transition is desired. */
-        States run();
+        virtual States run();
 
         States get_name();
 };
