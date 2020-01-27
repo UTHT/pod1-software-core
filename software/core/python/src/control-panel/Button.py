@@ -1,46 +1,37 @@
 '''
 Control Panel Button Widget
 '''
-from PyQt5.QtWidgets import QWidget, QPushButton
+from typing import Any
+from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import pyqtSlot
 
-from components import Coordinate
+import logging
 
 
-class Button(QWidget):
+class Button(QPushButton):
     def __init__(self,
                  title: str,
-                 coordinates: Coordinate,
+                 top: int,
+                 left: int,
                  width: int,
-                 height: int):
-        super().__init__()
-        self.setWindowTitle(self.title)
-        self.setGeometry(coordinates.x, coordinates.y, width, height)
+                 height: int,
+                 callback: Any,
+                 color: str = 'brown',
+                 tool_tip: str = '',
+                 parent: Any = None):
+        super(Button, self).__init__(title, parent)
+        self.setWindowTitle(title)
+        self.setStyleSheet(f"background-color: {color}")
+        self.setGeometry(left, top, width, height)
+        self.setToolTip(tool_tip)
+        self.callback = callback if callback is not None else self.on_click
+        self.clicked.connect(self.callback)
+        self.title = title
+        self.show()
 
     def __str__(self) -> str:
-        return 'Button'
-
-    def initUI(self):
-        # TODO what?
-        self.setStyleSheet("background-color: brown")
-        button = QPushButton('PyQt5 button', self)
-
-        button.setToolTip('This is an example button')
-        button.move(100, 70)
-        button.clicked.connect(self.on_click)
-
-        self.show()
+        return self.title
 
     @pyqtSlot()
     def on_click(self):
-        print('PyQt5 button click')
-
-    def action(self) -> None:
-        ...
-
-
-"""
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    button = Button()
-    sys.exit(app.exec_())"""
+        logging.info(f'Button: {str(self)}: Default callback.')
