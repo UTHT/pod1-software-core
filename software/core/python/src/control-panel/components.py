@@ -1,7 +1,6 @@
 from typing import NamedTuple
 from enum import Enum
 
-
 class Colour(NamedTuple):
     red: float
     green: float
@@ -19,3 +18,14 @@ class LayoutOrientation(Enum):
 
     def __str__(self) -> str:
         return self.name
+
+
+class TableLocation(NamedTuple):
+    row: int
+    col: int
+
+
+class TableEnum(Enum):
+    TABLE: 0
+    ROW: 1
+    COL: 1
