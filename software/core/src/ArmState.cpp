@@ -1,21 +1,15 @@
 
 #include "ArmState.hpp"
 
-//default constructor
-ArmState::ArmState():State(){}
-
-
 //primary constructor
 ArmState::ArmState(States name):State(name){
-    this->name = name;
     this->launch_channel_ptr = new Channel("data-launch-ready");
     this->check_emergency_ptr = new Channel("command-estop");
 }
 
 
-//function to request data from States 
+//function to request data from States
 States ArmState::run(){
-
     //TODO: We currently assume that the 'get()' function
     //      returns a bool. We will most likely need to update
     //      this syntax to reflect changes to the channel class
@@ -30,7 +24,7 @@ States ArmState::run(){
     if (launch_channel_ptr->get()){
         return DRIVE;
     }
-    
+
     //default case is to stay in Arm State
     return ARM;
 }

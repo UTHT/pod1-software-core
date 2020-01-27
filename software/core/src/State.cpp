@@ -1,7 +1,5 @@
 #include "State.hpp"
 
-State::State(){
-}
 State::State(States name) : name(name){
 }
 
