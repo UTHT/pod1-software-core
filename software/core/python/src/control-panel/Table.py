@@ -24,7 +24,7 @@ class Table(QTableWidget):
                       width of table
         '''
         super(Table, self).__init__(parent)
-        self.label = QLabel()
+        # self.label = QLabel()
         self.title = title
         if columns <= 0:
             logging.warning(
@@ -64,11 +64,10 @@ class Table(QTableWidget):
             self.setColumnWidth(x, y)
         for x, y in self.row_heights.items():
             self.setRowHeight(x, y)
-        for i in range(self.rowCount()):
-            for j in range(self.columnCount()):
-                self.setItem(
-                    i, j, QTableWidgetItem("Cell (%s, %s)" % (i, j)))
-
+#         for i in range(self.rowCount()):
+#             for j in range(self.columnCount()):
+#                 self.setItem(
+#                     i, j, QTableWidgetItem("Cell (%s, %s)" % (i, j)))
         # self.label.setAlignment(Qt.AlignCenter)
         # self.horizontalHeader().hide()
         # self.setGeometry(left, top, total_width, total_width)
