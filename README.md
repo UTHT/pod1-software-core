@@ -53,7 +53,8 @@ The basic idea...
     - Resolve issues unforeseen on the stable `master` branch
 - During the start of every sprint, all teams pull from their latest stable tag
   - Any branch created within this sprint must pull from this stable tag
-  - All work (features) during the sprint gets merged to the \*-dev branch
+  - All work (features) during the sprint gets merged to the \*-dev branch, by either [Mat](https://github.com/MathieuTuli), Jay or Rafay.
+    - Thus, when you are done with your feature branch, you must appropriately make a Pull Request.
   - Upon completion of the sprint, all new features are tested and confirmed as stable and merged to \*-stable
   - Subsequently, each team's stables are merged to `master-dev` for further QA and final merging to `master`
 - Reference the links from above for more details...
