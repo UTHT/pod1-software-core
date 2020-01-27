@@ -9,12 +9,11 @@ class State {
          * */
         States name;
     public:
-        State();
         State(States name);
         virtual ~State();
 
         /* Perform logic related to the current state and return when a state transition is desired. */
-        State& run();
+        virtual States run();
 
         States get_name();
 };
