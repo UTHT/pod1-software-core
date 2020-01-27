@@ -1,3 +1,5 @@
+#include <lcm/lcm-cpp.hpp>
+
 #ifndef CHANNEL_H
 #define CHANNEL_H
 
@@ -7,8 +9,8 @@ class Channel{
   private:
     // Channel channel;
     std::string name;
+    // std::string data;
   public:
-    Channel();
     Channel(const std::string name);
     virtual ~Channel();
 
@@ -18,7 +20,8 @@ class Channel{
     // for pub
     //    problem: what is the parameter?, as lcmtypes are not inherited, and each type
     //    is a custom class
+
     bool get();
-    bool pub();
+    // bool pub(const MessageType * msg);
 };
 #endif
