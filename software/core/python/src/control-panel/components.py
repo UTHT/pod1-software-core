@@ -1,15 +1,11 @@
 from typing import NamedTuple
 from enum import Enum
 
+
 class Colour(NamedTuple):
     red: float
     green: float
     blue: float
-
-
-class Coordinate(NamedTuple):
-    x: int
-    y: int
 
 
 class LayoutOrientation(Enum):
@@ -25,7 +21,10 @@ class TableLocation(NamedTuple):
     col: int
 
 
-class TableEnum(Enum):
+class CellLocation(Enum):
     TABLE: 0
     ROW: 1
     COL: 1
+
+    def __str__(self) -> str:
+        return self.name

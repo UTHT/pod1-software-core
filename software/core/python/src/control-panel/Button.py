@@ -19,8 +19,7 @@ class Button(QPushButton):
                  color: str = 'brown',
                  tool_tip: str = '',
                  parent: Any = None):
-        super(Button, self).__init__(title, parent)
-        self.setWindowTitle(title)
+        super(Button, self).__init__(parent)
         self.setStyleSheet(f"background-color: {color}")
         self.setGeometry(left, top, width, height)
         self.setToolTip(tool_tip)
