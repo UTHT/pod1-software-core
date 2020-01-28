@@ -1,33 +1,20 @@
 #ifndef PIDCONTROLLER_H
 #define PIDCONTROLLER_H
 
-#include <stdio.h>
-#include <vector>
-
-#include "State.hpp"
-#include "Channel.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
+#include "helper/PIDParameters.hpp"
 #include "PID_v1.h"
 
 class PIDController {
     private:
 
         struct IOPin io_pin;
-        States current_state;
+        struct PIDParameters pid_parameters;
 
-        double Input = 0;
-        double Output = 0;
-        double goal = 0;
-        std::vector<double> Kp;
-        std::vector<double> Ki;
-        std::vector<double> Kd;
-        std::vector<double> Setpoint;
-        std::vector<int> PoN;
-        std::vector<int> Direction;
-        std::vector<int> Mode;
-        std::vector<double> upperLimit;
-        std::vector<double> lowerLimit;
+        double Input = 0.0;          // input of sensor reading
+        double Output = 0.0;         // output of pwm spectrum
+        double Setpoint = 0.0;       // desired sensor reading
 
         // PID Controller
         // TODO naming convention
@@ -36,17 +23,8 @@ class PIDController {
     public:
 
         PIDController(const struct IOPin io_pin,
-                      const States current_state,
-                      const int total_States,
-                      const std::vector<double> Kp,
-                      const std::vector<double> Ki,
-                      const std::vector<double> Kd,
-                      const std::vector<double> Setpoint,
-                      const std::vector<int> POn,
-                      const std::vector<int> Direction,
-                      const std::vector<int> Mode,
-                      const std::vector<double> upperLimit,
-                      const std::vector<double> lowerLimit);
+                      const double sensor_reading,
+                      const struct PIDParameters pid_parameters); // TODO naming convention
 
         PIDController(const PIDController & src);
 
@@ -56,9 +34,11 @@ class PIDController {
 
         struct IOPin getPin();
 
-        // Update State Value upon state changes
-        void setState(const States change_to);
+        // Update PID Parameters
+        void setParameters(const struct PIDParameters pid_parameters);
 
-        bool run();
+        struct PIDParameters getParameters();
+
+        bool run(const double sensor_reading);
 };
 #endif
