@@ -82,7 +82,7 @@ PIDController::PIDController(const PIDController & src) = default;
 
 PIDController::~PIDController() = default;
 
-int PIDController::setpin(const struct IOPin io_pin) {
+int PIDController::setPin(const struct IOPin io_pin) {
 
     if (io_pin.pin_number < 0) {
         return -1;
@@ -91,12 +91,12 @@ int PIDController::setpin(const struct IOPin io_pin) {
     return 0;
 }
 
-struct IOPin PIDController::getpin() {
+struct IOPin PIDController::getPin() {
 
     return this->io_pin;
 }
 
-void PIDController::state_change(const States change_to) {
+void PIDController::setState(const States change_to) {
 
     current_state = change_to;
 
@@ -108,7 +108,7 @@ void PIDController::state_change(const States change_to) {
     Controller.SetOutputLimits(lowerLimit[current_state], upperLimit[current_state]);
 }
 
-bool PIDController::update() { // TODO: Add error checking to return error code on problem
+bool PIDController::run() { // TODO: Add error checking to return error code on problem
 
     bool status;
     Input = analogRead(io_pin.pin_number);

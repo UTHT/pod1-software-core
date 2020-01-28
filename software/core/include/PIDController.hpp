@@ -52,13 +52,13 @@ class PIDController {
 
         ~PIDController();
 
-        int setpin(const struct IOPin io_pin);
+        int setPin(const struct IOPin io_pin);
 
-        struct IOPin getpin();
+        struct IOPin getPin();
 
         // Update State Value upon state changes
-        void state_change(const States change_to);
+        void setState(const States change_to);
 
-        bool update();
+        bool run();
 };
 #endif
