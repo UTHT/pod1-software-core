@@ -17,7 +17,9 @@ class Table(QWidget):
                  width: Union[int, List[int]],
                  height: int,
                  parent: Any = None,
-                 width_of_table: bool = False) -> None:
+                 width_of_table: bool = False,
+                 row_headers: List[str],
+                 col_headers: List[str]) -> None:
         '''
         @param width: either int or List[int]. If int, all columsn equi-width
                       if List[int], len() must be equal to @param columns
@@ -74,6 +76,22 @@ class Table(QWidget):
 #                     i, j, QTableWidgetItem("Cell (%s, %s)" % (i, j)))
         self.label.setAlignment(Qt.AlignCenter)
         # self.horizontalHeader().hide()
+        if(len(self.col_headers) == self.columns):
+            self.table.setHorizontalHeaderLabels(self.col_headers)
+        else:
+            logging.warning(
+                "Table: @param col_headers is a list a doesn't have" +
+                f"length = {columns}. Pass in a list with the correct amount of" +
+                "headers to cover all the columns")
+            raise Exception
+        if(len(self.row_headers) == self.columns):
+            self.table.setVerticalHeaderLabels(self.row_headers)
+        else:
+            logging.warning(
+                "Table: @param row_headers is a list a doesn't have" +
+                f"length = {rows}. Pass in a list with the correct amount of" +
+                "headers to cover all the columns")
+            raise Exception
         self.setGeometry(left, top, total_width, total_height)
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.label)
