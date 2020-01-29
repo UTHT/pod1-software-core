@@ -1,5 +1,5 @@
-#ifndef MOTORCONTROLLER_H
-#define MOTORCONTROLLER_H
+#ifndef BRAKECONTROLLER_H
+#define BRAKECONTROLLER_H
 
 #include <stdio.h>
 #include <vector>
@@ -10,14 +10,14 @@
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
 
-class MotorController : public Controller {
+class BrakeController : public Controller {
   public:
     
-    MotorController(const struct IOPin io_pin,
+    BrakeController(const struct IOPin io_pin,
                     const States current_state,
                     const std::vector<Channel> channels);
 
-    virtual ~MotorController();
+    virtual ~BrakeController();
     // Run through list of channels for updated sensor values and command instructions
     virtual int run() override;
    // ESTOP command

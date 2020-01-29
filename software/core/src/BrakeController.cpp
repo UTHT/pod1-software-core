@@ -9,11 +9,11 @@
 
 #include "../include/State.hpp"
 #include "../include/Controller.hpp"
-#include "../include/MotorController.hpp"
+#include "../include/BrakeController.hpp"
 #include "../include/helper/enums.hpp"
 #include "../include/helper/IOPin.hpp"
 
-MotorController::MotorController(const struct IOPin io_pin,
+BrakeController::BrakeController(const struct IOPin io_pin,
                                  const States current_state,
                                  const std::vector<Channel> channels) :
     
@@ -21,13 +21,13 @@ MotorController::MotorController(const struct IOPin io_pin,
 
 {}
 
-int MotorController::run() {
+int BrakeController::run() {
 
     // code
     return 0;
 }
 
-bool MotorController::shutdown() {
+bool BrakeController::shutdown() {
 
     //code
 
