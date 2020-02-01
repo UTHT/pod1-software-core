@@ -14,7 +14,7 @@ class DataReader{
     Channel channel;
   public:
     DataReader();
-    ~DataReader();
+    virtual ~DataReader();
     //  a timeout = 0 means non-blocking, a timeout > 0 means block for whatever
     //  time, and a timeout < 0 means block forever
     bool get(const std::string chanel_name,

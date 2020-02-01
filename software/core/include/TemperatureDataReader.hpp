@@ -14,7 +14,12 @@ class TemperatureDataReader: public DataReader{
 
     public:
     //primary constructor
-    TemperatureDataReader(DataReader IOPin);
+    // TemperatureDataReader::TemperatureDataReader(DataReader IOPin);
+    TemperatureDataReader::TemperatureDataReader(
+        double temp,
+        double maxVolt, 
+        double minVolt, 
+        int analogInput, ):DataReader(IOPin);
     //destructor
     ~TemperatureDataReader();
     //reads the temperature and updates object
