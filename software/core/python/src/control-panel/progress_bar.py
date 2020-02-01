@@ -3,7 +3,7 @@ Control Panel Progress Bar Widget
 '''
 from typing import Union, Any
 
-from PyQt5.QtWidgets import QProgressBar
+from PyQt5.QtWidgets import QProgressBar,QApplication
 
 
 class ProgressBar(QProgressBar):
@@ -39,3 +39,9 @@ class ProgressBar(QProgressBar):
             return False
         self.setValue(current)
         return True
+
+app = QApplication([])
+
+ex = ProgressBar("progress",10,20,0,0,600,600)
+
+app.exec()
