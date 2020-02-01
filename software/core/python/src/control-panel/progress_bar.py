@@ -2,11 +2,11 @@
 Control Panel Progress Bar Widget
 '''
 from typing import Union, Any
+import sys
+from PyQt5.QtWidgets import QProgressBar, QWidget, QVBoxLayout, QApplication, QLabel
 
-from PyQt5.QtWidgets import QProgressBar
 
-
-class ProgressBar(QProgressBar):
+class ProgressBar(QWidget):
     def __init__(self,
                  title: str,
                  min_value: Union[int, float],
@@ -23,19 +23,27 @@ class ProgressBar(QProgressBar):
                 or not isinstance(max_value, int) and \
                 not isinstance(max_value, float):
             raise Exception
-        self.setMinimum(min_value)
-        self.setMaximum(max_value)
-        self.setStyleSheet("QProgressBar::chunk {background: %s}" % color)
-        self.setGeometry(left, top, width, height)
-        self.title = title
-        self.setValue(min_value)
+        self.progressbar = QProgressBar()
+        self.progressbar.setMinimum(min_value)
+        self.progressbar.setMaximum(max_value)
+        self.progressbar.setStyleSheet("QProgressBar::chunk {background: %s}" % color)
+        self.progressbar.setGeometry(left, top, width, height)
+        self.progressbar.title = title
+        self.progressbar.setValue(min_value)
+        self.min_max_label = QLabel(
+            "min: {}, max: {}". format(self.progressbar.minimum(), self.progressbar.maximum())
+        )
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.progressbar)
+        self.layout.addWidget(self.min_max_label)
+        self.setLayout(self.layout)
         self.show()
 
     def __str__(self) -> str:
-        return self.title
+        return self.progressbar.title
 
     def set_current(self, current: Union[int, float]) -> bool:
         if not isinstance(current, int) and not isinstance(current, float):
             return False
-        self.setValue(current)
+        self.progressbar.setValue(current)
         return True
