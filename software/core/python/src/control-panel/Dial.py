@@ -1,46 +1,87 @@
 '''
 Control Panel Dial Widget
 '''
-from typing import Any, Tuple
+from typing import Any, Union
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5 import QtCore
+from PyQt5.QtGui import QPainter, QBrush, QPen
 
-from components import Colour
+from PyQt5.QtCore import Qt
+import sys
 
 
-class Dial():
-    def __init__(self) -> None:
-        QWidget.__init__(self)
-        self.layout = QGridLayout()
-        self.dial = QDial()
+# class WorkerThread(QtCore.QObject):
+#     signalExample = QtCore.pyqtSignal(str, int)
+#
+#     def __init__(self):
+#         super().__init__()
+#
+#     @QtCore.pyqtSlot()
+#     def run(self):
+#         while True:
+#             self.signalExample.emit("leet", 1337)
+#             time.sleep(5)
+
+class Dial(QDial):
+    def __init__(self,
+                 title: str,
+                 top: int,
+                 left: int,
+                 width: int,
+                 height: int,
+                 min_value: Union[int, float],
+                 max_value: Union[int, float],
+                 parent: Any = None) -> None:
+        super(Dial, self).__init__(parent)
+        if not isinstance(min_value, int) and \
+                not isinstance(min_value, float) \
+                or not isinstance(max_value, int) and \
+                not isinstance(max_value, float):
+            raise Exception
+
+        self.setMinimum(min_value)
+        self.setMaximum(max_value)
+        self.setGeometry(left, top, width, height)
+        self.setNotchesVisible(True)
+        self.title = title
+        self.height = height
+        self.width = width
+        self.setValue(min_value)
+        self.show()
 
     def __str__(self) -> str:
-        ...
+        return self.title
 
-    def set_current(self, current: Any) -> bool:
-        self.dial.setValue(current)
+    def set_current(self, current: Union[int, float]) -> bool:
+        if not isinstance(current, int) and not isinstance(current, float):
+            return False
+        self.setValue(current)
+        return True
 
-    def set_min(self, min_value: Any) -> bool:
-        self.dial.setMinimum(min_value)
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        # label = QLabel(self)
+        pixmap = QPixmap("dialbackground.png")
 
-    def set_max(self, max_value: Any) -> bool:
-        self.dial.setMaximum(max_value)
+        if (self.width >= self.height):
+            pixmap = pixmap.scaledToHeight(self.height)
+        else:
+            pixmap = pixmap.scaledToWidth(self.height)
 
-    def set_width(self, width: float) -> bool:
-        ...
+        painter.drawPixmap(self.rect(),pixmap)
 
-    def set_height(self, height: float) -> bool:
-        ...
+        # if (self.width > self.height):
+        #     painter.move(self.height / 2, 0)
+        # if (self.height > self.width):
+        #     painter.move(0, 0)
+        # painter.setAlignment(Qt.AlignCenter)
 
-    def set_colour(self, colour: Colour) -> bool:
-        ...
+        painter.setPen(QPen(Qt.white, 8))
+        painter.drawLine(self.height/2,self.width/2,50,50)
 
-    # TODO : This should actually return the actual PyQT (or whatever lib we
-    #       use) widget, not None. Not sure if this is the best way
-    def display(self) -> None:
-        self.setLayout(self.layout)
-        self.dial.setNotchesVisible(True)
-        self.layout.addWidget(self.dial)
-        app = QApplication(sys.argv)
-        d = dial(100,0,50)
-        d.show()
-        sys.exit(app.exec_())
-        
+
+app = QApplication(sys.argv)
+d = Dial (title = "dial", top = 50, left = 50, width = 200, height = 200, min_value=10,max_value=50)
+d.set_current(25)
+sys.exit(app.exec_())
