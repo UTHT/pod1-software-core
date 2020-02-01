@@ -1,0 +1,5 @@
+package utht;
+struct control_current_state{
+  int64_t utime;
+  States current_state;
+}

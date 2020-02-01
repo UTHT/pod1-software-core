@@ -1,5 +1,4 @@
 package utht;
-
 struct sensor_imu_t{
   int64_t utime;
   double yaw;
