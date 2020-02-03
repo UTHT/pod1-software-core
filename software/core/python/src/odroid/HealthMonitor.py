@@ -2,10 +2,11 @@ import json
 import ChannelMonitor as cm
 
 
-class HealthMonitor(object):
-    def __init__(self, jsonPath="software/core/python/src/odriod/channels_sheet.json"):
+class HealthMonitor:
+    def __init__(self,
+                 jsonPath="software/core/python/src/odriod/channels_sheet.json") -> None:
         self.generate_channel_monitors(jsonPath)
-        self.status =
+        # self.status =
 
     def generate_channel_monitors(self, jsonPath):
         channelData = json.load(open(jsonPath, "r"))
