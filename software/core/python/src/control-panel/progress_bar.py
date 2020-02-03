@@ -2,8 +2,7 @@
 Control Panel Progress Bar Widget
 '''
 from typing import Union, Any
-import sys
-from PyQt5.QtWidgets import QProgressBar, QWidget, QVBoxLayout, QApplication, QLabel
+from PyQt5.QtWidgets import QProgressBar, QWidget, QVBoxLayout, QLabel
 
 
 class ProgressBar(QWidget):
@@ -26,12 +25,14 @@ class ProgressBar(QWidget):
         self.progressbar = QProgressBar()
         self.progressbar.setMinimum(min_value)
         self.progressbar.setMaximum(max_value)
-        self.progressbar.setStyleSheet("QProgressBar::chunk {background: %s}" % color)
+        self.progressbar.setStyleSheet(
+            "QProgressBar::chunk {background: %s}" % color)
         self.progressbar.setGeometry(left, top, width, height)
         self.progressbar.title = title
         self.progressbar.setValue(min_value)
         self.min_max_label = QLabel(
-            "min: {}, max: {}". format(self.progressbar.minimum(), self.progressbar.maximum())
+            "min: {}, max: {}". format(
+                self.progressbar.minimum(), self.progressbar.maximum())
         )
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.progressbar)

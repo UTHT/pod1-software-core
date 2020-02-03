@@ -24,12 +24,12 @@ if __name__ == "__main__":
     #      left=0, top=0, min_value=0,
     #      max_value=10,
     #      parent=window)
-    # ProgressBar(title='', width=50, height=50, left=100, top=0,
-    #             min_value=0, max_value=10, parent=window)
-    Table(title='test', columns=5, rows=3, left=0,
-          top=0, height=5, width=10, parent=window,
-          col_headers=['test', 't', 't', 't', 't'],
-          row_headers=['test', 'f', ])
+    pb = ProgressBar(title='', width=50, height=50, left=100, top=0,
+                     min_value=0, max_value=10, parent=window)
+    # Table(title='test', columns=5, rows=3, left=0,
+    #       top=0, height=5, width=10, parent=window,
+    #       col_headers=['test', 't', 't', 't', 't'],
+    #       row_headers=['test', 'f', ])
     # TextField(title='test', width=100, height=50, left=0,
     #           top=0, callback=None, parent=window)
     window.show()
