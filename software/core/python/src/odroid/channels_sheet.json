@@ -1,0 +1,14 @@
+{
+    "channel1": {
+        "min-value": 9,
+        "max-value": 10.11,
+        "min-rtt": 5,
+        "max-rtt": 5.11
+    },
+    "channel2": {
+        "min-value": 10,
+        "max-value": 50,
+        "min-rtt": 500,
+        "max-rtt": 510
+    }
+}
