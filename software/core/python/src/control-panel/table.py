@@ -3,7 +3,7 @@ from typing import List, Union, Any
 import logging
 
 from PyQt5.QtWidgets import QWidget, QLabel, QTableWidget, \
-    QTableWidgetItem, QVBoxLayout,QApplication
+    QVBoxLayout
 from PyQt5.QtCore import Qt
 
 
@@ -79,18 +79,18 @@ class Table(QWidget):
         if(len(col_headers) == columns):
             self.table.setHorizontalHeaderLabels(col_headers)
         else:
-            logging.warning(
-                "Table: @param col_headers is a list a doesn't have " +
-                f"length = {columns}. Pass in a list with the correct amount of " +
-                "headers to cover all the columns")
+            logging.critical(
+                "Table: @param col_headers is a list and doesn't have " +
+                f"length = {columns}. Pass in a list with the correct" +
+                "amount of headers to cover all the columns")
             raise Exception
         if(len(row_headers) == rows):
             self.table.setVerticalHeaderLabels(row_headers)
         else:
-            logging.warning(
-                "Table: @param row_headers is a list a doesn't have " +
-                f"length = {rows}. Pass in a list with the correct amount of " +
-                "headers to cover all the columns")
+            logging.critical(
+                "Table: @param row_headers is a list and doesn't have " +
+                f"length = {rows}. Pass in a list with the correct" +
+                " amount of headers to cover all the columns")
             raise Exception
         self.setGeometry(left, top, total_width, total_height)
         self.layout = QVBoxLayout()
@@ -106,8 +106,7 @@ class Table(QWidget):
         self.item(row, col).setText(value)
 
 
-
-#testing
+# testing
 # app = QApplication([])
 
 # ex = Table("test",2,2,0,0,200,200,["row1","row2","row3"],["col1","col2"])
