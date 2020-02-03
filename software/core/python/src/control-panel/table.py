@@ -3,7 +3,7 @@ from typing import List, Union, Any
 import logging
 
 from PyQt5.QtWidgets import QWidget, QLabel, QTableWidget, \
-    QTableWidgetItem, QVBoxLayout
+    QVBoxLayout
 from PyQt5.QtCore import Qt
 
 
@@ -16,6 +16,8 @@ class Table(QWidget):
                  top: int,
                  width: Union[int, List[int]],
                  height: int,
+                 row_headers: List[str],
+                 col_headers: List[str],
                  parent: Any = None,
                  width_of_table: bool = False) -> None:
         '''
@@ -74,6 +76,22 @@ class Table(QWidget):
 #                     i, j, QTableWidgetItem("Cell (%s, %s)" % (i, j)))
         self.label.setAlignment(Qt.AlignCenter)
         # self.horizontalHeader().hide()
+        if(len(col_headers) == columns):
+            self.table.setHorizontalHeaderLabels(col_headers)
+        else:
+            logging.critical(
+                "Table: @param col_headers is a list and doesn't have " +
+                f"length = {columns}. Pass in a list with the correct" +
+                "amount of headers to cover all the columns")
+            raise Exception
+        if(len(row_headers) == rows):
+            self.table.setVerticalHeaderLabels(row_headers)
+        else:
+            logging.critical(
+                "Table: @param row_headers is a list and doesn't have " +
+                f"length = {rows}. Pass in a list with the correct" +
+                " amount of headers to cover all the columns")
+            raise Exception
         self.setGeometry(left, top, total_width, total_height)
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.label)
@@ -86,3 +104,11 @@ class Table(QWidget):
 
     def update_cell(self, row: int, col: int, value: str) -> None:
         self.item(row, col).setText(value)
+
+
+# testing
+# app = QApplication([])
+
+# ex = Table("test",2,2,0,0,200,200,["row1","row2","row3"],["col1","col2"])
+
+# app.exec()
