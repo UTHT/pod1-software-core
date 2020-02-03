@@ -1,6 +1,6 @@
 from typing import Any
 from PyQt5.QtWidgets import QWidget, QTabWidget, QMainWindow
-from Layout import Layout
+from layout import Layout
 
 
 class Window(QMainWindow):
