@@ -21,6 +21,10 @@ class MotorController : public Controller {
     // Run through list of channels for updated sensor values and command instructions
     virtual int run() override;
    // ESTOP command
-    virtual bool shutdown() override;
+    virtual void shutdown() override;
+
+    //compute pid controller parameters based on desired next controller state and current pod state
+    void determine_pid_parameters(struct State_Transition & nextInternalState, 
+                                  struct Pod_Data & currentStatus);
 };
 #endif

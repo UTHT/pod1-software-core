@@ -23,7 +23,6 @@ class PIDController {
     public:
 
         PIDController(const struct IOPin io_pin,
-                      const double sensor_reading,
                       const struct PIDParameters pid_parameters); // TODO naming convention
 
         PIDController(const PIDController & src);
@@ -40,5 +39,7 @@ class PIDController {
         struct PIDParameters getParameters();
 
         bool run(const double sensor_reading);
+
+        bool shutdown();
 };
 #endif

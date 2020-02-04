@@ -4,6 +4,15 @@
 #include "PID_v1.h"
 
 struct PIDParameters {
+    
+    /*
+    #define AUTOMATIC	1
+    #define MANUAL	0
+    #define DIRECT  0
+    #define REVERSE  1
+    #define P_ON_M 0
+    #define P_ON_E 1
+    */
 
     // default values
     double Kp = 0.0;             // Proportional

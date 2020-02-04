@@ -13,6 +13,7 @@
 #include "../include/helper/enums.hpp"
 #include "../include/helper/IOPin.hpp"
 
+
 MotorController::MotorController(const struct IOPin io_pin,
                                  const States current_state,
                                  const std::vector<Channel> channels) :
@@ -23,12 +24,74 @@ MotorController::MotorController(const struct IOPin io_pin,
 
 int MotorController::run() {
 
+    switch (Controller::current_state)
+    {
+    case ESTOP:
+        shutdown();
+        break;
+
+    case OFF:
+        shutdown();
+        break;
+
+    case DEBUG:
+        /* code */
+        break;
+
+    case COMMS_CHECK:
+        /* code */
+        break;
+
+    case SYS_CHECK:
+        /* code */
+        break;
+
+    case LOCK:
+        /* code */
+        break;
+
+    case ARM:
+        /* code */
+        break;
+
+    case DRIVE:
+        /* code */
+        break;
+
+    case BRAKE:
+        /* code */
+        break;
+
+    default:
+        break;
+    }
+
     // code
     return 0;
 }
 
-bool MotorController::shutdown() {
+void MotorController::shutdown() {
 
-    //code
+    Controller::low_level_controls.shutdown();
+}
+
+
+void MotorController::determine_pid_parameters(struct State_Transition & nextInternalState, struct Pod_Data & currentStatus){
+
+    // default values
+    double Kp = 0.0;             // Proportional
+    double Ki = 0.0;             // Integral
+    double Kd = 0.0;             // Derivative
+    double Setpoint = 0.0;       // Desired Reading Goal
+    int Direction = DIRECT;      // DIRECT control (alternative is REVERSE control...proportional vs inversely proportional)
+    int Mode = MANUAL;           // Initialized Controller is DISABLED
+
+    //determine direction from sign of speed
+    this->pid_parameters.direction = (nextInternalState.speed > 0.0) ? 0 : 1; 
+
+    this->pid_parameters.Setpoint = (nextInternalState.speed > 0.0) ? nextInternalState.speed : 0.0;
+
+    // determine mode based on sign of speed...depends on regen
+    this->pid_parameters.Mode = (nextInternalState.speed > 0.0) ? 1 : 0;
 
 }

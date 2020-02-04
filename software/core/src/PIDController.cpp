@@ -10,7 +10,6 @@
 
 
 PIDController::PIDController(const struct IOPin io_pin,
-                             const double sensor_reading,
                              const struct PIDParameters pid_parameters) :
 
     Controller(&Input, &Output, &Setpoint, 
@@ -19,7 +18,6 @@ PIDController::PIDController(const struct IOPin io_pin,
 
 {
     this->setPin(io_pin);
-    this->Input = sensor_reading; // Sensor Reading
     this->setParameters(pid_parameters);
 }
 
@@ -65,4 +63,8 @@ bool PIDController::run(const double sensor_reading) { // TODO: Add error checki
     status = Controller.Compute();
     analogWrite(io_pin.pin_number, Output);
     return status;
+}
+
+void PIDController::shutdown() {
+    Controller.SetMode(MANUAL);
 }
