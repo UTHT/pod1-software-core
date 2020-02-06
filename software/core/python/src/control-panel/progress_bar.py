@@ -3,7 +3,12 @@ Control Panel Progress Bar Widget
 '''
 from typing import Union, Any
 
-from PyQt5.QtWidgets import QProgressBar,QApplication
+import threading
+import time
+import logging
+
+from PyQt5.QtWidgets import QProgressBar,QApplication,QWidget
+from PyQt5.QtCore import pyqtSignal, QThread,pyqtSlot
 
 
 class ProgressBar(QProgressBar):
@@ -40,8 +45,42 @@ class ProgressBar(QProgressBar):
         self.setValue(current)
         return True
 
+    @pyqtSlot(int)
+    def on_sld_valueChanged(self, value):
+        self.setValue(value)
+        print(self.value)
+        self.update()
+    
+
+class worker(QWidget):
+    my_signal = pyqtSignal(int)
+
+    def emit(self,val: int):
+        self.my_signal.emit(val)
+
+
+def thread_function(work: worker) -> None:
+    a = 0
+    while(True):
+        w.emit(a)
+        a = a + 1
+        time.sleep(4)
+        print(a)
+
+
+
 app = QApplication([])
 
-ex = ProgressBar("progress",10,20,0,0,600,600)
+ex = ProgressBar("progress",0,20,0,0,600,600)
+ 
+w = worker()
+
+w.my_signal.connect(ex.on_sld_valueChanged)
+
+x = threading.Thread(target=thread_function,args=(w,),daemon=True)
+
+x.start()
 
 app.exec()
+
+print("thread ending") 
