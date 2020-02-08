@@ -4,6 +4,8 @@
 #include "channels/practice.hpp"
 // #include "lcm_handler.hpp"
 
+channels::practice data;
+
 class LCMHandler{
   public:
     ~LCMHandler(){}
@@ -11,6 +13,8 @@ class LCMHandler{
         const lcm::ReceiveBuffer* recv_buf,
         const std::string& channel_name,
         const channels::practice* msg){
+      data.name = msg->name;
+      data.message = msg->message;
       std::cout << "LCMHandler: Message: Handling.";
       std::cout << "LCMHandler: Message: channel name: " << channel_name << std::endl;
       std::cout << "LCMHandler: Message: " << channel_name << ": name: " << msg->name << std::endl;
@@ -27,6 +31,8 @@ int main(int argc, char*argv[]){
   std::string channel_name = "practice_channel";
 
   // Sample
+  data.name = "TEST";
+  data.message = "TEST";
   LCMHandler lcm_handler;
   _lcm.subscribe(channel_name,
                 &LCMHandler::handle_message,
@@ -35,6 +41,8 @@ int main(int argc, char*argv[]){
 
 
   while(_lcm.handle() == 0){
+    std::cout << "NAME: " << data.name << std::endl;
+    std::cout << "MESSAGE: " << data.message << std::endl;
   };
   return 0;
 }

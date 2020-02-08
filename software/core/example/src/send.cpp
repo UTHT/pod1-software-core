@@ -17,6 +17,7 @@ int main(int argc, char*argv[]){
   practice_data.message = "C++ LCM Example.";
   int count = 0;
   for(;;){
+    practice_data.message = std::to_string(count);
     std::cout << "Main: Message: count: " << count++ << std::endl;
     std::cout << "Main: Message: Creating Message" << std::endl;
     _lcm.publish(channel_name, &practice_data);
