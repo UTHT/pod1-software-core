@@ -8,6 +8,7 @@
 #include "Channel.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
+// #include "PID_v1.h"
 
 class Controller {
   private:
@@ -28,5 +29,19 @@ class Controller {
     virtual int run() = 0;
    // ESTOP command
     virtual bool shutdown() = 0;
+};
+
+class Controller : private BrakeController {
+   private:
+   struct unint8_t Io_pin{
+     unint8_t LEDpin;
+     unint8_t motorPin;
+   }
+   unint8_t value;
+   States current_state;
+
+   public:
+   BrakeController(unint8_t LEDpin, unint8_t motorPin, unint8_t value);
+   bool shutdown(unint8_t value);
 };
 #endif
