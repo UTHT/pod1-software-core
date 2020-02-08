@@ -23,7 +23,7 @@ class TemperatureDataReader: public DataReader{
     //destructor
     ~TemperatureDataReader();
     //reads the temperature and updates object
-    void TemperatureDataReader::readTemperature(); 
+    void TemperatureDataReader::readTemperature(double voltageInputDC, double offset); 
 };
 
 #endif
