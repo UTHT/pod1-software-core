@@ -40,6 +40,6 @@ class PIDController {
 
         bool run(const double sensor_reading);
 
-        bool shutdown();
+        void shutdown();
 };
 #endif
