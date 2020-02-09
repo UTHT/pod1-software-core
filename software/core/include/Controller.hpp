@@ -5,17 +5,39 @@
 #include <vector>
 
 #include "State.hpp"
-#include "Channel.hpp"
+#include "PIDController.hpp"
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
+#include "helper/PIDParameters.hpp"
 // #include "PID_v1.h"
 
+//lcm type to indicate desired next brake state
+struct State_Transition{
+
+  double speed                   = 0;
+  double max_transition_distance = 0;
+  double min_transition_distance = 0;
+  double max_transition_accel    = 0;
+  double min_transition_accel    = 0;
+};
+
+struct Pod_Data {
+
+  double instant_speed    = 0;
+  double instant_accel    = 0;
+  double instant_distance = 0;
+
+};
+
+
 class Controller {
-  private:
+  protected:
     // defined in enums
     struct IOPin io_pin;
     States current_state;
     std::vector<Channel> channels;
+    PIDController low_level_controls;
+    PIDParameters pid_parameters;
 
   public:
     
@@ -31,7 +53,7 @@ class Controller {
     virtual bool shutdown() = 0;
 };
 
-class Controller : private BrakeController {
+class BrakeController : public Controller {
    private:
    struct unint8_t Io_pin{
      unint8_t LEDpin;
