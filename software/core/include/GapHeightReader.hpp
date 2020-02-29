@@ -3,3 +3,9 @@
 
 #include "DataReader.hpp"
 
+class GapHeightReader:public DataReader {
+    private:
+
+
+    public:
+}
