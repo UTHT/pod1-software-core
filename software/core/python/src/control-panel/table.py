@@ -4,7 +4,7 @@ import logging
 
 from PyQt5.QtWidgets import QWidget, QLabel, QTableWidget, \
     QTableWidgetItem, QVBoxLayout
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSlot
 
 
 class Table(QWidget):
@@ -84,5 +84,9 @@ class Table(QWidget):
     def __str__(self) -> str:
         return self.title
 
-    def update_cell(self, row: int, col: int, value: str) -> None:
-        self.item(row, col).setText(value)
+    def update_cell(self, row: int, col: int, value: Any) -> None:
+        self.item(row, col).setText(str(value))
+
+    @pyqtSlot(list)
+    def set_cell_val(self, val: list):
+        self.update_cell(val[0],val[1],val[2])

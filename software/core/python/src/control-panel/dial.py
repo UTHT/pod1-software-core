@@ -3,6 +3,7 @@ Control Panel Dial Widget
 '''
 from typing import Any, Union
 from PyQt5.QtWidgets import QDial
+from PyQt5.QtCore import pyqtSlot
 
 
 class Dial(QDial):
@@ -37,3 +38,7 @@ class Dial(QDial):
             return False
         self.setValue(current)
         return True
+
+    @pyqtSlot(int,float)
+    def set_val(self,value):
+        self.set_current(value)

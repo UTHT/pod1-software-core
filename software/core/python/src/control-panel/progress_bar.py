@@ -1,15 +1,11 @@
 '''
 Control Panel Progress Bar Widget
 '''
-from typing import Union, Any
-
-import threading
-import time
 import logging
 
 from PyQt5.QtWidgets import QProgressBar,QApplication,QWidget
-from PyQt5.QtCore import pyqtSignal, QThread,pyqtSlot
-
+from PyQt5.QtCore import pyqtSlot
+from typing import Union, Any
 
 class ProgressBar(QProgressBar):
     def __init__(self,
@@ -44,43 +40,16 @@ class ProgressBar(QProgressBar):
             return False
         self.setValue(current)
         return True
-
+    '''Defining slot function. When signal connected to this function is
+    emitted this function is called'''
     @pyqtSlot(int)
-    def on_sld_valueChanged(self, value):
+    def set_val_int(self, value):
         self.setValue(value)
-        print(self.value)
-        self.update()
+
+    @pyqtSlot(float)
+    def set_val_float(self, value):
+        self.setValue(value)
     
 
-class worker(QWidget):
-    my_signal = pyqtSignal(int)
-
-    def emit(self,val: int):
-        self.my_signal.emit(val)
 
 
-def thread_function(work: worker) -> None:
-    a = 0
-    while(True):
-        w.emit(a)
-        a = a + 1
-        time.sleep(4)
-        print(a)
-
-
-
-app = QApplication([])
-
-ex = ProgressBar("progress",0,20,0,0,600,600)
- 
-w = worker()
-
-w.my_signal.connect(ex.on_sld_valueChanged)
-
-x = threading.Thread(target=thread_function,args=(w,),daemon=True)
-
-x.start()
-
-app.exec()
-
-print("thread ending") 
