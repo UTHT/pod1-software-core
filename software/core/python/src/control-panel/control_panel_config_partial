@@ -1,0 +1,35 @@
+{
+	"DISTANCE" : {
+		"TYPE" : "PROGRESSBAR",
+		"MINMAX" : [0, 150],
+		"TAB" : "POD PERFORMANCE",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"COLOR" : "BLUE"
+	},
+		
+	"ACCELERATION" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 200],
+		"TAB" : "POD PERFORMANCE",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	}, 
+	
+	"BATTERY" : {
+		"TYPE" : "PROGRESSBAR",
+		"MINMAX" : [0, 100],
+		"TAB" : "POD STATE",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"COLOR" : "GREEN"
+	}
+
+}
+	

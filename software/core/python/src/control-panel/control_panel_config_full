@@ -1,0 +1,151 @@
+{
+	"LAUNCH" : {
+		"TYPE" : "BUTTON",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"CALLBACK" : "",
+		"COLOR" : "GREEN",
+		"TOOLTIP" : "Runs a function"
+	},
+
+	"DISTANCE" : {
+		"TYPE" : "PROGRESSBAR",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"COLOR" : "BLUE"
+	},
+		
+	"ACCELERATION" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 200],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	}, 
+
+	"MOTORTEMPERATURE" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"RPM" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"VERTSTABILITY" : {
+		"TYPE" : "GRAPH",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"VIBRATION" : {
+		"TYPE" : "GRAPH",
+		"MINMAX" : [0, 150],
+		"TAB" : "Performance",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"BREAK" : {
+		"TYPE" : "BUTTON",
+		"MINMAX" : [0, 100],
+		"TAB" : "Break",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"CALLBACK" : "",
+		"COLOR" : "RED",
+		"TOOLTIP" : "Runs a function"
+	},
+	
+	"PRESSURE" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 100],
+		"TAB" : "Break",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"BREAKPADTEMPERATURE" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 100],
+		"TAB" : "Break",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"TEMPERATURE" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 100],
+		"TAB" : "Energy",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"BATTERY" : {
+		"TYPE" : "PROGRESSBAR",
+		"MINMAX" : [0, 100],
+		"TAB" : "Energy",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100,
+		"COLOR" : "BLUE"
+	},
+
+	"VOLTAGE" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 100],
+		"TAB" : "Energy",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	},
+
+	"CURRENT" : {
+		"TYPE" : "DIAL",
+		"MINMAX" : [0, 100],
+		"TAB" : "Energy",
+		"TOP" : 0,
+		"LEFT" : 0,
+		"WIDTH" : 200,
+		"HEIGHT" : 100
+	}
+
+}
+	

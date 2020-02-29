@@ -1,6 +1,6 @@
 from typing import Any
 from PyQt5.QtWidgets import QWidget, QTabWidget, QMainWindow
-from Layout import Layout
+from layout import Layout
 
 
 class Window(QMainWindow):
@@ -11,7 +11,7 @@ class Window(QMainWindow):
                  width: int,
                  height: int,
                  parent: Any = None) -> None:
-        super(Window, QMainWindow).__init__(parent)
+        super().__init__(parent)
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
         self.title = title
@@ -21,5 +21,5 @@ class Window(QMainWindow):
 
     def new_tab(self, layout: Layout, tab_name: str) -> None:
         tab = QWidget()
-        tab.setLayout(layout)
+        tab.setLayout(layout.layout)
         self.tabs.addTab(tab, tab_name)
