@@ -7,11 +7,8 @@
 #include <stdio.h>
 #include <vector>
 
-#include "../include/State.hpp"
-#include "../include/Controller.hpp"
-#include "../include/MotorController.hpp"
-#include "../include/helper/enums.hpp"
-#include "../include/helper/IOPin.hpp"
+#include "State.hpp"
+#include "MotorController.hpp"
 
 
 MotorController::MotorController(const struct IOPin io_pin,
@@ -66,7 +63,7 @@ int MotorController::run() {
         break;
     }
 
-    // code
+    // return resulting code
     return 0;
 }
 
@@ -87,7 +84,7 @@ void MotorController::determine_pid_parameters(struct State_Transition & nextInt
     int Mode = MANUAL;           // Initialized Controller is DISABLED
 
     //determine direction from sign of speed
-    this->pid_parameters.direction = (nextInternalState.speed > 0.0) ? 0 : 1; 
+    this->pid_parameters.Direction = (nextInternalState.speed > 0.0) ? 0 : 1; 
 
     this->pid_parameters.Setpoint = (nextInternalState.speed > 0.0) ? nextInternalState.speed : 0.0;
 

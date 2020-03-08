@@ -85,7 +85,7 @@ class Controller {
     // Run through list of channels for updated sensor values and command instructions
     virtual int run() = 0;
    // ESTOP command
-    virtual bool shutdown() = 0;
+    virtual void shutdown() = 0;
     // Determines pid_parameters from currentStatus and desired nextStatus
     virtual void determine_pid_parameters(struct State_Transition & nextInternalState, struct Pod_Data & currentStatus) = 0; 
 };

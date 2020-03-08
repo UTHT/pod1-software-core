@@ -26,6 +26,12 @@ struct PIDParameters {
     // entire output range
     double upperLimit = 255.0;
     double lowerLimit = 0.0;
+
+    PIDParameters() = default;
+    PIDParameters(double _Kp, double _Setpoint) :
+
+                    Kp(_Kp), Setpoint(_Setpoint), Ki(0.0), Kd(0.0), PoN(P_ON_E),
+                    Direction(DIRECT), Mode(MANUAL), upperLimit(255.0), lowerLimit(0.0) {}
 };
 
 #endif
