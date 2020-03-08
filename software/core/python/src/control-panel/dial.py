@@ -2,10 +2,10 @@
 Control Panel Dial Widget
 '''
 from typing import Any, Union
-from PyQt5.QtWidgets import QDial
+from PyQt5.QtWidgets import QDial, QWidget, QVBoxLayout, QLabel
 
 
-class Dial(QDial):
+class Dial(QWidget):
     def __init__(self,
                  title: str,
                  top: int,
@@ -21,12 +21,18 @@ class Dial(QDial):
                 or not isinstance(max_value, int) and \
                 not isinstance(max_value, float):
             raise Exception
-        self.setMinimum(min_value)
-        self.setMaximum(max_value)
-        self.setGeometry(left, top, width, height)
-        self.setNotchesVisible(True)
+        self.dial = QDial()
+        self.dial.setMinimum(min_value)
+        self.dial.setMaximum(max_value)
+        self.dial.setGeometry(left, top, width, height)
+        self.dial.setNotchesVisible(True)
         self.title = title
-        self.setValue(min_value)
+        self.dial.setValue(min_value)
+        self.titleLabel = QLabel(title)
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.titleLabel)
+        self.layout.addWidget(self.dial)
+        self.setLayout(self.layout)
         self.show()
 
     def __str__(self) -> str:

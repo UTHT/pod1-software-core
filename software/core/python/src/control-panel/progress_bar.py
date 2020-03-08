@@ -33,7 +33,9 @@ class ProgressBar(QWidget):
         self.min_max_label = QLabel(
             "min: {}, max: {}". format(self.progressbar.minimum(), self.progressbar.maximum())
         )
+        self.titleLabel = QLabel(title)
         self.layout = QVBoxLayout()
+        self.layout.addWidget(self.titleLabel)
         self.layout.addWidget(self.progressbar)
         self.layout.addWidget(self.min_max_label)
         self.setLayout(self.layout)
