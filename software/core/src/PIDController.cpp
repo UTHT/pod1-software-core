@@ -1,6 +1,4 @@
-#include "helper/enums.hpp"
-#include "helper/IOPin.hpp"
-#include "PIDController.hpp"
+#include "..\include\PIDController.hpp"
 
 
 PIDController::PIDController(const struct IOPin io_pin,
@@ -19,13 +17,10 @@ PIDController::PIDController(const PIDController & src) = default;
 
 PIDController::~PIDController() = default;
 
-int PIDController::setPin(const struct IOPin _io_pin) {
+void PIDController::setPin(const struct IOPin _io_pin) {
 
-    if (io_pin.pin_number < 0) {
-        return -1;
-    }
-    this->io_pin = _io_pin;
-    return 0;
+    assert(_io_pin.pin_number > 0);
+    io_pin = _io_pin;
 }
 
 struct IOPin PIDController::getPin() {
@@ -35,8 +30,8 @@ struct IOPin PIDController::getPin() {
 
 void PIDController::setParameters(const struct PIDParameters _pid_parameters) {
 
-    this->pid_parameters = _pid_parameters;
-    this->Setpoint = pid_parameters.Setpoint; // Updating pointer reference to Setpoint
+    pid_parameters = _pid_parameters;
+    Setpoint = pid_parameters.Setpoint; // Updating pointer reference to Setpoint
 
     // Update Controller PID
     Controller.SetTunings(pid_parameters.Kp, pid_parameters.Ki, pid_parameters.Kp, pid_parameters.PoN);
@@ -50,13 +45,15 @@ struct PIDParameters PIDController::getParameters() {
     return this->pid_parameters;
 }
 
-bool PIDController::run(const double sensor_reading) { // TODO: Add error checking to return error code on problem
+struct runResult PIDController::run(const double sensor_reading) { // TODO: Add error checking to return error code on problem
 
     bool status;
-    this->Input = sensor_reading; // Updating pointer reference to Sensor Reading
+    Input = sensor_reading; // Updating pointer reference to Sensor Reading
     status = Controller.Compute();
     analogWrite(io_pin.pin_number, Output);
-    return status;
+    
+    runResult return_value(Output, status);
+    return return_value;
 }
 
 void PIDController::shutdown() {

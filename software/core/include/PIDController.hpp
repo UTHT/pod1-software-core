@@ -1,10 +1,14 @@
+
+  
 #ifndef PIDCONTROLLER_H
 #define PIDCONTROLLER_H
 
 #include "helper/enums.hpp"
 #include "helper/IOPin.hpp"
 #include "helper/PIDParameters.hpp"
+#include "helper/runResult.hpp"
 #include "PID_v1.h"
+#include <assert.h>
 
 class PIDController {
     private:
@@ -29,7 +33,7 @@ class PIDController {
 
         ~PIDController();
 
-        int setPin(const struct IOPin io_pin);
+        void setPin(const struct IOPin io_pin);
 
         struct IOPin getPin();
 
@@ -38,7 +42,7 @@ class PIDController {
 
         struct PIDParameters getParameters();
 
-        bool run(const double sensor_reading);
+        struct runResult run(const double sensor_reading);
 
         void shutdown();
 };
