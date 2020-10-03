@@ -222,3 +222,7 @@ dmypy.json
 # PlatformIO
 .pio/
 *.ini
+
+node_modules/
+*/node_modules/
+!.ts
