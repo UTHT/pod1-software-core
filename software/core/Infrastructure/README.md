@@ -23,3 +23,8 @@ Now you can open multiple instances in the browser at `localhost:3000/` and each
 
 #### Test for websocket connection:
 Every instance at `localhost:4200/` will have a unique temp server name (which is just the current date :p ). When the button is clicked, the message is sent across all the instances if the WebSocket is working properly.
+
+#### Creating Component for Angular
+If you want to create an independent component in Angular, make sure you create it inside components folder. You can use the following command:
+
+`ng generate component components/<nameOfPackage>`
