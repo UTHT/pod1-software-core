@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LineComponent implements OnInit {
   data: any;
-
+  options: any;
   constructor() {
     this.data = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -25,6 +25,10 @@ export class LineComponent implements OnInit {
           borderColor: '#565656',
         },
       ],
+    };
+
+    this.options = {
+      elements: { line: { tension: 0 } },
     };
   }
 

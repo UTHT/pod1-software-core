@@ -10,6 +10,7 @@ import { ChartModule } from 'primeng/chart';
 import { BarComponent } from './components/democharts/bar/bar.component';
 import { DoughnutComponent } from './components/democharts/doughnut/doughnut.component';
 import { RadarComponent } from './components/democharts/radar/radar.component';
+import { LiveLineComponent } from './components/democharts/live-line/live-line.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RadarComponent } from './components/democharts/radar/radar.component';
     BarComponent,
     DoughnutComponent,
     RadarComponent,
+    LiveLineComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ChartModule],
   providers: [],

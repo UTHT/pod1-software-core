@@ -27,8 +27,10 @@ export class WebsocketComponent implements OnInit {
       let recvData = JSON.parse(message.data);
 
       console.log(recvData);
-      this.msgData = recvData.msg;
-      this.recvServerName = recvData.name;
+      if (recvData.eventName === 'broadcast') {
+        this.msgData = recvData.msg;
+        this.recvServerName = recvData.name;
+      }
     };
 
     client.onclose = (e) => {
@@ -39,6 +41,7 @@ export class WebsocketComponent implements OnInit {
   onSend(): void {
     client.send(
       JSON.stringify({
+        eventName: 'broadcast',
         msg: 'Message from Server',
         name: this.serverName,
       })
