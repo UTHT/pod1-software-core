@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 const client = new W3CWebSocket('ws://127.0.0.1:8080/');
+import { DataStreamService } from '../../services/data-stream.service';
 
 @Component({
   selector: 'app-websocket',
@@ -12,7 +13,7 @@ export class WebsocketComponent implements OnInit {
   msgData: string = '';
   recvServerName: string = '';
 
-  constructor() {
+  constructor(private dsService: DataStreamService) {
     var d = new Date();
     var n = d.getTime().toString();
     this.serverName = n.toString();
@@ -30,6 +31,11 @@ export class WebsocketComponent implements OnInit {
       if (recvData.eventName === 'broadcast') {
         this.msgData = recvData.msg;
         this.recvServerName = recvData.name;
+      }
+
+      if (recvData.eventName === 'mockData') {
+        console.log('hi');
+        this.dsService.newY();
       }
     };
 

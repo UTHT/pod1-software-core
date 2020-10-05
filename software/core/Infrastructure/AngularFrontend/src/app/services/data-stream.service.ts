@@ -23,4 +23,21 @@ export class DataStreamService {
   currentData = this.dataSub.asObservable();
 
   constructor() {}
+
+  newY() {
+    const newArray = [Math.random() * 20, Math.random() * 30];
+    this.y = newArray;
+    const newData = {
+      labels: this.x,
+      datasets: [
+        {
+          label: 'Mock Live Data',
+          data: this.y,
+          fill: false,
+          borderColor: '#565656',
+        },
+      ],
+    };
+    this.dataSub.next(newData);
+  }
 }
