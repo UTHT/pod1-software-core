@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataStreamService {
-  x: Array<any> = ['may', 'june'];
-  y: Array<any> = [10, 20];
+  x: Array<any> = [];
+  y: Array<any> = [];
 
   data: any = {
     labels: this.x,
@@ -24,9 +24,10 @@ export class DataStreamService {
 
   constructor() {}
 
-  newY() {
-    const newArray = [Math.random() * 20, Math.random() * 30];
-    this.y = newArray;
+  newY({ time, value }) {
+    this.x.push(time);
+    this.y.push(value);
+
     const newData = {
       labels: this.x,
       datasets: [
@@ -38,6 +39,7 @@ export class DataStreamService {
         },
       ],
     };
-    this.dataSub.next(newData);
+    this.data = newData;
+    this.dataSub.next(this.data);
   }
 }

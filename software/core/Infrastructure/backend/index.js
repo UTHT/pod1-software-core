@@ -16,7 +16,12 @@ wss.on("connection", function connection(ws) {
 	heart.createEvent(1, (count, last) => {
 		wss.clients.forEach(function each(client) {
 			if (client.readyState === WebSocket.OPEN) {
-				client.send(JSON.stringify({ message: "hello" }));
+				client.send(
+					JSON.stringify({
+						eventName: "mockData",
+						message: { time: Date.now(), value: Math.random() * 20 },
+					})
+				);
 			}
 		});
 	});

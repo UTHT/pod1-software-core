@@ -34,8 +34,7 @@ export class WebsocketComponent implements OnInit {
       }
 
       if (recvData.eventName === 'mockData') {
-        console.log('hi');
-        this.dsService.newY();
+        this.dsService.newY(recvData.message);
       }
     };
 
