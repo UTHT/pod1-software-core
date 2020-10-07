@@ -52,4 +52,12 @@ export class WebsocketComponent implements OnInit {
       })
     );
   }
+
+  onToggleStream(): void {
+    client.send(
+      JSON.stringify({
+        eventName: 'toggleStream',
+      })
+    );
+  }
 }

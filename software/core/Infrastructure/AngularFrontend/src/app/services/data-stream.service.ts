@@ -25,7 +25,7 @@ export class DataStreamService {
   constructor() {}
 
   newY({ time, value }) {
-    this.x.push(time);
+    this.x.push(new Date(time * 1000).toLocaleString());
     this.y.push(value);
 
     const newData = {
