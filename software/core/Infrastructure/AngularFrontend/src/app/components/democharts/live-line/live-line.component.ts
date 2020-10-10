@@ -23,7 +23,6 @@ export class LiveLineComponent implements OnInit {
   ngOnInit(): void {
     this.dsService.currentData.subscribe((newData) => {
       this.data = newData;
-      console.log(this.data);
     });
   }
 }
