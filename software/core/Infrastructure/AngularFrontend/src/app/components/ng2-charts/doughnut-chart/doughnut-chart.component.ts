@@ -49,7 +49,7 @@ export class DoughnutChartComponent implements OnInit {
       Math.round(Math.random() * 100)
     ];
     console.log(this.doughnutChartData)
-    this.doughnutChartLabels.push("New label")
+    this.doughnutChartData = [...this.doughnutChartData];
     setTimeout(() => { this.randomize(); }, 2000);
   }
 }
