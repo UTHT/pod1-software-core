@@ -39,8 +39,8 @@ export class LiveElineComponent implements OnInit {
     };
     
     this.dsService.currentData.subscribe((newData) => {
-      const x = newData.labels
-      const y = newData.datasets[0].data
+      const x = newData.x
+      const y = newData.y
       this.updateOptions = {
         xAxis: [
           {

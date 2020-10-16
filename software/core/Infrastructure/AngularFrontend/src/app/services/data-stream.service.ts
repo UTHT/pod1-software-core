@@ -9,15 +9,8 @@ export class DataStreamService {
   y: Array<any> = [];
 
   data: any = {
-    labels: this.x,
-    datasets: [
-      {
-        label: 'Mock Live Data',
-        data: this.y,
-        fill: false,
-        borderColor: '#565656',
-      },
-    ],
+    x: this.x,
+    y: this.y
   };
   private dataSub = new BehaviorSubject<any>(this.data);
   currentData = this.dataSub.asObservable();
@@ -29,15 +22,8 @@ export class DataStreamService {
     this.y.push(value);
 
     const newData = {
-      labels: this.x,
-      datasets: [
-        {
-          label: 'Mock Live Data',
-          data: this.y,
-          fill: false,
-          borderColor: '#565656',
-        },
-      ],
+      x: this.x,
+      y: this.y
     };
     this.data = newData;
     this.dataSub.next(this.data);
