@@ -10,10 +10,6 @@ import { BarChartComponent } from "./components/ng2-charts/bar-chart/bar-chart.c
 import { DoughnutChartComponent } from "./components/ng2-charts/doughnut-chart/doughnut-chart.component";
 import { RadarChartComponent } from "./components/ng2-charts/radar-chart/radar-chart.component";
 import { ScatterChartComponent } from "./components/ng2-charts/scatter-chart/scatter-chart.component";
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { LineChartComponent2 } from "./components/ngx-charts/line-chart/line-chart.component";
-import { BarChartComponent2 } from "./components/ngx-charts/bar-chart/bar-chart.component";
-import { DoughnutChartComponent2 } from "./components/ngx-charts/doughnut-chart/doughnut-chart.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -24,16 +20,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BarChartComponent,
     DoughnutChartComponent,
     RadarChartComponent,
-    ScatterChartComponent,
-    LineChartComponent2,
-    BarChartComponent2,
-    DoughnutChartComponent2
+    ScatterChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    NgxChartsModule,
     BrowserAnimationsModule
   ],
   providers: [],
