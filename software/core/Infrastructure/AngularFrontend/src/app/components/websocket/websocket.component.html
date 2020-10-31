@@ -9,6 +9,31 @@
        
   
      <button (click)="onSend()">Click to send message to all server</button>
-     <div>{{msgData + " : "+recvServerName}}</div>
-  
-   </div>
+
+     <div>{{msgData + " - "+recvServerName}}</div>
+      
+     <br>
+     <div>
+       ng2-charts
+      <div style="width: 25%; height: 25%">
+        <app-line-chart></app-line-chart>
+       </div>
+       <br>
+       <div style="width: 25%; height: 25%">
+        <app-bar-chart></app-bar-chart>
+       </div>
+       <br>
+       <div style="width: 25%; height: 25%">
+        <app-doughnut-chart></app-doughnut-chart>
+       </div>
+       <br>
+       <div style="width: 25%; height: 25%">
+        <app-radar-chart></app-radar-chart>
+       </div>
+       <br>
+       <div style="width: 25%; height: 25%">
+        <app-scatter-chart></app-scatter-chart>
+       </div>
+     </div>
+     <br>
+  </div>
