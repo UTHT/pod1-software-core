@@ -9,9 +9,9 @@ function digest(odroid_json) {
 	const odroid_object = JSON.parse(odroid_json);
 	const { speed, temperatures, battery, position } = odroid_object;
 
-	const Speed = new SpeedSensor("speed", speed);
-	const Battery = new BatterySensor("battery", battery);
-	const Position = new PositionSensor("position", position[0], position[1]);
+	const Speed = new SpeedSensor(speed);
+	const Battery = new BatterySensor(battery);
+	const Position = new PositionSensor(position[0], position[1]);
 	const temp_array = temperatures.map(
 		({ name, value }) => new TempSensor(name, value)
 	);
