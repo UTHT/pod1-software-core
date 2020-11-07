@@ -1,0 +1,11 @@
+{
+    "speed": 29,
+    "temperatures": [
+                    {
+                    "name":"motor", "value":56
+                    },
+                     { "name":"battery", "value": 78}
+                     ],
+    "battery" : 67,
+    "position" : [127, 46]
+  }
