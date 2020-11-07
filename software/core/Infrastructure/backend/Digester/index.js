@@ -19,6 +19,7 @@ function digest(odroid_json) {
 	return [Speed, Battery, Position, ...temp_array];
 }
 
+//testing
 const data = fs.readFileSync("test.json");
 
 const digester_object = digest(data);
