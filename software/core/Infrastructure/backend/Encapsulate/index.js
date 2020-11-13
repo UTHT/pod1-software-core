@@ -6,13 +6,13 @@ const TempSensor = require("../Classes/temp-sensor");
 const fs = require("fs");
 
 const { digest } = require("../Digester");
-const classes_constant = require("../constant/classes");
 
 function encapsulate(digester_obj) {
 	let obj = {};
 
 	digester_obj.map((sensor) => {
 		const type = sensor.sensor_type;
+		//If the object don't already have a key with the type in it
 		if (!obj.hasOwnProperty(type)) {
 			obj = { ...obj, [type]: [sensor] };
 		} else {
@@ -25,7 +25,7 @@ function encapsulate(digester_obj) {
 	return obj;
 }
 
-//testing
+//tests -> will write separate test file later
 const data = fs.readFileSync("test.json");
 
 console.log(data);

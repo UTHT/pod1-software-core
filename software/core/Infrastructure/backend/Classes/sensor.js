@@ -1,4 +1,5 @@
 class Sensor {
+	sensor_type = "";
 	constructor(name, value = null) {
 		this._name = name;
 		this._value = value;
@@ -18,6 +19,10 @@ class Sensor {
 
 	set value(newValue) {
 		this._value = newValue;
+	}
+
+	get sensor_type() {
+		return this.sensor_type;
 	}
 }
 
