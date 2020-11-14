@@ -12,40 +12,98 @@ export class WebsocketComponent implements OnInit {
   serverName: string = '';
   msgData: string = '';
   recvServerName: string = '';
+  serverType: string = '';
 
-  constructor() { 
+  constructor() {
     var d = new Date();
     var n = d.getTime().toString();
     this.serverName = n.toString();
-
+    // this.serverType = "";
   }
 
   ngOnInit(): void {
     client.onopen = () => {
       console.log('Websocket Client Connected');
-  };
+      console.log()
 
-  client.onmessage = (message) => {
-      let recvData = JSON.parse(message.data);
-      console.log(recvData)
-                this.msgData =recvData.msg;
-                this.recvServerName =recvData.name;
-      }
-      
-      client.onclose = e => {
-          console.log('closed');
-          
-      };
-  }
-
-  onSend():void{
-    client.send(
-      JSON.stringify(
-        {
-          msg:"Message from Server", 
-          name:this.serverName
-        }
+      client.send(
+        JSON.stringify(
+          {
+            msg: "Message from Server " + 'A',
+            name: this.serverName,
+            serverType: 'A',
+            isNew: true
+    
+          }
         )
       )
+    
+
+    };
+
+    client.onmessage = (message) => {
+      console.log("message from websocket: ", message);
+      let recvData = JSON.parse(message.data);
+      console.log("recvData: ", recvData)
+      this.msgData = recvData.msg;
+      this.recvServerName = recvData.name;
+    }
+
+    client.onclose = e => {
+      console.log('closed');
+
+    };
   }
+
+  serverSelect(): void {
+    // const selServer = document.getElementById('serverType');
+    // selServer.addEventListener('change', (e) => {
+    //   this.serverType = (e.target as HTMLSelectElement).value;
+    // });
+    // console.log(this.serverType);
+
+    // const selServer = document.querySelector('.serverType');
+    // selServer.addEventListener('change', (e) => {
+    //   this.serverType = (<HTMLInputElement>e.target).value;
+    // });
+    // console.log(this.serverType);
+
+    // var selServer = (document.getElementById('serverType')) as HTMLSelectElement;
+    // var serverValue = selServer.options[selServer.selectedIndex].value;
+    // this.serverType = serverValue;
+    // console.log(this.serverType);
+
+
+    // var selServer = document.getElementById('serverType').querySelector("option");
+
+    var selServer = (<HTMLSelectElement>document.getElementById("serverType")).value;
+    console.log(selServer);
+    if (selServer == "serverA") {
+      this.serverType = "A";
+      // console.log("Message sent from server A");
+    }
+    else {
+      this.serverType = "B";
+      // console.log("Message sent from server B");
+    }
+
+
+}
+
+onSend(): void {
+  this.serverSelect();
+
+  client.send(
+
+    JSON.stringify(
+      {
+        msg: "Message from Server " + this.serverType,
+        name: this.serverName,
+        serverType: this.serverType,
+        isNew: false
+
+      }
+    )
+  )
+};
 }
