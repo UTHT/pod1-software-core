@@ -1,5 +1,5 @@
 class Sensor {
-	constructor(name, value) {
+	constructor(name, value = null) {
 		this._name = name;
 		this._value = value;
 	}
