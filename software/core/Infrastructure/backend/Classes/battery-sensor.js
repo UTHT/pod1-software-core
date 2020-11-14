@@ -1,6 +1,7 @@
 const Sensor = require("./sensor");
 
 class BatterySensor extends Sensor {
+	sensor_type = "BATTERY";
 	constructor(value, name = "battery") {
 		super(name, value);
 		this._name = name;

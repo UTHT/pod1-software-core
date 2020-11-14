@@ -1,11 +1,13 @@
 const Sensor = require("./sensor");
 
 class PositionSensor extends Sensor {
+	sensor_type = "POSITION";
 	constructor(x, y, name = "position") {
 		super(name);
 		this._x = x;
 		this._y = y;
 		this._name = name;
+		this.value = [this._x, this._y];
 	}
 
 	set x(value) {

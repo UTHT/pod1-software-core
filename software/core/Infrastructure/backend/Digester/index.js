@@ -7,6 +7,7 @@ const fs = require("fs");
 
 function digest(odroid_json) {
 	const odroid_object = JSON.parse(odroid_json);
+
 	const { speed, temperatures, battery, position } = odroid_object;
 
 	const Speed = new SpeedSensor(speed);
@@ -20,10 +21,10 @@ function digest(odroid_json) {
 }
 
 //testing
-const data = fs.readFileSync("test.json");
+// const data = fs.readFileSync("test.json");
 
-const digester_object = digest(data);
-console.log(digester_object);
+// const digester_object = digest(data);
+// console.log(digester_object);
 
 module.exports = {
 	digest,

@@ -1,6 +1,7 @@
 const Sensor = require("./sensor");
 
 class TempSensor extends Sensor {
+	sensor_type = "TEMPERATURE";
 	constructor(name, value) {
 		super(name, value);
 	}
