@@ -11,6 +11,11 @@ import { DoughnutChartComponent } from "./components/ng2-charts/doughnut-chart/d
 import { RadarChartComponent } from "./components/ng2-charts/radar-chart/radar-chart.component";
 import { ScatterChartComponent } from "./components/ng2-charts/scatter-chart/scatter-chart.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxGaugeComponent } from './components/dashboard/speedometer/ngx-gauge/ngx-gauge.component';
+import { Ng2GaugeComponent } from './components/dashboard/speedometer/ng2-gauge/ng2-gauge.component';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { Ng2GaugeModule } from 'ng2-gauge';
+import { BatteryPercentageComponent } from './components/dashboard/battery/battery.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +25,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BarChartComponent,
     DoughnutChartComponent,
     RadarChartComponent,
-    ScatterChartComponent
+    ScatterChartComponent,
+    NgxGaugeComponent,
+    Ng2GaugeComponent,
+    BatteryPercentageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxGaugeModule,
+    Ng2GaugeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
