@@ -1,7 +1,7 @@
 <div className="App">
     <div>Temp Server Name: {{serverName}}</div> 
      <label>Choose a Server Type: (Implementation Required)</label>
-       <select name="serverType" id="serverType">
+       <select  on-change="serverSelect()" name="serverType" id="serverType">
          <option value="serverA">Server A</option>
          <option value="serverB">Server B</option>
        </select>
@@ -9,6 +9,7 @@
        
   
      <button (click)="onSend()">Click to send message to all server</button>
+
      <div>{{msgData + " - "+recvServerName}}</div>
       
      <br>
@@ -49,6 +50,4 @@
     <br>
      <battery-component></battery-component>
 </div>
-
-
 
