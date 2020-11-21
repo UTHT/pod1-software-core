@@ -11,11 +11,11 @@ import { DoughnutChartComponent } from "./components/ng2-charts/doughnut-chart/d
 import { RadarChartComponent } from "./components/ng2-charts/radar-chart/radar-chart.component";
 import { ScatterChartComponent } from "./components/ng2-charts/scatter-chart/scatter-chart.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxGaugeComponent } from './components/dashboard/speedometer/ngx-gauge/ngx-gauge.component';
-import { Ng2GaugeComponent } from './components/dashboard/speedometer/ng2-gauge/ng2-gauge.component';
+import { NgxGaugeComponent } from './components/icons/speedometer/ngx-gauge/ngx-gauge.component';
+import { Ng2GaugeComponent } from './components/icons/speedometer/ng2-gauge/ng2-gauge.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { Ng2GaugeModule } from 'ng2-gauge';
-import { BatteryPercentageComponent } from './components/dashboard/battery/battery.component';
+import { BatteryPercentageComponent } from './components/icons/battery/battery.component';
 import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
