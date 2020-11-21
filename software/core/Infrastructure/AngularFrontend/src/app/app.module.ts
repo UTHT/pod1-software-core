@@ -16,6 +16,7 @@ import { Ng2GaugeComponent } from './components/dashboard/speedometer/ng2-gauge/
 import { NgxGaugeModule } from 'ngx-gauge';
 import { Ng2GaugeModule } from 'ng2-gauge';
 import { BatteryPercentageComponent } from './components/dashboard/battery/battery.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BatteryPercentageComponent } from './components/dashboard/battery/batte
     ScatterChartComponent,
     NgxGaugeComponent,
     Ng2GaugeComponent,
-    BatteryPercentageComponent
+    BatteryPercentageComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
