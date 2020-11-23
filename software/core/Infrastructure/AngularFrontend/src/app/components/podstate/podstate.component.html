@@ -1,8 +1,31 @@
 <div class="startup">
-    <p>hello</p>
-    <app-podstate-item name="Off"></app-podstate-item>
+    <p>Start up</p>
+    <div class="three-row">
+        <app-podstate-item name="Off" class='topright'></app-podstate-item>
+        <app-podstate-item name="Debug Mode" class='midleft'></app-podstate-item>
+        <app-podstate-item name="Comms Check" class='midright'></app-podstate-item>
+        <app-podstate-item name="System Check" class='bottomright'></app-podstate-item>
+    </div>
 </div>
-<div class="shutdown">Shutdown</div>
-<div class="ready">Ready</div>
-<div class="active">Active</div>
+<div class="shutdown">
+    <p>Shutdown</p>
+    <div class="two-row">
+        <app-podstate-item name="Shutdown" class='topleft'></app-podstate-item>
+    </div>
+</div>
+<div class="ready">
+    <p>Ready</p>
+    <div class="two-row">
+        <app-podstate-item name="Lock" class='topright'></app-podstate-item>
+        <app-podstate-item name="Arm" class='bottomright'></app-podstate-item>
+    </div>
+</div>
+<div class="active">
+    <p>Active</p>
+    <div class="three-row">
+        <app-podstate-item name="Braking" class='topleft'></app-podstate-item>
+        <app-podstate-item name="Emergency Stop" class='midright'></app-podstate-item>
+        <app-podstate-item name="Drive" class='bottomleft'></app-podstate-item>
+    </div>
+</div>
 

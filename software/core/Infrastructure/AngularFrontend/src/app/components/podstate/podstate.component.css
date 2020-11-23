@@ -13,6 +13,10 @@
   grid-template-rows: auto 1fr;
 }
 
+:host > div > p {
+  margin: 0 0.5rem;
+}
+
 .startup {
   grid-row: 1 / span 3;
 }
@@ -28,4 +32,48 @@
 .active {
   grid-column-start: 2;
   grid-row: 3 / -1;
+}
+
+.three-row {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0.5rem;
+  grid-gap: 0.75rem;
+}
+
+.two-row {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0.5rem;
+  grid-gap: 0.75rem;
+}
+
+.topright {
+  grid-row: 1;
+  grid-column: 2;
+}
+.topleft {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.midleft {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.midright {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.bottomright {
+  grid-row: -2;
+  grid-column: 2;
+}
+.bottomleft {
+  grid-row: -2;
+  grid-column: 1;
 }
