@@ -6,3 +6,14 @@
   background: black;
   height: 100%;
 }
+
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.active {
+  background: green !important;
+}

@@ -15,4 +15,7 @@ export class PodstateItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleActive(): void {
+    this.isActive = !this.isActive
+  }
 }

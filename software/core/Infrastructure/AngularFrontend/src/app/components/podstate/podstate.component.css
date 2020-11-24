@@ -7,14 +7,16 @@
   grid-gap: 0.5rem;
 }
 
+/* Container */
 :host > div {
   border: 1px solid black;
   display: grid;
   grid-template-rows: auto 1fr;
 }
 
+/* Container title */
 :host > div > p {
-  margin: 0 0.5rem;
+  margin: 0.1rem 0.5rem;
 }
 
 .startup {
