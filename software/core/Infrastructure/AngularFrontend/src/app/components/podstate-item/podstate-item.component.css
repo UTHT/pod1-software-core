@@ -5,6 +5,8 @@
   text-align: center;
   background: black;
   height: 100%;
+  font-size: 0.8rem;
+  padding: 0 0.5rem;
 }
 
 .disable-select {
@@ -15,5 +17,5 @@
 }
 
 .active {
-  background: green !important;
+  background: #53da70 !important;
 }
