@@ -84,3 +84,15 @@
   grid-row: -2;
   grid-column: 1;
 }
+
+@media only screen and (max-height: 870px) {
+  :host > div > p {
+    font-size: 0.75rem;
+  }
+
+  .three-row,
+  .two-row {
+    margin: 0.2rem;
+    grid-gap: 0.35rem;
+  }
+}
