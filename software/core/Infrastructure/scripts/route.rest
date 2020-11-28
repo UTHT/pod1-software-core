@@ -1,0 +1,5 @@
+GET http://localhost:3000/pod1
+
+###
+
+GET http://localhost:3000/pod1/12
