@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  max-width: 1444px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  height: 98vh;
+  grid-gap: 10px;
+}
+
+.dashboard > * {
+  background: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.switch {
+  grid-column-start: 1;
+}
+
+.battery {
+  grid-column-start: 2;
+  grid-row: 1 / span 4;
+}
+
+.pod-state {
+  grid-column-start: 3;
+  grid-row: 1 / span 4;
+}
+
+.temp {
+  grid-row: 2 / span 9;
+}
+
+.speed {
+  grid-column-start: 2;
+  grid-row: 5 / span 4;
+}
+
+.position {
+  grid-column-start: 1;
+
+  grid-row: 11 / -1;
+}
+
+.brake {
+  grid-column-start: 2;
+  grid-row: 9 / -1;
+}
+
+.control-panel {
+  grid-column-start: 3;
+  grid-row: 5 / -1;
+}

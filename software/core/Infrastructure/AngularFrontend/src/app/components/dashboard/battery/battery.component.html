@@ -1,0 +1,15 @@
+<style>
+    .percentage-box {
+	width: 70px;
+	height: 150px;
+	display: inline-block;
+	margin: 1px;
+}
+</style>
+<div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
+	<ng-template [ngIf]="item.full == false">
+		<div [ngStyle]="{ 'background-color': color, width: item.width, height: '150px' }"></div>
+	</ng-template>
+</div>
+<br>
+<button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
