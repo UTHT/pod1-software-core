@@ -20,6 +20,12 @@
 
 .active {
   background: #53da70 !important;
+  box-shadow: 0 0 5px 2px #53da70 !important;
+}
+
+.error {
+  background: #e04949 !important;
+  box-shadow: 0 0 5px 2px #e04949 !important;
 }
 
 @media only screen and (max-height: 870px) {
