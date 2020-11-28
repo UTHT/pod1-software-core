@@ -6,11 +6,9 @@ using namespace web;
 using namespace web::websockets::client;
 
 int main() {
-  websocket_client client;
-  if (client.connect("ws://127.0.0.1:8080/").wait() < 0){
-    return -1;
-  }
-  else{
+  try {
+    websocket_client client;
+    client.connect("ws://127.0.0.1:8080/").wait();
     websocket_outgoing_message out_msg;
     out_msg.set_utf8_message("{'msg':'Message from Server', 'name':'serverB'}");
     //data.replace(/'/g, '"'); -- Important
@@ -23,6 +21,9 @@ int main() {
     }).wait();
 
     client.close().wait();
+  } catch (int e) {
+        cout << "An exception occurred. Exception Nr. " << e << '\n';
   }
+
   return 0;
 }
