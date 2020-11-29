@@ -1,31 +1,25 @@
 <div class="startup">
     <p>Start up</p>
     <div class="three-row">
-        <app-podstate-item name="Off" class='topright'></app-podstate-item>
-        <app-podstate-item name="Debug Mode" class='midleft'></app-podstate-item>
-        <app-podstate-item name="Comms Check" class='midright'></app-podstate-item>
-        <app-podstate-item name="System Check" class='bottomright'></app-podstate-item>
+        <app-podstate-item *ngFor='let state of podstateData.startup' name={{state.name}} class={{state.css_position}}></app-podstate-item>
     </div>
 </div>
 <div class="shutdown">
     <p>Shutdown</p>
     <div class="two-row">
-        <app-podstate-item name="Shutdown" class='topleft'></app-podstate-item>
+        <app-podstate-item *ngFor='let state of podstateData.shutdown' name={{state.name}} class={{state.css_position}}></app-podstate-item>
     </div>
 </div>
 <div class="ready">
     <p>Ready</p>
     <div class="two-row">
-        <app-podstate-item name="Lock" class='topright'></app-podstate-item>
-        <app-podstate-item name="Arm" class='bottomright'></app-podstate-item>
+        <app-podstate-item *ngFor='let state of podstateData.ready' name={{state.name}} class={{state.css_position}}></app-podstate-item>
     </div>
 </div>
 <div class="active">
     <p>Active</p>
     <div class="three-row">
-        <app-podstate-item name="Braking" class='topleft'></app-podstate-item>
-        <app-podstate-item name="Emergency Stop" class='midright'></app-podstate-item>
-        <app-podstate-item name="Drive" class='bottomleft'></app-podstate-item>
+        <app-podstate-item *ngFor='let state of podstateData.active' name={{state.name}} class={{state.css_position}}></app-podstate-item>
     </div>
 </div>
 
