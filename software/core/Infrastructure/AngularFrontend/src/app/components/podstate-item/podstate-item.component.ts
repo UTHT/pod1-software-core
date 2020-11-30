@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PodstateItemComponent implements OnInit {
   @Input() name: string;
-  @Input() isActive: Boolean=false;
-  @Input() isError: Boolean=false;
+  @Input() isActive: Boolean =false;
+  @Input() isError: Boolean;
 
   constructor() { }
 

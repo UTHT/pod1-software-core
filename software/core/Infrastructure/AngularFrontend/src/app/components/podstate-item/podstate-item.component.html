@@ -1,4 +1,4 @@
-<div class="normal disable-select" [class]="isActive? 'active':''" (click)='toggleActive()'>
+<div [ngClass]="{'disable-select': true, 'active': isActive , 'error': isError}" (click)='toggleActive()'>
     {{name}}
 </div>
 

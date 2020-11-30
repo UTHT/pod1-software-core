@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #504f4f;
+  background-color: #504f4f;
   height: 100%;
   font-size: 0.8rem;
   padding: 0 0.5rem;
@@ -24,8 +24,18 @@
 }
 
 .error {
-  background: #e04949 !important;
+  background-color: #e04949 !important;
   box-shadow: 0 0 5px 2px #e04949 !important;
+  animation: blink 1000ms infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: #e04949 !important;
+  }
+  100% {
+    background-color: #504f4f !important;
+  }
 }
 
 @media only screen and (max-height: 870px) {
