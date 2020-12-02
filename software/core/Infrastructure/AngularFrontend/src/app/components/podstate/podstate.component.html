@@ -1,25 +1,10 @@
-<div class="startup">
-    <p>Start up</p>
-    <div class="three-row">
-        <app-podstate-item *ngFor='let state of podstateData.startup' name={{state.name}} [isActive]="state.isActive" [isError]="state.isError" class={{state.css_position}}></app-podstate-item>
+<div *ngFor='let group of podstateData' class={{group.name}}>
+    <p>{{stateGroupMap[group.name].title}}</p>
+    <div class={{stateGroupMap[group.name].layout}}>
+        <app-podstate-item *ngFor='let item of group.items' title={{itemPropsMap[item.name].title}} [isActive]="item.isActive" [isError]="item.isError" class={{itemPropsMap[item.name].position}}></app-podstate-item>
     </div>
 </div>
-<div class="shutdown">
-    <p>Shutdown</p>
-    <div class="two-row">
-        <app-podstate-item *ngFor='let state of podstateData.shutdown' name={{state.name}} [isActive]="state.isActive" [isError]="state.isError" class={{state.css_position}}></app-podstate-item>
-    </div>
-</div>
-<div class="ready">
-    <p>Ready</p>
-    <div class="two-row">
-        <app-podstate-item *ngFor='let state of podstateData.ready' name={{state.name}} [isActive]="state.isActive" [isError]="state.isError" class={{state.css_position}}></app-podstate-item>
-    </div>
-</div>
-<div class="active">
-    <p>Active</p>
-    <div class="three-row">
-        <app-podstate-item *ngFor='let state of podstateData.active' name={{state.name}} [isActive]="state.isActive" [isError]="state.isError" class={{state.css_position}}></app-podstate-item>
-    </div>
-</div>
+
+
+
 

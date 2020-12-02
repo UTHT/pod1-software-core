@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./podstate-item.component.css']
 })
 export class PodstateItemComponent implements OnInit {
-  @Input() name: string;
+  @Input() title: string;
   @Input() isActive: Boolean =false;
   @Input() isError: Boolean;
 
