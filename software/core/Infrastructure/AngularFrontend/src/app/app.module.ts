@@ -17,6 +17,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { Ng2GaugeModule } from 'ng2-gauge';
 import { BatteryPercentageComponent } from './components/dashboard/battery/battery.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { PodstateComponent } from './components/podstate/podstate.component';
+import { PodstateItemComponent } from './components/podstate-item/podstate-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LayoutComponent } from './components/layout/layout.component';
     NgxGaugeComponent,
     Ng2GaugeComponent,
     BatteryPercentageComponent,
-    LayoutComponent
+    LayoutComponent,
+    PodstateComponent,
+    PodstateItemComponent
   ],
   imports: [
     BrowserModule,
