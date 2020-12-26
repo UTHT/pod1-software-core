@@ -8,8 +8,8 @@
 
 const JSONParser = (externalJson) => {
     if (
-        typeof externalJson === "string" &&
-        externalJson !== null 
+        externalJson !== null  &&
+        typeof externalJson === "string"
     )
 
     {
@@ -18,10 +18,8 @@ const JSONParser = (externalJson) => {
         return JSONobject;
 
     } else {
-        return externalJson;
+        return JSON.parse(externalJson);
     }
 }
 
-module.exports = {
-    JSONParser
-}
+module.exports = JSONParser;
