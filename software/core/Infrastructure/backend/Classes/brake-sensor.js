@@ -10,13 +10,15 @@ class BrakeSensor extends Sensor {
 
 }
 
-// const sensor1 = new BatterySensor("mysensor", 2);
+// const sensor1 = new BrakeSensor(0,254);
 
 // console.log(sensor1.name);
 // console.log(sensor1.value);
+// console.log(sensor1.pressure);
+
 
 // sensor1.name = "updatedsensor";
-// sensor1.value = 3;
+// sensor1.value = 1;
 
 // console.log(sensor1.name);
 // console.log(sensor1.value);

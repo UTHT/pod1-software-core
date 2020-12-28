@@ -7,6 +7,7 @@
  */
 
 const JSONParser = (externalJson) => {
+    // If incoming data is from Odroid
     if (
         externalJson !== null  &&
         typeof externalJson === "string"
@@ -18,6 +19,7 @@ const JSONParser = (externalJson) => {
         return JSONobject;
 
     } else {
+        // If incoming data is from dashbord
         return JSON.parse(externalJson);
     }
 }

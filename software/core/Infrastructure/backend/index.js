@@ -20,68 +20,50 @@ wss.on('connection', function connection(ws) {
 
     // if the socket is just connected, add it to the client list
     if (parsedData.isNew) {
+
       parsedData["socket"] = ws;
       clientList.push(parsedData);
-      console.log("isNew");
+
     }
     else {
-
-
-      // clientList.forEach((element) => {
-      //   //if unique ID match, changee element.serverType to parsedData.serverType 
-      //   if (parsedData.name == element.name) {
-      //     element.serverType = parsedData.serverType;
-      //     element.msg = parsedData.msg;
-
-      //   }
-      // });
 
       clientList.forEach(function each(client) {
         if (client.socket.readyState === WebSocket.OPEN) {
           if (parsedData.serverType == 'odroid') {
-              // Divide incoming data into multiple components
-              var error = [];
-              var Digestor =  digest(parsedData);
+            
+            var error = [];
 
-              // pack all the data to be sent to front-end.
-              var encapsulator = encapsulate(Digestor, error);
+            // validation module -- here
 
+            // Divide incoming data into multiple components
+            var Digestor =  digest(parsedData);
 
-            // clientList.forEach((elem) => {
-              // if (elem.serverType == 'odroid') {
-              //   elem.socket.send(data);
-              // }
-            // });
+            // pack all the data to be sent to front-end.
+            var encapsulator = encapsulate(Digestor, error);
+
+            // Send encapsulation data to front-end
+            clientList.forEach((elem) => {
+              if (elem.serverType == 'dashboard') {
+                elem.socket.send(JSON.stringify(encapsulator));
+              }
+            });
+
           }
 
           else {
-            clientList.forEach((elem) => {
-            
-      //      
 
-              // if (elem.serverType == 'dasboard') {
-              //   elem.socket.send(JSON.stringify(Encapsulation));
-              // }
+            // Send encapsulation data to odroid
+            clientList.forEach((elem) => {
+              if (elem.serverType == 'odroid') {
+                elem.socket.send(JSON.stringify(Encapsulation));
+              }
             });
+
           }
 
         }
       });
-
-
-
     }
 
-    // console.log(clientList);
-
-
-    // var serverType = parsedData.serverType;
-    // console.log(serverType);
-
-    // wss.clients.forEach(function each(client) {
-    //   if (client.readyState === WebSocket.OPEN) {
-    //     client.send(data);
-    //   }
-    // });
   });
 });

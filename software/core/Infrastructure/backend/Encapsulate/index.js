@@ -7,6 +7,15 @@ const fs = require("fs");
 
 const { digest } = require("../Digester");
 
+
+/**
+ * Change a list of Class Objects into standard Objects model 
+ * to be manipulated by dashboard
+ * @param {List<Object>} digester_obj 
+ * @param {List<String>} error 
+ * @returns {Object object, List<String>} {obj, error: error}
+ */
+
 function encapsulate(digester_obj, error) {
 	let obj = {};
 
