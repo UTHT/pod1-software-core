@@ -7,7 +7,16 @@ const fs = require("fs");
 
 const { digest } = require("../Digester");
 
-function encapsulate(digester_obj) {
+
+/**
+ * Change a list of Class Objects into standard Objects model 
+ * to be manipulated by dashboard
+ * @param {List<Object>} digester_obj 
+ * @param {List<String>} error 
+ * @returns {Object object, List<String>} {obj, error: error}
+ */
+
+function encapsulate(digester_obj, error) {
 	let obj = {};
 
 	digester_obj.map((sensor) => {
@@ -22,19 +31,17 @@ function encapsulate(digester_obj) {
 		}
 	});
 
-	return obj;
+	return {obj, error: error};
 }
 
 //tests -> will write separate test file later
-const data = fs.readFileSync("test.json");
+// const data = fs.readFileSync("test.json");
 
-console.log(data);
-const digester_object = digest(data);
-console.log(digester_object);
+// console.log(data);
+// const digester_object = digest(data);
+// console.log(digester_object);
 
-const enc_obj = encapsulate(digester_object);
-console.log(enc_obj);
+// const enc_obj = encapsulate(digester_object);
+// console.log(enc_obj);
 
-module.exports = {
-	encapsulate,
-};
+module.exports = encapsulate;

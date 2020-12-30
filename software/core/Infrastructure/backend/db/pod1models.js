@@ -23,10 +23,9 @@ const pod1Schema = new mongoose.Schema({
     Parameters:
         speed: integer or float number representing speed of pod
     */
-    speed: {
-        type: Number,
-
-    },
+    speed: [
+        Object,
+    ],
     /*
     Desc: temperature of various applicable components on pod; have a unique id for every 
     temperature component (determined by respective subteam)
