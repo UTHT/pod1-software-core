@@ -38,6 +38,9 @@
 
 .temp {
   grid-row: 2 / span 9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .speed {

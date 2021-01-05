@@ -20,6 +20,9 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { SpeedComponent } from './components/dashboard/speed/speed.component';
 import { SpeedGaugeComponent } from './components/dashboard/speed/speed-gauge/speed-gauge.component';
 import { SpeedGraphComponent } from './components/dashboard/speed/speed-graph/speed-graph.component';
+import { TemperatureComponent } from './components/dashboard/temperature/temperature.component';
+import { TemperatureGaugeComponent } from './components/dashboard/temperature/temperature-gauge/temperature-gauge.component';
+import { TemperatureGraphComponent } from './components/dashboard/temperature/temperature-graph/temperature-graph.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { SpeedGraphComponent } from './components/dashboard/speed/speed-graph/sp
     LayoutComponent,
     SpeedComponent,
     SpeedGaugeComponent,
-    SpeedGraphComponent
+    SpeedGraphComponent,
+    TemperatureComponent,
+    TemperatureGaugeComponent,
+    TemperatureGraphComponent
   ],
   imports: [
     BrowserModule,
