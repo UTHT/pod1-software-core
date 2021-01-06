@@ -14,9 +14,9 @@ export class TemperatureComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.randomize();
+    this.updateTemperature();
   }
-  randomize() {
+  updateTemperature() {
     // Gauge updates every 50ms
     // Graph updates every 5s
     this.currTemperature += 0.1 * (Math.round(Math.random()) * 4 - 1) * (Math.random() < 0.5 ? -1 : 1);
@@ -27,6 +27,6 @@ export class TemperatureComponent implements OnInit {
         this.temperatureArray.shift();
       }
     }
-    setTimeout(() => { this.randomize(); }, 50);
+    setTimeout(() => { this.updateTemperature(); }, 50);
   }
 }

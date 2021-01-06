@@ -4,7 +4,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
   selector: 'battery-component',
   templateUrl: './battery.component.html'
 })
-export class BatteryPercentageComponent  {
+export class BatteryComponent  {
 	@Input() public color: string;
 	@Input() public percentage: number;
 	@Input() label: string;
@@ -18,7 +18,7 @@ export class BatteryPercentageComponent  {
 		this.color = '#3DCC93';
 		this.percentage = 100;
 		this.renderArrayColor();
-		this.updatePercentage();
+		this.updateBatteryPercentage();
 	}
 
 	renderArrayColor() {
@@ -39,12 +39,12 @@ export class BatteryPercentageComponent  {
 		}
 	}
 
-	public updatePercentage(): void {
+	public updateBatteryPercentage(): void {
 		if (Math.floor(Math.random() * 50)==0){
 			this.arrayColor = []	
 			this.percentage -= 1;
 			this.renderArrayColor();
 		}
-        setTimeout(() => { this.updatePercentage(); }, 200);
+        setTimeout(() => { this.updateBatteryPercentage(); }, 200);
     }
 }

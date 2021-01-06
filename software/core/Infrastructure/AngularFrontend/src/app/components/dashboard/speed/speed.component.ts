@@ -13,9 +13,9 @@ export class SpeedComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.randomize();
+    this.updateSpeed();
   }
-  randomize() {
+  updateSpeed() {
     // Gauge updates every 50ms
     // Graph updates every 5s
     this.currSpeed += 0.1 * (Math.round(Math.random()) * 4 - 1);
@@ -26,6 +26,6 @@ export class SpeedComponent implements OnInit {
         this.speedArray.shift();
       }
     }
-    setTimeout(() => { this.randomize(); }, 50);
+    setTimeout(() => { this.updateSpeed(); }, 50);
   }
 }

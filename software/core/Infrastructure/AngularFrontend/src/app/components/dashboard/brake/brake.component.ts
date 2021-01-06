@@ -14,9 +14,9 @@ export class BrakeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.randomize();
+    this.updateBrakePressure();
   }
-  randomize() {
+  updateBrakePressure() {
     // Gauge updates every 50ms
     // Graph updates every 5s
     this.currBrakePressure += 0.01 * (Math.round(Math.random()) * 4 - 1) * (Math.random() < 0.5 ? -1 : 1);
@@ -27,6 +27,6 @@ export class BrakeComponent implements OnInit {
         this.brakePressureArray.shift();
       }
     }
-    setTimeout(() => { this.randomize(); }, 50);
+    setTimeout(() => { this.updateBrakePressure(); }, 50);
   }
 }

@@ -15,7 +15,7 @@ import { NgxGaugeComponent } from './components/icons/speedometer/ngx-gauge/ngx-
 import { Ng2GaugeComponent } from './components/icons/speedometer/ng2-gauge/ng2-gauge.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { Ng2GaugeModule } from 'ng2-gauge';
-import { BatteryPercentageComponent } from './components/dashboard/battery/battery.component';
+import { BatteryComponent } from './components/dashboard/battery/battery.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SpeedComponent } from './components/dashboard/speed/speed.component';
 import { SpeedGaugeComponent } from './components/dashboard/speed/speed-gauge/speed-gauge.component';
@@ -38,7 +38,7 @@ import { BrakeGraphComponent } from './components/dashboard/brake/brake-graph/br
     ScatterChartComponent,
     NgxGaugeComponent,
     Ng2GaugeComponent,
-    BatteryPercentageComponent,
+    BatteryComponent,
     LayoutComponent,
     SpeedComponent,
     SpeedGaugeComponent,
