@@ -26,6 +26,8 @@ import { TemperatureGraphComponent } from './components/dashboard/temperature/te
 import { BrakeComponent } from './components/dashboard/brake/brake.component';
 import { BrakeGaugeComponent } from './components/dashboard/brake/brake-gauge/brake-gauge.component';
 import { BrakeGraphComponent } from './components/dashboard/brake/brake-graph/brake-graph.component';
+import { PodstateComponent } from './components/podstate/podstate.component';
+import { PodstateItemComponent } from './components/podstate-item/podstate-item.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,10 @@ import { BrakeGraphComponent } from './components/dashboard/brake/brake-graph/br
     TemperatureGraphComponent,
     BrakeComponent,
     BrakeGaugeComponent,
-    BrakeGraphComponent
+    BrakeGraphComponent,
+    LayoutComponent,
+    PodstateComponent,
+    PodstateItemComponent
   ],
   imports: [
     BrowserModule,

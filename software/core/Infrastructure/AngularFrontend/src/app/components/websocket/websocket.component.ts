@@ -33,7 +33,7 @@ export class WebsocketComponent implements OnInit {
           {
             msg: "Message from Server " + 'A',
             name: this.serverName,
-            serverType: 'A',
+            serverType: 'dashboard',
             isNew: true
     
           }
@@ -47,8 +47,8 @@ export class WebsocketComponent implements OnInit {
       console.log("message from websocket: ", message);
       let recvData = JSON.parse(message.data);
       console.log("recvData: ", recvData)
-      this.msgData = recvData.msg;
-      this.recvServerName = recvData.name;
+      this.msgData = recvData.toString();
+      this.recvServerName = recvData;
     }
 
     client.onclose = e => {
