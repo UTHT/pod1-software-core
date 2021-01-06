@@ -36,6 +36,10 @@
 .battery {
   grid-column-start: 2;
   grid-row: 1 / span 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  grid-gap: 20px;
 }
 
 .pod-state {
@@ -45,6 +49,9 @@
 
 .temp {
   grid-row: 2 / span 9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .speed {
