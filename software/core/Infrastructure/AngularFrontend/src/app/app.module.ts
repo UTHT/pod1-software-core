@@ -28,6 +28,9 @@ import { BrakeGaugeComponent } from './components/dashboard/brake/brake-gauge/br
 import { BrakeGraphComponent } from './components/dashboard/brake/brake-graph/brake-graph.component';
 import { PodstateComponent } from './components/podstate/podstate.component';
 import { PodstateItemComponent } from './components/podstate-item/podstate-item.component';
+import { SensorGroupComponent } from './components/sensor-group/sensor-group.component';
+import { ControlsComponent } from './components/controls/controls.component';
+import { SensorsComponent } from './components/sensors/sensors.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { PodstateItemComponent } from './components/podstate-item/podstate-item.
     BrakeGraphComponent,
     LayoutComponent,
     PodstateComponent,
-    PodstateItemComponent
+    PodstateItemComponent,
+    SensorGroupComponent,
+    ControlsComponent,
+    SensorsComponent,
   ],
   imports: [
     BrowserModule,
