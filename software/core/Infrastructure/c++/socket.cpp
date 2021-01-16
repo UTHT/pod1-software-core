@@ -17,20 +17,37 @@ int main()
     client.send(out_msg).wait();
     
     const char *text2 = "\
-        {\
-          'isNew':0,\
-          'serverType':'odroid',\
-          'speed': 29,\
-          'brakes':{ 'status':0, 'pressure':257 },\
-          'temperatures': [\
-                          {\
-                          'name':'motor', 'value':56\
-                          },\
-                          { 'name':'battery', 'value': 78}\
-                          ],\
-          'battery' : 67,\
-          'position' : [127, 46]\
-        }\
+           {\
+            'serverType':'odroid',\
+              'speed':[\
+                  {\
+                      'name':'speed','value':250\
+                  }\
+              ],\
+              'temperatures':[\
+                            {\
+                              'name': 'motor','value':56 \
+                            },\
+                            {'name': 'battery','value':78} \
+                            ],\
+              'position':[127,46],\
+              'brakes':[\
+                  {\
+                      'name':'brakes_left','status':0,'pressure':257\
+                  },\
+                  {\
+                      'name':'brakes_right','status':0,'pressure':257\
+                  }\
+              ],\
+              'battery':[\
+                  {\
+                      'name':'battery_1','value':67\
+                  },\
+                  {\
+                      'name':'battery_2','value':64\
+                  }\
+              ]\
+          }\
         ";
     
 
