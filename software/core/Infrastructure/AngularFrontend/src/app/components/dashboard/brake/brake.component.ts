@@ -18,10 +18,10 @@ export class BrakeComponent implements OnInit {
   }
   updateBrakePressure() {
     // Gauge updates every 50ms
-    // Graph updates every 5s
+    // Graph updates every 2s
     this.currBrakePressure += 0.01 * (Math.round(Math.random()) * 4 - 1) * (Math.random() < 0.5 ? -1 : 1);
     this.count += 50;
-    if (this.count % 5000 == 0){
+    if (this.count % 2000 == 0){
       this.brakePressureArray.push([this.count/1000,Math.round(this.currBrakePressure * 10) / 10]);
       if (this.brakePressureArray.length > 10){
         this.brakePressureArray.shift();

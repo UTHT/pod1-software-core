@@ -17,10 +17,10 @@ export class SpeedComponent implements OnInit {
   }
   updateSpeed() {
     // Gauge updates every 50ms
-    // Graph updates every 5s
+    // Graph updates every 2s
     this.currSpeed += 0.1 * (Math.round(Math.random()) * 4 - 1);
     this.count += 50;
-    if (this.count % 5000 == 0){
+    if (this.count % 2000 == 0){
       this.speedArray.push([this.count/1000,Math.floor(this.currSpeed)])
       if (this.speedArray.length > 10){
         this.speedArray.shift();
