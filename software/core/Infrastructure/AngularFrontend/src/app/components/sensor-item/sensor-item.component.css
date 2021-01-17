@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 1000px;
+  background: #989898;
+  margin-right: 0.4rem;
+}
+
+p {
+  font-size: 0.8rem;
+  line-height: 0.5rem;
+  color: #c9c9c9;
+}
+
+.active {
+  background: #53da70;
+  box-shadow: 0 0 2px 1px #53da70;
+}
+
+.error {
+  background: #e04949;
+  box-shadow: 0 0 2px 1px #e04949;
+}

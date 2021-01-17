@@ -1,1 +1,4 @@
 <h1>{{title}}</h1>
+<div class="grid">
+    <app-sensor-item *ngFor="let sensor of fakeData" id={{sensor.id}} state={{sensor.state}}></app-sensor-item>
+</div>

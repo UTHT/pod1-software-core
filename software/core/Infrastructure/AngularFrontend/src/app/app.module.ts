@@ -31,6 +31,7 @@ import { PodstateItemComponent } from './components/podstate-item/podstate-item.
 import { SensorGroupComponent } from './components/sensor-group/sensor-group.component';
 import { ControlsComponent } from './components/controls/controls.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
+import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SensorsComponent } from './components/sensors/sensors.component';
     SensorGroupComponent,
     ControlsComponent,
     SensorsComponent,
+    SensorItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,34 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SensorGroupComponent implements OnInit {
   @Input() title: string;
 
-  constructor() { }
+  fakeData:any[] = [
+    {
+    id: 'j1',
+    state: 'inactive'
+  },
+    {
+    id: 'j2',
+    state: 'active'
+  },
+    {
+    id: 'j3',
+    state: 'active'
+  },
+    {
+    id: 'j4',
+    state: 'error'
+  },
+    {
+    id: 'j5',
+    state: 'active'
+  },
+    {
+    id: 'j6',
+    state: 'active'
+  },
+  ]
+
+  constructor() { } 
 
   ngOnInit(): void {
   }
