@@ -1,0 +1,20 @@
+:host {
+  border: 1px solid rgb(86, 86, 86);
+  border-radius: 5px;
+  padding: 5px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+h1 {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 2px;
+}
