@@ -34,6 +34,8 @@ import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
 import { PositionComponent } from './components/dashboard/position/position.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SwitchComponent } from './components/dashboard/switch/switch.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ControlsComponent,
     SensorsComponent,
     SensorItemComponent,
-    PositionComponent
+    PositionComponent,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BrowserAnimationsModule,
     NgxGaugeModule,
     Ng2GaugeModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
