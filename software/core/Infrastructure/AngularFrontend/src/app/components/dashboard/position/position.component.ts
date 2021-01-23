@@ -16,8 +16,8 @@ export class PositionComponent {
     }
 
     updatePosition() {
-        this.position += 1;
-        // update every 1s
-        setTimeout(() => { this.updatePosition(); }, 1000);
+        this.position += 0.1;
+        // update every 0.1s
+        setTimeout(() => { this.updatePosition(); }, 100);
     }
 }
