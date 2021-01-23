@@ -1,69 +1,57 @@
-const { Socket } = require('dgram');
-const WebSocket = require('ws');
+const { Socket } = require("dgram");
+const WebSocket = require("ws");
 
-const JSONParser = require('./externalSocketParser/parser');
-const digest  = require('./Digester/index');
-const encapsulate = require('./Encapsulate/index');
-
+const JSONParser = require("./externalSocketParser/parser");
+const digest = require("./Digester/index");
+const encapsulate = require("./Encapsulate/index");
 
 const wss = new WebSocket.Server({ port: 8080 });
 var clientList = [];
 
-
 //websocket connection
-wss.on('connection', function connection(ws) {
-  //websocket message
-  ws.on('message', function incoming(data) {
+wss.on("connection", function connection(ws) {
+	//websocket message
+	ws.on("message", function incoming(data) {
+		console.log(data);
+		// parsed incoming data from sockets
+		var { eventType, data } = JSONParser(data);
 
-    // parsed incoming data from sockets
-    var parsedData = JSONParser(data);
+		// if the socket is just connected, add it to the client list
+		if (eventType === "connection") {
+			console.log("hello");
+			// parsedData["socket"] = ws;
+			// clientList.push(parsedData);
+			ws.send(JSON.stringify({ message: "hello" }));
+		} else {
+			clientList.forEach(function each(client) {
+				if (client.socket.readyState === WebSocket.OPEN) {
+					if (parsedData.serverType == "odroid") {
+						var error = [];
 
-    // if the socket is just connected, add it to the client list
-    if (parsedData.isNew) {
+						// validation module -- here
 
-      parsedData["socket"] = ws;
-      clientList.push(parsedData);
+						// Divide incoming data into multiple components
+						var Digestor = digest(parsedData);
 
-    }
-    else {
+						// pack all the data to be sent to front-end.
+						var encapsulator = encapsulate(Digestor, error);
 
-      clientList.forEach(function each(client) {
-        if (client.socket.readyState === WebSocket.OPEN) {
-          if (parsedData.serverType == 'odroid') {
-            
-            var error = [];
-
-            // validation module -- here
-
-            // Divide incoming data into multiple components
-            var Digestor =  digest(parsedData);
-
-            // pack all the data to be sent to front-end.
-            var encapsulator = encapsulate(Digestor, error);
-
-            // Send encapsulation data to front-end
-            clientList.forEach((elem) => {
-              if (elem.serverType == 'dashboard') {
-                elem.socket.send(JSON.stringify(encapsulator));
-              }
-            });
-
-          }
-
-          else {
-
-            // Send encapsulation data to odroid
-            clientList.forEach((elem) => {
-              if (elem.serverType == 'odroid') {
-                elem.socket.send(JSON.stringify(Encapsulation));
-              }
-            });
-
-          }
-
-        }
-      });
-    }
-
-  });
+						// Send encapsulation data to front-end
+						clientList.forEach((elem) => {
+							if (elem.serverType == "dashboard") {
+								elem.socket.send(JSON.stringify(encapsulator));
+							}
+						});
+					} else {
+						// Send encapsulation data to odroid
+						clientList.forEach((elem) => {
+							if (elem.serverType == "odroid") {
+								elem.socket.send(JSON.stringify(Encapsulation));
+							}
+						});
+					}
+				}
+			});
+		}
+	});
 });

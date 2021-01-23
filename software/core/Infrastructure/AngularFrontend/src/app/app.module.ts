@@ -32,6 +32,7 @@ import { SensorGroupComponent } from './components/sensor-group/sensor-group.com
 import { ControlsComponent } from './components/controls/controls.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
+import { WebsocketService } from './services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { SensorItemComponent } from './components/sensor-item/sensor-item.compon
     NgxGaugeModule,
     Ng2GaugeModule
   ],
-  providers: [],
+  providers: [WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
