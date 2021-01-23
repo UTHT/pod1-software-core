@@ -20,16 +20,16 @@ export class SpeedComponent implements OnInit {
     // Gauge updates every 50ms
     // Graph updates every 5s
 
-    var i = 0.1 * (Math.round(Math.random()) * 4 - 1)
+    var speedDiff = 0.1 * (Math.round(Math.random()) * 4 - 1)
 
     // demo code
-    if (i < 0){
+    if (speedDiff < 0){
       this.engaged = true;
     }else{
       this.engaged = false;
     }
 
-    this.currSpeed += i;
+    this.currSpeed += speedDiff;
     this.count += 50;
     if (this.count % 5000 == 0){
       this.speedArray.push([this.count/1000,Math.floor(this.currSpeed)])
