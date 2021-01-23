@@ -32,6 +32,8 @@ import { SensorGroupComponent } from './components/sensor-group/sensor-group.com
 import { ControlsComponent } from './components/controls/controls.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
+import { PositionComponent } from './components/dashboard/position/position.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { SensorItemComponent } from './components/sensor-item/sensor-item.compon
     ControlsComponent,
     SensorsComponent,
     SensorItemComponent,
+    PositionComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { SensorItemComponent } from './components/sensor-item/sensor-item.compon
     ChartsModule,
     BrowserAnimationsModule,
     NgxGaugeModule,
-    Ng2GaugeModule
+    Ng2GaugeModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
