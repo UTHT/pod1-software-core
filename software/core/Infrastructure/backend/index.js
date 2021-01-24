@@ -4,6 +4,8 @@ const WebSocket = require("ws");
 const JSONParser = require("./externalSocketParser/parser");
 const digest = require("./Digester/index");
 const encapsulate = require("./Encapsulate/index");
+const broadcast = require("./utilities/broadcast");
+const mock = require("./utilities/mock");
 
 const wss = new WebSocket.Server({ port: 8080 });
 var clientList = [];
@@ -11,47 +13,40 @@ var clientList = [];
 //websocket connection
 wss.on("connection", function connection(ws) {
 	//websocket message
-	ws.on("message", function incoming(data) {
-		console.log(data);
+	ws.on("message", function incoming(message) {
 		// parsed incoming data from sockets
-		var { eventType, data } = JSONParser(data);
+		const { eventType, data } = JSONParser(message);
 
 		// if the socket is just connected, add it to the client list
-		if (eventType === "connection") {
-			console.log("hello");
-			// parsedData["socket"] = ws;
-			// clientList.push(parsedData);
-			ws.send(JSON.stringify({ message: "hello" }));
-		} else {
-			clientList.forEach(function each(client) {
-				if (client.socket.readyState === WebSocket.OPEN) {
-					if (parsedData.serverType == "odroid") {
-						var error = [];
+		switch (eventType) {
+			case "connection":
+				const clientType = data.clientType;
+				ws.clientType = clientType;
+				ws.send(JSON.stringify({ eventType: "init" }));
+			case "relay":
+				if (ws.clientType === "dashboard") {
+					broadcast(wss, message, "odroid");
+				} else {
+					const error = [];
+					// validation module -- here
 
-						// validation module -- here
-
-						// Divide incoming data into multiple components
-						var Digestor = digest(parsedData);
-
-						// pack all the data to be sent to front-end.
-						var encapsulator = encapsulate(Digestor, error);
-
-						// Send encapsulation data to front-end
-						clientList.forEach((elem) => {
-							if (elem.serverType == "dashboard") {
-								elem.socket.send(JSON.stringify(encapsulator));
-							}
-						});
-					} else {
-						// Send encapsulation data to odroid
-						clientList.forEach((elem) => {
-							if (elem.serverType == "odroid") {
-								elem.socket.send(JSON.stringify(Encapsulation));
-							}
-						});
-					}
+					// Divide incoming data into multiple components
+					const Digestor = digest(parsedData);
+					// pack all the data to be sent to front-end.
+					const encapsulator = encapsulate(Digestor, error);
+					broadcast(wss, encapsulator, "dashboard");
 				}
-			});
+			case "mock_request":
+				const msg = { eventType: "mock", data: mock() };
+				broadcast(wss, msg, "dashboard");
+				return;
+			default:
+				ws.send(
+					JSON.stringify({
+						eventType: "error",
+						data: { message: "No event of that type found" },
+					})
+				);
 		}
 	});
 });
