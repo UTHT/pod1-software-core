@@ -21,25 +21,31 @@ export class WebsocketService {
 
     this.websocket.onmessage = event => {
       const {eventType, data} = JSON.parse(event.data)
-      console.log(eventType, data)
+      // console.log(eventType, data)
       
       switch (eventType) {
         case 'init':
           this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
+          return
         default:
           this.data = data
           this.dataSub.next(this.data)
+          return
       }
 
       
       // const newData = JSON.parse(event.data)
       // console.log(newData)
       // this.data = newData
-      // this.dataSub.next(this.data)
+      //  this.dataSub.next(this.data)
     }
 
     this.websocket.onclose = event => { 
       console.log('disconnected')
     }
+  }
+
+  public getMockData(){
+    this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
   }
 }

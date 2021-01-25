@@ -2,12 +2,9 @@ const Sensor = require("./sensor");
 
 class BrakeSensor extends Sensor {
 	sensor_type = "BRAKE";
-	constructor(value,  pressure = 0,name = "brakes") {
+	constructor(value, name = "brakes") {
 		super(name, value);
-		this._name = name;
-		this._pressure = pressure;
 	}
-
 }
 
 // const sensor1 = new BrakeSensor(0,254);
@@ -15,7 +12,6 @@ class BrakeSensor extends Sensor {
 // console.log(sensor1.name);
 // console.log(sensor1.value);
 // console.log(sensor1.pressure);
-
 
 // sensor1.name = "updatedsensor";
 // sensor1.value = 1;

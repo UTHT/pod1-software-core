@@ -33,6 +33,7 @@ import { ControlsComponent } from './components/controls/controls.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
 import { WebsocketService } from './services/websocket.service';
+import { BrakesComponent } from './components/brakes/brakes.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { WebsocketService } from './services/websocket.service';
     ControlsComponent,
     SensorsComponent,
     SensorItemComponent,
+    BrakesComponent,
   ],
   imports: [
     BrowserModule,

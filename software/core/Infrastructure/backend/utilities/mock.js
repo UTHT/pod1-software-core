@@ -21,12 +21,12 @@ function mock() {
 			{
 				name: "brakes_left",
 				status: 0,
-				pressure: 257 * Math.random(),
+				value: 3 * Math.random(),
 			},
 			{
 				name: "brakes_right",
 				status: 0,
-				pressure: 257 * Math.random(),
+				value: 3 * Math.random(),
 			},
 		],
 		battery: [
