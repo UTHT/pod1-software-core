@@ -17,14 +17,14 @@ export class BrakeComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
+    this.count += 1
     //this.updateBrakePressure();
   }
 
   ngOnChanges(): void {
     this.count += 1;
-    console.log(this.count)
+    this.brakePressureArray = [...this.brakePressureArray, [this.count, this.pressure]]
 
-    this.brakePressureArray.push([this.count, this.pressure])
     if (this.brakePressureArray.length > 10){
       this.brakePressureArray.shift();
     }

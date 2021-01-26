@@ -34,6 +34,7 @@ import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
 import { WebsocketService } from './services/websocket.service';
 import { BrakesComponent } from './components/brakes/brakes.component';
+import { BatteriesComponent } from './components/batteries/batteries.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { BrakesComponent } from './components/brakes/brakes.component';
     SensorsComponent,
     SensorItemComponent,
     BrakesComponent,
+    BatteriesComponent,
   ],
   imports: [
     BrowserModule,
