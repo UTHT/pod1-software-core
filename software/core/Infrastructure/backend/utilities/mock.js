@@ -1,6 +1,8 @@
 const digest = require("../Digester");
 const encapsulate = require("../Encapsulate");
 
+//Return a mock object for the data that needs to be handled on the front-end
+
 function mock() {
 	const newData = {
 		speed: [

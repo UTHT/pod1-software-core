@@ -22,6 +22,7 @@ export class BrakeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    //TODO: the array seems to be not able to be updated this way
     this.count += 1;
     this.brakePressureArray = [...this.brakePressureArray, [this.count, this.pressure]]
 

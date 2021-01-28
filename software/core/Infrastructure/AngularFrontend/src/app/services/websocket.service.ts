@@ -12,17 +12,19 @@ export class WebsocketService {
 
   constructor() { }
 
+  //connect method to initialize connection to the server (call once)
   public connect(){
     this.websocket = new WebSocket("ws://localhost:8080");
     
     this.websocket.onopen = event => { 
+      //Any clients during connection to the websocket must send this connection event!!!
       this.websocket.send(JSON.stringify({eventType: 'connection', data: {clientType: 'dashboard'}}))
     }
 
     this.websocket.onmessage = event => {
       const {eventType, data} = JSON.parse(event.data)
-      // console.log(eventType, data)
-      
+
+      //Handle messages that are coming in, evenType struture will be enforced
       switch (eventType) {
         case 'init':
           this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
@@ -33,14 +35,10 @@ export class WebsocketService {
           return
       }
 
-      
-      // const newData = JSON.parse(event.data)
-      // console.log(newData)
-      // this.data = newData
-      //  this.dataSub.next(this.data)
     }
 
     this.websocket.onclose = event => { 
+      //Todo: handle event when the server come down (trying to reconnect / display server is disconnected)
       console.log('disconnected')
     }
   }
