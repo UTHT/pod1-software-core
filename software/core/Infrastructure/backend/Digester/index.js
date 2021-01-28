@@ -24,7 +24,7 @@ function digest(odroid_json) {
 	const Position = new PositionSensor(position[0], position[1]);
 
 	const temp_array = temperatures.map(
-		({ name, value }) => new TempSensor(value, name)
+		({ name, value }) => new TempSensor(name, value)
 	);
 
 	const Brakes = brakes.map(({ name, value }) => new BrakeSensor(value, name));
