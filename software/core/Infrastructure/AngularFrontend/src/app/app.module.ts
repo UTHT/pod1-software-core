@@ -36,6 +36,10 @@ import { WebsocketService } from './services/websocket.service';
 import { BrakesComponent } from './components/brakes/brakes.component';
 import { BatteriesComponent } from './components/batteries/batteries.component';
 import { TemperaturesComponent } from './components/temperatures/temperatures.component';
+import { PositionComponent } from './components/dashboard/position/position.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SwitchComponent } from './components/dashboard/switch/switch.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,8 @@ import { TemperaturesComponent } from './components/temperatures/temperatures.co
     BrakesComponent,
     BatteriesComponent,
     TemperaturesComponent,
+    PositionComponent,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +82,9 @@ import { TemperaturesComponent } from './components/temperatures/temperatures.co
     ChartsModule,
     BrowserAnimationsModule,
     NgxGaugeModule,
-    Ng2GaugeModule
+    Ng2GaugeModule,
+    MatProgressBarModule,
+    MatButtonModule
   ],
   providers: [WebsocketService],
   bootstrap: [AppComponent]
