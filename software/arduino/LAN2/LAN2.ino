@@ -11,7 +11,7 @@ byte data2 [ARRAY_SIZE]; // This is the read vector.
 // The IP address will be dependent on your local network.
 
 byte mac[] = {0x11, 0x11, 0x11, 0x11, 0x11, 0x11}; // This is the local board number 1.
-IPAddress ip(111, 111, 111, 111);
+IPAddress ip(111, 111, 111, 222);
 unsigned int localPort = 22222;
 
 char remote_IP[] = "111.111.111.111"; // This is the foreign board number 2.
