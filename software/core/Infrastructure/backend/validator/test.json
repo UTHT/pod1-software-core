@@ -1,0 +1,30 @@
+{ 
+    "speed":
+        {
+            "value":-1
+        }
+    ,
+    "temperatures": [ 
+                   { 
+                    "name": "motor",  "value":56 
+                   }, 
+                   {  "name": "battery",  "value": 78} 
+                   ], 
+    "position" : [127, 46],
+    "brakes":[
+        {
+            "name": "brakes_left", "status": 0,"pressure":257
+        },
+        {
+            "name": "brakes_right", "status": 0,"pressure":257
+        }
+    ], 
+    "battery":[
+        {
+            "name" : "battery_1", "value":67
+        },
+        {
+            "name" : "battery_2", "value":64
+        }
+    ]
+ } 

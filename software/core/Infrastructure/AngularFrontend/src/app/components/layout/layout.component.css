@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  max-width: 1444px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  height: 98vh;
+  grid-gap: 10px;
+}
+
+/* Each region */
+.dashboard > * {
+  background: #232323;
+  /* background: #434343; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  /* -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 1);
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 1); */
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.switch {
+  grid-column-start: 1;
+}
+
+.battery {
+  grid-column-start: 2;
+  grid-row: 1 / span 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  grid-gap: 20px;
+}
+
+.pod-state {
+  grid-column-start: 3;
+  grid-row: 1 / span 4;
+}
+
+.temp {
+  grid-row: 2 / span 9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.speed {
+  grid-column-start: 2;
+  grid-row: 5 / span 4;
+}
+
+.position {
+  grid-column-start: 1;
+
+  grid-row: 11 / -1;
+}
+
+.brake {
+  grid-column-start: 2;
+  grid-row: 9 / -1;
+}
+
+.control-panel {
+  grid-column-start: 3;
+  grid-row: 5 / -1;
+}
