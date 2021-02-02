@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
     templateUrl: './position.component.html',
 })
 export class PositionComponent {
-    mode = 'buffer';
+    mode = 'determinate';
+    color = 'warn';
     position = 0;
 
     ngOnInit(): void {

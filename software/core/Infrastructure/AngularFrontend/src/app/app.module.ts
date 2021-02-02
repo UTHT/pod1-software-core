@@ -36,6 +36,7 @@ import { PositionComponent } from './components/dashboard/position/position.comp
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SwitchComponent } from './components/dashboard/switch/switch.component';
 import { MatButtonModule } from '@angular/material/button';
+import { LogsComponent } from './components/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatButtonModule } from '@angular/material/button';
     SensorsComponent,
     SensorItemComponent,
     PositionComponent,
-    SwitchComponent
+    SwitchComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,
