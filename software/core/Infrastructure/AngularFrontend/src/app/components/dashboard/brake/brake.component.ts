@@ -1,12 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'brake-component',
   templateUrl: './brake.component.html',
   //   styleUrls: ['./brake.component.css']
 })
-export class BrakeComponent implements OnInit {
+export class BrakeComponent implements OnInit, OnChanges {
   @Input() label: string;
+  @Input() pressure: number;
+  @Output() updatePressure = new EventEmitter<number>();
   currBrakePressure = 1;
   brakePressureArray = [[0,0]];
   count = 0;
@@ -14,8 +17,20 @@ export class BrakeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.updateBrakePressure();
+    this.count += 1
+    //this.updateBrakePressure();
   }
+
+  ngOnChanges(): void {
+    //TODO: the array seems to be not able to be updated this way
+    this.count += 1;
+    this.brakePressureArray = [...this.brakePressureArray, [this.count, this.pressure]]
+
+    if (this.brakePressureArray.length > 10){
+      this.brakePressureArray.shift();
+    }
+  }
+
   updateBrakePressure() {
     // Gauge updates every 50ms
     // Graph updates every 5s

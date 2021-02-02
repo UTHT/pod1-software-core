@@ -1,69 +1,65 @@
-const { Socket } = require('dgram');
-const WebSocket = require('ws');
+const { Socket } = require("dgram");
+const WebSocket = require("ws");
 
-const JSONParser = require('./externalSocketParser/parser');
-const digest  = require('./Digester/index');
-const encapsulate = require('./Encapsulate/index');
-
+const JSONParser = require("./externalSocketParser/parser");
+const digest = require("./Digester/index");
+const encapsulate = require("./Encapsulate/index");
+const broadcast = require("./utilities/broadcast");
+const mock = require("./utilities/mock");
 
 const wss = new WebSocket.Server({ port: 8080 });
-var clientList = [];
-
 
 //websocket connection
-wss.on('connection', function connection(ws) {
-  //websocket message
-  ws.on('message', function incoming(data) {
+wss.on("connection", function connection(ws) {
+	//websocket message
+	ws.on("message", function incoming(message) {
+		// parsed incoming data from sockets
+		// enforcing sending evenType with every message for easier data manipulation
+		const { eventType, data } = JSONParser(message);
 
-    // parsed incoming data from sockets
-    var parsedData = JSONParser(data);
+		//switch case is is better for in the future when there are more than 3 eventTypes
+		switch (eventType) {
+			// if the socket is just connected, tag it with the clientType property to be identifiable later
+			// any clients should send this event during initialization of the ws connection
+			case "connection":
+				//Data should have a clientType to be added to the connection
+				//Todo: maybe add an error event id clienType is undefined
+				const clientType = data.clientType;
+				ws.clientType = clientType;
+				ws.send(JSON.stringify({ eventType: "init" }));
+				return;
 
-    // if the socket is just connected, add it to the client list
-    if (parsedData.isNew) {
+			// replay is any messages that just need to be passed to the clientType
+			case "relay":
+				if (ws.clientType === "dashboard") {
+					//Todo: add encapsulation for the massage to go to the odroid
+					broadcast(wss, message, "odroid");
+				} else {
+					const error = [];
+					// validation module -- here
 
-      parsedData["socket"] = ws;
-      clientList.push(parsedData);
+					// Divide incoming data into multiple components
+					const Digestor = digest(parsedData);
+					// pack all the data to be sent to front-end.
+					const encapsulator = encapsulate(Digestor, error);
+					broadcast(wss, encapsulator, "dashboard");
+				}
+				return;
 
-    }
-    else {
+			// use to request for mock data to test the front-end components
+			case "mock_request":
+				const msg = { eventType: "mock", data: mock() };
+				broadcast(wss, msg, "dashboard");
+				return;
 
-      clientList.forEach(function each(client) {
-        if (client.socket.readyState === WebSocket.OPEN) {
-          if (parsedData.serverType == 'odroid') {
-            
-            var error = [];
-
-            // validation module -- here
-
-            // Divide incoming data into multiple components
-            var Digestor =  digest(parsedData);
-
-            // pack all the data to be sent to front-end.
-            var encapsulator = encapsulate(Digestor, error);
-
-            // Send encapsulation data to front-end
-            clientList.forEach((elem) => {
-              if (elem.serverType == 'dashboard') {
-                elem.socket.send(JSON.stringify(encapsulator));
-              }
-            });
-
-          }
-
-          else {
-
-            // Send encapsulation data to odroid
-            clientList.forEach((elem) => {
-              if (elem.serverType == 'odroid') {
-                elem.socket.send(JSON.stringify(Encapsulation));
-              }
-            });
-
-          }
-
-        }
-      });
-    }
-
-  });
+			//If eventType is not given or any of the above case then send an error message
+			default:
+				ws.send(
+					JSON.stringify({
+						eventType: "error",
+						data: { message: "No event of that type found" },
+					})
+				);
+		}
+	});
 });

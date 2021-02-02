@@ -1,3 +1,6 @@
+//Which ever sensor inherited from this class should make use of the value property when possible
+//avoid unit-specific property such as pressure - this makes it harder on the front-end to parse
+
 class Sensor {
 	sensor_type = "";
 	constructor(name, value = null) {

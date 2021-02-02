@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 const client = new W3CWebSocket('ws://127.0.0.1:8080/');
-import { DataStreamService } from '../../services/data-stream.service';
 
 @Component({
   selector: 'app-websocket',
@@ -16,7 +15,7 @@ export class WebsocketComponent implements OnInit {
 
   //call this.dsService.updateData(<Object>) to update the state
   //call this.dsService.currentData.subscribe((data) => {}) to watch for change and update state accordingly
-  constructor(private dsService: DataStreamService) {
+  constructor() {
     var d = new Date();
     var n = d.getTime().toString();
     this.serverName = n.toString();

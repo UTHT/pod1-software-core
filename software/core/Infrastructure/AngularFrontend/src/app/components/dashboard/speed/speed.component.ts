@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WebsocketService} from '../../../services/websocket.service';
 
 @Component({
   selector: 'speed-component',
@@ -11,10 +12,16 @@ export class SpeedComponent implements OnInit {
   count = 0;
   engaged = false;
 
-  constructor() { }
+  constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.updateSpeed();
+    // this.updateSpeed();
+    this.wsService.serverMessage.subscribe(message => {
+      if (message.obj){
+        const{SPEED: speed} = message.obj
+        this.currSpeed = speed[0]._value
+      }
+    })
   }
   updateSpeed() {
     // Gauge updates every 50ms

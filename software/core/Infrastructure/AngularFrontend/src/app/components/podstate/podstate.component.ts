@@ -70,6 +70,7 @@ export class PodstateComponent implements OnInit {
     }
   }
 
+  //Pod state data variable to be updated as data comes in
   podstateData: any[] = [{
     name: 'startup', 
     items:  [

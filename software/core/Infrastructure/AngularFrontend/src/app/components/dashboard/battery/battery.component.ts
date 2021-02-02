@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'battery-component',
   templateUrl: './battery.component.html'
 })
-export class BatteryComponent  {
+export class BatteryComponent implements OnInit, OnChanges {
 	@Input() public color: string;
 	@Input() public percentage: number;
 	@Input() label: string;
@@ -16,12 +16,16 @@ export class BatteryComponent  {
 
 	ngOnInit() {
 		this.color = '#3DCC93';
-		this.percentage = 100;
 		this.renderArrayColor();
-		this.updateBatteryPercentage();
+		// this.updateBatteryPercentage();
+	}
+
+	ngOnChanges(){
+		this.renderArrayColor();
 	}
 
 	renderArrayColor() {
+		this.arrayColor = []
 		const part = 100 / this.totalPin;
 		let currentLevel = 0 + part;
 		for (let i = 0; i < this.totalPin; i++) {

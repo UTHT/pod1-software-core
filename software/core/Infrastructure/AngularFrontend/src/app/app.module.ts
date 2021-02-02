@@ -32,6 +32,10 @@ import { SensorGroupComponent } from './components/sensor-group/sensor-group.com
 import { ControlsComponent } from './components/controls/controls.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
+import { WebsocketService } from './services/websocket.service';
+import { BrakesComponent } from './components/brakes/brakes.component';
+import { BatteriesComponent } from './components/batteries/batteries.component';
+import { TemperaturesComponent } from './components/temperatures/temperatures.component';
 import { PositionComponent } from './components/dashboard/position/position.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SwitchComponent } from './components/dashboard/switch/switch.component';
@@ -67,6 +71,9 @@ import { LogsComponent } from './components/logs/logs.component';
     ControlsComponent,
     SensorsComponent,
     SensorItemComponent,
+    BrakesComponent,
+    BatteriesComponent,
+    TemperaturesComponent,
     PositionComponent,
     SwitchComponent,
     LogsComponent
@@ -81,7 +88,7 @@ import { LogsComponent } from './components/logs/logs.component';
     MatProgressBarModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
