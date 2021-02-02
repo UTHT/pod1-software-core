@@ -1,5 +1,9 @@
 #include <iostream>
 #include <cpprest/ws_client.h>
+#include <fstream>
+#include <string>
+#include <stdlib.h> 
+#include<unistd.h>
 
 using namespace std;
 using namespace web;
@@ -15,46 +19,27 @@ int main()
 
     out_msg.set_utf8_message("{ 'isNew':1 }");
     client.send(out_msg).wait();
+
+    std::ifstream file("testFiles/speedIncrease_2.txt");
+
+    //std::ifstream file("input.txt");
     
-    const char *text2 = "\
-           {\
-            'serverType':'odroid',\
-              'speed':[\
-                  {\
-                      'name':'speed','value':250\
-                  }\
-              ],\
-              'temperatures':[\
-                            {\
-                              'name': 'motor','value':56 \
-                            },\
-                            {'name': 'battery','value':78} \
-                            ],\
-              'position':[127,46],\
-              'brakes':[\
-                  {\
-                      'name':'brakes_left','status':0,'pressure':257\
-                  },\
-                  {\
-                      'name':'brakes_right','status':0,'pressure':257\
-                  }\
-              ],\
-              'battery':[\
-                  {\
-                      'name':'battery_1','value':67\
-                  },\
-                  {\
-                      'name':'battery_2','value':64\
-                  }\
-              ]\
-          }\
-        ";
+    std::string str;
+    while (std::getline(file, str)) {
+      std::cout << str << "\n";
+      char *text = new char[str.length() + 1];
+      strcpy(text, str.c_str());
+
+       //cout << text2 << endl;
+      out_msg.set_utf8_message(text);
+      //data.replace(/'/g, '"'); -- Important
+      client.send(out_msg).wait();
+      delete[] text;
+      sleep(1);
+    }
     
 
-    cout << text2 << endl;
-    out_msg.set_utf8_message(text2);
-    //data.replace(/'/g, '"'); -- Important
-    client.send(out_msg).wait();
+   
 
     client.receive().then([](websocket_incoming_message in_msg) {
                       return in_msg.extract_string();

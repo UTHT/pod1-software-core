@@ -15,6 +15,7 @@ wss.on('connection', function connection(ws) {
   //websocket message
   ws.on('message', function incoming(data) {
 
+    console.log(data);
     // parsed incoming data from sockets
     var parsedData = JSONParser(data);
 
@@ -40,6 +41,8 @@ wss.on('connection', function connection(ws) {
 
             // pack all the data to be sent to front-end.
             var encapsulator = encapsulate(Digestor, error);
+
+            console.log(encapsulator);
 
             // Send encapsulation data to front-end
             clientList.forEach((elem) => {
