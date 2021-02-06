@@ -35,7 +35,7 @@ const pod1Schema = new mongoose.Schema({
             "temp": 56
         )
     */
-    temp: [
+    temperature: [
         Object
     ],
 
