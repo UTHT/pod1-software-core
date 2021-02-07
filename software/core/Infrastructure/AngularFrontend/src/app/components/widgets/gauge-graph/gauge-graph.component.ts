@@ -11,8 +11,6 @@ export class GaugeGraphComponent implements OnInit, OnChanges {
   @Input() type: string;
   @Input() inputDataArray: any[];
   dataList: any[];
-  unit: string;
-  gaugeSize: number;
   settings: any;
 
   constructor() { }
@@ -38,9 +36,16 @@ export class GaugeGraphComponent implements OnInit, OnChanges {
           graphHeight: 100,
           max: 3,
         };
-        this.unit = 'bar'
-        this.gaugeSize = 125
         return
+      case "TEMPERATURE":
+        this.settings = {
+          unit: '°C',
+          gaugeType: 'semi',
+          gaugeSize: '100',
+          graphWidth: 200,
+          graphHeight: 100,
+          max: 100,
+        }
       default:
         return
     }

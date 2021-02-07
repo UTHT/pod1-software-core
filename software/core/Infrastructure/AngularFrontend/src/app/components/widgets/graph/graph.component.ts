@@ -44,6 +44,7 @@ export class GraphComponent implements OnInit {
         }
       ]
     },
+    maintainAspectRatio: false,
     elements:{
       line:{
         tension:0
