@@ -11,12 +11,12 @@ export class TemperaturesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wsService.serverMessage.subscribe(message => {
-      if (message.obj){
-        const{TEMPERATURE: temperature} = message.obj
-        this.temperaturesData = temperature
-      }
-    })
+    // this.wsService.serverMessage.subscribe(message => {
+    //   if (message.obj){
+    //     const{TEMPERATURE: temperature} = message.obj
+    //     this.temperaturesData = temperature
+    //   }
+    // })
   }
 
 }

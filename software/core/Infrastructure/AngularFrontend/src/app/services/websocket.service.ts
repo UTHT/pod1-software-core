@@ -7,8 +7,10 @@ import { BehaviorSubject } from 'rxjs'
 export class WebsocketService {
   websocket: WebSocket;
   private data: any = {}
-  private dataSub = new BehaviorSubject<any>(this.data);
-  public serverMessage = this.dataSub.asObservable();
+  //global store of the history
+  public dataHistory: any[] = [];
+  private dataSub = new BehaviorSubject<any>(this.dataHistory);
+  public history = this.dataSub.asObservable();
 
   constructor() { }
 
@@ -31,10 +33,14 @@ export class WebsocketService {
           return
         default:
           this.data = data
-          this.dataSub.next(this.data)
+          this.data.time = new Date()
+          this.dataHistory.push(this.data)
+          if (this.dataHistory.length > 20){
+            this.dataHistory.shift()
+          }
+          this.dataSub.next(this.dataHistory)
           return
       }
-
     }
 
     this.websocket.onclose = event => { 
@@ -46,4 +52,8 @@ export class WebsocketService {
   public getMockData(){
     this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
   }
+
+  public getDataHistory(){
+    return this.dataHistory
+  } 
 }

@@ -14,11 +14,11 @@ export class BatteriesComponent implements OnInit {
   constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.wsService.serverMessage.subscribe(message => {
-      if (message.obj){
-        const{BATTERY: battery} = message.obj
-        this.batteryData = battery
-      }
-    })
+    // this.wsService.serverMessage.subscribe(message => {
+    //   if (message.obj){
+    //     const{BATTERY: battery} = message.obj
+    //     this.batteryData = battery
+    //   }
+    // })
   }
 }

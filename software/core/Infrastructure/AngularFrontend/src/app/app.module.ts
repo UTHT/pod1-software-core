@@ -41,6 +41,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SwitchComponent } from './components/dashboard/switch/switch.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LogsComponent } from './components/logs/logs.component';
+import { GraphComponent } from './components/dashboard/widget/graph/graph.component';
+import { GaugeComponent } from './components/dashboard/widget/gauge/gauge.component';
+import { GaugeGraphComponent } from './components/dashboard/widget/gauge-graph/gauge-graph.component';
+import { WidgetArrayComponent } from './components/widget-array/widget-array.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +80,11 @@ import { LogsComponent } from './components/logs/logs.component';
     TemperaturesComponent,
     PositionComponent,
     SwitchComponent,
-    LogsComponent
+    LogsComponent,
+    GraphComponent,
+    GaugeComponent,
+    GaugeGraphComponent,
+    WidgetArrayComponent
   ],
   imports: [
     BrowserModule,
