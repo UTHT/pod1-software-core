@@ -30,7 +30,7 @@ function encapsulate(digester_obj, error) {
 		}
 	});
 
-	return { obj, error: error };
+	return { obj, error: error, timeStamp: new Date() };
 }
 
 //tests -> will write separate test file later

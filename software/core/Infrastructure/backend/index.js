@@ -39,7 +39,7 @@ wss.on("connection", function connection(ws) {
 					// validation module -- here
 
 					// Divide incoming data into multiple components
-					const Digestor = digest(parsedData);
+					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, error);
 					broadcast(wss, encapsulator, "dashboard");
