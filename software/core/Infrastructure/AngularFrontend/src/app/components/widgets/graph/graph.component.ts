@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
@@ -13,7 +13,7 @@ export class GraphComponent implements OnInit {
   @Input() dataList: any[];
   @Input() settings: any;
 
-  public lineChartData: ChartDataSets[] = [{ data: [], fill:false, pointStyle:'line'}];
+  public lineChartData: ChartDataSets[] = [{ data: [], fill:false, pointRadius:0}];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions) = {
     responsive: true,
@@ -30,7 +30,15 @@ export class GraphComponent implements OnInit {
           },
           ticks:{
             autoSkipPadding: 20,
-          }
+            fontColor: 'rgb(180, 180, 180)',
+            padding: 5,
+            minRotation: 50
+          },
+          gridLines:{
+            color: 'rgba(150, 150, 150, 0.1)',
+            drawTicks: false, 
+            zeroLineColor: 'rgba(150, 150, 150, 0.1)'
+          },
         }
       ],
       yAxes: [
@@ -40,15 +48,21 @@ export class GraphComponent implements OnInit {
             autoSkipPadding: 20,
             min: 0,
             max: 3,
+            fontColor: 'rgb(180, 180, 180)',
+            padding: 5
+          },
+          gridLines:{
+            color: 'rgba(150, 150, 150, 0.1)',
+            drawTicks: false
           }
         }
-      ]
+      ],
     },
     maintainAspectRatio: false,
     elements:{
       line:{
-        tension:0
-      }
+        tension:0.3
+      },
     },
     legend: {
       display: false
@@ -65,11 +79,11 @@ export class GraphComponent implements OnInit {
   public lineChartColors: Color[] = [
     {
       backgroundColor: 'rgba(0, 255, 0, 0.3)',
-      borderColor: 'green',
+      borderColor: 'rgba(26, 196, 151, 1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
     }
   ];
   public lineChartLegend = false;

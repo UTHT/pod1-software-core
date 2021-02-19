@@ -1,1 +1,8 @@
-<app-gauge-graph *ngFor='let item of data' [label]="item._name" [value]="item._value" [inputDataArray]="dataArray" [type]="type"></app-gauge-graph>
+<ng-container *ngIf="type === 'BATTERY'; else elseBlock">
+    <div class="twotwo">
+        <battery-component *ngFor='let item of data' [label]="item._name" [value]="item._value"></battery-component>
+    </div>
+</ng-container>
+<ng-template #elseBlock>
+    <app-gauge-graph *ngFor='let item of data' [label]="item._name" [value]="item._value" [inputDataArray]="dataArray" [type]="type"></app-gauge-graph>
+</ng-template>
