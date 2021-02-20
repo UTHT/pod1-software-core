@@ -1,0 +1,10 @@
+:host {
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(50px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  min-height: 0;
+  min-width: 0;
+}

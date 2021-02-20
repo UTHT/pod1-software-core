@@ -16,7 +16,7 @@ export class BrakeGaugeComponent {
     ngOnInit() {
         this.gaugeValue = this.brakePressure;
         this.gaugeLabel = this.name;
-        this.getBrakePressure();
+        // this.getBrakePressure();
     }
     getBrakePressure() {
         this.gaugeValue = Math.round(this.brakePressure * 10) / 10;

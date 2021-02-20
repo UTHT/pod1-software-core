@@ -8,8 +8,10 @@
 </style>
 <label>{{label}}</label>
 <br>
-<div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
-	<ng-template [ngIf]="item.full == false">
-		<div [ngStyle]="{ 'background-color': color, width: item.width, height: '50px' }"></div>
-	</ng-template>
+<div class="battery">
+	<div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
+		<ng-template [ngIf]="item.full == false">
+			<div [ngStyle]="{ 'background-color': color, width: item.width, height: '50px' }"></div>
+		</ng-template>
+	</div>
 </div>
