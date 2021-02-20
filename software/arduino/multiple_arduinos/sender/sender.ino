@@ -10,7 +10,9 @@ byte data2 [ARRAY_SIZE]; // This is the read vector.
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network.
 
-byte mac[] = {0x11, 0x11, 0x11, 0x11, 0x11, 0x11}; // This is the local board number 1.
+byte mac[] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x39}; // This is the local board number 1. 
+//mac[3] = 0x0 & 0x7F
+
 IPAddress ip(111, 111, 111, 222);
 unsigned int localPort = 22222;
 
@@ -45,12 +47,14 @@ void setup()
 
 void loop()
 {
-  Udp.beginPacketMulticast(multi_IP, multi_Port);
+  Udp.beginPacket(multi_IP, multi_Port);
   Udp.write(data1, ARRAY_SIZE);
 
   Udp.endPacket();
-
+  Serial.println(data1[0]);
+  Serial.println("Data Sent");
   delay(1000);
+  data1[0]++;
 
 //   int packetSize = Udp.parsePacket();
 //   if (packetSize)
