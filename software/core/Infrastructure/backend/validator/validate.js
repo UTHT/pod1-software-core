@@ -1,32 +1,9 @@
-/*
-speed:
-- more than 0 and less than some threshold
-- only double type
-
-temp:
-- more than 0 less than some threshold
-- only double type
-
-battery:
-- more than 0 and less than 100%
-- double type or integer type
-
-brake pressure:
-- more than 0 and less than some threshold
-- only double type
-- status:
-    - only 0 or 1 (failed or working)
-    - only integer type
-
-location: 
-- more than 0 and less than some threshold
-- only double type
-
-*/
-
-const { throws } = require("assert");
 const fs = require("fs");
 const ValidationError = require('./ValidationErrorClass')
+
+var commonErrors = fs.readFileSync("./commonErrors.json");
+var commonErrorsParsed = JSON.parse(commonErrors);
+var commonErrorkeyArray = Object.keys(commonErrorsParsed);
 
 
 /**
@@ -36,7 +13,6 @@ const ValidationError = require('./ValidationErrorClass')
  * @returns {... List<Class>} [errors]
  */
 function validate(jsonOdriodData) {
-    var errorarray = [];
 
     //structural integrity of data:
     //sensor type
@@ -54,57 +30,147 @@ function validate(jsonOdriodData) {
     //else value not detected throw value error and populate error array
     //if no type detected throw type error and populate error array
 
+    //for example purposes only:
+
+    var errorarray = [
+        {
+            errorId: '0',
+            dataArrayName: 'speedDataArray',
+            field: 'value',
+            error: 'valueNotFoundError'
+        },
+        {
+            errorId: '1',
+            dataArrayName: 'temperatureDataArray',
+            field: 'name',
+            error: 'nameNotFoundError'
+        }, {
+            errorId: '2',
+            dataArrayName: 'temperatureDataArray',
+            field: 'value',
+            error: 'negativeValueError'
+        }, {
+            errorId: '3',
+            dataArrayName: 'batteryDataArray',
+            field: 'value',
+            error: 'negativeValueError'
+        }, {
+            errorId: '4',
+            dataArrayName: 'batteryDataArray',
+            field: 'name',
+            error: 'nameNotFoundError'
+        },
+    ]
+
+    // test.push(speedDataDict);
+    // console.log(test);
+
     if ('speed' in jsonOdriodData) {
-        errorarray.push(checkSpeedData(jsonOdriodData.speed));
+        // errorarray.push(checkSpeedData(jsonOdriodData.speed));
+        // console.log(test);
+
+        // errorarray.push(checkSpeedData(jsonOdriodData.speed));
         // checkSpeedData(jsonOdriodData.speed);
         // console.log(errorarray);
     }
     else {
         //throw speed type error
-        errorarray.push(new ValidationError('No field: speed').message);
+        // errorarray.push(new ValidationError('No field: speed').message);
         // console.log(errorarray);
     }
 
     if ('temperatures' in jsonOdriodData) {
-        errorarray.push(checkTempData(jsonOdriodData.temperatures));
+        // errorarray.push(checkTempData(jsonOdriodData.temperatures));
         // checkTempData(jsonOdriodData.temperatures);
         // console.log(errorarray);
     }
     else {
         //throw temprature type error
-        errorarray.push(new ValidationError('No field: temperatures').message);
+        // errorarray.push(new ValidationError('No field: temperatures').message);
         // console.log(errorarray);
     }
 
     if ('position' in jsonOdriodData) {
-        errorarray.push(checkPositionData(jsonOdriodData.position));
+        // errorarray.push(checkPositionData(jsonOdriodData.position));
         // consol.log(checkPositionData(jsonOdriodData.position));
         // console.log(errorarray);
     }
     else {
         //throw position type error
-        errorarray.push(new ValidationError('No field: position').message);
+        // errorarray.push(new ValidationError('No field: position').message);
     }
 
     if ('brakes' in jsonOdriodData) {
-        errorarray.push(checkBrakeData(jsonOdriodData.brakes));
+        // errorarray.push(checkBrakeData(jsonOdriodData.brakes));
         // console.log(checkBrakeData(jsonOdriodData.brakes));
-        console.log(errorarray);
+        // console.log(errorarray);
     }
     else {
         //throw brakes type error
+        // errorarray.push(new ValidationError('No field: brakes').message);
+        // console.log(errorarray);
     }
 
-    // if ('battery' in jsonOdriodData){
-    //     errorarray.push(checkBatteryData(jsonOdriodData.battery));
+    if ('battery' in jsonOdriodData) {
+        // errorarray.push(checkBatteryData(jsonOdriodData.battery));
+        // console.log(checkBatteryData(jsonOdriodData.brakes));
+        // console.log(errorarray);
+    }
+    else {
+        //throw battery type error
+        // errorarray.push(new ValidationError('No field: battery').message);
+        // console.log(errorarray);
 
-    // }
-    // else{
-    //     //throw battery type error
-    // }
+    }
+
+
 
     //generate and return error array
     ///dont return/send the error data further
+
+    //the following two funciton convert the error array into an array with nested objects
+
+    /**
+ * Creates nested groups by object properties.
+ * `properties` array nest from highest(index = 0) to lowest level.
+ *
+ * @param {String[]} properties
+ * @returns {Object}
+ */
+    function nestGroupsBy(arr, properties) {
+        properties = Array.from(properties);
+        if (properties.length === 1) {
+            return groupBy(arr, properties[0]);
+        }
+        const property = properties.shift();
+        var grouped = groupBy(arr, property);
+        for (let key in grouped) {
+            grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
+        }
+        return grouped;
+    }
+
+    /**
+     * Group objects by property.
+     * `nestGroupsBy` helper method.
+     *
+     * @param {String} property
+     * @param {Object[]} conversions
+     * @returns {Object}
+     */
+    function groupBy(conversions, property) {
+        return conversions.reduce((acc, obj) => {
+            let key = obj[property];
+            if (!acc[key]) {
+                acc[key] = [];
+            }
+            acc[key].push(obj);
+            return acc;
+        }, {});
+    }
+
+    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'field', 'error']);
+    console.log(JSON.stringify(groups, null, 2));
 
 }
 
@@ -112,23 +178,44 @@ function validate(jsonOdriodData) {
 
 //validates speed value
 function checkSpeedData(speedDataArray) {
-    speedDataArray.forEach(elem => {
+    var speedDataDict = {
+        errorId: '0',
+        dataArrayName: 'speedDataArray',
+        field: '',
+        error: ''
+    }
+
+    // var speedErrors = {}
+
+
+    speedDataArray.forEach((elem, index) => {
         if ('value' in elem) {
-            console.log("speed value exists");
+            // console.log("speed value exists");
 
             //check if value is more than 0
             if (elem.value > 0) {
-                console.log("speed value more than 0: ", elem.value);
+                // console.log("speed value more than 0: ", elem.value);
             }
             else {
-                return new ValidationError('Speed cannot be less than 0').message;
+                speedDataDict['errorId'] = parseInt(speedDataDict['errorId']) + 1;
+                speedDataDict['field'] = 'value';
+                speedDataDict['error'] = commonErrorkeyArray[0];
+                // speedErrors[index] = new ValidationError('Speed cannot be less than 0').message;
             }
         }
         else {
-            return new ValidationError('No field: value').message;
+            speedDataDict['errorId'] = parseInt(speedDataDict['errorId']) + 1;
+            speedDataDict['field'] = 'value';
+            speedDataDict['error'] = commonErrorkeyArray[2];
+
+            // speedErrors[index] = new ValidationError('No field: value').message;
         }
 
     });
+
+    // return speedErrors;
+    return speedDataDict;
+
 }
 
 //validate temp name and value
@@ -146,6 +233,15 @@ function checkTempData(temperatureArrayData) {
 
         if ('value' in element) {
             // console.log(element.value);
+
+            //check if value is more than 00
+            // if (element.value > 0) {
+            //     console.log("temperature value more than 0: ", elem.value);
+            // }
+            // else {
+            //     temperatureErrors[index] = new ValidationError('Temperature cannot be less than 0').message;
+            // }
+
         }
         else {
             temperatureErrors[index] = new ValidationError("No field: value").message;
@@ -178,7 +274,7 @@ function checkPositionData(positionArrayData) {
 //function: validate brake status
 //function: validate brake value
 function checkBrakeData(brakeArrayData) {
-    var brakeErrors = {}
+    var brakeErrors = {};
 
     brakeArrayData.forEach((element, index) => {
         for ([key, val] of Object.entries(element)) {
@@ -201,7 +297,7 @@ function checkBrakeData(brakeArrayData) {
             }
             else {
                 brakeErrors["pressure"] = new ValidationError("No field").message;
-            }            
+            }
         }
 
     });
@@ -210,8 +306,33 @@ function checkBrakeData(brakeArrayData) {
 
 }
 
-//function: validate battery name
-//function: validate battery value
+//function: validate battery name and battery value
+function checkBatteryData(batteryArrayData) {
+    var batteryErrors = {};
+
+    batteryArrayData.forEach((element, index) => {
+        for ([key, val] of Object.entries(element)) {
+            if ('name' in element) {
+                // console.log(element.name);
+            }
+            else {
+                batteryErrors["name"] = new ValidationError("No field").message;
+            }
+
+            if ('status' in element) {
+                // console.log(element.status);
+            }
+            else {
+                batteryErrors["value"] = new ValidationError("No field").message;
+            }
+        }
+
+    });
+
+    return batteryErrors;
+
+}
+
 //function: validate podstate ???
 //function: validate timeStamp ???
 
@@ -222,3 +343,27 @@ const validateobject = validate(JSON.parse(tempdata));
 // console.log(validateobject);
 
 module.exports = validate;
+
+
+//random test code
+
+    // console.log(errorarray);
+    // console.log(JSON.stringify(errorarray, null, 2));
+
+    // console.log(commonErrorsParsed);
+    // let first  = commonErrorkeyArray[0];
+    // console.log(`the key is ${first}`);
+
+    // let soMany = commonErrors[0];
+    // console.log(`This is ${soMany} times easier!`);
+
+    // var test = [
+    //     {
+    //         speedDataArray: {
+    //             value: {
+    //                 "negativeValueError": "can not have a negative value"
+    //             }
+    //         }
+    //     }
+    // ]
+    // console.log(JSON.stringify(test, null, 2));
