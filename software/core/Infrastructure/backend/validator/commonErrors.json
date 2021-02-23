@@ -1,0 +1,14 @@
+{
+    "negativeValueError": "can not have a negative value",
+    "nullValueError": "can not be null",
+    "valueNotFoundError": "does not exist",
+    "nameNotFoundError": "does not exist",
+    "statusNotFoundError": "does not exist",
+    "pressureNotFoundError": "does not exist",
+    "speedNotFoundError": "",
+    "temperatureNotFoundError": "",
+    "positionNotFoundError": "",
+    "brakesNotFoundError": "",
+    "batteryNotFoundError": ""
+    
+}
