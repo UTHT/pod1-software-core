@@ -22,4 +22,12 @@ describe('GaugeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be defined', () => {
+    expect(component.value).toBeDefined();
+    expect(component.label).toBeDefined();
+    expect(component.unit).toBeDefined();
+    expect(component.gaugeSize).toBeDefined();
+  })
+
 });

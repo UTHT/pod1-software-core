@@ -11,7 +11,14 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 })
 export class GraphComponent implements OnInit {
   @Input() dataList: any[];
-  @Input() settings: any;
+  @Input() settings: any = {
+    unit: 'm/s',
+    gaugeType: 'arch',
+    gaugeSize: '200',
+    graphWidth: 400,
+    graphHeight: 100,
+    max: 25,
+  };
 
   public lineChartData: ChartDataSets[] = [{ data: [], fill:false, pointRadius:0}];
   public lineChartLabels: Label[] = [];

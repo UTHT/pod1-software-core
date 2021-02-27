@@ -6,12 +6,12 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
   styleUrls: ['./gauge-graph.component.css']
 })
 export class GaugeGraphComponent implements OnInit, OnChanges {
-  @Input() label: string;
-  @Input() value: number;
-  @Input() type: string;
-  @Input() inputDataArray: any[];
+  @Input() label: string = "";
+  @Input() value: number = 0;
+  @Input() type: string = "";
+  @Input() inputDataArray: any[] = [];
   dataList: any[];
-  settings: any;
+  settings: any = {};
 
   constructor() { }
 
