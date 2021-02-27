@@ -1,3 +1,4 @@
+const { Console } = require("console");
 const fs = require("fs");
 const ValidationError = require('./ValidationErrorClass')
 
@@ -8,7 +9,7 @@ var commonErrorkeyArray = Object.keys(commonErrorsParsed);
 
 /**
  * Validate incoming JSON data for structural and syntactical integrity
- * returns array of errors for each respective data in jsonOdroidData
+ * returns array of errors for each sensor type in jsonOdroidData
  * @param {[Object object] <JSON>} jsonOdriodData 
  * @returns {... List<Class>} [errors]
  */
@@ -18,7 +19,7 @@ function validate(jsonOdriodData) {
     //sensor type
     //has name and value
 
-    //call appropriate sensor functions for it respective fields as the sensor type is detected in the for loop
+    //call appropriate sensor functions for it respective fields as the sensor type is detected
 
     //loop through json data
     //when sensor type detected call appropriate sensor funtion 
@@ -30,64 +31,50 @@ function validate(jsonOdriodData) {
     //else value not detected throw value error and populate error array
     //if no type detected throw type error and populate error array
 
-    //for example purposes only:
 
-    var errorarray = [
-        {
-            errorId: '0',
-            dataArrayName: 'speedDataArray',
-            field: 'value',
-            error: 'valueNotFoundError'
-        },
-        {
-            errorId: '1',
-            dataArrayName: 'temperatureDataArray',
-            field: 'name',
-            error: 'nameNotFoundError'
-        }, {
-            errorId: '2',
-            dataArrayName: 'temperatureDataArray',
-            field: 'value',
-            error: 'negativeValueError'
-        }, {
-            errorId: '3',
-            dataArrayName: 'batteryDataArray',
-            field: 'value',
-            error: 'negativeValueError'
-        }, {
-            errorId: '4',
-            dataArrayName: 'batteryDataArray',
-            field: 'name',
-            error: 'nameNotFoundError'
-        },
-    ]
+    var errorarray = []
+
+    error_id = 0;
+    var speedDataDict = {
+        errorId: error_id,
+        dataArrayName: 'speedDataArray',
+        field: '',
+        error: ''
+    }
+    var temperatureDataDict = {
+        errorId: error_id,
+        dataArrayName: 'temperatureDataArray',
+        field: '',
+        error: ''
+    }
 
     // test.push(speedDataDict);
     // console.log(test);
 
     if ('speed' in jsonOdriodData) {
-        // errorarray.push(checkSpeedData(jsonOdriodData.speed));
-        // console.log(test);
-
-        // errorarray.push(checkSpeedData(jsonOdriodData.speed));
-        // checkSpeedData(jsonOdriodData.speed);
-        // console.log(errorarray);
+        errorarray.push(checkSpeedData(jsonOdriodData.speed, speedDataDict));
+        console.log(errorarray);
     }
     else {
         //throw speed type error
-        // errorarray.push(new ValidationError('No field: speed').message);
-        // console.log(errorarray);
+        errorarray.push(sensorTypeError('speed', speedDataDict));
+        console.log(errorarray);
     }
 
     if ('temperatures' in jsonOdriodData) {
         // errorarray.push(checkTempData(jsonOdriodData.temperatures));
-        // checkTempData(jsonOdriodData.temperatures);
+        // tempArray = [];
+        // checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
+        // tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
+        // tempArray.forEach(elem => {
+        //     errorarray.push(elem);
+        // })
         // console.log(errorarray);
     }
     else {
         //throw temprature type error
-        // errorarray.push(new ValidationError('No field: temperatures').message);
-        // console.log(errorarray);
+        errorarray.push(sensorTypeError('temperature', temperatureDataDict));
+        console.log(errorarray);
     }
 
     if ('position' in jsonOdriodData) {
@@ -170,85 +157,103 @@ function validate(jsonOdriodData) {
     }
 
     const groups = nestGroupsBy(errorarray, ['dataArrayName', 'field', 'error']);
-    console.log(JSON.stringify(groups, null, 2));
+    // console.log(JSON.stringify(groups, null, 2));
 
 }
 
-//IF NO FUNCTIONS RETURN ERROR --> NEED TO FIX UNDEFINED IN ERRORARRAY
+//increment error id
+function incremenErrorId(error_id) {
+    var temp = error_id + 1;
+    return temp;
+}
 
-//validates speed value
-function checkSpeedData(speedDataArray) {
-    var speedDataDict = {
-        errorId: '0',
-        dataArrayName: 'speedDataArray',
-        field: '',
-        error: ''
+//FIX ERROR ID INCREMENT
+//returns error for appropriate sensor that is not found in original json data
+function sensorTypeError(sensorType, dataDict) {
+    //speedNotFoundError
+    if (sensorType == 'speed') {
+        dataDict['errorId'] = incremenErrorId(dataDict['errorId']);
+        dataDict['field'] = 'speed';
+        dataDict['error'] = commonErrorkeyArray[6];
     }
 
-    // var speedErrors = {}
+    //temperatureNotFoundError
+    if (sensorType == 'temperature') {
+        dataDict['errorId'] = incremenErrorId(dataDict['errorId']);
+        dataDict['field'] = 'temperature';
+        dataDict['error'] = commonErrorkeyArray[7];
+    }
+
+    return dataDict
+}
 
 
-    speedDataArray.forEach((elem, index) => {
+//validates speed value
+function checkSpeedData(speedDataArray, speedDataDict) {
+    speedDataArray.forEach(elem => {
         if ('value' in elem) {
-            // console.log("speed value exists");
-
-            //check if value is more than 0
-            if (elem.value > 0) {
-                // console.log("speed value more than 0: ", elem.value);
-            }
-            else {
-                speedDataDict['errorId'] = parseInt(speedDataDict['errorId']) + 1;
+            if (elem.value < 0) {
+                //negativeValueError
+                // var incrementedErrorId = incremenErrorId(error_id);
+                speedDataDict['errorId'] = incremenErrorId(speedDataDict['errorId']);
                 speedDataDict['field'] = 'value';
                 speedDataDict['error'] = commonErrorkeyArray[0];
-                // speedErrors[index] = new ValidationError('Speed cannot be less than 0').message;
             }
         }
         else {
-            speedDataDict['errorId'] = parseInt(speedDataDict['errorId']) + 1;
+            //valueNotFoundError
+            error_id += 1;
+            speedDataDict['errorId'] = incremenErrorId(speedDataDict['errorId']);
             speedDataDict['field'] = 'value';
             speedDataDict['error'] = commonErrorkeyArray[2];
-
-            // speedErrors[index] = new ValidationError('No field: value').message;
         }
-
     });
 
-    // return speedErrors;
     return speedDataDict;
-
 }
 
 //validate temp name and value
-function checkTempData(temperatureArrayData) {
-    var temperatureErrors = {}
+//FIX ERROR ID INCREMENT
+function checkTempData(temperatureArrayData, temperatureDataDict) {
+    temperatureArray = [];
 
-
-    temperatureArrayData.forEach((element, index) => {
+    temperatureArrayData.forEach(element => {
+        // console.log(element);
         if ('name' in element) {
             // console.log(element.name);
         }
         else {
-            temperatureErrors[index] = new ValidationError("No field: name").message;
+            //nameNotFoundError
+            temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
+            temperatureDataDict['field'] = 'name';
+            temperatureDataDict['error'] = commonErrorkeyArray[3];
         }
 
-        if ('value' in element) {
-            // console.log(element.value);
+        // if ('value' in element) {
+        //     //check if value is more than 0
+        //     if (element.value < 0) {
+        //         //negativeValueError
+        //         temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
+        //         temperatureDataDict['field'] = 'value';
+        //         temperatureDataDict['error'] = commonErrorkeyArray[0];
+        //     }
+        // }
+        // else {
+        //     //valueNotFoundError
+        //     temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
+        //     temperatureDataDict['field'] = 'value';
+        //     temperatureDataDict['error'] = commonErrorkeyArray[2];
+        // }
+        console.log("temperatureDataDict here: ");
+        // console.log(temperatureDataDict);
+        console.log("temperatureArray here: ")
+        temperatureArray.push(temperatureDataDict);
+        // console.log(temperatureArray)
+        });
 
-            //check if value is more than 00
-            // if (element.value > 0) {
-            //     console.log("temperature value more than 0: ", elem.value);
-            // }
-            // else {
-            //     temperatureErrors[index] = new ValidationError('Temperature cannot be less than 0').message;
-            // }
 
-        }
-        else {
-            temperatureErrors[index] = new ValidationError("No field: value").message;
-        }
-    });
-
-    return temperatureErrors;
+    // console.log(temperatureArray)
+    // return temperatureArray;
 }
 
 
@@ -347,23 +352,53 @@ module.exports = validate;
 
 //random test code
 
-    // console.log(errorarray);
-    // console.log(JSON.stringify(errorarray, null, 2));
+// console.log(errorarray);
+// console.log(JSON.stringify(errorarray, null, 2));
 
-    // console.log(commonErrorsParsed);
-    // let first  = commonErrorkeyArray[0];
-    // console.log(`the key is ${first}`);
+// console.log(commonErrorsParsed);
+// let first  = commonErrorkeyArray[0];
+// console.log(`the key is ${first}`);
 
-    // let soMany = commonErrors[0];
-    // console.log(`This is ${soMany} times easier!`);
+// let soMany = commonErrors[0];
+// console.log(`This is ${soMany} times easier!`);
 
-    // var test = [
-    //     {
-    //         speedDataArray: {
-    //             value: {
-    //                 "negativeValueError": "can not have a negative value"
-    //             }
-    //         }
-    //     }
-    // ]
-    // console.log(JSON.stringify(test, null, 2));
+// var test = [
+//     {
+//         speedDataArray: {
+//             value: {
+//                 "negativeValueError": "can not have a negative value"
+//             }
+//         }
+//     }
+// ]
+// console.log(JSON.stringify(test, null, 2));
+
+// var tempArray = [
+//     {
+//         errorId: '0',
+//         dataArrayName: 'speedDataArray',
+//         field: 'value',
+//         error: 'valueNotFoundError'
+//     },
+//     {
+//         errorId: '1',
+//         dataArrayName: 'temperatureDataArray',
+//         field: 'name',
+//         error: 'nameNotFoundError'
+//     }, {
+//         errorId: '2',
+//         dataArrayName: 'temperatureDataArray',
+//         field: 'value',
+//         error: 'negativeValueError'
+//     }, {
+//         errorId: '3',
+//         dataArrayName: 'batteryDataArray',
+//         field: 'value',
+//         error: 'negativeValueError'
+//     }, {
+//         errorId: '4',
+//         dataArrayName: 'batteryDataArray',
+//         field: 'name',
+//         error: 'nameNotFoundError'
+//     },
+// ]

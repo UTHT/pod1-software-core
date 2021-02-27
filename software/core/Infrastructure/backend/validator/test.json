@@ -1,25 +1,42 @@
-{ 
-    "temperatures": [ 
-                   { 
-                      "value":56 
-                   }, 
-                   {  "name": "battery"} 
-                   ], 
-    "position" : [127, -46],
-    "brakes":[
+{
+    "speed": [
         {
-            "name": "brakes_left", "status": 0,"pressure":257
-        },
-        {
-            "name": "brakes_right", "status": 0,"pressure":257
+            "value": -8
         }
-    ], 
-    "battery":[
+    ],
+    "temperatures": [
         {
-            "name" : "battery_1", "value":67
+            "name": "battery",
+            "value": 23
         },
         {
-            "name" : "battery_2", "value":64
+            "value": 23
+        }
+    ],
+    "position": [
+        127,
+        -46
+    ],
+    "brakes": [
+        {
+            "status": 0,
+            "pressure": 257
+        },
+        {
+            "name": "brakes_right",
+            "pressure": 243
+        },
+        {
+            "name": "brakes_right",
+            "status": 1
+        }
+    ],
+    "battery": [
+        {
+            "value": 67
+        },
+        {
+            "name": "battery_2"
         }
     ]
- } 
+}
