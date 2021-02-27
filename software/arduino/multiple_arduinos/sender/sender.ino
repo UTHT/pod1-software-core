@@ -1,23 +1,25 @@
 #include <SPI.h>
-#include <Ethernet.h>
-#include <EthernetUdp.h>
+#include <Ethernet3.h>
+#include <EthernetUdp3.h>
 
 #define ARRAY_SIZE 32
 
 byte data1 [ARRAY_SIZE]; // This is the write vector.
 byte data2 [ARRAY_SIZE]; // This is the read vector.
 
-// Enter a MAC address and IP address for your controller below.
-// The IP address will be dependent on your local network.
-
-byte mac[] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x39}; // This is the local board number 1. 
-//mac[3] = 0x0 & 0x7F
-
+// IP address of the sender Arduino
 IPAddress ip(111, 111, 111, 222);
-unsigned int localPort = 22222;
+uint16_t localPort = 8888;
 
-char multi_IP[] = "239.0.0.57"; // This is the foreign board number 2.
-int multi_Port = 12345;
+// Multicast IP address (sender will send data to this)
+IPAddress multiIP(239, 0, 0, 57);
+
+// MAC address of the sender Arduino
+byte mac[] = {  0x01, 0x00, 0x5E, multiIP[1] & 0x7F, multiIP[2], multiIP[3] };
+
+//mac[3] = multiIP[1] & 0x7F;
+//mac[4] = multiIP[2];
+//mac[5] = multiIP[3];
 
 // An EthernetUDP instance to let us send and receive packets over UDP
 EthernetUDP Udp;
@@ -40,6 +42,10 @@ void setup()
   Ethernet.begin(mac, ip);
   Udp.begin(localPort);
 
+  if (Udp.beginMulticast(multiIP, localPort)) {
+    Serial.println("Successful");
+  }
+
   // print your local IP address:
   Serial.print("My IP Address; ");
   Serial.println(Ethernet.localIP());
@@ -47,7 +53,7 @@ void setup()
 
 void loop()
 {
-  Udp.beginPacket(multi_IP, multi_Port);
+  Udp.beginPacket(multiIP, localPort);
   Udp.write(data1, ARRAY_SIZE);
 
   Udp.endPacket();

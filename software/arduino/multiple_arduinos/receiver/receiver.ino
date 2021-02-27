@@ -1,23 +1,23 @@
 #include <SPI.h>         // needed for Arduino versions later than 0018
-#include <Ethernet.h>
-#include <EthernetUdp.h>         
+#include <Ethernet3.h>
+#include <EthernetUdp3.h>         
  
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
 
 // CHANGE THIS FOR THE TWO RECEIVER ARDUINOS
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-//byte ip[] = { 111,111,111,111 };
 IPAddress ip(111, 111, 111, 111);
-unsigned int localPort = 8888;      // local port to listen on
- 
+
+// Local port to listen to incoming packets from
+uint16_t localPort = 8888;  
+
 // Multicast
-IPAddress ipMulti(239,0,0,57);
-int portMulti = 12345;      // local port to listen on
+IPAddress ipMulti(239, 0, 0, 57);
  
 // the next two variables are set when a packet is received
 byte remoteIp[4];        // holds received packet's originating IP
-unsigned int remotePort; // holds received packet's originating port
+unsigned int remotePort; // holds received packet's originating port 
  
 // buffers for receiving and sending data
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
@@ -25,13 +25,23 @@ char  ReplyBuffer[] = "acknowledged";       // a string to send back
 EthernetUDP Udp;
 
 void setup() {
+  
+  Serial.begin(115200);
   // start the Ethernet and UDP:
   Ethernet.begin(mac,ip);
+
+  // Debug printing for multi cast
+  Serial.println("Entering Multi-Cast");
   
   // multicast UDP
-  Udp.beginMulticast(ipMulti, portMulti);
+  //Udp.begin(localPort);
+  if (Udp.beginMulticast(ipMulti, localPort)) {
+    Serial.println("Successful");
+  }
+  else {
+    Serial.println("Failure");
+  }
  
-  Serial.begin(9600);
 }
  
 void loop() {
