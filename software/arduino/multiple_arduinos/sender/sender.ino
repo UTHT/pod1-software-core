@@ -1,94 +1,52 @@
-#include <SPI.h>
-#include <Ethernet3.h>
+#include <SPI.h>            // Not exactly sure if we need this include
+#include <Ethernet3.h>      // EthernetUdp3.h does include Ethernet3.h, so this can be removed
 #include <EthernetUdp3.h>
 
 #define ARRAY_SIZE 32
 
-byte data1 [ARRAY_SIZE]; // This is the write vector.
-byte data2 [ARRAY_SIZE]; // This is the read vector.
-
-// IP address of the sender Arduino
-IPAddress ip(111, 111, 111, 222);
+// Multicast IP Address
+IPAddress multicastIP(239, 0, 0, 57);
 uint16_t localPort = 8888;
 
-// Multicast IP address (sender will send data to this)
-IPAddress multiIP(239, 0, 0, 57);
+// Define a MAC address and IP address for sender Arduino
+// (Does not need to be that calculated MAC address)
+byte mac[] = { 0x0, 0xA2, 0xDA, 0x0D, 0x90, 0xE2 };
+IPAddress senderIPAddress(192, 168, 1, 177);
 
-// MAC address of the sender Arduino
-byte mac[] = {  0x01, 0x00, 0x5E, multiIP[1] & 0x7F, multiIP[2], multiIP[3] };
-
-//mac[3] = multiIP[1] & 0x7F;
-//mac[4] = multiIP[2];
-//mac[5] = multiIP[3];
-
-// An EthernetUDP instance to let us send and receive packets over UDP
+// Send and receive packets over UDP
 EthernetUDP Udp;
 
-void setup()
-{
-  // Open serial communications and wait for port to open:
+// Define byte to send
+byte data;
+
+void setup() {
   Serial.begin(115200);
-  while (!Serial)
-  {
-    ; // Wait for serial port to connect. Needed for native USP port only
+  Serial.println("Starting the serial monitor...");
+  
+  // Wait for the serial monitor to start
+  while (!Serial) {}
+
+  Ethernet.begin(mac, senderIPAddress);
+  
+  // Start the local multicast server
+  if (Udp.beginMulticast(multicastIP, localPort) == 0) {
+    Serial.println("Failed to configure UDP Multicast.");
   }
 
-  for (int i = 0; i < ARRAY_SIZE; i++)
-  {
-    data1[i] = i;
-  }
-
-  // Start the Ethernet and UDP:
-  Ethernet.begin(mac, ip);
-  Udp.begin(localPort);
-
-  if (Udp.beginMulticast(multiIP, localPort)) {
-    Serial.println("Successful");
-  }
-
-  // print your local IP address:
-  Serial.print("My IP Address; ");
-  Serial.println(Ethernet.localIP());
+  // Initialize data
+  data = 0;
 }
 
-void loop()
-{
-  Udp.beginPacket(multiIP, localPort);
-  Udp.write(data1, ARRAY_SIZE);
-
+void loop() {
+  // Send data to the multicast IP address
+  Udp.beginPacket(multicastIP, localPort);
+  Udp.write(data);
   Udp.endPacket();
-  Serial.println(data1[0]);
-  Serial.println("Data Sent");
+
+  Serial.println("Sending data...");
+  Serial.println(data);
+
+  data++;
+
   delay(1000);
-  data1[0]++;
-
-//   int packetSize = Udp.parsePacket();
-//   if (packetSize)
-//   {
-//     Serial.print("Received packet of size ");
-//     Serial.println(packetSize);
-//     Serial.print("From ");
-//     IPAddress remote = Udp.remoteIP();
-//     for (int i = 0; i < 4; i++) 
-//     {
-//       Serial.print (remote[i], DEC);
-//       if (i < 3)
-//       {
-//         Serial.print(".");
-//       }
-//     }
-//     Serial.print (", port ");
-//     Serial.println(Udp.remotePort());
-
-//     // read the packet into packetBuffer
-//     Udp.read(data2, ARRAY_SIZE);
-//     Serial.println("Contents:");
-//     for (int i = 0; i < ARRAY_SIZE; i++)
-//     {
-//       Serial.print(" ");
-//       Serial.print(data2[i]);
-//     }
-//     Serial.println("");
-//     data1[0]++;
-//   }
 }
