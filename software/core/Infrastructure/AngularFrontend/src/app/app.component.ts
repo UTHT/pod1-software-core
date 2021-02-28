@@ -7,6 +7,8 @@ import { WebsocketService } from './services/websocket.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent{
+  title = "AngularFrontend";
+
   constructor(private websocket: WebsocketService){
     websocket.connect()
   }
