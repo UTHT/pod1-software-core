@@ -77,7 +77,7 @@ testCases.forEach(test => {
       expect(component.inputDataArray).toEqual(test.input);
     })
 
-    it('shoud match expect output settings', () => {
+    it('shoud match expected output settings', () => {
       expect(component.settings.unit).toEqual(test.settings.unit);
       expect(component.settings.gaugeType).toEqual(test.settings.gaugeType);
       expect(component.settings.gaugeSize).toEqual(test.settings.gaugeSize);
