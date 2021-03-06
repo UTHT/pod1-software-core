@@ -48,7 +48,7 @@ const testCases = [
 ]
 
 testCases.forEach(test => {
-  describe('BatteryPercentageComponent', () => {
+  describe('BatteryComponent', () => {
     let component: BatteryComponent;
     let fixture: ComponentFixture<BatteryComponent>;
 

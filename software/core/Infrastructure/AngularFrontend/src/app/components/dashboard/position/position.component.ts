@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * @title Determinate progress-bar
@@ -10,10 +10,10 @@ import { Component } from '@angular/core';
 export class PositionComponent {
     mode = 'determinate';
     color = 'warn';
-    position = 0;
+    @Input() public position: number = 0;
 
     ngOnInit(): void {
-        this.updatePosition();
+        //this.updatePosition();
     }
 
     updatePosition() {
