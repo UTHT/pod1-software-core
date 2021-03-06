@@ -1,11 +1,13 @@
 const { Console } = require("console");
 const fs = require("fs");
-const ValidationError = require('./ValidationErrorClass')
+// const ValidationError = require('./ValidationErrorClass')
+
+const lodash = require('lodash');
 
 var commonErrors = fs.readFileSync("./commonErrors.json");
 var commonErrorsParsed = JSON.parse(commonErrors);
 var commonErrorkeyArray = Object.keys(commonErrorsParsed);
-
+var error_id = 0;
 
 /**
  * Validate incoming JSON data for structural and syntactical integrity
@@ -34,17 +36,17 @@ function validate(jsonOdriodData) {
 
     var errorarray = []
 
-    error_id = 0;
+    globalEntityIncrement = 0;
     var speedDataDict = {
         errorId: error_id,
         dataArrayName: 'speedDataArray',
-        field: '',
+        entity: globalEntityIncrement,
         error: ''
     }
     var temperatureDataDict = {
         errorId: error_id,
         dataArrayName: 'temperatureDataArray',
-        field: '',
+        entity: globalEntityIncrement,
         error: ''
     }
 
@@ -53,28 +55,27 @@ function validate(jsonOdriodData) {
 
     if ('speed' in jsonOdriodData) {
         errorarray.push(checkSpeedData(jsonOdriodData.speed, speedDataDict));
-        console.log(errorarray);
+        // console.log(errorarray);
     }
     else {
         //throw speed type error
         errorarray.push(sensorTypeError('speed', speedDataDict));
-        console.log(errorarray);
+        // console.log(errorarray);
     }
 
     if ('temperatures' in jsonOdriodData) {
-        // errorarray.push(checkTempData(jsonOdriodData.temperatures));
-        // tempArray = [];
-        // checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
-        // tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
-        // tempArray.forEach(elem => {
-        //     errorarray.push(elem);
-        // })
+        // checkTempData(jsonOdriodData.temperatures, temperatureDataDict);
+        tempArray = [];
+        tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
         // console.log(errorarray);
     }
     else {
         //throw temprature type error
         errorarray.push(sensorTypeError('temperature', temperatureDataDict));
-        console.log(errorarray);
+        // console.log(errorarray);
     }
 
     if ('position' in jsonOdriodData) {
@@ -109,7 +110,6 @@ function validate(jsonOdriodData) {
         // console.log(errorarray);
 
     }
-
 
 
     //generate and return error array
@@ -156,15 +156,14 @@ function validate(jsonOdriodData) {
         }, {});
     }
 
-    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'field', 'error']);
-    // console.log(JSON.stringify(groups, null, 2));
+    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
+    console.log(JSON.stringify(groups, null, 2));
 
 }
 
 //increment error id
-function incremenErrorId(error_id) {
-    var temp = error_id + 1;
-    return temp;
+function incremenErrorId() {
+    error_id++;
 }
 
 //FIX ERROR ID INCREMENT
@@ -172,15 +171,17 @@ function incremenErrorId(error_id) {
 function sensorTypeError(sensorType, dataDict) {
     //speedNotFoundError
     if (sensorType == 'speed') {
-        dataDict['errorId'] = incremenErrorId(dataDict['errorId']);
-        dataDict['field'] = 'speed';
+        incremenErrorId();
+        dataDict['errorId'] = error_id;
+        dataDict['entity'] = sensorType;
         dataDict['error'] = commonErrorkeyArray[6];
     }
 
     //temperatureNotFoundError
     if (sensorType == 'temperature') {
-        dataDict['errorId'] = incremenErrorId(dataDict['errorId']);
-        dataDict['field'] = 'temperature';
+        incremenErrorId();
+        dataDict['errorId'] = error_id;
+        dataDict['entity'] = sensorType;
         dataDict['error'] = commonErrorkeyArray[7];
     }
 
@@ -190,70 +191,85 @@ function sensorTypeError(sensorType, dataDict) {
 
 //validates speed value
 function checkSpeedData(speedDataArray, speedDataDict) {
+    var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+    var entityIncrement = 1;
+
     speedDataArray.forEach(elem => {
         if ('value' in elem) {
             if (elem.value < 0) {
                 //negativeValueError
                 // var incrementedErrorId = incremenErrorId(error_id);
-                speedDataDict['errorId'] = incremenErrorId(speedDataDict['errorId']);
-                speedDataDict['field'] = 'value';
-                speedDataDict['error'] = commonErrorkeyArray[0];
+                incremenErrorId();
+                deepSpeedDataDict['errorId'] = error_id;
+                deepSpeedDataDict['entity'] = entityIncrement;
+                entityIncrement++;
+                deepSpeedDataDict['error'] = commonErrorkeyArray[0];
             }
         }
         else {
             //valueNotFoundError
-            error_id += 1;
-            speedDataDict['errorId'] = incremenErrorId(speedDataDict['errorId']);
-            speedDataDict['field'] = 'value';
-            speedDataDict['error'] = commonErrorkeyArray[2];
+            incremenErrorId();
+            deepSpeedDataDict['errorId'] = error_id;
+            deepSpeedDataDict['entity'] = entityIncrement;
+            entityIncrement++;
+            deepSpeedDataDict['error'] = commonErrorkeyArray[2];
         }
-    });
 
-    return speedDataDict;
+    });
+    return deepSpeedDataDict;
 }
 
 //validate temp name and value
-//FIX ERROR ID INCREMENT
 function checkTempData(temperatureArrayData, temperatureDataDict) {
-    temperatureArray = [];
+    var entityIncrement = 1;
 
+    temperatureArray = [];
+    // console.log(temperatureArrayData, "temperature array data")
     temperatureArrayData.forEach(element => {
-        // console.log(element);
         if ('name' in element) {
-            // console.log(element.name);
         }
         else {
             //nameNotFoundError
-            temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
-            temperatureDataDict['field'] = 'name';
-            temperatureDataDict['error'] = commonErrorkeyArray[3];
+            var deepTemperatureDataDict = lodash.cloneDeep(temperatureDataDict);
+
+            incremenErrorId();
+            deepTemperatureDataDict['errorId'] = error_id;
+            deepTemperatureDataDict['entity'] = entityIncrement;
+            deepTemperatureDataDict['error'] = commonErrorkeyArray[3];
+
+            temperatureArray.push(deepTemperatureDataDict);
         }
 
-        // if ('value' in element) {
-        //     //check if value is more than 0
-        //     if (element.value < 0) {
-        //         //negativeValueError
-        //         temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
-        //         temperatureDataDict['field'] = 'value';
-        //         temperatureDataDict['error'] = commonErrorkeyArray[0];
-        //     }
-        // }
-        // else {
-        //     //valueNotFoundError
-        //     temperatureDataDict['errorId'] = incremenErrorId(temperatureDataDict['errorId']);
-        //     temperatureDataDict['field'] = 'value';
-        //     temperatureDataDict['error'] = commonErrorkeyArray[2];
-        // }
-        console.log("temperatureDataDict here: ");
-        // console.log(temperatureDataDict);
-        console.log("temperatureArray here: ")
-        temperatureArray.push(temperatureDataDict);
-        // console.log(temperatureArray)
-        });
+        if ('value' in element) {
+            //check if value is more than 0
+            var deepTemperatureDataDict = lodash.cloneDeep(temperatureDataDict);
 
+            if (element.value < 0) {
+                //negativeValueError                
+                incremenErrorId();
+                deepTemperatureDataDict['errorId'] = error_id;
+                deepTemperatureDataDict['entity'] = entityIncrement;
+                deepTemperatureDataDict['error'] = commonErrorkeyArray[0];
 
+                temperatureArray.push(deepTemperatureDataDict);
+            }
+        }
+        else {
+            //valueNotFoundError
+            var deepTemperatureDataDict = lodash.cloneDeep(temperatureDataDict);
+
+            incremenErrorId();
+            deepTemperatureDataDict['errorId'] = error_id;
+            deepTemperatureDataDict['entity'] = entityIncrement;
+            deepTemperatureDataDict['error'] = commonErrorkeyArray[2];
+
+            temperatureArray.push(deepTemperatureDataDict);
+        }
+        entityIncrement++;
+
+    });
     // console.log(temperatureArray)
-    // return temperatureArray;
+    return temperatureArray;
 }
 
 
