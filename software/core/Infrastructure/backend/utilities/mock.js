@@ -14,9 +14,9 @@ function mock() {
 		temperatures: [
 			{
 				name: "motor",
-				value: 55 * Math.random(),
+				value: 55 * Math.random() + 20,
 			},
-			{ name: "battery", value: 78 },
+			{ name: "battery", value: 55 * Math.random() + 20},
 		],
 		position: [100 * Math.random(), 46],
 		brakes: [

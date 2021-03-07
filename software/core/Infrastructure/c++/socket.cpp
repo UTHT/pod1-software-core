@@ -18,6 +18,7 @@ int main()
     out_msg.set_utf8_message("{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }");
     client.send(out_msg).wait();
 
+
 //Example class usage
     //Sensor _sensor = new Sensor {"k", 90};
     SpeedSensor sp{"speed", 200};

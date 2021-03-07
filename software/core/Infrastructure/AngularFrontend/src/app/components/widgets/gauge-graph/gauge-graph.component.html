@@ -1,0 +1,12 @@
+
+<ngx-gauge 
+    [type]="settings.gaugeType" 
+    [value]="value" 
+    [label]="label"  
+    [append]="settings.unit"
+    [max]="settings.max"
+    [size]="settings.gaugeSize"
+>
+</ngx-gauge>
+
+<app-graph [dataList]="dataList" [settings]="settings"></app-graph>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {WebsocketService} from '../../services/websocket.service';
+import {WebsocketService} from '../../../services/websocket.service';
 @Component({
   selector: 'app-temperatures',
   templateUrl: './temperatures.component.html',
@@ -11,12 +11,12 @@ export class TemperaturesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wsService.serverMessage.subscribe(message => {
-      if (message.obj){
-        const{TEMPERATURE: temperature} = message.obj
-        this.temperaturesData = temperature
-      }
-    })
+    // this.wsService.serverMessage.subscribe(message => {
+    //   if (message.obj){
+    //     const{TEMPERATURE: temperature} = message.obj
+    //     this.temperaturesData = temperature
+    //   }
+    // })
   }
 
 }
