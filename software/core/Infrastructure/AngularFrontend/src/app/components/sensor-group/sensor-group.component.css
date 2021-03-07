@@ -1,9 +1,17 @@
 :host {
-  border: 1px solid rgb(86, 86, 86);
+  /* border: 1px solid rgb(86, 86, 86); */
   border-radius: 5px;
   padding: 5px;
-  display: grid;
-  grid-template-rows: auto 1fr;
+  /* display: grid;
+  grid-template-rows: auto 1fr; */
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 75px;
+  height: 75px;
+  position: absolute;
 }
 
 h1 {
@@ -18,3 +26,7 @@ h1 {
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 2px;
 }
+
+/* .wrapper {
+  position: relative;
+} */
