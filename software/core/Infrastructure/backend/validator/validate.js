@@ -49,6 +49,12 @@ function validate(jsonOdriodData) {
         entity: globalEntityIncrement,
         error: ''
     }
+    var brakeDataDict = {
+        errorId: error_id,
+        dataArrayName: 'brakeDataArray',
+        entity: globalEntityIncrement,
+        error: ''
+    }
 
     // test.push(speedDataDict);
     // console.log(test);
@@ -64,7 +70,6 @@ function validate(jsonOdriodData) {
     }
 
     if ('temperatures' in jsonOdriodData) {
-        // checkTempData(jsonOdriodData.temperatures, temperatureDataDict);
         tempArray = [];
         tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
         tempArray.forEach(elem => {
@@ -74,10 +79,10 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw temprature type error
-        errorarray.push(sensorTypeError('temperature', temperatureDataDict));
+        errorarray.push(sensorTypeError('temperatures', temperatureDataDict));
         // console.log(errorarray);
     }
-
+    // NOT CHECKING FOR NOW
     if ('position' in jsonOdriodData) {
         // errorarray.push(checkPositionData(jsonOdriodData.position));
         // consol.log(checkPositionData(jsonOdriodData.position));
@@ -89,13 +94,16 @@ function validate(jsonOdriodData) {
     }
 
     if ('brakes' in jsonOdriodData) {
-        // errorarray.push(checkBrakeData(jsonOdriodData.brakes));
-        // console.log(checkBrakeData(jsonOdriodData.brakes));
+        tempArray = [];
+        tempArray = checkBrakeData(jsonOdriodData.brakes, brakeDataDict, error_id);
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
         // console.log(errorarray);
     }
     else {
         //throw brakes type error
-        // errorarray.push(new ValidationError('No field: brakes').message);
+        errorarray.push(sensorTypeError('brakes', brakeDataDict));
         // console.log(errorarray);
     }
 
@@ -112,53 +120,51 @@ function validate(jsonOdriodData) {
     }
 
 
-    //generate and return error array
-    ///dont return/send the error data further
+    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
+    // console.log(groups);
+    // console.log(JSON.stringify(groups, null, 2));
 
-    //the following two funciton convert the error array into an array with nested objects
+}
 
-    /**
+//the following two funciton convert the error array into an array with nested objects
+
+/**
  * Creates nested groups by object properties.
  * `properties` array nest from highest(index = 0) to lowest level.
  *
  * @param {String[]} properties
  * @returns {Object}
  */
-    function nestGroupsBy(arr, properties) {
-        properties = Array.from(properties);
-        if (properties.length === 1) {
-            return groupBy(arr, properties[0]);
-        }
-        const property = properties.shift();
-        var grouped = groupBy(arr, property);
-        for (let key in grouped) {
-            grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
-        }
-        return grouped;
+function nestGroupsBy(arr, properties) {
+    properties = Array.from(properties);
+    if (properties.length === 1) {
+        return groupBy(arr, properties[0]);
     }
-
-    /**
-     * Group objects by property.
-     * `nestGroupsBy` helper method.
-     *
-     * @param {String} property
-     * @param {Object[]} conversions
-     * @returns {Object}
-     */
-    function groupBy(conversions, property) {
-        return conversions.reduce((acc, obj) => {
-            let key = obj[property];
-            if (!acc[key]) {
-                acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-        }, {});
+    const property = properties.shift();
+    var grouped = groupBy(arr, property);
+    for (let key in grouped) {
+        grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
     }
+    return grouped;
+}
 
-    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
-    console.log(JSON.stringify(groups, null, 2));
-
+/**
+ * Group objects by property.
+ * `nestGroupsBy` helper method.
+ *
+ * @param {String} property
+ * @param {Object[]} conversions
+ * @returns {Object}
+ */
+function groupBy(conversions, property) {
+    return conversions.reduce((acc, obj) => {
+        let key = obj[property];
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(obj);
+        return acc;
+    }, {});
 }
 
 //increment error id
@@ -169,23 +175,33 @@ function incremenErrorId() {
 //FIX ERROR ID INCREMENT
 //returns error for appropriate sensor that is not found in original json data
 function sensorTypeError(sensorType, dataDict) {
+    var deepDataDict = lodash.cloneDeep(dataDict);
+
     //speedNotFoundError
     if (sensorType == 'speed') {
         incremenErrorId();
-        dataDict['errorId'] = error_id;
-        dataDict['entity'] = sensorType;
-        dataDict['error'] = commonErrorkeyArray[6];
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[6];
     }
 
     //temperatureNotFoundError
-    if (sensorType == 'temperature') {
+    if (sensorType == 'temperatures') {
         incremenErrorId();
-        dataDict['errorId'] = error_id;
-        dataDict['entity'] = sensorType;
-        dataDict['error'] = commonErrorkeyArray[7];
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[7];
     }
 
-    return dataDict
+    //brakeNotFoundError
+    if (sensorType == 'brakes') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[9];
+    }
+
+    return deepDataDict
 }
 
 
@@ -222,9 +238,8 @@ function checkSpeedData(speedDataArray, speedDataDict) {
 //validate temp name and value
 function checkTempData(temperatureArrayData, temperatureDataDict) {
     var entityIncrement = 1;
-
     temperatureArray = [];
-    // console.log(temperatureArrayData, "temperature array data")
+
     temperatureArrayData.forEach(element => {
         if ('name' in element) {
         }
@@ -268,12 +283,12 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
         entityIncrement++;
 
     });
-    // console.log(temperatureArray)
     return temperatureArray;
 }
 
 
 //validate position value
+//NOT CHECKING AT THE MOMENT
 function checkPositionData(positionArrayData) {
     var positionErrors = {}
 
@@ -294,41 +309,73 @@ function checkPositionData(positionArrayData) {
 
 //function: validate brake status
 //function: validate brake value
-function checkBrakeData(brakeArrayData) {
-    var brakeErrors = {};
+function checkBrakeData(brakeArrayData, brakeDataDict) {
+    var entityIncrement = 1;
+    brakeArray = [];
 
-    brakeArrayData.forEach((element, index) => {
-        for ([key, val] of Object.entries(element)) {
-            if ('name' in element) {
-                // console.log(element.name);
-            }
-            else {
-                brakeErrors["name"] = new ValidationError("No field").message;
-            }
+    brakeArrayData.forEach(element => {
+        if ('name' in element) {
+        }
+        else {
+            //nameNotFoundError
+            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
 
-            if ('status' in element) {
-                // console.log(element.status);
-            }
-            else {
-                brakeErrors["status"] = new ValidationError("No field").message;
-            }
+            incremenErrorId();
+            deepBrakeDataDict['errorId'] = error_id;
+            deepBrakeDataDict['entity'] = entityIncrement;
+            deepBrakeDataDict['error'] = commonErrorkeyArray[3];
 
-            if ('pressure' in element) {
-                // console.log(element.pressure);
-            }
-            else {
-                brakeErrors["pressure"] = new ValidationError("No field").message;
-            }
+            brakeArray.push(deepBrakeDataDict);
         }
 
-    });
+        if ('status' in element) {
+        }
+        else {
+            //statusNotFoundError
+            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
 
-    return brakeErrors;
+            incremenErrorId();
+            deepBrakeDataDict['errorId'] = error_id;
+            deepBrakeDataDict['entity'] = entityIncrement;
+            deepBrakeDataDict['error'] = commonErrorkeyArray[4];
+
+            brakeArray.push(deepBrakeDataDict);
+        }
+
+        if ('pressure' in element) {
+            //check if pressure is more than 0
+            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+
+            if (element.pressure < 0) {
+                //negativeValueError                
+                incremenErrorId();
+                deepBrakeDataDict['errorId'] = error_id;
+                deepBrakeDataDict['entity'] = entityIncrement;
+                deepBrakeDataDict['error'] = commonErrorkeyArray[0];
+
+                brakeArray.push(deepBrakeDataDict);
+            }
+        }
+        else {
+            //pressureNotFoundError
+            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+
+            incremenErrorId();
+            deepBrakeDataDict['errorId'] = error_id;
+            deepBrakeDataDict['entity'] = entityIncrement;
+            deepBrakeDataDict['error'] = commonErrorkeyArray[5];
+
+            brakeArray.push(deepBrakeDataDict);
+        }
+        entityIncrement++;
+
+    });
+    return brakeArray;
 
 }
 
 //function: validate battery name and battery value
-function checkBatteryData(batteryArrayData) {
+function checkBatteryData(batteryArrayData, batteryDataDict) {
     var batteryErrors = {};
 
     batteryArrayData.forEach((element, index) => {

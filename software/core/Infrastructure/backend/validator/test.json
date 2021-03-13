@@ -19,7 +19,7 @@
     "brakes": [
         {
             "status": 0,
-            "pressure": 257
+            "pressure": 257.2323
         },
         {
             "name": "brakes_right",
