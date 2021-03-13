@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cpprest/ws_client.h>
+#include "./classes/sensor.h"
+#include <vector>
 
 using namespace std;
 using namespace web;
@@ -13,50 +15,41 @@ int main()
     client.connect("ws://127.0.0.1:8080/").wait();
     websocket_outgoing_message out_msg;
 
-    out_msg.set_utf8_message("{ 'eventType':'connection', 'data':'odroid' }");
+    out_msg.set_utf8_message("{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }");
     client.send(out_msg).wait();
-    
-    const char *text2 = "\
-           {\
-           'eventType':'relay',\
-           'data': {\
-              'clientType':'odroid',\
-                'speed':[\
-                    {\
-                        'name':'speed','value':250\
-                    }\
-                ],\
-                'temperatures':[\
-                              {\
-                                'name': 'motor','value':56 \
-                              },\
-                              {'name': 'battery','value':78} \
-                              ],\
-                'position':[127,46],\
-                'brakes':[\
-                    {\
-                        'name':'brakes_left','status':0,'pressure':257\
-                    },\
-                    {\
-                        'name':'brakes_right','status':0,'pressure':257\
-                    }\
-                ],\
-                'battery':[\
-                    {\
-                        'name':'battery_1','value':67\
-                    },\
-                    {\
-                        'name':'battery_2','value':64\
-                    }\
-                ]\
-              }\
-          }\
-        ";
-    
 
-    cout << text2 << endl;
-    out_msg.set_utf8_message(text2);
-    //data.replace(/'/g, '"'); -- Important
+
+//Example class usage
+    //Sensor _sensor = new Sensor {"k", 90};
+    SpeedSensor sp{"speed", 200};
+    TemperatureSensor tp1 {"motor", 100};
+    TemperatureSensor tp2 {"brake", 150};
+    BatterySensor b1 {"battery", 40};
+    BatterySensor b2 {"battery", 50};
+    BrakeSensor br1 {"left", 140};
+    BrakeSensor br2 {"ight", 60};
+    PositionSensor p1 {12,16};
+
+    vector<SpeedSensor> vsp;
+    vsp.push_back(sp);
+
+    vector<TemperatureSensor> tp;
+    tp.push_back(tp1);
+    tp.push_back(tp2);
+
+    vector<BatterySensor> b;
+    b.push_back(b1);
+    b.push_back(b2);
+
+    vector<BrakeSensor> br;
+    br.push_back(br1);
+    br.push_back(br2);
+
+    Bundler *bundle = new Bundler {vsp, tp, b, br, p1};
+    cout << bundle->toString()<< endl;
+//Example end
+
+    out_msg.set_utf8_message(bundle->toString());
     client.send(out_msg).wait();
 
     client.receive().then([](websocket_incoming_message in_msg) {
@@ -76,3 +69,4 @@ int main()
 
   return 0;
 }
+

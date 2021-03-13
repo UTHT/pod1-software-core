@@ -16,6 +16,7 @@ wss.on("connection", function connection(ws) {
 		// parsed incoming data from sockets
 		// enforcing sending evenType with every message for easier data manipulation
 		const { eventType, data } = JSONParser(message);
+		console.log(data, message)
 
 		//switch case is is better for in the future when there are more than 3 eventTypes
 		switch (eventType) {
