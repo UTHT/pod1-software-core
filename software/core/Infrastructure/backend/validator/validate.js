@@ -139,7 +139,7 @@ function validate(jsonOdriodData) {
 
     const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
     var nestedObj = JSON.stringify(groupByDataArray, null, 2);
-    console.log(nestedObj);
+    return nestedObj;
 
 }
 //the following two function convert the error array into an array with nested objects
@@ -174,21 +174,12 @@ function nestGroupsBy(arr, properties) {
  */
 function groupBy(conversions, property) {
     return conversions.reduce((accumulate, obj) => {
-        // console.log("accumulate here: ", accumulate);
-        // console.log("Objs here", obj);
-        // console.log(" ");
         let key = obj[property];
         if (!accumulate[key]) {
             accumulate[key] = [];
         }
         delete obj.dataArrayName;
         accumulate[key].push(obj);
-
-        // console.log("After groupBy: ");
-        // console.log("accumulate here: ", accumulate);
-        // console.log("Objs here", obj);
-        // console.log(" ");
-
         return accumulate;
     }, {});
 }
@@ -335,23 +326,23 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
 
 //validate position value
 //NOT CHECKING AT THE MOMENT
-function checkPositionData(positionArrayData) {
-    var positionErrors = {}
+// function checkPositionData(positionArrayData) {
+//     var positionErrors = {}
 
-    positionArrayData.forEach((elem, index) => {
-        if (elem > 0) {
-            // console.log(elem);
-        }
-        else if (elem < 0) {
-            positionErrors[index] = new ValidationError("Position cannot be less than 0").message;
-        }
-        else {
-            positionErrors[index] = new ValidationError("No values provided for position").message;
-        }
-    });
+//     positionArrayData.forEach((elem, index) => {
+//         if (elem > 0) {
+//             // console.log(elem);
+//         }
+//         else if (elem < 0) {
+//             positionErrors[index] = new ValidationError("Position cannot be less than 0").message;
+//         }
+//         else {
+//             positionErrors[index] = new ValidationError("No values provided for position").message;
+//         }
+//     });
 
-    return positionErrors;
-}
+//     return positionErrors;
+// }
 
 //function: validate brake status
 //function: validate brake value
@@ -495,23 +486,9 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
 
 }
 
-//function: validate podstate ???
-//function: validate timeStamp ???
 
-
-
-var tempdata = fs.readFileSync("./test.json");
-const validateobject = validate(JSON.parse(tempdata));
+// var tempdata = fs.readFileSync("./test.json");
+// const validateobject = validate(JSON.parse(tempdata));
 // console.log(validateobject);
 
 module.exports = validate;
-
-
-//random test code
-
-// console.log(commonErrorsParsed);
-// let first  = commonErrorkeyArray[0];
-// console.log(`the key is ${first}`);
-
-// let soMany = commonErrors[0];
-// console.log(`This is ${soMany} times easier!`);

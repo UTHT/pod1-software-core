@@ -31,16 +31,16 @@ wss.on('connection', function connection(ws) {
         if (client.socket.readyState === WebSocket.OPEN) {
           if (parsedData.serverType == 'odroid') {
             
-            var error = [];
+            var errorObj = {};
 
             // validation module -- here
-            // var error = validate(parsedData);
+            var errorObj = validate(parsedData);
 
             // Divide incoming data into multiple components
             var Digestor =  digest(parsedData);
 
             // pack all the data to be sent to front-end.
-            var encapsulator = encapsulate(Digestor, error);
+            var encapsulator = encapsulate(Digestor, errorObj);
 
             // Send encapsulation data to front-end
             clientList.forEach((elem) => {
