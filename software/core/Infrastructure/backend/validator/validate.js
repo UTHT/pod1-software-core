@@ -11,29 +11,11 @@ var error_id = 0;
 
 /**
  * Validate incoming JSON data for structural and syntactical integrity
- * returns array of errors for each sensor type in jsonOdroidData
+ * returns an object of errors for each sensor type in jsonOdroidData
  * @param {[Object object] <JSON>} jsonOdriodData 
- * @returns {... List<Class>} [errors]
+ * @returns {Object}
  */
 function validate(jsonOdriodData) {
-
-    //structural integrity of data:
-    //sensor type
-    //has name and value
-
-    //call appropriate sensor functions for it respective fields as the sensor type is detected
-
-    //loop through json data
-    //when sensor type detected call appropriate sensor funtion 
-    //if name detected
-    //if it does not have string throw syntax error and populate error array
-    //else push to data base 
-    //if value detected
-    //if value does not have double/integer throw syntax error and populate error array
-    //else value not detected throw value error and populate error array
-    //if no type detected throw type error and populate error array
-
-
     var errorarray = []
 
     globalEntityIncrement = 0;
@@ -71,9 +53,6 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
-    // test.push(speedDataDict);
-    // console.log(test);
-
     if ('speed' in jsonOdriodData) {
         errorarray.push(checkSpeedData(jsonOdriodData.speed, speedDataDict));
         // console.log(errorarray);
@@ -98,15 +77,15 @@ function validate(jsonOdriodData) {
         // console.log(errorarray);
     }
     // NOT CHECKING FOR NOW
-    if ('position' in jsonOdriodData) {
-        // errorarray.push(checkPositionData(jsonOdriodData.position));
-        // consol.log(checkPositionData(jsonOdriodData.position));
-        // console.log(errorarray);
-    }
-    else {
-        //throw position type error
-        // errorarray.push(new ValidationError('No field: position').message);
-    }
+    // if ('position' in jsonOdriodData) {
+    //     // errorarray.push(checkPositionData(jsonOdriodData.position));
+    //     // consol.log(checkPositionData(jsonOdriodData.position));
+    //     // console.log(errorarray);
+    // }
+    // else {
+    //     //throw position type error
+    //     // errorarray.push(new ValidationError('No field: position').message);
+    // }
 
     if ('brakes' in jsonOdriodData) {
         tempArray = [];
@@ -185,11 +164,22 @@ function groupBy(conversions, property) {
 }
 
 //increment error id
+/**
+ * Increments the error id for every error encountered
+ *
+ * @returns {int}
+ */
 function incremenErrorId() {
     error_id++;
 }
 
-//returns error for appropriate sensor that is not found in original json data
+/**
+ * Creates an error object for appropriate sensors that are not found in original json data
+ *
+ * @param {String} sensorType
+ * @param {Object} dataDict
+* @returns {Object}
+ */
 function sensorTypeError(sensorType, dataDict) {
     var deepDataDict = lodash.cloneDeep(dataDict);
 
@@ -225,12 +215,16 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['error'] = commonErrorkeyArray[10];
     }
 
-
     return deepDataDict
 }
 
-
-//validates speed value
+/**
+ * Creates a speed data error object by checking name and value of the data
+ *
+ * @param {Object[]} speedDataArray
+ * @param {Object} speedDataDict
+ * @returns {Object}
+ */
 function checkSpeedData(speedDataArray, speedDataDict) {
     var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
     var entityIncrement = 1;
@@ -239,7 +233,6 @@ function checkSpeedData(speedDataArray, speedDataDict) {
         if ('value' in elem) {
             if (elem.value < 0) {
                 //negativeValueError
-                // var incrementedErrorId = incremenErrorId(error_id);
                 incremenErrorId();
                 deepSpeedDataDict['errorId'] = error_id;
                 deepSpeedDataDict['entity'] = entityIncrement;
@@ -260,7 +253,13 @@ function checkSpeedData(speedDataArray, speedDataDict) {
     return deepSpeedDataDict;
 }
 
-//validate temp name and value
+/**
+ * Creates an array of temperature data error objects by checking name and value of the data
+ *
+ * @param {Object[]} temperatureArrayData
+ * @param {Object} temperatureDataDict
+ * @returns {Object[]}
+ */
 function checkTempData(temperatureArrayData, temperatureDataDict) {
     var entityIncrement = 1;
     temperatureArray = [];
@@ -344,8 +343,13 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
 //     return positionErrors;
 // }
 
-//function: validate brake status
-//function: validate brake value
+/**
+ * Creates an array of brake data error objects by checking name, value, and pressure of the data
+ *
+ * @param {Object[]} brakeArrayData
+ * @param {Object} brakeDataDict
+ * @returns {Object[]}
+ */
 function checkBrakeData(brakeArrayData, brakeDataDict) {
     var entityIncrement = 1;
     brakeArray = [];
@@ -423,7 +427,13 @@ function checkBrakeData(brakeArrayData, brakeDataDict) {
 
 }
 
-//function: validate battery name and battery value
+/**
+ * Creates an array of battery data error objects by checking name and value of the data
+ *
+ * @param {Object[]} batteryArrayData
+ * @param {Object} batteryDataDict
+ * @returns {Object[]}
+ */
 function checkBatteryData(batteryArrayData, batteryDataDict) {
     var entityIncrement = 1;
     batteryArray = [];
