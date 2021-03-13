@@ -55,6 +55,14 @@ function validate(jsonOdriodData) {
         entity: globalEntityIncrement,
         error: ''
     }
+    batteryThreshold = 100;
+    var batteryDataDict = {
+        errorId: error_id,
+        dataArrayName: 'batteryDataArray',
+        entity: globalEntityIncrement,
+        thresholdValue: batteryThreshold,
+        error: ''
+    }
 
     // test.push(speedDataDict);
     // console.log(test);
@@ -71,7 +79,7 @@ function validate(jsonOdriodData) {
 
     if ('temperatures' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict, error_id);
+        tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict);
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -95,7 +103,7 @@ function validate(jsonOdriodData) {
 
     if ('brakes' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkBrakeData(jsonOdriodData.brakes, brakeDataDict, error_id);
+        tempArray = checkBrakeData(jsonOdriodData.brakes, brakeDataDict);
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -108,13 +116,18 @@ function validate(jsonOdriodData) {
     }
 
     if ('battery' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkBatteryData(jsonOdriodData.battery, batteryDataDict);
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+        console.log(errorarray);
         // errorarray.push(checkBatteryData(jsonOdriodData.battery));
         // console.log(checkBatteryData(jsonOdriodData.brakes));
-        // console.log(errorarray);
     }
     else {
         //throw battery type error
-        // errorarray.push(new ValidationError('No field: battery').message);
+        errorarray.push(sensorTypeError('battery', batteryDataDict));
         // console.log(errorarray);
 
     }
@@ -200,6 +213,15 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['entity'] = sensorType;
         deepDataDict['error'] = commonErrorkeyArray[9];
     }
+
+    //batteryNotFoundError
+    if (sensorType == 'battery') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[10];
+    }
+
 
     return deepDataDict
 }
@@ -376,28 +398,64 @@ function checkBrakeData(brakeArrayData, brakeDataDict) {
 
 //function: validate battery name and battery value
 function checkBatteryData(batteryArrayData, batteryDataDict) {
-    var batteryErrors = {};
+    var entityIncrement = 1;
+    batteryArray = [];
 
-    batteryArrayData.forEach((element, index) => {
-        for ([key, val] of Object.entries(element)) {
-            if ('name' in element) {
-                // console.log(element.name);
-            }
-            else {
-                batteryErrors["name"] = new ValidationError("No field").message;
-            }
+    batteryArrayData.forEach(element => {
+        if ('name' in element) {
+        }
+        else {
+            //nameNotFoundError
+            var deepbatteryDataDict = lodash.cloneDeep(batteryDataDict);
 
-            if ('status' in element) {
-                // console.log(element.status);
-            }
-            else {
-                batteryErrors["value"] = new ValidationError("No field").message;
-            }
+            incremenErrorId();
+            deepbatteryDataDict['errorId'] = error_id;
+            deepbatteryDataDict['entity'] = entityIncrement;
+            deepbatteryDataDict['error'] = commonErrorkeyArray[3];
+
+            batteryArray.push(deepbatteryDataDict);
         }
 
-    });
+        if ('value' in element) {
+            //check if value is more than 0
+            var deepbatteryDataDict = lodash.cloneDeep(batteryDataDict);
 
-    return batteryErrors;
+            if (element.value < 0) {
+                //negativeValueError
+                incremenErrorId();
+                deepbatteryDataDict['errorId'] = error_id;
+                deepbatteryDataDict['entity'] = entityIncrement;
+                deepbatteryDataDict['error'] = commonErrorkeyArray[0];
+
+                batteryArray.push(deepbatteryDataDict);
+            }
+            else if (element.value > 100){
+                var deepbatteryDataDict = lodash.cloneDeep(batteryDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepbatteryDataDict['errorId'] = error_id;
+                deepbatteryDataDict['entity'] = entityIncrement;
+                deepbatteryDataDict['error'] = commonErrorkeyArray[11];
+
+                batteryArray.push(deepbatteryDataDict);
+            }
+        }
+        else {
+            //valueNotFoundError
+            var deepbatteryDataDict = lodash.cloneDeep(batteryDataDict);
+
+            incremenErrorId();
+            deepbatteryDataDict['errorId'] = error_id;
+            deepbatteryDataDict['entity'] = entityIncrement;
+            deepbatteryDataDict['error'] = commonErrorkeyArray[2];
+
+            batteryArray.push(deepbatteryDataDict);
+        }
+        entityIncrement++;
+
+    });
+    return batteryArray;
 
 }
 
@@ -415,53 +473,9 @@ module.exports = validate;
 
 //random test code
 
-// console.log(errorarray);
-// console.log(JSON.stringify(errorarray, null, 2));
-
 // console.log(commonErrorsParsed);
 // let first  = commonErrorkeyArray[0];
 // console.log(`the key is ${first}`);
 
 // let soMany = commonErrors[0];
 // console.log(`This is ${soMany} times easier!`);
-
-// var test = [
-//     {
-//         speedDataArray: {
-//             value: {
-//                 "negativeValueError": "can not have a negative value"
-//             }
-//         }
-//     }
-// ]
-// console.log(JSON.stringify(test, null, 2));
-
-// var tempArray = [
-//     {
-//         errorId: '0',
-//         dataArrayName: 'speedDataArray',
-//         field: 'value',
-//         error: 'valueNotFoundError'
-//     },
-//     {
-//         errorId: '1',
-//         dataArrayName: 'temperatureDataArray',
-//         field: 'name',
-//         error: 'nameNotFoundError'
-//     }, {
-//         errorId: '2',
-//         dataArrayName: 'temperatureDataArray',
-//         field: 'value',
-//         error: 'negativeValueError'
-//     }, {
-//         errorId: '3',
-//         dataArrayName: 'batteryDataArray',
-//         field: 'value',
-//         error: 'negativeValueError'
-//     }, {
-//         errorId: '4',
-//         dataArrayName: 'batteryDataArray',
-//         field: 'name',
-//         error: 'nameNotFoundError'
-//     },
-// ]

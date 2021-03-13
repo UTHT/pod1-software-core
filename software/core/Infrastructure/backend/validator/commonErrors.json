@@ -9,6 +9,6 @@
     "temperatureNotFoundError": "",
     "positionNotFoundError": "",
     "brakesNotFoundError": "",
-    "batteryNotFoundError": ""
-    
+    "batteryNotFoundError": "",
+    "valueExceedsThresholdError": ""
 }
