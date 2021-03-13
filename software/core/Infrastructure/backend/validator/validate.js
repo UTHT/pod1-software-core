@@ -128,9 +128,7 @@ function validate(jsonOdriodData) {
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
-        console.log(errorarray);
-        // errorarray.push(checkBatteryData(jsonOdriodData.battery));
-        // console.log(checkBatteryData(jsonOdriodData.brakes));
+        // console.log(errorarray);
     }
     else {
         //throw battery type error
@@ -142,7 +140,7 @@ function validate(jsonOdriodData) {
 
     const groups = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
     // console.log(groups);
-    // console.log(JSON.stringify(groups, null, 2));
+    console.log(JSON.stringify(groups, null, 2));
 
 }
 
@@ -297,6 +295,18 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
 
                 temperatureArray.push(deepTemperatureDataDict);
             }
+            else if (element.value > 1000) {
+                var deepTemperatureDataDict = lodash.cloneDeep(temperatureDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepTemperatureDataDict['errorId'] = error_id;
+                deepTemperatureDataDict['entity'] = entityIncrement;
+                deepTemperatureDataDict['error'] = commonErrorkeyArray[11];
+
+                temperatureArray.push(deepTemperatureDataDict);
+            }
+
         }
         else {
             //valueNotFoundError
@@ -384,7 +394,7 @@ function checkBrakeData(brakeArrayData, brakeDataDict) {
 
                 brakeArray.push(deepBrakeDataDict);
             }
-            else if (element.pressure > 1000){
+            else if (element.pressure > 1000) {
                 var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
 
                 //valueExceedsThresholdError
@@ -448,7 +458,7 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
 
                 batteryArray.push(deepbatteryDataDict);
             }
-            else if (element.value > 100){
+            else if (element.value > 100) {
                 var deepbatteryDataDict = lodash.cloneDeep(batteryDataDict);
 
                 //valueExceedsThresholdError
