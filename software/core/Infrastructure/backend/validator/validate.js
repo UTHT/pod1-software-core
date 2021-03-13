@@ -137,14 +137,12 @@ function validate(jsonOdriodData) {
 
     }
 
-
-    const groups = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
-    // console.log(groups);
-    console.log(JSON.stringify(groups, null, 2));
+    const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
+    var nestedObj = JSON.stringify(groupByDataArray, null, 2);
+    console.log(nestedObj);
 
 }
-
-//the following two funciton convert the error array into an array with nested objects
+//the following two function convert the error array into an array with nested objects
 
 /**
  * Creates nested groups by object properties.
@@ -175,13 +173,23 @@ function nestGroupsBy(arr, properties) {
  * @returns {Object}
  */
 function groupBy(conversions, property) {
-    return conversions.reduce((acc, obj) => {
+    return conversions.reduce((accumulate, obj) => {
+        // console.log("accumulate here: ", accumulate);
+        // console.log("Objs here", obj);
+        // console.log(" ");
         let key = obj[property];
-        if (!acc[key]) {
-            acc[key] = [];
+        if (!accumulate[key]) {
+            accumulate[key] = [];
         }
-        acc[key].push(obj);
-        return acc;
+        delete obj.dataArrayName;
+        accumulate[key].push(obj);
+
+        // console.log("After groupBy: ");
+        // console.log("accumulate here: ", accumulate);
+        // console.log("Objs here", obj);
+        // console.log(" ");
+
+        return accumulate;
     }, {});
 }
 
@@ -190,7 +198,6 @@ function incremenErrorId() {
     error_id++;
 }
 
-//FIX ERROR ID INCREMENT
 //returns error for appropriate sensor that is not found in original json data
 function sensorTypeError(sensorType, dataDict) {
     var deepDataDict = lodash.cloneDeep(dataDict);
