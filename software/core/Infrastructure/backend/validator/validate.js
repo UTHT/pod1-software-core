@@ -43,18 +43,25 @@ function validate(jsonOdriodData) {
         entity: globalEntityIncrement,
         error: ''
     }
+
+    temperatureThreshold = 1000;
     var temperatureDataDict = {
         errorId: error_id,
         dataArrayName: 'temperatureDataArray',
         entity: globalEntityIncrement,
+        thresholdValue: temperatureThreshold,
         error: ''
     }
+
+    brakesThreshold = 1000;
     var brakeDataDict = {
         errorId: error_id,
         dataArrayName: 'brakeDataArray',
         entity: globalEntityIncrement,
+        thresholdValue: brakesThreshold,
         error: ''
     }
+
     batteryThreshold = 100;
     var batteryDataDict = {
         errorId: error_id,
@@ -377,6 +384,18 @@ function checkBrakeData(brakeArrayData, brakeDataDict) {
 
                 brakeArray.push(deepBrakeDataDict);
             }
+            else if (element.pressure > 1000){
+                var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepBrakeDataDict['errorId'] = error_id;
+                deepBrakeDataDict['entity'] = entityIncrement;
+                deepBrakeDataDict['error'] = commonErrorkeyArray[11];
+
+                brakeArray.push(deepBrakeDataDict);
+            }
+
         }
         else {
             //pressureNotFoundError
