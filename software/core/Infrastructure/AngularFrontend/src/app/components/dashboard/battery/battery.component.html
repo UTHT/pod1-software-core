@@ -1,0 +1,15 @@
+<style>
+    .percentage-box {
+	width: 30px;
+	height: 50px;
+	display: inline-block;
+	margin: 1px;
+}
+</style>
+<label>{{label}}</label>
+<br>
+<div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
+	<ng-template [ngIf]="item.full == false">
+		<div [ngStyle]="{ 'background-color': color, width: item.width, height: '50px' }"></div>
+	</ng-template>
+</div>

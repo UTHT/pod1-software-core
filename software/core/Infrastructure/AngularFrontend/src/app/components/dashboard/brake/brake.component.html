@@ -1,0 +1,12 @@
+<div style="text-align: center;">
+    <div>
+        <brake-gauge-component
+        [brakePressure]="currBrakePressure"
+        [name]="label"
+        ></brake-gauge-component>
+    </div>
+    <div>
+        <brake-graph
+        [dataList]="brakePressureArray"></brake-graph>
+    </div>
+</div>

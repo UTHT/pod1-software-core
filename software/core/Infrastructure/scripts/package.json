@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "name": "mongoose-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^5.10.13",
+    "express": "^4.17.1",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
