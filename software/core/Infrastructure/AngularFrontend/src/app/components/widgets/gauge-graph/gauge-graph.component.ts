@@ -45,7 +45,8 @@ export class GaugeGraphComponent implements OnInit, OnChanges {
           graphWidth: 200,
           graphHeight: 100,
           max: 100,
-        }
+        };
+        return
       default:
         return
     }

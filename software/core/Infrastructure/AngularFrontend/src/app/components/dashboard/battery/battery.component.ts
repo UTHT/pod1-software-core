@@ -33,8 +33,12 @@ export class BatteryComponent implements OnInit, OnChanges {
 				this.arrayColor.push({ full: true, color: this.color, width: '30px' });
 				currentLevel += part;
 			} else {
-				const newWidth = ((this.value - currentLevel + part) * 30) / 20;
-				this.arrayColor.push({ full: false, color: this.pinColor, width: newWidth + 'px' });
+				if (this.value != 0){
+					const newWidth = ((this.value - currentLevel + part) * 30) / part;
+					this.arrayColor.push({ full: false, color: this.pinColor, width: newWidth + 'px' });
+				}else{
+					this.arrayColor.push({ full: true, color: this.pinColor, width: '30px' });
+				}
 				for (let j = i + 1; j < this.totalPin; j++) {
 					this.arrayColor.push({ full: true, color: this.pinColor, width: '30px' });
 				}
