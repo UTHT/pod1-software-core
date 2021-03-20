@@ -85,9 +85,5 @@ testCases.forEach(test => {
       expect(component.settings.graphHeight).toEqual(test.settings.graphHeight);
       expect(component.settings.max).toEqual(test.settings.max);
     })
-
-    it('should update datalist', () => {
-      expect(component.dataList).toBeDefined();
-    })
   })
 });
