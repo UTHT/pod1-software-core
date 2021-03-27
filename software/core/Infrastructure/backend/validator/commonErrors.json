@@ -1,0 +1,14 @@
+{
+    "negativeValueError": "",
+    "nullValueError": "",
+    "valueNotFoundError": "",
+    "nameNotFoundError": "",
+    "statusNotFoundError": "",
+    "pressureNotFoundError": "",
+    "speedNotFoundError": "",
+    "temperatureNotFoundError": "",
+    "positionNotFoundError": "",
+    "brakesNotFoundError": "",
+    "batteryNotFoundError": "",
+    "valueExceedsThresholdError": ""
+}

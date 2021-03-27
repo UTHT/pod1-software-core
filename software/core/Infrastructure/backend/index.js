@@ -6,6 +6,7 @@ const digest = require("./Digester/index");
 const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
+const validate = require("./validator/validate");
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -36,13 +37,15 @@ wss.on("connection", function connection(ws) {
 					//Todo: add encapsulation for the massage to go to the odroid
 					broadcast(wss, message, "odroid");
 				} else {
-					const error = [];
-					// validation module -- here
+					var errorObj = {};
 
+					// validate incoming data from the pod
+					var errorObj = validate(parsedData);
+		
 					// Divide incoming data into multiple components
 					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.
-					const encapsulator = encapsulate(Digestor, error);
+					const encapsulator = encapsulate(Digestor, errorObj);
 					broadcast(wss, encapsulator, "dashboard");
 				}
 				return;
