@@ -40,10 +40,11 @@ wss.on("connection", function connection(ws) {
 					var errorObj = {};
 
 					// validate incoming data from the pod
-					var errorObj = validate(parsedData);
+					var errorObj = validate(data);
 		
 					// Divide incoming data into multiple components
 					const Digestor = digest(data);
+					
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, errorObj);
 					broadcast(wss, encapsulator, "dashboard");

@@ -27,14 +27,32 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Brakes = brakes.map(({ name, value }) => new BrakeSensor(value, name));
+	const Brakes = brakes.map(({ name, pressure }) => new BrakeSensor(pressure, name));
 
 	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes];
 }
 
-// const data = fs.readFileSync("./test.json");
+const data = fs.readFileSync("./test.json");
 
-// const digester_object = digest(JSON.parse(data));
-// console.log(digester_object);
+const digester_object = digest(JSON.parse(data));
+console.log(digester_object);
 
 module.exports = digest;
+
+/*
+Crash Report:
+- when speed object completely removed
+	- TypeError: Cannot read property 'map' of undefined
+- when temperature object completely removed
+	- TypeError: Cannot read property 'map' of undefined
+- position completely removed	
+	- TypeError: Cannot read property '0' of undefined
+- when brakes object completely removed
+	- TypeError: Cannot read property 'map' of undefined
+- when battery object completely removed
+	- TypeError: Cannot read property 'map' of undefined
+
+
+Other notes:
+- For brakes, not accounting for "status"
+*/
