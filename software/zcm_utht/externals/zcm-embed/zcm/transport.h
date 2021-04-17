@@ -191,7 +191,7 @@ extern "C" {
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "zcm/zcm.h"
+#include "zcm.h"
 
 /* Only define inline for C99 builds or better */
 #if (__STDC_VERSION__ >= 199901L) || (__cplusplus)

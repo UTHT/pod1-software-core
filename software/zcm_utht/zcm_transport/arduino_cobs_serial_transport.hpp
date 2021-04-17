@@ -4,7 +4,7 @@
 #define LINUX_COBS_SERIAL_TRANSPORT_H
 
 #define ZCM_EMBEDDED
-#include "zcm/transport.h"
+#include "../externals/zcm-embed/zcm/transport.h"
 #include "Arduino.h"
 #include "../externals/PacketSerial/src/PacketSerialArduino.h"
 
