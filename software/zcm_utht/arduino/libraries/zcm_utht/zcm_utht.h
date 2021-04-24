@@ -6,7 +6,7 @@
 #define ZCM_UTHT_H
 
 // extern "C" {
-#include "zcm_transport/arduino_cobs_serial_transport.hpp"
+#include "../arduino_cobs_serial_transport/arduino_cobs_serial_transport.hpp"
 // }
 
 class Zcm_utht {

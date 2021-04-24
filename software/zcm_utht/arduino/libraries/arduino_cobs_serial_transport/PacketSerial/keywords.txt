@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For Arduration
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+PacketSerial_	KEYWORD1
+PacketSerial	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+encode	KEYWORD2
+decode	KEYWORD2
+getEncodedBufferSize KEYWORD2
+send KEYWORD2
+setPacketHandler KEYWORD2
+update KEYWORD2
+begin KEYWORD2
+onPacket KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+

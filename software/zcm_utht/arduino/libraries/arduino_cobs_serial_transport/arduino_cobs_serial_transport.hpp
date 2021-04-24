@@ -5,9 +5,9 @@
 
 #define ZCM_EMBEDDED
 
-#include "../externals/zcm-embed/zcm/transport.h"
-#include "Arduino.h"
-#include "../externals/PacketSerial/src/PacketSerialArduino.h"
+#include "../zcm/transport.h"
+// #include "Arduino.h"
+#include "PacketSerial/src/PacketSerialArduino.h"
 
 
 // Define this the class name you want

@@ -190,7 +190,7 @@ extern "C" {
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
-// #include <stdbool.h>
+#include <stdbool.h>
 #include "zcm.h"
 
 /* Only define inline for C99 builds or better */
