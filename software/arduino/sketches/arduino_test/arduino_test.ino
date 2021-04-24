@@ -23,7 +23,7 @@ void loop() {
   String message = "This is a test message: " + String(counter);
 
   // Might not need to include this. Arduino was able to publish 
-  // with and without this.
+  // with or without this.
   zcm_handle_nonblock(zcm_arduino);
 
   // The "send" method in PacketSerialArduino writes an encoded
