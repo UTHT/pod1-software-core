@@ -16,7 +16,9 @@ wss.on("connection", function connection(ws) {
 		// parsed incoming data from sockets
 		// enforcing sending evenType with every message for easier data manipulation
 		const { eventType, data } = JSONParser(message);
-		console.log(data, message)
+		// const { eventType, data } = JSON.parse(message);
+		console.log(data, eventType)
+		// console.log(JSON.parse(message));
 
 		//switch case is is better for in the future when there are more than 3 eventTypes
 		switch (eventType) {
@@ -43,6 +45,11 @@ wss.on("connection", function connection(ws) {
 					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, error);
+					console.log(Digestor)
+					console.log(encapsulator)
+					console.log('------------')
+					ws.send(JSON.stringify({ eventType: "working" }));
+
 					broadcast(wss, encapsulator, "dashboard");
 				}
 				return;
@@ -50,7 +57,7 @@ wss.on("connection", function connection(ws) {
 			// use to request for mock data to test the front-end components
 			case "mock_request":
 				const msg = { eventType: "mock", data: mock() };
-				broadcast(wss, msg, "dashboard");
+				//broadcast(wss, msg, "dashboard");
 				return;
 
 			//If eventType is not given or any of the above case then send an error message

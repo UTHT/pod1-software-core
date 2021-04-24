@@ -1,0 +1,48 @@
+{ 
+    "eventType":"relay",
+    "data":{
+        "speed": [
+            {
+                "name": "speed", "value":0
+            }
+        ],
+        "temperatures": [ 
+                       { 
+                        "name": "motor_1",  "value":0 
+                       }, 
+                       { 
+                        "name": "motor_2",  "value":0 
+                       }, 
+                       {
+                        "name" : "battery_1", "value":0
+                        },
+                        {
+                            "name" : "battery_2", "value":0
+                        },
+                       {
+                        "name": "brakes_left", "value": 0
+                        },
+                        {
+                            "name": "brakes_right", "value": 0
+                        }
+                       ], 
+        "position" : [0, 0],
+        "brakes":[
+            {
+                "name": "brakes_left", "status": 0,"pressure":0
+            },
+            {
+                "name": "brakes_right", "status": 0,"pressure":0
+            }
+        ], 
+        "battery":[
+            {
+                "name" : "battery_1", "value":100
+            },
+            {
+                "name" : "battery_2", "value":100
+            }
+        ]
+    }
+
+ } 

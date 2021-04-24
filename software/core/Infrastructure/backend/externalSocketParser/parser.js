@@ -15,6 +15,7 @@ const JSONParser = (externalJson) => {
 
     {
         let dataPreparation = externalJson.replace(/'/g, '"');
+        console.log('comeshere')
         let JSONobject = JSON.parse(dataPreparation);
         return JSONobject;
 

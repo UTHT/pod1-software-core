@@ -27,7 +27,7 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Brakes = brakes.map(({ name, value }) => new BrakeSensor(value, name));
+	const Brakes = brakes.map(({ name, value,status,pressure }) => new BrakeSensor(value, name,status,pressure));
 
 	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes];
 }
