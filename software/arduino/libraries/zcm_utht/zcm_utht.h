@@ -1,13 +1,7 @@
-// #ifdef __cplusplus
-//  extern "C" {
-// #endif
-
 #ifndef ZCM_UTHT_H
 #define ZCM_UTHT_H
 
-// extern "C" {
 #include "../arduino_cobs_serial_transport/arduino_cobs_serial_transport.hpp"
-// }
 
 class Zcm_utht {
     public:
@@ -21,7 +15,3 @@ class Zcm_utht {
 
 
 #endif
-
-// #ifdef __cplusplus
-//  }
-// #endif
