@@ -29,10 +29,10 @@
         "position" : [0, 0],
         "brakes":[
             {
-                "name": "brakes_left", "status": 0,"pressure":0
+                "name": "brakes_left", "status": 0,"pressure":0, "value": 0
             },
             {
-                "name": "brakes_right", "status": 0,"pressure":0
+                "name": "brakes_right", "status": 0,"pressure":0, "value": 0
             }
         ], 
         "battery":[

@@ -32,7 +32,8 @@ export class WebsocketService {
           this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
           return
         default:
-          this.data = data
+          this.data = data.obj
+          
           this.data.time = new Date()
           this.dataHistory.push(this.data)
           if (this.dataHistory.length > 20){
