@@ -6,6 +6,7 @@ const digest = require("./Digester/index");
 const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
+//const validate = require("./validator/validate");
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -29,7 +30,8 @@ wss.on("connection", function connection(ws) {
 				//Todo: maybe add an error event id clienType is undefined
 				const clientType = data.clientType;
 				ws.clientType = clientType;
-				ws.send(JSON.stringify({ eventType: "init" }));
+				//ws.send(JSON.stringify({ eventType: "init" }));
+				ws.send(JSON.stringify({ eventType: "started" }));
 				return;
 
 			// replay is any messages that just need to be passed to the clientType
@@ -38,13 +40,15 @@ wss.on("connection", function connection(ws) {
 					//Todo: add encapsulation for the massage to go to the odroid
 					broadcast(wss, message, "odroid");
 				} else {
-					const error = [];
-					// validation module -- here
+					var errorObj = {};
 
+					// validate incoming data from the pod
+					//var errorObj = validate(parsedData);
+		
 					// Divide incoming data into multiple components
 					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.
-					const encapsulator = encapsulate(Digestor, error);
+					const encapsulator = encapsulate(Digestor, errorObj);
 					console.log(Digestor)
 					console.log(encapsulator)
 					console.log('------------')
@@ -57,7 +61,7 @@ wss.on("connection", function connection(ws) {
 			// use to request for mock data to test the front-end components
 			case "mock_request":
 				const msg = { eventType: "mock", data: mock() };
-				//broadcast(wss, msg, "dashboard");
+				broadcast(wss, msg, "dashboard");
 				return;
 
 			//If eventType is not given or any of the above case then send an error message
