@@ -1,0 +1,6 @@
+all:
+	mkdir -pv m4
+	autoreconf -i --force  --verbose
+
+configure:
+	./configure
