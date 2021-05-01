@@ -41,7 +41,10 @@ wss.on("connection", function connection(ws) {
 
 					// validate incoming data from the pod
 					var errorObj = validate(parsedData);
-		
+					
+					// correct incoming data to pass to the Digester
+					// var correctedData = dataCorrector(parsedData);
+
 					// Divide incoming data into multiple components
 					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.

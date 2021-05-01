@@ -27,14 +27,14 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Brakes = brakes.map(({ name, value }) => new BrakeSensor(value, name));
+	const Brakes = brakes.map(({ name, pressure, status }) => new BrakeSensor(pressure, name, status));
 
 	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes];
 }
 
-// const data = fs.readFileSync("./test.json");
+const data = fs.readFileSync("./test.json");
 
-// const digester_object = digest(JSON.parse(data));
-// console.log(digester_object);
+const digester_object = digest(JSON.parse(data));
+console.log(digester_object);
 
 module.exports = digest;

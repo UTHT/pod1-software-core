@@ -3,9 +3,10 @@
 
 class Sensor {
 	sensor_type = "";
-	constructor(name, value = null) {
+	constructor(name, value = null, status=null) {
 		this._name = name;
 		this._value = value;
+		this._status = status;
 	}
 
 	get name() {
@@ -16,12 +17,20 @@ class Sensor {
 		return this._value;
 	}
 
+	get status() {
+		return this._status;
+	}
+
 	set name(newName) {
 		this._name = newName;
 	}
 
 	set value(newValue) {
 		this._value = newValue;
+	}
+
+	set status(newStatus) {
+		this._status = newStatus;
 	}
 
 	get sensor_type() {
