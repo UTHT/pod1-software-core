@@ -44,8 +44,8 @@ wss.on("connection", function connection(ws) {
 					var errorObj = validate(data);
 		
 					// corrected json data
-					var correctedData;
-					correctedData = corrector(data, errorObj);
+					// var correctedData;
+					// correctedData = corrector(data, errorObj);
 
 					// Divide incoming data into multiple components
 					const Digestor = digest(correctedData);
