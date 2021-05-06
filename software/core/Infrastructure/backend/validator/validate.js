@@ -496,8 +496,8 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
 }
 
 
-// var tempdata = fs.readFileSync("./test.json");
-// const validateobject = validate(JSON.parse(tempdata));
-// console.log(validateobject);
+var tempdata = fs.readFileSync("./test.json");
+const validateobject = validate(JSON.parse(tempdata));
+console.log(validateobject);
 
 module.exports = validate;

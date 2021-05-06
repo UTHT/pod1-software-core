@@ -7,6 +7,7 @@ const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
 const validate = require("./validator/validate");
+const corrector = require("./dataCorrector/corrector");
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -42,8 +43,12 @@ wss.on("connection", function connection(ws) {
 					// validate incoming data from the pod
 					var errorObj = validate(data);
 		
+					// corrected json data
+					var correctedData;
+					correctedData = corrector(data, errorObj);
+
 					// Divide incoming data into multiple components
-					const Digestor = digest(data);
+					const Digestor = digest(correctedData);
 					
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, errorObj);
