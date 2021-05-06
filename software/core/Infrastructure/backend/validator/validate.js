@@ -53,7 +53,11 @@ function validate(jsonOdriodData) {
     }
 
     if ('speed' in jsonOdriodData) {
-        errorarray.push(checkSpeedData(jsonOdriodData.speed, speedDataDict));
+        tempArray = [];
+        tempArray = checkSpeedData(jsonOdriodData.speed, speedDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
         // console.log(errorarray);
     }
     else {
@@ -225,31 +229,49 @@ function sensorTypeError(sensorType, dataDict) {
  * @returns {Object}
  */
 function checkSpeedData(speedDataArray, speedDataDict) {
-    var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+    speedArray = [];
     var entityIncrement = 1;
 
     speedDataArray.forEach(elem => {
         if ('value' in elem) {
             if (elem.value < 0) {
                 //negativeValueError
+                var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+
                 incremenErrorId();
                 deepSpeedDataDict['errorId'] = error_id;
                 deepSpeedDataDict['entity'] = entityIncrement;
-                entityIncrement++;
                 deepSpeedDataDict['error'] = commonErrorkeyArray[0];
+
+                speedArray.push(deepSpeedDataDict);
             }
         }
         else {
             //valueNotFoundError
+            var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+
             incremenErrorId();
             deepSpeedDataDict['errorId'] = error_id;
             deepSpeedDataDict['entity'] = entityIncrement;
-            entityIncrement++;
             deepSpeedDataDict['error'] = commonErrorkeyArray[2];
+
+            speedArray.push(deepSpeedDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+
+            incremenErrorId();
+            deepSpeedDataDict['errorId'] = error_id;
+            deepSpeedDataDict['entity'] = entityIncrement;
+            deepSpeedDataDict['error'] = commonErrorkeyArray[3];
+
+            speedArray.push(deepSpeedDataDict);
         }
 
     });
-    return deepSpeedDataDict;
+    return speedArray;
 }
 
 /**

@@ -1,103 +1,110 @@
 {
     "speedDataArray": {
-        "1": {
-            "negativeValueError": [
-                {
-                    "errorId": 1,
-                    "entity": 1,
-                    "error": "negativeValueError"
-                }
-            ]
-        }
+      "1": {
+        "negativeValueError": [
+          {
+            "errorId": 1,
+            "entity": 1,
+            "error": "negativeValueError"
+          }
+        ],
+        "nameNotFoundError": [
+          {
+            "errorId": 2,
+            "entity": 1,
+            "error": "nameNotFoundError"
+          }
+        ]
+      }
     },
     "temperatureDataArray": {
-        "1": {
-            "nameNotFoundError": [
-                {
-                    "errorId": 2,
-                    "entity": 1,
-                    "thresholdValue": 1000,
-                    "error": "nameNotFoundError"
-                }
-            ],
-            "valueExceedsThresholdError": [
-                {
-                    "errorId": 3,
-                    "entity": 1,
-                    "thresholdValue": 1000,
-                    "error": "valueExceedsThresholdError"
-                }
-            ]
-        }
+      "1": {
+        "nameNotFoundError": [
+          {
+            "errorId": 3,
+            "entity": 1,
+            "thresholdValue": 1000,
+            "error": "nameNotFoundError"
+          }
+        ],
+        "valueExceedsThresholdError": [
+          {
+            "errorId": 4,
+            "entity": 1,
+            "thresholdValue": 1000,
+            "error": "valueExceedsThresholdError"
+          }
+        ]
+      }
     },
     "brakeDataArray": {
-        "1": {
-            "nameNotFoundError": [
-                {
-                    "errorId": 4,
-                    "entity": 1,
-                    "thresholdValue": 1000,
-                    "error": "nameNotFoundError"
-                }
-            ],
-            "valueExceedsThresholdError": [
-                {
-                    "errorId": 5,
-                    "entity": 1,
-                    "thresholdValue": 1000,
-                    "error": "valueExceedsThresholdError"
-                }
-            ]
-        },
-        "2": {
-            "statusNotFoundError": [
-                {
-                    "errorId": 6,
-                    "entity": 2,
-                    "thresholdValue": 1000,
-                    "error": "statusNotFoundError"
-                }
-            ]
-        },
-        "3": {
-            "pressureNotFoundError": [
-                {
-                    "errorId": 7,
-                    "entity": 3,
-                    "thresholdValue": 1000,
-                    "error": "pressureNotFoundError"
-                }
-            ]
-        }
+      "1": {
+        "nameNotFoundError": [
+          {
+            "errorId": 5,
+            "entity": 1,
+            "thresholdValue": 1000,
+            "error": "nameNotFoundError"
+          }
+        ],
+        "valueExceedsThresholdError": [
+          {
+            "errorId": 6,
+            "entity": 1,
+            "thresholdValue": 1000,
+            "error": "valueExceedsThresholdError"
+          }
+        ]
+      },
+      "2": {
+        "statusNotFoundError": [
+          {
+            "errorId": 7,
+            "entity": 2,
+            "thresholdValue": 1000,
+            "error": "statusNotFoundError"
+          }
+        ]
+      },
+      "3": {
+        "pressureNotFoundError": [
+          {
+            "errorId": 8,
+            "entity": 3,
+            "thresholdValue": 1000,
+            "error": "pressureNotFoundError"
+          }
+        ]
+      }
     },
     "batteryDataArray": {
-        "1": {
-            "nameNotFoundError": [
-                {
-                    "errorId": 8,
-                    "entity": 1,
-                    "thresholdValue": 100,
-                    "error": "nameNotFoundError"
-                }
-            ],
-            "valueExceedsThresholdError": [
-                {
-                    "errorId": 9,
-                    "entity": 1,
-                    "thresholdValue": 100,
-                    "error": "valueExceedsThresholdError"
-                }
-            ]
-        },
-        "2": {
-            "valueNotFoundError": [
-                {
-                    "errorId": 10,
-                    "entity": 2,
-                    "thresholdValue": 100,
-                    "error": "valueNotFoundError"
-                }
-            ]
-        }
+      "1": {
+        "nameNotFoundError": [
+          {
+            "errorId": 9,
+            "entity": 1,
+            "thresholdValue": 100,
+            "error": "nameNotFoundError"
+          }
+        ],
+        "valueExceedsThresholdError": [
+          {
+            "errorId": 10,
+            "entity": 1,
+            "thresholdValue": 100,
+            "error": "valueExceedsThresholdError"
+          }
+        ]
+      },
+      "2": {
+        "valueNotFoundError": [
+          {
+            "errorId": 11,
+            "entity": 2,
+            "thresholdValue": 100,
+            "error": "valueNotFoundError"
+          }
+        ]
+      }
     }
-}
+  }
