@@ -2,8 +2,8 @@ const Sensor = require("./sensor");
 
 class BrakeSensor extends Sensor {
 	sensor_type = "BRAKE";
-	constructor(value, name = "brakes") {
-		super(name, value);
+	constructor(pressure, name = "brakes") {
+		super(name, pressure);
 	}
 }
 
