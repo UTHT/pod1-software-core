@@ -79,6 +79,13 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
+    var accelerationDataDict = {
+        errorId: error_id,
+        dataArrayName: 'accelerationDataArray',
+        entity: globalEntityIncrement,
+        error: ''
+    }
+
     if ('speed' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkSpeedData(jsonOdriodData.speed, speedDataDict)
@@ -186,6 +193,20 @@ function validate(jsonOdriodData) {
         //throw current type error
         errorarray.push(sensorTypeError('gapHeight', gapHeightDataDict));
         // console.log(errorarray);
+    }
+
+    if ('acceleration' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkAccelerationData(jsonOdriodData.acceleration, accelerationDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+        // console.log(errorarray);
+    }
+    else {
+        //throw current type error
+        errorarray.push(sensorTypeError('acceleration', accelerationDataDict));
+        console.log(errorarray);
     }
 
     const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
@@ -309,6 +330,14 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
         deepDataDict['error'] = commonErrorkeyArray[14];
+    }
+
+    //accelerationNotFoundError
+    if (sensorType == 'acceleration') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[15];
     }
 
     return deepDataDict
@@ -775,6 +804,39 @@ function checkGapHeightData(gapHeightArrayData, gapHeightDataDict) {
         }
     });
     return gapHeightArray;
+}
+
+function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
+    accelerationArray = [];
+    var entityIncrement = 1;
+
+    accelerationArrayData.forEach(elem => {
+        // Acceleration CAN BE NEGATIVE
+        if (!('value' in elem)) {
+            //valueNotFoundError
+            var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
+
+            incremenErrorId();
+            deepAccelerationDataDict['errorId'] = error_id;
+            deepAccelerationDataDict['entity'] = entityIncrement;
+            deepAccelerationDataDict['error'] = commonErrorkeyArray[2];
+
+            accelerationArray.push(deepAccelerationDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
+
+            incremenErrorId();
+            deepAccelerationDataDict['errorId'] = error_id;
+            deepAccelerationDataDict['entity'] = entityIncrement;
+            deepAccelerationDataDict['error'] = commonErrorkeyArray[3];
+
+            accelerationArray.push(deepAccelerationDataDict);
+        }
+    });
+    return accelerationArray;
 }
 
 var tempdata = fs.readFileSync("./test.json");

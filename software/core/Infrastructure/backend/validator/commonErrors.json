@@ -13,5 +13,6 @@
     "batteryNotFoundError": "",
     "currentNotFoundError": "",
     "vibrationNotFoundError": "",
-    "gapHeightNotFoundError": ""
+    "gapHeightNotFoundError": "",
+    "accelerationNotFoundError": ""
 }
