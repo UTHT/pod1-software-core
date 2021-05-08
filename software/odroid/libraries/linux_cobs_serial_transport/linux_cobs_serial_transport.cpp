@@ -83,7 +83,7 @@ int linux_cobs_serial_transport_recvmsg(zcm_trans_t *zt, zcm_msg_t *msg, int tim
         // once, and if we spit out a message, immediately dispatch it to the
         // right callbacks. Further calls to recvmsg or transport_update
         // do not until after that callback is done.
-        msg->buf = (char *) (recv_buffer + channelNameLen + 1); 
+        msg->buf = (uint8_t *) (recv_buffer + channelNameLen + 1); 
         msg->len = total_size - 1 - channelNameLen - 4;
         
         t->recv_buffer_tail  = (t->recv_buffer_tail + 1) % QUEUE_NUM;
