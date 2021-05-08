@@ -61,6 +61,15 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
+    vibrationThreshold = 100;
+    var vibrationDataDict = {
+        errorId: error_id,
+        dataArrayName: 'vibrationDataArray',
+        entity: globalEntityIncrement,
+        thresholdValue: vibrationThreshold,
+        error: ''
+    }
+
     if ('speed' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkSpeedData(jsonOdriodData.speed, speedDataDict)
@@ -134,10 +143,25 @@ function validate(jsonOdriodData) {
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
+        // console.log(errorarray);
     }
     else {
         //throw current type error
         errorarray.push(sensorTypeError('current', currentDataDict));
+        // console.log(errorarray);
+    }
+
+    if ('vibration' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkVibrationData(jsonOdriodData.vibration, vibrationDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+        // console.log(errorarray);
+    }
+    else {
+        //throw current type error
+        errorarray.push(sensorTypeError('vibration', currentDataDict));
         console.log(errorarray);
     }
 
@@ -213,7 +237,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[6];
+        deepDataDict['error'] = commonErrorkeyArray[7];
     }
 
     //temperatureNotFoundError
@@ -221,7 +245,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[7];
+        deepDataDict['error'] = commonErrorkeyArray[8];
     }
 
     //brakeNotFoundError
@@ -229,7 +253,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[9];
+        deepDataDict['error'] = commonErrorkeyArray[10];
     }
 
     //batteryNotFoundError
@@ -237,7 +261,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[10];
+        deepDataDict['error'] = commonErrorkeyArray[11];
     }
 
     //batteryNotFoundError
@@ -245,7 +269,15 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[11];
+        deepDataDict['error'] = commonErrorkeyArray[12];
+    }
+
+    //batteryNotFoundError
+    if (sensorType == 'vibration') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[13];
     }
 
     return deepDataDict
@@ -350,7 +382,7 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
                 incremenErrorId();
                 deepTemperatureDataDict['errorId'] = error_id;
                 deepTemperatureDataDict['entity'] = entityIncrement;
-                deepTemperatureDataDict['error'] = commonErrorkeyArray[11];
+                deepTemperatureDataDict['error'] = commonErrorkeyArray[6];
 
                 temperatureArray.push(deepTemperatureDataDict);
             }
@@ -454,7 +486,7 @@ function checkBrakeData(brakeArrayData, brakeDataDict) {
                 incremenErrorId();
                 deepBrakeDataDict['errorId'] = error_id;
                 deepBrakeDataDict['entity'] = entityIncrement;
-                deepBrakeDataDict['error'] = commonErrorkeyArray[11];
+                deepBrakeDataDict['error'] = commonErrorkeyArray[6];
 
                 brakeArray.push(deepBrakeDataDict);
             }
@@ -524,7 +556,7 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
                 incremenErrorId();
                 deepbatteryDataDict['errorId'] = error_id;
                 deepbatteryDataDict['entity'] = entityIncrement;
-                deepbatteryDataDict['error'] = commonErrorkeyArray[11];
+                deepbatteryDataDict['error'] = commonErrorkeyArray[6];
 
                 batteryArray.push(deepbatteryDataDict);
             }
@@ -591,6 +623,61 @@ function checkCurrentData(currentArrayData, currentDataDict) {
     return currentArray;
 }
 
+function checkVibrationData(vibrationArrayData, vibrationDataDict) {
+    vibrationArray = [];
+    var entityIncrement = 1;
+
+    vibrationArrayData.forEach(elem => {
+        if ('value' in elem) {
+            if (elem.value < 0) {
+                //negativeValueError
+                var deepVibrationDataDict = lodash.cloneDeep(vibrationDataDict);
+
+                incremenErrorId();
+                deepVibrationDataDict['errorId'] = error_id;
+                deepVibrationDataDict['entity'] = entityIncrement;
+                deepVibrationDataDict['error'] = commonErrorkeyArray[0];
+
+                vibrationArray.push(deepVibrationDataDict);
+            }
+            else if (elem.value > 100) {
+                var deepVibrationDataDict = lodash.cloneDeep(vibrationDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepVibrationDataDict['errorId'] = error_id;
+                deepVibrationDataDict['entity'] = entityIncrement;
+                deepVibrationDataDict['error'] = commonErrorkeyArray[6];
+
+                vibrationArray.push(deepVibrationDataDict);
+            }
+        }
+        else {
+            //valueNotFoundError
+            var deepVibrationDataDict = lodash.cloneDeep(vibrationDataDict);
+
+            incremenErrorId();
+            deepVibrationDataDict['errorId'] = error_id;
+            deepVibrationDataDict['entity'] = entityIncrement;
+            deepVibrationDataDict['error'] = commonErrorkeyArray[2];
+
+            vibrationArray.push(deepVibrationDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepVibrationDataDict = lodash.cloneDeep(vibrationDataDict);
+
+            incremenErrorId();
+            deepVibrationDataDict['errorId'] = error_id;
+            deepVibrationDataDict['entity'] = entityIncrement;
+            deepVibrationDataDict['error'] = commonErrorkeyArray[3];
+
+            vibrationArray.push(deepVibrationDataDict);
+        }
+    });
+    return vibrationArray;
+}
 
 var tempdata = fs.readFileSync("./test.json");
 const validateobject = validate(JSON.parse(tempdata));

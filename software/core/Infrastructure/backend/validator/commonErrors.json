@@ -5,11 +5,12 @@
     "nameNotFoundError": "",
     "statusNotFoundError": "",
     "pressureNotFoundError": "",
+    "valueExceedsThresholdError": "",
     "speedNotFoundError": "",
     "temperatureNotFoundError": "",
     "positionNotFoundError": "",
     "brakesNotFoundError": "",
     "batteryNotFoundError": "",
     "currentNotFoundError": "",
-    "valueExceedsThresholdError": ""
+    "vibrationNotFoundError": ""
 }
