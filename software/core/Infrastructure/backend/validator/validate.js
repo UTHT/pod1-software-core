@@ -34,7 +34,7 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
-    brakesThreshold = 1000;
+    brakesThreshold = 200;
     var brakeDataDict = {
         errorId: error_id,
         dataArrayName: 'brakeDataArray',
@@ -49,6 +49,15 @@ function validate(jsonOdriodData) {
         dataArrayName: 'batteryDataArray',
         entity: globalEntityIncrement,
         thresholdValue: batteryThreshold,
+        error: ''
+    }
+
+    currentThreshold = 100;
+    var currentDataDict = {
+        errorId: error_id,
+        dataArrayName: 'currentDataArray',
+        entity: globalEntityIncrement,
+        thresholdValue: currentThreshold,
         error: ''
     }
 
@@ -117,6 +126,19 @@ function validate(jsonOdriodData) {
         errorarray.push(sensorTypeError('battery', batteryDataDict));
         // console.log(errorarray);
 
+    }
+
+    if ('current' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkCurrentData(jsonOdriodData.current, currentDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+    }
+    else {
+        //throw current type error
+        errorarray.push(sensorTypeError('current', currentDataDict));
+        console.log(errorarray);
     }
 
     const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
@@ -216,6 +238,14 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
         deepDataDict['error'] = commonErrorkeyArray[10];
+    }
+
+    //batteryNotFoundError
+    if (sensorType == 'current') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[11];
     }
 
     return deepDataDict
@@ -514,7 +544,51 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
 
     });
     return batteryArray;
+}
 
+function checkCurrentData(currentArrayData, currentDataDict) {
+    currentArray = [];
+    var entityIncrement = 1;
+
+    currentArrayData.forEach(elem => {
+        if ('value' in elem) {
+            if (elem.value < 0) {
+                //negativeValueError
+                var deepCurrentDataDict = lodash.cloneDeep(currentDataDict);
+
+                incremenErrorId();
+                deepCurrentDataDict['errorId'] = error_id;
+                deepCurrentDataDict['entity'] = entityIncrement;
+                deepCurrentDataDict['error'] = commonErrorkeyArray[0];
+
+                currentArray.push(deepCurrentDataDict);
+            }
+        }
+        else {
+            //valueNotFoundError
+            var deepCurrentDataDict = lodash.cloneDeep(currentDataDict);
+
+            incremenErrorId();
+            deepCurrentDataDict['errorId'] = error_id;
+            deepCurrentDataDict['entity'] = entityIncrement;
+            deepCurrentDataDict['error'] = commonErrorkeyArray[2];
+
+            currentArray.push(deepCurrentDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepCurrentDataDict = lodash.cloneDeep(currentDataDict);
+
+            incremenErrorId();
+            deepCurrentDataDict['errorId'] = error_id;
+            deepCurrentDataDict['entity'] = entityIncrement;
+            deepCurrentDataDict['error'] = commonErrorkeyArray[3];
+
+            currentArray.push(deepCurrentDataDict);
+        }
+    });
+    return currentArray;
 }
 
 

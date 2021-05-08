@@ -10,5 +10,6 @@
     "positionNotFoundError": "",
     "brakesNotFoundError": "",
     "batteryNotFoundError": "",
+    "currentNotFoundError": "",
     "valueExceedsThresholdError": ""
 }
