@@ -638,6 +638,13 @@ function checkBatteryData(batteryArrayData, batteryDataDict) {
     return batteryArray;
 }
 
+/**
+ * Creates an array of current data error objects by checking name and value of the data
+ *
+ * @param {Object[]} currentArrayData
+ * @param {Object} currentDataDict
+ * @returns {Object[]}
+ */
 function checkCurrentData(currentArrayData, currentDataDict) {
     currentArray = [];
     var entityIncrement = 1;
@@ -694,6 +701,13 @@ function checkCurrentData(currentArrayData, currentDataDict) {
     return currentArray;
 }
 
+/**
+ * Creates an array of vibraiton data error objects by checking name and value of the data
+ *
+ * @param {Object[]} vibrationArrayData
+ * @param {Object} vibrationDataDict
+ * @returns {Object[]}
+ */
 function checkVibrationData(vibrationArrayData, vibrationDataDict) {
     vibrationArray = [];
     var entityIncrement = 1;
@@ -750,6 +764,13 @@ function checkVibrationData(vibrationArrayData, vibrationDataDict) {
     return vibrationArray;
 }
 
+/**
+ * Creates an array of vibraiton data error objects by checking name and value of the data
+ *
+ * @param {Object[]} gapHeightArrayData
+ * @param {Object} gapHeightDataDict
+ * @returns {Object[]}
+ */
 function checkGapHeightData(gapHeightArrayData, gapHeightDataDict) {
     gapHeightArray = [];
     var entityIncrement = 1;
@@ -806,6 +827,13 @@ function checkGapHeightData(gapHeightArrayData, gapHeightDataDict) {
     return gapHeightArray;
 }
 
+/**
+ * Creates an array of vibraiton data error objects by checking name and value of the data
+ *
+ * @param {Object[]} accelerationArrayData
+ * @param {Object} accelerationDataDict
+ * @returns {Object[]}
+ */
 function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
     accelerationArray = [];
     var entityIncrement = 1;
