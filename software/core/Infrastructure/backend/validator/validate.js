@@ -595,6 +595,17 @@ function checkCurrentData(currentArrayData, currentDataDict) {
 
                 currentArray.push(deepCurrentDataDict);
             }
+            else if (elem.value > 100) {
+                var deepCurrentDataDict = lodash.cloneDeep(currentDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepCurrentDataDict['errorId'] = error_id;
+                deepCurrentDataDict['entity'] = entityIncrement;
+                deepCurrentDataDict['error'] = commonErrorkeyArray[6];
+
+                currentArray.push(deepCurrentDataDict);
+            }
         }
         else {
             //valueNotFoundError
