@@ -8,7 +8,7 @@ import subprocess
 
 server = "127.0.0.1"  # Server IP Address
 port = 8080  # Server Port
-SEND_COUNT = 10
+SEND_COUNT = 30
 streaming_process = None
 with open('./test.json') as f:
     raw_data = json.load(f)
@@ -26,7 +26,7 @@ class AppProtocol(WebSocketClientProtocol):
     def sendOneOdroidMessage(self):
         data = raw_data['data']
 
-        if self.count < 30:
+        if self.count < 20:
             data['speed'][0]['value'] += 30
 
             data['temperatures'][0]['value'] += 1
@@ -39,9 +39,9 @@ class AppProtocol(WebSocketClientProtocol):
 
         elif  self.count  < 56:
             data['brakes'][0]['status'] = 1
-            data['brakes'][0]['pressure'] +=10
+            data['brakes'][0]['value'] +=10
             data['brakes'][1]['status'] = 1
-            data['brakes'][1]['pressure'] +=10
+            data['brakes'][1]['value'] +=10
 
             data['speed'][0]['value'] -= 30
 
@@ -68,7 +68,7 @@ class AppProtocol(WebSocketClientProtocol):
         
         self.count +=1
         if self.count < SEND_COUNT:
-            time.sleep(2.5)
+            time.sleep(0.5)
             self.sendOneOdroidMessage()
 
     def onClose(self, wasClean, code, reason):
