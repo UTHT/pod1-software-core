@@ -70,6 +70,15 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
+    gapHeightThreshold = 100;
+    var gapHeightDataDict = {
+        errorId: error_id,
+        dataArrayName: 'gapHeightDataArray',
+        entity: globalEntityIncrement,
+        thresholdValue: gapHeightThreshold,
+        error: ''
+    }
+
     if ('speed' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkSpeedData(jsonOdriodData.speed, speedDataDict)
@@ -162,7 +171,21 @@ function validate(jsonOdriodData) {
     else {
         //throw current type error
         errorarray.push(sensorTypeError('vibration', currentDataDict));
-        console.log(errorarray);
+        // console.log(errorarray);
+    }
+
+    if ('gapHeight' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkGapHeightData(jsonOdriodData.gapHeight, gapHeightDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+        // console.log(errorarray);
+    }
+    else {
+        //throw current type error
+        errorarray.push(sensorTypeError('gapHeight', gapHeightDataDict));
+        // console.log(errorarray);
     }
 
     const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
@@ -264,7 +287,7 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['error'] = commonErrorkeyArray[11];
     }
 
-    //batteryNotFoundError
+    //currentNotFoundError
     if (sensorType == 'current') {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
@@ -272,12 +295,20 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['error'] = commonErrorkeyArray[12];
     }
 
-    //batteryNotFoundError
+    //vibrationNotFoundError
     if (sensorType == 'vibration') {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
         deepDataDict['error'] = commonErrorkeyArray[13];
+    }
+
+    //gapHeightNotFoundError
+    if (sensorType == 'gapHeight') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[14];
     }
 
     return deepDataDict
@@ -688,6 +719,62 @@ function checkVibrationData(vibrationArrayData, vibrationDataDict) {
         }
     });
     return vibrationArray;
+}
+
+function checkGapHeightData(gapHeightArrayData, gapHeightDataDict) {
+    gapHeightArray = [];
+    var entityIncrement = 1;
+
+    gapHeightArrayData.forEach(elem => {
+        if ('value' in elem) {
+            if (elem.value < 0) {
+                //negativeValueError
+                var deepGapHeightDataDict = lodash.cloneDeep(gapHeightDataDict);
+
+                incremenErrorId();
+                deepGapHeightDataDict['errorId'] = error_id;
+                deepGapHeightDataDict['entity'] = entityIncrement;
+                deepGapHeightDataDict['error'] = commonErrorkeyArray[0];
+
+                gapHeightArray.push(deepGapHeightDataDict);
+            }
+            else if (elem.value > 100) {
+                var deepGapHeightDataDict = lodash.cloneDeep(gapHeightDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepGapHeightDataDict['errorId'] = error_id;
+                deepGapHeightDataDict['entity'] = entityIncrement;
+                deepGapHeightDataDict['error'] = commonErrorkeyArray[6];
+
+                gapHeightArray.push(deepGapHeightDataDict);
+            }
+        }
+        else {
+            //valueNotFoundError
+            var deepGapHeightDataDict = lodash.cloneDeep(gapHeightDataDict);
+
+            incremenErrorId();
+            deepGapHeightDataDict['errorId'] = error_id;
+            deepGapHeightDataDict['entity'] = entityIncrement;
+            deepGapHeightDataDict['error'] = commonErrorkeyArray[2];
+
+            gapHeightArray.push(deepGapHeightDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepGapHeightDataDict = lodash.cloneDeep(gapHeightDataDict);
+
+            incremenErrorId();
+            deepGapHeightDataDict['errorId'] = error_id;
+            deepGapHeightDataDict['entity'] = entityIncrement;
+            deepGapHeightDataDict['error'] = commonErrorkeyArray[3];
+
+            gapHeightArray.push(deepGapHeightDataDict);
+        }
+    });
+    return gapHeightArray;
 }
 
 var tempdata = fs.readFileSync("./test.json");

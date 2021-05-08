@@ -12,5 +12,6 @@
     "brakesNotFoundError": "",
     "batteryNotFoundError": "",
     "currentNotFoundError": "",
-    "vibrationNotFoundError": ""
+    "vibrationNotFoundError": "",
+    "gapHeightNotFoundError": ""
 }
