@@ -206,7 +206,7 @@ function validate(jsonOdriodData) {
     else {
         //throw current type error
         errorarray.push(sensorTypeError('acceleration', accelerationDataDict));
-        console.log(errorarray);
+        // console.log(errorarray);
     }
 
     const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);

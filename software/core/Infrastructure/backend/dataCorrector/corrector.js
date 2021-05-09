@@ -6,8 +6,36 @@ var commonErrorkeyArray = Object.keys(commonErrorsParsed);
 
 function corrector(json_odriod_data, error_obj) {
 
+    for (const [dataArray, sensor] of Object.entries(error_obj)) {
+        for (const [sensor_key, error] of Object.entries(sensor)){
+            for (const [error_key, value] of Object.entries(error)){
+                // console.log(error_key)
+                if (error_key == "speedNotFoundError") insert_speed();
+
+            }
+        }
+    }
 
 }
+
+
+var temp_error = {
+    "brakeDataArray": {
+        "brakes": {
+            "nameNotFoundError": [
+                {
+                    "errorId": 6,
+                    "entity": 1,
+                    "thresholdValue": 100,
+                    "error": "nameNotFoundError"
+                }
+            ]
+        }
+    } 
+};
+
+// if (temp_error.brakeDataArray.brakes.brakesNotFoundError) console.log("true");
+// else console.log("false"); 
 
 
 var obj = {
@@ -25,13 +53,13 @@ var temp_string = "temp";
 var hello = "hello";
 obj["speed"][0][temp_string] = hello;
 
-console.log(JSON.stringify(obj, null, 4));
+// console.log(JSON.stringify(obj, null, 4));
 
 var test_data = fs.readFileSync("./test_data.json");
 var test_errors = fs.readFileSync("./test_error.json");
+
 // var  error_obj = validate(JSON.parse(test_data));
 const correct_object = corrector(JSON.parse(test_data), JSON.parse(test_errors))
 // console.log(correct_object);
 
 module.exports = corrector;
-

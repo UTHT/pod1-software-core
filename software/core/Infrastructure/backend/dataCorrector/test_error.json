@@ -1,108 +1,92 @@
 {
     "speedDataArray": {
-      "1": {
-        "negativeValueError": [
+      "speed": {
+        "speedNotFoundError": [
           {
             "errorId": 1,
-            "entity": 1,
-            "error": "negativeValueError"
-          }
-        ],
-        "nameNotFoundError": [
-          {
-            "errorId": 2,
-            "entity": 1,
-            "error": "nameNotFoundError"
+            "entity": "speed",
+            "error": "speedNotFoundError"
           }
         ]
       }
     },
     "temperatureDataArray": {
-      "1": {
-        "nameNotFoundError": [
+      "temperatures": {
+        "temperatureNotFoundError": [
           {
-            "errorId": 3,
-            "entity": 1,
+            "errorId": 2,
+            "entity": "temperatures",
             "thresholdValue": 1000,
-            "error": "nameNotFoundError"
-          }
-        ],
-        "valueExceedsThresholdError": [
-          {
-            "errorId": 4,
-            "entity": 1,
-            "thresholdValue": 1000,
-            "error": "valueExceedsThresholdError"
+            "error": "temperatureNotFoundError"
           }
         ]
       }
     },
     "brakeDataArray": {
-      "1": {
-        "nameNotFoundError": [
+      "brakes": {
+        "brakesNotFoundError": [
           {
-            "errorId": 5,
-            "entity": 1,
-            "thresholdValue": 1000,
-            "error": "nameNotFoundError"
-          }
-        ],
-        "valueExceedsThresholdError": [
-          {
-            "errorId": 6,
-            "entity": 1,
-            "thresholdValue": 1000,
-            "error": "valueExceedsThresholdError"
-          }
-        ]
-      },
-      "2": {
-        "statusNotFoundError": [
-          {
-            "errorId": 7,
-            "entity": 2,
-            "thresholdValue": 1000,
-            "error": "statusNotFoundError"
-          }
-        ]
-      },
-      "3": {
-        "pressureNotFoundError": [
-          {
-            "errorId": 8,
-            "entity": 3,
-            "thresholdValue": 1000,
-            "error": "pressureNotFoundError"
+            "errorId": 3,
+            "entity": "brakes",
+            "thresholdValue": 200,
+            "error": "brakesNotFoundError"
           }
         ]
       }
     },
     "batteryDataArray": {
-      "1": {
-        "nameNotFoundError": [
+      "battery": {
+        "batteryNotFoundError": [
           {
-            "errorId": 9,
-            "entity": 1,
+            "errorId": 4,
+            "entity": "battery",
             "thresholdValue": 100,
-            "error": "nameNotFoundError"
+            "error": "batteryNotFoundError"
           }
-        ],
-        "valueExceedsThresholdError": [
+        ]
+      }
+    },
+    "currentDataArray": {
+      "current": {
+        "currentNotFoundError": [
           {
-            "errorId": 10,
-            "entity": 1,
+            "errorId": 5,
+            "entity": "current",
             "thresholdValue": 100,
-            "error": "valueExceedsThresholdError"
+            "error": "currentNotFoundError"
           }
         ]
       },
-      "2": {
-        "valueNotFoundError": [
+      "vibration": {
+        "vibrationNotFoundError": [
           {
-            "errorId": 11,
-            "entity": 2,
+            "errorId": 6,
+            "entity": "vibration",
             "thresholdValue": 100,
-            "error": "valueNotFoundError"
+            "error": "vibrationNotFoundError"
+          }
+        ]
+      }
+    },
+    "gapHeightDataArray": {
+      "gapHeight": {
+        "gapHeightNotFoundError": [
+          {
+            "errorId": 7,
+            "entity": "gapHeight",
+            "thresholdValue": 100,
+            "error": "gapHeightNotFoundError"
+          }
+        ]
+      }
+    },
+    "accelerationDataArray": {
+      "acceleration": {
+        "accelerationNotFoundError": [
+          {
+            "errorId": 8,
+            "entity": "acceleration",
+            "error": "accelerationNotFoundError"
           }
         ]
       }
