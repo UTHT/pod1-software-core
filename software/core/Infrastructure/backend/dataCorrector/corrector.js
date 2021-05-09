@@ -4,20 +4,34 @@ const fs = require("fs");
 // var commonErrorsParsed = JSON.parse(commonErrors);
 // var commonErrorkeyArray = Object.keys(commonErrorsParsed);
 
+var global_data = {};
+var temp_dict = {
+    "name": "empty",
+    "value": "-1"
+};
+
 function corrector(json_odriod_data, error_array) {
 
+    global_data = json_odriod_data;
 
+    error_array.forEach(element => {
+        if (element.error == "speedNotFoundError") insert_speed();
+        // if (element.error == "temperatureNotFoundError") insert_temperature();
+        // if (element.error == "brakesNotFoundError") insert_brakes();
+        // if (element.error == "batteryNotFoundError") insert_battery();
+        // if (element.error == "currentNotFoundError") insert_current();
+        // if (element.error == "vibrationNotFoundError") insert_vibration();
+        // if (element.error == "gapHeightNotFoundError") insert_gapHeight();
+        // if (element.error == "accelerationNotFoundError") insert_acceleration();
+    });
 
-    // for (const [dataArray, sensor] of Object.entries(error_obj)) {
-    //     for (const [sensor_key, error] of Object.entries(sensor)){
-    //         for (const [error_key, value] of Object.entries(error)){
-    //             // console.log(error_key)
-    //             // if (error_key == "speedNotFoundError") insert_speed();
+    return global_data;
+    // console.log(JSON.stringify(global_data, null, 4));
+}
 
-    //         }
-    //     }
-    // }
-
+function insert_speed() {
+    global_data["speed"] = []
+    global_data["speed"].push(temp_dict);
 }
 
 var error_array =
@@ -25,27 +39,63 @@ var error_array =
     {
       errorId: 1,
       dataArrayName: 'speedDataArray',
-      entity: 1,
-      error: 'negativeValueError'
+      entity: 'speed',
+      error: 'speedNotFoundError'
     },
     {
       errorId: 2,
-      dataArrayName: 'speedDataArray',
-      entity: 1,
-      error: 'nameNotFoundError'
+      dataArrayName: 'temperatureDataArray',
+      entity: 'temperatures',
+      thresholdValue: 1000,
+      error: 'temperatureNotFoundError'
     },
     {
       errorId: 3,
-      dataArrayName: 'temperatureDataArray',
-      entity: 1,
-      thresholdValue: 1000,
-      error: 'nameNotFoundError'
+      dataArrayName: 'brakeDataArray',
+      entity: 'brakes',
+      thresholdValue: 200,
+      error: 'brakesNotFoundError'
+    },
+    {
+      errorId: 4,
+      dataArrayName: 'batteryDataArray',
+      entity: 'battery',
+      thresholdValue: 100,
+      error: 'batteryNotFoundError'
+    },
+    {
+      errorId: 5,
+      dataArrayName: 'currentDataArray',
+      entity: 'current',
+      thresholdValue: 100,
+      error: 'currentNotFoundError'
+    },
+    {
+      errorId: 6,
+      dataArrayName: 'currentDataArray',
+      entity: 'vibration',
+      thresholdValue: 100,
+      error: 'vibrationNotFoundError'
+    },
+    {
+      errorId: 7,
+      dataArrayName: 'gapHeightDataArray',
+      entity: 'gapHeight',
+      thresholdValue: 100,
+      error: 'gapHeightNotFoundError'
+    },
+    {
+      errorId: 8,
+      dataArrayName: 'accelerationDataArray',
+      entity: 'acceleration',
+      error: 'accelerationNotFoundError'
     }
-]
+  ]
 
 error_array.forEach(elem => {
     // console.log(elem.error);
 });
+
 
 /*
 ------------------------------------------------------
@@ -73,6 +123,7 @@ var temp_error = {
 ------------------------------------------------------------
 */
 
+/*
 var obj = {
     "speed": [
         {
@@ -87,6 +138,7 @@ obj["speed"][0] = temp_dict;
 var temp_string = "temp";
 var hello = "hello";
 obj["speed"][0][temp_string] = hello;
+*/
 
 // console.log(JSON.stringify(obj, null, 4));
 
@@ -97,10 +149,10 @@ obj["speed"][0][temp_string] = hello;
 
 
 var test_data = fs.readFileSync("./test_data.json");
-var test_errors = fs.readFileSync("./test_error.json");
+// var test_errors = fs.readFileSync("./test_error.json");
 
 // var  error_obj = validate(JSON.parse(test_data));
-const correct_object = corrector(JSON.parse(test_data), JSON.parse(test_errors))
-// console.log(correct_object);
+const correct_object = corrector(JSON.parse(test_data), error_array)
+console.log(JSON.stringify(correct_object, null, 4));
 
 module.exports = corrector;
