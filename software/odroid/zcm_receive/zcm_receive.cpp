@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     if (argc == 2) {
         serial_port = argv[1];
     } else {
-        serial_port = "1";
+        serial_port = "/dev/cu.usbmodem14501";
     }
 
     cout << "Listening on port: " << serial_port << endl;
@@ -30,6 +30,10 @@ int main(int argc, char** argv) {
     zcm_t* zcm = zcm_create_from_trans(linux_cobs_serial_transport);
 
     test_msg_subscribe(zcm, "TEST", &test_msg_handler, NULL);
+
+    while (true) {
+        zcm_handle_nonblock(zcm);
+    }
 
     return 0;
 }
