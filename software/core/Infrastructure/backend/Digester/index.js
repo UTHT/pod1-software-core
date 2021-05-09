@@ -32,10 +32,10 @@ function digest(odroid_json) {
 	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes];
 }
 
-const data = fs.readFileSync("./test.json");
+// const data = fs.readFileSync("./test.json");
 
-const digester_object = digest(JSON.parse(data));
-console.log(digester_object);
+// const digester_object = digest(JSON.parse(data));
+// console.log(digester_object);
 
 module.exports = digest;
 

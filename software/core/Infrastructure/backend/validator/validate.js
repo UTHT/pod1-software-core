@@ -209,51 +209,7 @@ function validate(jsonOdriodData) {
         // console.log(errorarray);
     }
 
-    const groupByDataArray = nestGroupsBy(errorarray, ['dataArrayName', 'entity', 'error']);
-    var nestedObj = JSON.stringify(groupByDataArray, null, 2);
-    return nestedObj;
-
-}
-//the following two function convert the error array into an array with nested objects
-
-/**
- * Creates nested groups by object properties.
- * `properties` array nest from highest(index = 0) to lowest level.
- *
- * @param {String[]} properties
- * @returns {Object}
- */
-function nestGroupsBy(arr, properties) {
-    properties = Array.from(properties);
-    if (properties.length === 1) {
-        return groupBy(arr, properties[0]);
-    }
-    const property = properties.shift();
-    var grouped = groupBy(arr, property);
-    for (let key in grouped) {
-        grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
-    }
-    return grouped;
-}
-
-/**
- * Group objects by property.
- * `nestGroupsBy` helper method.
- *
- * @param {String} property
- * @param {Object[]} conversions
- * @returns {Object}
- */
-function groupBy(conversions, property) {
-    return conversions.reduce((accumulate, obj) => {
-        let key = obj[property];
-        if (!accumulate[key]) {
-            accumulate[key] = [];
-        }
-        delete obj.dataArrayName;
-        accumulate[key].push(obj);
-        return accumulate;
-    }, {});
+    return errorarray;
 }
 
 //increment error id
