@@ -15,24 +15,39 @@ function corrector(json_odriod_data, error_array) {
     global_data = json_odriod_data;
 
     error_array.forEach(element => {
-        if (element.error == "speedNotFoundError") insert_speed();
-        // if (element.error == "temperatureNotFoundError") insert_temperature();
-        // if (element.error == "brakesNotFoundError") insert_brakes();
-        // if (element.error == "batteryNotFoundError") insert_battery();
-        // if (element.error == "currentNotFoundError") insert_current();
-        // if (element.error == "vibrationNotFoundError") insert_vibration();
-        // if (element.error == "gapHeightNotFoundError") insert_gapHeight();
-        // if (element.error == "accelerationNotFoundError") insert_acceleration();
+        if (element.error == "speedNotFoundError") insert_name_value("speed");
+        if (element.error == "temperatureNotFoundError") insert_name_value("temperatures");
+        if (element.error == "brakesNotFoundError") insert_brakes();
+        if (element.error == "batteryNotFoundError") insert_name_value("battery");
+        if (element.error == "currentNotFoundError") insert_name_value("current");
+        if (element.error == "vibrationNotFoundError") insert_name_value("vibration");
+        if (element.error == "gapHeightNotFoundError") insert_name_value("gapHeight");
+        if (element.error == "accelerationNotFoundError") insert_name_value("acceleration");
     });
 
     return global_data;
     // console.log(JSON.stringify(global_data, null, 4));
 }
 
-function insert_speed() {
-    global_data["speed"] = []
-    global_data["speed"].push(temp_dict);
+function insert_name_value(sensor_name){
+    global_data[sensor_name] = [];
+    global_data[sensor_name].push(temp_dict);
 }
+
+function insert_brakes() {
+    global_data["brakes"] = [];
+    var temp_brake_dict = {
+        "name": "empty",
+        "status": "-1",
+        "pressure": "-1"    
+    }
+
+    global_data["brakes"] = temp_brake_dict;
+}
+
+/*
+--------------------------------Testing Data-----------------------------------------
+*/
 
 var error_array =
 [
@@ -98,53 +113,8 @@ error_array.forEach(elem => {
 
 
 /*
-------------------------------------------------------
+-------------------------------Testing Data-------------------------------------------
 */
-
-var temp_error = {
-    "brakeDataArray": {
-        "brakes": {
-            "nameNotFoundError": [
-                {
-                    "errorId": 6,
-                    "entity": 1,
-                    "thresholdValue": 100,
-                    "error": "nameNotFoundError"
-                }
-            ]
-        }
-    } 
-};
-
-// if (temp_error.brakeDataArray.brakes.brakesNotFoundError) console.log("true");
-// else console.log("false"); 
-
-/*
-------------------------------------------------------------
-*/
-
-/*
-var obj = {
-    "speed": [
-        {
-            "value": -8
-        }
-    ],
-};
-
-var temp_dict = {"name": "speed", "value": 0};
-obj["speed"][0] = temp_dict;
-
-var temp_string = "temp";
-var hello = "hello";
-obj["speed"][0][temp_string] = hello;
-*/
-
-// console.log(JSON.stringify(obj, null, 4));
-
-
-
-
 
 
 

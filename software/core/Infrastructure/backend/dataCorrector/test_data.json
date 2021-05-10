@@ -20,7 +20,7 @@
     "brakes": [
         {
             "status": 0,
-            "pressure": 2570.2323
+            "pressure": 170.2323
         },
         {
             "name": "brakes_right",
@@ -37,6 +37,26 @@
         },
         {
             "name": "battery_2"
+        }
+    ],
+    "current": [
+        {
+            "value": "200"
+        }
+    ],
+    "vibration": [
+        {
+            "value": "200"            
+        }
+    ],
+    "gapHeight": [
+        {
+            "value": "233"
+        }
+    ],
+    "acceleration": [
+        {
+            "value": "23"
         }
     ]
 }
