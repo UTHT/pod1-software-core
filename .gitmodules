@@ -1,6 +1,6 @@
 [submodule "software/lcm"]
 	path = software/lcm
 	url = https://github.com/lcm-proj/lcm.git
-[submodule "software/zcm_utht/externals/PacketSerial"]
-	path = software/zcm_utht/externals/PacketSerial
+[submodule "software/communications/libraries/PacketSerial"]
+	path = software/communications/libraries/PacketSerial
 	url = https://github.com/gizatt/PacketSerial.git

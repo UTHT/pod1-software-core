@@ -2,7 +2,7 @@
    Arduino + COBS from PacketLib */
 
 #include "linux_cobs_serial_transport.hpp"
-#include "../common/crc32.h"
+#include "../common/src/crc32.h"
 
 /* Returns Maximum Transmission Unit supported */
 size_t linux_cobs_serial_transport_get_mtu(zcm_trans_t *zt){
