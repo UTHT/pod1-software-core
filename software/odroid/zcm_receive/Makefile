@@ -10,9 +10,6 @@ all: $(TARGET)
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
 
-# $(TARGET): zcm_receive.cpp
-# 	$(CC) $(CFLAGS) $(TARGET) zcm_receive.cpp
-
 zcm_receive.o: zcm_receive.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
 	
@@ -33,7 +30,3 @@ zcm.o: zcm.c nonblocking.o
 
 nonblocking.o: nonblocking.c
 	gcc -c $(CFLAGS) $^ -o $@
-
-# transport.o: ../libraries/zcm/transport/generic_serial_transport.c
-# 	$(CC) -c $(CFLAGS) $^ -o $@
-

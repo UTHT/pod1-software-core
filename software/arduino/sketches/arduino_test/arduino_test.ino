@@ -31,9 +31,6 @@ void loop() {
   // of ZCM reads this message (aka the Odroid).
   int result = publishTestToChannel(zcm_arduino, message, "TEST");
 
-  // Need to remove this after testing
-  Serial.println();
-
 //  if (result == 0) {
 //    Serial.println("Successfully published to channel 'TEST'");
 //  } else {
