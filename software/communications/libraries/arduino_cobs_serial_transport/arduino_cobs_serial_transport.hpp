@@ -7,7 +7,7 @@
 
 #include "../zcm/transport.h"
 // #include "Arduino.h"
-#include "PacketSerial/src/PacketSerialArduino.h"
+#include "PacketSerialArduino.h"
 
 
 // Define this the class name you want

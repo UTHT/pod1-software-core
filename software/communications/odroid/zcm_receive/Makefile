@@ -1,8 +1,24 @@
 CC = g++
-INCLUDES = -I../libraries -I../libraries/libserial/src -I../libraries/linux_cobs_serial_transport
-VPATH = ../libraries/linux_cobs_serial_transport ../libraries/libserial/src ../libraries/zcm ../libraries/zcm_types/src/
 CFLAGS = $(INCLUDES) -g -Wall
 TARGET = zcm_receive
+
+# Common directories
+LIBRARIES_FOLDER = ../../libraries
+
+# Instead of using relative paths within each .cpp/.c or header file, define it here.
+INCLUDES += -I$(LIBRARIES_FOLDER)
+INCLUDES += -I$(LIBRARIES_FOLDER)/libserial/src
+INCLUDES += -I$(LIBRARIES_FOLDER)/linux_cobs_serial_transport
+INCLUDES += -I$(LIBRARIES_FOLDER)/zcm
+INCLUDES += -I$(LIBRARIES_FOLDER)/zcm_types/src/
+
+# VPATH is used to define where the arguments of each rule are located
+VPATH += $(LIBRARIES_FOLDER)/linux_cobs_serial_transport
+VPATH += $(LIBRARIES_FOLDER)/libserial/src
+VPATH += $(LIBRARIES_FOLDER)/zcm
+VPATH += $(LIBRARIES_FOLDER)/zcm_types/src/
+
+# Final objects needed to build the zcm_receive executable file
 OBJECTS = zcm_receive.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o test_msg.o
 
 all: $(TARGET)

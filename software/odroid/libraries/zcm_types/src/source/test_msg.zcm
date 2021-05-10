@@ -1,4 +1,0 @@
-struct test_msg
-{
-    string str;
-}

@@ -1,8 +1,5 @@
-#include "../libraries/linux_cobs_serial_transport/linux_cobs_serial_transport.hpp"
-
-// We need to centralize all zcm_types to a different folder.
-// Temporary way to access the zcm types:
-#include "../libraries/zcm_types/src/test_msg.h" 
+#include <linux_cobs_serial_transport.hpp>
+#include <test_msg.h>
 
 #include <stdint.h>
 #include <string>
@@ -18,10 +15,11 @@ static void test_msg_handler(const zcm_recv_buf_t* rbuf, const char* channel, co
 int main(int argc, char** argv) {
     char* serial_port;
 
+    // Get the serial port from the Arduino IDE and pass it to the program.
     if (argc == 2) {
         serial_port = argv[1];
     } else {
-        serial_port = "/dev/cu.usbmodem14501";
+        serial_port = (char *) "/dev/cu.usbmodem14501";
     }
 
     cout << "Listening on port: " << serial_port << endl;
