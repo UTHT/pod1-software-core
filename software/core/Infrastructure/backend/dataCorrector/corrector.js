@@ -15,14 +15,35 @@ function corrector(json_odriod_data, error_array) {
     global_data = json_odriod_data;
 
     error_array.forEach(element => {
-        if (element.error == "speedNotFoundError") insert_name_value("speed");
-        if (element.error == "temperatureNotFoundError") insert_name_value("temperatures");
-        if (element.error == "brakesNotFoundError") insert_brakes();
-        if (element.error == "batteryNotFoundError") insert_name_value("battery");
-        if (element.error == "currentNotFoundError") insert_name_value("current");
-        if (element.error == "vibrationNotFoundError") insert_name_value("vibration");
-        if (element.error == "gapHeightNotFoundError") insert_name_value("gapHeight");
-        if (element.error == "accelerationNotFoundError") insert_name_value("acceleration");
+      error_type = element.error;
+      switch (true) {
+        case error_type == "speedNotFoundError":
+          insert_name_value("speed");
+          break;
+        case error_type == "temperatureNotFoundError":
+          insert_name_value("temperatures");
+          break;
+        case error_type == "brakesNotFoundError":
+          insert_brakes();
+          break;
+        case error_type == "batteryNotFoundError":
+          insert_name_value("battery");
+          break;
+        case error_type == "currentNotFoundError":
+          insert_name_value("current");
+          break;
+        case error_type == "vibrationNotFoundError":
+          insert_name_value("vibration");
+          break;
+        case error_type == "gapHeightNotFoundError":
+          insert_name_value("gapHeight");
+          break;
+        case error_type == "accelerationNotFoundError":
+          insert_name_value("acceleration");
+          break;
+        default:
+          break;
+      }
     });
 
     return global_data;
