@@ -50,28 +50,11 @@ export class BatteryComponent implements OnInit {
 	}
 
 	public updateBatteryPercentage(): void {
-		// if (Math.floor(Math.random() * 50)==0){
-			// this.arrayColor = []	
-			// this.value -= 1;
-			// this.renderArrayColor();
-		// }
-
-
 		this.wsService.history.subscribe(historyArray => {
 			if (historyArray && historyArray.length > 0){
-			//   console.log(historyArray);
-			//   this.currSpeed = historyArray[historyArray.length-1].obj.SPEED[0]._value;
 			  this.value = historyArray[historyArray.length-1].obj.BATTERY[this.idNum]._value;
-			  // if (this.count % 5000 == 0){
-				// this.speedArray.push([this.value/1000,Math.floor(this.currSpeed)])
-				// if (this.speedArray.length > 10){
-				//   this.speedArray.shift();
-				// }
-			  // }
 			}
 			this.renderArrayColor();
 		  })
-
-        // setTimeout(() => { this.updateBatteryPercentage(); }, 200);
     }
 }

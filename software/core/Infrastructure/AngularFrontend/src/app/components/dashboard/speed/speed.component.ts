@@ -33,9 +33,5 @@ export class SpeedComponent implements OnInit {
         // }
       }
     })
-
-    //this.currSpeed += 0.1 * (Math.round(Math.random()) * 4 - 1);
-    
-    // setTimeout(() => { this.randomize(); }, 50);
   }
 }

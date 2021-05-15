@@ -21,18 +21,6 @@ export class TemperatureComponent implements OnInit {
     this.updateTemperature();
   }
   updateTemperature() {
-    // Gauge updates every 50ms
-    // Graph updates every 5s
-    // this.currTemperature += 0.1 * (Math.round(Math.random()) * 4 - 1) * (Math.random() < 0.5 ? -1 : 1);
-    // this.count += 50;
-    // if (this.count % 5000 == 0){
-    //   this.temperatureArray.push([this.count/1000,Math.floor(this.currTemperature)]);
-    //   if (this.temperatureArray.length > 10){
-    //     this.temperatureArray.shift();
-    //   }
-    // }
-    // setTimeout(() => { this.updateTemperature(); }, 50);
-
     this.wsService.history.subscribe(historyArray => {
       if (historyArray && historyArray.length > 0){
         console.log(historyArray);
