@@ -170,3 +170,5 @@ function groupBy(conversions, property) {
 //   ]
 
 // console.log(createErrorObj(temp));
+
+module.exports = createErrorObj;

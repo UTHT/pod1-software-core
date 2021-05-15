@@ -1,4 +1,5 @@
-{
+
+commonErrorsDict = {
     "negativeValueError": "",
     "nullValueError": "",
     "valueNotFoundError": "",
@@ -16,3 +17,5 @@
     "gapHeightNotFoundError": "",
     "accelerationNotFoundError": ""
 }
+
+module.exports = commonErrorsDict;

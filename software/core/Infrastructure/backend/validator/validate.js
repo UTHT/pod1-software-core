@@ -2,10 +2,11 @@ const { Console } = require("console");
 const fs = require("fs");
 
 const lodash = require('lodash');
+const commonErrorsDict = require("./commonErrors");
 
-var commonErrors = fs.readFileSync("./commonErrors.json");
-var commonErrorsParsed = JSON.parse(commonErrors);
-var commonErrorkeyArray = Object.keys(commonErrorsParsed);
+// var commonErrors = fs.readFileSync("./commonErrors.json");
+// var commonErrorsParsed = JSON.parse(commonErrors);
+var commonErrorkeyArray = Object.keys(commonErrorsDict);
 var error_id = 0;
 
 /**
@@ -823,8 +824,9 @@ function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
     return accelerationArray;
 }
 
-var tempdata = fs.readFileSync("./test.json");
-const validateobject = validate(JSON.parse(tempdata));
-console.log(validateobject);
+// var tempdata = fs.readFileSync("./test.json");
+// const validateobject = validate(JSON.parse(tempdata));
+// console.log(validateobject);
+// return validateobject;
 
 module.exports = validate;

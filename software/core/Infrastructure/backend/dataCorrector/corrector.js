@@ -4,12 +4,21 @@ const fs = require("fs");
 // var commonErrorsParsed = JSON.parse(commonErrors);
 // var commonErrorkeyArray = Object.keys(commonErrorsParsed);
 
+const validate = require("../validator/validate");
+
 var global_data = {};
 var temp_dict = {
     "name": "empty",
     "value": "-1"
 };
 
+/**
+ * Inputs placeholders values for absent sensors in the orignal JSON odroid data
+ *
+ * @param {[Object object] <JSON>} json_odriod_data
+ * @param {[Object]} error_array
+* @returns {Object}
+ */
 function corrector(json_odriod_data, error_array) {
 
     global_data = json_odriod_data;
@@ -47,7 +56,6 @@ function corrector(json_odriod_data, error_array) {
     });
 
     return global_data;
-    // console.log(JSON.stringify(global_data, null, 4));
 }
 
 function insert_name_value(sensor_name){
@@ -68,7 +76,7 @@ function insert_brakes() {
 
 /*
 --------------------------------Testing Data-----------------------------------------
-*/
+
 
 var error_array =
 [
@@ -128,22 +136,15 @@ var error_array =
     }
   ]
 
-error_array.forEach(elem => {
-    // console.log(elem.error);
-});
-
-
-/*
 -------------------------------Testing Data-------------------------------------------
 */
 
 
-
 var test_data = fs.readFileSync("./test_data.json");
-// var test_errors = fs.readFileSync("./test_error.json");
+var  validator_error_array = validate(JSON.parse(test_data));
+// console.log(validator_error_array);
 
-// var  error_obj = validate(JSON.parse(test_data));
-const correct_object = corrector(JSON.parse(test_data), error_array)
+const correct_object = corrector(JSON.parse(test_data), validator_error_array)
 console.log(JSON.stringify(correct_object, null, 4));
 
 module.exports = corrector;
