@@ -6,7 +6,7 @@ const digest = require("./Digester/index");
 const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
-const validate = require("./validator/validate");
+//const validate = require("./validator/validate");
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -17,7 +17,9 @@ wss.on("connection", function connection(ws) {
 		// parsed incoming data from sockets
 		// enforcing sending evenType with every message for easier data manipulation
 		const { eventType, data } = JSONParser(message);
-		console.log(data, message)
+		// const { eventType, data } = JSON.parse(message);
+		console.log(data, eventType)
+		// console.log(JSON.parse(message));
 
 		//switch case is is better for in the future when there are more than 3 eventTypes
 		switch (eventType) {
@@ -28,7 +30,8 @@ wss.on("connection", function connection(ws) {
 				//Todo: maybe add an error event id clienType is undefined
 				const clientType = data.clientType;
 				ws.clientType = clientType;
-				ws.send(JSON.stringify({ eventType: "init" }));
+				//ws.send(JSON.stringify({ eventType: "init" }));
+				ws.send(JSON.stringify({ eventType: "started" }));
 				return;
 
 			// replay is any messages that just need to be passed to the clientType
@@ -40,13 +43,20 @@ wss.on("connection", function connection(ws) {
 					var errorObj = {};
 
 					// validate incoming data from the pod
+
 					var errorObj = validate(data);
+
 		
 					// Divide incoming data into multiple components
 					const Digestor = digest(data);
 					
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, errorObj);
+					console.log(Digestor)
+					console.log(encapsulator)
+					console.log('------------')
+					ws.send(JSON.stringify({ eventType: "working" }));
+
 					broadcast(wss, encapsulator, "dashboard");
 				}
 				return;
