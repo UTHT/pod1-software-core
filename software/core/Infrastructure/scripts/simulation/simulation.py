@@ -37,6 +37,11 @@ class AppProtocol(WebSocketClientProtocol):
             data['battery'][0]['value'] -= 1
             data['battery'][1]['value'] -= 2
 
+            data['brakes'][0]['status'] = 1
+            data['brakes'][0]['value'] +=10
+            data['brakes'][1]['status'] = 1
+            data['brakes'][1]['value'] +=20
+
         elif  self.count  < 56:
             data['brakes'][0]['status'] = 1
             data['brakes'][0]['value'] +=10
@@ -68,7 +73,7 @@ class AppProtocol(WebSocketClientProtocol):
         
         self.count +=1
         if self.count < SEND_COUNT:
-            time.sleep(0.5)
+            time.sleep(1)
             self.sendOneOdroidMessage()
 
     def onClose(self, wasClean, code, reason):

@@ -17,20 +17,20 @@ export class WidgetArrayComponent implements OnInit {
   constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.wsService.history.subscribe(historyArray => {
-      const mapping = historyArray.map(({obj, time}) => { 
-        if (obj){
-          const items = obj[this.type];  
-          return {items, time}
-        }
-      })
-      this.dataArray = mapping;
+  //   this.wsService.history.subscribe(historyArray => {
+  //     const mapping = historyArray.map(({obj, time}) => { 
+  //       if (obj){
+  //         const items = obj[this.type];  
+  //         return {items, time}
+  //       }
+  //     })
+  //     this.dataArray = mapping;
 
-      if (historyArray.length > 0) {
-        const currentObject = historyArray[historyArray.length - 1];
-        const data = currentObject.obj[this.type];
-        this.data = data
-      }
-    })
+  //     if (historyArray.length > 0) {
+  //       const currentObject = historyArray[historyArray.length - 1];
+  //       const data = currentObject.obj[this.type];
+  //       this.data = data
+  //     }
+  //   })
   }
 }

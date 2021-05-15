@@ -2,7 +2,7 @@
     <div class="switch">
       <switch-component></switch-component>
     </div>
-    <div class="battery">
+    <!-- <div class="battery">
       <app-widget-array type="BATTERY"></app-widget-array>
     </div>
     <div class="pod-state">
@@ -22,6 +22,30 @@
     </div>
     <div class="control-panel">
       <app-sensors></app-sensors>
-      <app-controls></app-controls>
+      <app-controls></app-controls> 
+    </div>-->
+    <div class="battery">
+      <battery-component label="battery-1" idNum=0></battery-component>
+      <battery-component label="battery-2" idNum=1></battery-component>
     </div>
+    <div class="pod-state">
+      <app-podstate></app-podstate>
+    </div>
+      <div class="speed">
+        <speed-component></speed-component>
+      </div>
+      <div class="temp">
+        <temperature-component label="Motor" idNum=0></temperature-component>
+        <temperature-component label="Sensor" idNum=1></temperature-component>
+        <temperature-component label="Brake" idNum=2></temperature-component>
+      </div>
+      <div class="brake">
+        <brake-component label="Brake A" idNum = 0></brake-component>
+        <brake-component label="Brake B" idNum = 1></brake-component>
+      </div>
+      <div class="control-panel">
+        <app-sensors></app-sensors>
+        <app-controls></app-controls> 
+      </div>
+    
   </div>

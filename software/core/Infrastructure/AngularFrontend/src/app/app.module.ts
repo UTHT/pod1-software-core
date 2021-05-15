@@ -41,10 +41,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SwitchComponent } from './components/dashboard/switch/switch.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LogsComponent } from './components/logs/logs.component';
-import { GraphComponent } from './components/widgets/graph/graph.component';
-import { GaugeComponent } from './components/widgets/gauge/gauge.component';
-import { GaugeGraphComponent } from './components/widgets/gauge-graph/gauge-graph.component';
-import { WidgetArrayComponent } from './components/widget-array/widget-array.component';
+// import { GraphComponent } from './components/widgets/graph/graph.component';
+// import { GaugeComponent } from './components/widgets/gauge/gauge.component';
+// import { GaugeGraphComponent } from './components/widgets/gauge-graph/gauge-graph.component';
+// import { WidgetArrayComponent } from './components/widget-array/widget-array.component';
 
 @NgModule({
   declarations: [
@@ -81,10 +81,10 @@ import { WidgetArrayComponent } from './components/widget-array/widget-array.com
     PositionComponent,
     SwitchComponent,
     LogsComponent,
-    GraphComponent,
-    GaugeComponent,
-    GaugeGraphComponent,
-    WidgetArrayComponent
+    //GraphComponent,
+    //GaugeComponent,
+    //GaugeGraphComponent,
+    //WidgetArrayComponent
   ],
   imports: [
     BrowserModule,

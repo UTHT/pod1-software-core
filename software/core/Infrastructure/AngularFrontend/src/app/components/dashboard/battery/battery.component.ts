@@ -1,28 +1,30 @@
-import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import {WebsocketService} from '../../../services/websocket.service';
 
 @Component({
   selector: 'battery-component',
   templateUrl: './battery.component.html',
   styleUrls: ['./battery.component.css']
 })
-export class BatteryComponent implements OnInit, OnChanges {
+export class BatteryComponent implements OnInit {
 	@Input() public color: string = '#3DCC93';
 	@Input() public value: number = 100;
 	@Input() public label: string = "battery label";
+	@Input() idNum: string;
 	arrayColor = [];
 	totalPin = 5;
 	pinColor = '#efefed';
 
-	constructor() {}
+	constructor(private wsService: WebsocketService) {}
 
 	ngOnInit() {
-		this.renderArrayColor();
-		// this.updateBatteryPercentage();
+		//this.renderArrayColor();
+		 this.updateBatteryPercentage();
 	}
 
-	ngOnChanges(){
-		this.renderArrayColor();
-	}
+	// ngOnChanges(){
+	// 	this.renderArrayColor();
+	// }
 
 	renderArrayColor() {
 		this.arrayColor = []
@@ -48,11 +50,28 @@ export class BatteryComponent implements OnInit, OnChanges {
 	}
 
 	public updateBatteryPercentage(): void {
-		if (Math.floor(Math.random() * 50)==0){
-			this.arrayColor = []	
-			this.value -= 1;
+		// if (Math.floor(Math.random() * 50)==0){
+			// this.arrayColor = []	
+			// this.value -= 1;
+			// this.renderArrayColor();
+		// }
+
+
+		this.wsService.history.subscribe(historyArray => {
+			if (historyArray && historyArray.length > 0){
+			//   console.log(historyArray);
+			//   this.currSpeed = historyArray[historyArray.length-1].obj.SPEED[0]._value;
+			  this.value = historyArray[historyArray.length-1].obj.BATTERY[this.idNum]._value;
+			  // if (this.count % 5000 == 0){
+				// this.speedArray.push([this.value/1000,Math.floor(this.currSpeed)])
+				// if (this.speedArray.length > 10){
+				//   this.speedArray.shift();
+				// }
+			  // }
+			}
 			this.renderArrayColor();
-		}
-        setTimeout(() => { this.updateBatteryPercentage(); }, 200);
+		  })
+
+        // setTimeout(() => { this.updateBatteryPercentage(); }, 200);
     }
 }

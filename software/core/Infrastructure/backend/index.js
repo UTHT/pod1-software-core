@@ -49,10 +49,10 @@ wss.on("connection", function connection(ws) {
 					const Digestor = digest(data);
 					// pack all the data to be sent to front-end.
 					const encapsulator = encapsulate(Digestor, errorObj);
-					// console.log(Digestor)
-					// console.log(encapsulator)
-					// console.log('------------')
-					// ws.send(JSON.stringify({ eventType: "working" }));
+					console.log(Digestor)
+					console.log(encapsulator)
+					console.log('------------')
+					ws.send(JSON.stringify({ eventType: "working" }));
 
 					broadcast(wss, encapsulator, "dashboard");
 				}
