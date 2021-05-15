@@ -140,11 +140,11 @@ var error_array =
 */
 
 
-var test_data = fs.readFileSync("./test_data.json");
-var  validator_error_array = validate(JSON.parse(test_data));
+// var test_data = fs.readFileSync("./test_data.json");
+// var  validator_error_array = validate(JSON.parse(test_data));
 // console.log(validator_error_array);
 
-const correct_object = corrector(JSON.parse(test_data), validator_error_array)
-console.log(JSON.stringify(correct_object, null, 4));
+// const correct_object = corrector(JSON.parse(test_data), validator_error_array)
+// console.log(JSON.stringify(correct_object, null, 4));
 
 module.exports = corrector;

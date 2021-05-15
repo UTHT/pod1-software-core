@@ -4,9 +4,8 @@ const fs = require("fs");
 const lodash = require('lodash');
 const commonErrorsDict = require("./commonErrors");
 
-// var commonErrors = fs.readFileSync("./commonErrors.json");
-// var commonErrorsParsed = JSON.parse(commonErrors);
-var commonErrorkeyArray = Object.keys(commonErrorsDict);
+var commonErrorkeyArray = Object.values(commonErrorsDict);
+
 var error_id = 0;
 
 /**
