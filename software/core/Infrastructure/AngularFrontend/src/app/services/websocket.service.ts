@@ -33,6 +33,7 @@ export class WebsocketService {
           return
         default:
           this.data = data
+          
           this.data.time = new Date()
           this.dataHistory.push(this.data)
           if (this.dataHistory.length > 20){
