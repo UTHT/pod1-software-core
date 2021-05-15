@@ -12,7 +12,7 @@ int main()
   try
   {
     websocket_client client;
-    client.connect("ws://127.0.0.1:8080/").wait();
+    client.connect("ws://107.174.17.4/").wait();
     websocket_outgoing_message out_msg;
 
     out_msg.set_utf8_message("{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }");

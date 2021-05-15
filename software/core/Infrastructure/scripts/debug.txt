@@ -1,0 +1,6 @@
+Ran this command to download the library: sudo apt-get install libcpprest-dev
+
+
+Tried the commands below to make compilation run properly:
+g++ -std=c++11 socket.cpp -lcpprest -lcrypto -lssl
+g++ -std=c++11 socket.cpp /usr/include/openssl /usr/include/cpprest /usr/include/boost -lcpprest -lcrypto -lssl -lboost_system -lboost_chrono -lboost_thread-mt
