@@ -1,0 +1,5 @@
+struct zcm_msg {
+    int8_t arduino_id;
+    int8_t sensor_id;
+    double data_value; 
+}
