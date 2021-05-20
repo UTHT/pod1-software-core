@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = $(INCLUDES) -g -Wall -std=c++11
+CFLAGS = $(INCLUDES) -g -Wall
 TARGET = channel_class_test
 
 # Common directories
@@ -29,13 +29,13 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
 
 channel_class_test.o: channel_class_test.cpp
-	$(CC) -c $(CFLAGS) $^ -o $@
+	$(CC) -c  -std=c++11 $(CFLAGS) $^ -o $@
 	
 linux_cobs_serial_transport.o: linux_cobs_serial_transport.cpp
-	$(CC) -c $(CFLAGS) $^ -o $@
+	$(CC) -c  -std=c++11 $(CFLAGS) $^ -o $@
 
 channel.o: channel.cpp
-	$(CC) -c $(CFLAGS) $^ -o $@
+	$(CC) -c  -std=c++11 $(CFLAGS) $^ -o $@
 
 SerialStream.o: SerialStream.cc
 	$(CC) -c $(CFLAGS) $^ -o $@
