@@ -11,7 +11,7 @@ Channel::Channel(string channel_name, double min_value, double max_value) {
     this->max_value = max_value;
 
     // Defaulted this to the current time
-    time(&this->last_comm_time)
+    time(&this->last_comm_time);
 }
 
 // Should return an ENUM

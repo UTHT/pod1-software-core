@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include "../libraries/zcm_types/src/zcm_msg.h"
+#include "enums.hpp"
 
 using namespace std;
 
 class Channel {
+
     private:
         string channel_name;
         double current_value;
