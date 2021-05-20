@@ -1,5 +1,5 @@
-struct zcm_msg {
+struct channel_msg {
     int8_t arduino_id;
     int8_t sensor_id;
-    double data_value; 
+    double sensor_value;
 }

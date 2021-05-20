@@ -1,9 +1,4 @@
 #include "channel.hpp"
-#include "enums.hpp"
-//type checking
-#include <typeinfo>
-#include <ctime> 
-
 
 Channel::Channel(string channel_name, double min_value, double max_value) {
     this->channel_name = channel_name;
@@ -41,19 +36,35 @@ int Channel::validateCurrentValue() {
     return ChannelStatus::FUNCTIONING;
 }
 
-void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const zcm_msg* msg, void* user) {
-    // Guarded by a semaphore
+// This is a static function (instead of a method function)
+void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_msg* msg, void* user) {
+    // Get the pointer to the channel
+    string channelString(channel);
+    Channel* channelObj = channel_map[channelString];
+    cout << "Received message on channel: " << channelString << endl;
 
-    // TODO: zcm_msg also includes arduino_id and sensor_id. Can we validate this before modifying the current_value?
+    // TODO: Should we return some ENUM here?
+    if (channelObj == NULL) {
+        return;
+    }
 
-    // message type checking
-    // Need to double check what  typeid.name() returns for double and arrays
-    if (typeid(msg->data_value).name() == "double" || typeid(msg->data_value).name() == "int") {
-        this->current_value = msg->data_value;
-        time(&this->last_comm_time);
+    // TODO: channel_msg also includes arduino_id and sensor_id. Can we validate this before modifying the current_value?
+
+    // Message type checking
+    // Need to double check what typeid.name() returns for double and arrays
+    string sensorType(typeid(msg->sensor_value).name());
+
+    // d = double and i = int
+    if (sensorType == "d"|| sensorType == "i") {
+        channelObj->current_value = msg->sensor_value;
+        time(&channelObj->last_comm_time);
+
+        // Debugging purposes
+        cout << "Current Value: " << channelObj->current_value << endl;
+        cout << "Time received: " << channelObj->last_comm_time << endl;
     } else {
-        //returning some string or gibberish
-        this->current_value = -1;
+        // Returning some string or gibberish
+        channelObj->current_value = -1;
     }
 }
 
@@ -62,6 +73,6 @@ double Channel::getCurrentValue() {
     return this->current_value;
 }
 
-int Channel::subscribeToChannel(zcm_t* zcm) {  
-    return zcm_msg_subscribe(zcm, this->channel_name, &this->callbackHandler, NULL);
+channel_msg_subscription_t* Channel::subscribeToChannel(zcm_t* zcm) {  
+    return channel_msg_subscribe(zcm, this->channel_name.c_str(), &callbackHandler, NULL);
 }
