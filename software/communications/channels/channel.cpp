@@ -73,6 +73,6 @@ double Channel::getCurrentValue() {
     return this->current_value;
 }
 
-channel_msg_subscription_t* Channel::subscribeToChannel(zcm_t* zcm) {  
+channel_msg_subscription_t* Channel::subscribeToChannel(zcm_t* zcm) { 
     return channel_msg_subscribe(zcm, this->channel_name.c_str(), &callbackHandler, NULL);
 }

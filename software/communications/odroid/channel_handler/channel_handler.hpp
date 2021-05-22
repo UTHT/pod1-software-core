@@ -6,8 +6,11 @@
 #include "../../channels/channel.hpp"
 #include "../../channels/enums.hpp"
 #include "../../libraries/zcm_types/src/zcm_msg.h"
+#include <linux_cobs_serial_transport.hpp>
 
 using namespace std;
-       
-std::vector<Channel> subscribeToChannels();  
+
+
+bool subscribeToChannels(char *serial_port);
+void add_to_channel(Channel temp);
         // ChannelHandler(vector<Channel> channels);
