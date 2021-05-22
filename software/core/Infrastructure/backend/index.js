@@ -7,7 +7,7 @@ const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
 const validate = require("./validator/validate");
-const validate = require("./validator/createErrorObj");
+const createErrorObj = require("./validator/createErrorObj");
 const corrector = require("./dataCorrector/corrector");
 
 const wss = new WebSocket.Server({ port: 8080 });
@@ -53,7 +53,7 @@ wss.on("connection", function connection(ws) {
 
 					// corrected json data
 					// var correctedData;
-					// correctedData = corrector(data, error_array);
+					correctedData = corrector(data, error_array);
 
 					// Divide incoming data into multiple components
 					const Digestor = digest(correctedData);
