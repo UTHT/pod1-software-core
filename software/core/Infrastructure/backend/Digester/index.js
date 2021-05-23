@@ -17,7 +17,8 @@ const fs = require("fs");
  * Breakdown incoming data into corresponding classes.
  * Digestor works as a middle man to ensure data integerity and structure.
  * @param {[Object object] <JSON>} odroid_json
- * @returns {... List<Class>} [Speed, Battery, Position, ...temp_array, Brakes]
+ * @returns {... List<Class>} [Speed, Battery, Position, ...temp_array, Brakes, Acceleration,
+ * Vibration, Current, GapHeight]
  */
 function digest(odroid_json) {
 	const { speed, temperatures, battery, position, brakes, current, vibration,
