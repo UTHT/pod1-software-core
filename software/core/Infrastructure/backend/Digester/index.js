@@ -1,8 +1,8 @@
 const BatterySensor = require("../Classes/battery-sensor");
 const PositionSensor = require("../Classes/position-sensor");
-const SpeedSensor = require("../Classes/speed-sensor");
+const VelocitySensor = require("../Classes/velocity-sensor");
 const TempSensor = require("../Classes/temp-sensor");
-const BrakeSensor = require("../Classes/pressure-sensor");
+const PressureSensor = require("../Classes/pressure-sensor");
 const AccelerationSensor = require("../Classes/acceleration-sensor");
 const CurrentSensor = require("../Classes/current-sensor");
 const GapHeightSensor = require("../Classes/gapHeight-sensor");
@@ -21,10 +21,10 @@ const fs = require("fs");
  * Vibration, Current, GapHeight]
  */
 function digest(odroid_json) {
-	const { speed, temperatures, battery, position, brakes, current, vibration,
+	const { velocity, temperatures, battery, position, pressure, current, vibration,
 	 gapHeight, acceleration} = odroid_json;
 
-	const Speed = speed.map(({ name, value }) => new SpeedSensor(value, name));
+	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
 	const Battery = battery.map(
 		({ name, value }) => new BatterySensor(value, name)
@@ -36,14 +36,14 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Brakes = brakes.map(({ name, value,status,pressure }) => new BrakeSensor(value, name,status,pressure));
+	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
 
 	const Acceleration = acceleration.map(({ name, value }) => new AccelerationSensor(value, name));
 	const Current = current.map(({ name, value }) => new CurrentSensor(value, name));
 	const GapHeight = gapHeight.map(({ name, value }) => new GapHeightSensor(value, name));
 	const Vibration = vibration.map(({ name, value }) => new VibrationSensor(value, name));
 
-	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes, ...Acceleration,
+	return [...Velocity, ...Battery, Position, ...temp_array, ...Pressure, ...Acceleration,
 	...Current, ...GapHeight, ...Vibration];
 }
 
