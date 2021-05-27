@@ -7,15 +7,18 @@
 #include <typeinfo>
 #include <ctime> 
 
+#include <linux_cobs_serial_transport.hpp>
 #include <channel_msg.h>
 #include "enums.hpp"
 
 using namespace std;
 
 class Channel {
-
     private:
         string channel_name;
+        string serial_port;
+        zcm_t* zcm;
+
         double current_value;
         double min_value;
         double max_value;
@@ -24,9 +27,12 @@ class Channel {
         static void callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_msg* msg, void* user);
 
     public:
-        Channel(string channel_name, double min_value, double max_value);
+        Channel(string channel_name, string serial_port, double min_value, double max_value);
+
         double getCurrentValue();
-        channel_msg_subscription_t* subscribeToChannel(zcm_t* zcm); 
+        zcm_t* getZCM();
+
+        channel_msg_subscription_t* subscribeToChannel(); 
         int validateCurrentValue();
 };
 

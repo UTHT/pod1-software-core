@@ -1,9 +1,21 @@
 #include "channel.hpp"
 
-Channel::Channel(string channel_name, double min_value, double max_value) {
+Channel::Channel(string channel_name, string serial_port, double min_value, double max_value) {
     this->channel_name = channel_name;
     this->min_value = min_value;
     this->max_value = max_value;
+    this->serial_port = serial_port;
+
+    // Convert string to char*
+    char* serial_port_c = new char[serial_port.length() + 1];
+    strcpy(serial_port_c, serial_port.c_str());
+
+    // The object should only be created if the serial_port is valid.
+    // Otherwise, an error will be thrown.
+    zcm_trans_t* linux_cobs_serial_transport = linux_cobs_serial_transport_create(serial_port_c);
+    this->zcm = zcm_create_from_trans(linux_cobs_serial_transport);
+
+    delete [] serial_port_c;
 
     // Defaulted this to the current time
     time(&this->last_comm_time);
@@ -73,6 +85,10 @@ double Channel::getCurrentValue() {
     return this->current_value;
 }
 
-channel_msg_subscription_t* Channel::subscribeToChannel(zcm_t* zcm) { 
-    return channel_msg_subscribe(zcm, this->channel_name.c_str(), &callbackHandler, NULL);
+zcm_t* Channel::getZCM() {
+    return this->zcm;
+}
+
+channel_msg_subscription_t* Channel::subscribeToChannel() { 
+    return channel_msg_subscribe(this->zcm, this->channel_name.c_str(), &callbackHandler, NULL);
 }
