@@ -13,4 +13,6 @@ using namespace std;
 
 bool subscribeToChannels(char *serial_port);
 void add_to_channel(Channel temp);
-        // ChannelHandler(vector<Channel> channels);
+void populate_channel_map();
+
+// ChannelHandler(vector<Channel> channels);

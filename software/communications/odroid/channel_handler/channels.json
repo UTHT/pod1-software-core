@@ -1,0 +1,10 @@
+{
+    "channels": [
+        {
+            "sensor": "temperature_1",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "min_value": 10,
+            "max_value": 30
+        },
+    ]
+}
