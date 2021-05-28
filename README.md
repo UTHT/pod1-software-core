@@ -1,7 +1,7 @@
 # University of Toronto Hyperloop Team Software Core #
 
 This respository holds all code developed for the University of Toronto Hyperloop Team. This code is placed online under an MIT for anyone interested in using the code in any capacity. If you would like to reach out and learn more, please do not hesitate to contact me
-    - [Mat](https://github.com/MathieuTuli)
+    - [Dave](https://github.com/davendramaharaj1)
 
 ## Directory Structure ##
 
