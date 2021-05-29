@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <typeinfo>
 #include <ctime> 
+#include <mutex>
 
 #include <linux_cobs_serial_transport.hpp>
 #include <channel_msg.h>
@@ -19,6 +20,7 @@ class Channel {
         string channel_name;
         string serial_port;
         zcm_t* zcm;
+        mutex lock;
 
         double current_value;
         double min_value;
@@ -32,6 +34,7 @@ class Channel {
 
         double getCurrentValue();
         zcm_t* getZCM();
+        string getChannelName();
 
         channel_msg_subscription_t* subscribeToChannel(); 
         int validateCurrentValue();

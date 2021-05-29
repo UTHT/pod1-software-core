@@ -28,16 +28,19 @@ int Channel::validateCurrentValue() {
     // Update the current time 
     time(&current_comm_time); 
 
+    this->lock.lock();
     // Get the difference between current time and the last communicated time
     double time_diff = difftime(current_comm_time, this->last_comm_time); 
 
     // Check time
     if (time_diff >= 60.0) {
+        this->lock.unlock();
         return ChannelStatus::NO_COMMS;
     }
 
     // Check value within range
     if (this->current_value < this->min_value || this->current_value > this->max_value) {
+        this->lock.unlock();
         return ChannelStatus::OUT_OF_RANGE;
     }
 
@@ -45,6 +48,7 @@ int Channel::validateCurrentValue() {
     // 1) What are the acceptable bounds?
 
     // Default return value
+    this->lock.unlock();
     return ChannelStatus::FUNCTIONING;
 }
 
@@ -66,6 +70,8 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     // Need to double check what typeid.name() returns for double and arrays
     string sensorType(typeid(msg->sensor_value).name());
 
+    channelObj->lock.lock();
+
     // d = double and i = int
     if (sensorType == "d"|| sensorType == "i") {
         channelObj->current_value = msg->sensor_value;
@@ -76,17 +82,26 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
         cout << "Time received: " << channelObj->last_comm_time << endl;
     } else {
         // Returning some string or gibberish
+        // (It should never come her)
         channelObj->current_value = -1;
     }
+    
+    channelObj->lock.unlock();
 }
 
 double Channel::getCurrentValue() {
-    // TODO: Do we need to guard this with a semaphore?
-    return this->current_value;
+    this->lock.lock();
+    double current_val = this->current_value;
+    this->lock.unlock();
+
+    return current_val;
 }
 
 zcm_t* Channel::getZCM() {
     return this->zcm;
+}
+string Channel::getChannelName() {
+    return this->channel_name;
 }
 
 channel_msg_subscription_t* Channel::subscribeToChannel() { 
