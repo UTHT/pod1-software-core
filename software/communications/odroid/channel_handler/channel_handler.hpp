@@ -3,10 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../../channels/channel.hpp"
-#include "../../channels/enums.hpp"
-#include "../../libraries/zcm_types/src/zcm_msg.h"
-#include <linux_cobs_serial_transport.hpp>
+#include <channel.hpp>
 
 using namespace std;
 

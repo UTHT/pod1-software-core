@@ -1,8 +1,5 @@
 // Implementation of channel handler
 #include "channel_handler.hpp"
-//type checking
-#include <typeinfo>
-#include <ctime> 
 
 unordered_map<string, Channel*> channel_map;
 
