@@ -34,12 +34,12 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
-    brakesThreshold = 200;
-    var brakeDataDict = {
+    pressureThreshold = 200;
+    var pressureDataDict = {
         errorId: error_id,
-        dataArrayName: 'brakeDataArray',
+        dataArrayName: 'pressureDataArray',
         entity: globalEntityIncrement,
-        thresholdValue: brakesThreshold,
+        thresholdValue: pressureThreshold,
         error: ''
     }
 
@@ -124,9 +124,9 @@ function validate(jsonOdriodData) {
     //     // errorarray.push(new ValidationError('No field: position').message);
     // }
 
-    if ('brakes' in jsonOdriodData) {
+    if ('pressure' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkBrakeData(jsonOdriodData.brakes, brakeDataDict);
+        tempArray = checkPressureData(jsonOdriodData.pressure, pressureDataDict);
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -134,7 +134,7 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw brakes type error
-        errorarray.push(sensorTypeError('brakes', brakeDataDict));
+        errorarray.push(sensorTypeError('pressure', pressureDataDict));
         // console.log(errorarray);
     }
 
@@ -249,11 +249,11 @@ function sensorTypeError(sensorType, dataDict) {
     }
 
     //brakeNotFoundError
-    if (sensorType == 'brakes') {
+    if (sensorType == 'pressure') {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[10];
+        deepDataDict['error'] = commonErrorkeyArray[5];
     }
 
     //batteryNotFoundError
@@ -449,80 +449,62 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
  * @param {Object} brakeDataDict
  * @returns {Object[]}
  */
-function checkBrakeData(brakeArrayData, brakeDataDict) {
+function checkPressureData(pressureArrayData, pressureDataDict) {
     var entityIncrement = 1;
-    brakeArray = [];
+    pressureArray = [];
 
-    brakeArrayData.forEach(element => {
-        if ('name' in element) {
-        }
-        else {
+    pressureArrayData.forEach(element => {
+        if (!('name' in element)) {
             //nameNotFoundError
-            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+            var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
 
             incremenErrorId();
-            deepBrakeDataDict['errorId'] = error_id;
-            deepBrakeDataDict['entity'] = entityIncrement;
-            deepBrakeDataDict['error'] = commonErrorkeyArray[3];
+            deepPressureDataDict['errorId'] = error_id;
+            deepPressureDataDict['entity'] = entityIncrement;
+            deepPressureDataDict['error'] = commonErrorkeyArray[3];
 
-            brakeArray.push(deepBrakeDataDict);
+            pressureArray.push(deepPressureDataDict);
         }
 
-        if ('status' in element) {
-        }
-        else {
-            //statusNotFoundError
-            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+        if ('value' in element) {
+            //check if value is more than 0
+            var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
 
-            incremenErrorId();
-            deepBrakeDataDict['errorId'] = error_id;
-            deepBrakeDataDict['entity'] = entityIncrement;
-            deepBrakeDataDict['error'] = commonErrorkeyArray[4];
-
-            brakeArray.push(deepBrakeDataDict);
-        }
-
-        if ('pressure' in element) {
-            //check if pressure is more than 0
-            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
-
-            if (element.pressure < 0) {
+            if (element.value < 0) {
                 //negativeValueError                
                 incremenErrorId();
-                deepBrakeDataDict['errorId'] = error_id;
-                deepBrakeDataDict['entity'] = entityIncrement;
-                deepBrakeDataDict['error'] = commonErrorkeyArray[0];
+                deepPressureDataDict['errorId'] = error_id;
+                deepPressureDataDict['entity'] = entityIncrement;
+                deepPressureDataDict['error'] = commonErrorkeyArray[0];
 
-                brakeArray.push(deepBrakeDataDict);
+                pressureArray.push(deepPressureDataDict);
             }
-            else if (element.pressure > 1000) {
-                var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+            else if (element.value > 1000) {
+                var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
 
                 //valueExceedsThresholdError
                 incremenErrorId();
-                deepBrakeDataDict['errorId'] = error_id;
-                deepBrakeDataDict['entity'] = entityIncrement;
-                deepBrakeDataDict['error'] = commonErrorkeyArray[6];
+                deepPressureDataDict['errorId'] = error_id;
+                deepPressureDataDict['entity'] = entityIncrement;
+                deepPressureDataDict['error'] = commonErrorkeyArray[6];
 
-                brakeArray.push(deepBrakeDataDict);
+                pressureArray.push(deepPressureDataDict);
             }
-
         }
         else {
-            //pressureNotFoundError
-            var deepBrakeDataDict = lodash.cloneDeep(brakeDataDict);
+            //valueNotFoundError
+            var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
 
             incremenErrorId();
-            deepBrakeDataDict['errorId'] = error_id;
-            deepBrakeDataDict['entity'] = entityIncrement;
-            deepBrakeDataDict['error'] = commonErrorkeyArray[5];
+            deepPressureDataDict['errorId'] = error_id;
+            deepPressureDataDict['entity'] = entityIncrement;
+            deepPressureDataDict['error'] = commonErrorkeyArray[2];
 
-            brakeArray.push(deepBrakeDataDict);
+            pressureArray.push(deepPressureDataDict);
         }
         entityIncrement++;
-
     });
-    return brakeArray;
+    return pressureArray;
 
 }
 
@@ -823,9 +805,9 @@ function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
     return accelerationArray;
 }
 
-// var tempdata = fs.readFileSync("./test.json");
-// const validateobject = validate(JSON.parse(tempdata));
-// console.log(validateobject);
+var tempdata = fs.readFileSync("./test.json");
+const validateobject = validate(JSON.parse(tempdata));
+console.log(validateobject);
 // return validateobject;
 
 module.exports = validate;

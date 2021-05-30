@@ -17,18 +17,16 @@
         127,
         -46
     ],
-    "brakes": [
+    "pressure": [
         {
-            "status": 0,
-            "pressure": 170.2323
+            "value": 170.2323
+        },
+        {
+            "name": "brakes_right"
         },
         {
             "name": "brakes_right",
-            "pressure": 243
-        },
-        {
-            "name": "brakes_right",
-            "status": 1
+            "value": 10000
         }
     ],
     "battery": [
