@@ -4,7 +4,7 @@ const VelocitySensor = require("../Classes/velocity-sensor");
 const TempSensor = require("../Classes/temp-sensor");
 const PressureSensor = require("../Classes/pressure-sensor");
 const AccelerationSensor = require("../Classes/acceleration-sensor");
-const CurrentSensor = require("../Classes/current-sensor");
+const DCcurrentSensor = require("../Classes/dc_current-sensor");
 const GapHeightSensor = require("../Classes/gapHeight-sensor");
 const VibrationSensor = require("../Classes/vibration-sensor");
 
@@ -17,11 +17,11 @@ const fs = require("fs");
  * Breakdown incoming data into corresponding classes.
  * Digestor works as a middle man to ensure data integerity and structure.
  * @param {[Object object] <JSON>} odroid_json
- * @returns {... List<Class>} [Speed, Battery, Position, ...temp_array, Brakes, Acceleration,
- * Vibration, Current, GapHeight]
+ * @returns {... List<Class>} [Velocity, Battery, Position, ...temp_array, Brakes, Acceleration,
+ * Vibration, dcCurrent, GapHeight]
  */
 function digest(odroid_json) {
-	const { velocity, temperatures, battery, position, pressure, current, vibration,
+	const { velocity, temperatures, battery, position, pressure, dcCurrent, vibration,
 	 gapHeight, acceleration} = odroid_json;
 
 	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
@@ -39,12 +39,12 @@ function digest(odroid_json) {
 	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
 
 	const Acceleration = acceleration.map(({ name, value }) => new AccelerationSensor(value, name));
-	const Current = current.map(({ name, value }) => new CurrentSensor(value, name));
+	const DCcurrent = dcCurrent.map(({ name, value }) => new DCcurrentSensor(value, name));
 	const GapHeight = gapHeight.map(({ name, value }) => new GapHeightSensor(value, name));
 	const Vibration = vibration.map(({ name, value }) => new VibrationSensor(value, name));
 
 	return [...Velocity, ...Battery, Position, ...temp_array, ...Pressure, ...Acceleration,
-	...Current, ...GapHeight, ...Vibration];
+	...DCcurrent, ...GapHeight, ...Vibration];
 }
 
 const data = fs.readFileSync("./test.json");

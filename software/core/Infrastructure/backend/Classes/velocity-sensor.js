@@ -1,6 +1,6 @@
 const Sensor = require("./sensor");
 
-class SpeedSensor extends Sensor {
+class VelocitySensor extends Sensor {
 	sensor_type = "VELOCITY";
 
 	constructor(value, name = "velocity") {
