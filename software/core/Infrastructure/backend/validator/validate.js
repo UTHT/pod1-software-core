@@ -18,9 +18,9 @@ function validate(jsonOdriodData) {
     var errorarray = []
 
     globalEntityIncrement = 0;
-    var speedDataDict = {
+    var velocityDataDict = {
         errorId: error_id,
-        dataArrayName: 'speedDataArray',
+        dataArrayName: 'velocityDataArray',
         entity: globalEntityIncrement,
         error: ''
     }
@@ -86,9 +86,9 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
-    if ('speed' in jsonOdriodData) {
+    if ('velocity' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkSpeedData(jsonOdriodData.speed, speedDataDict)
+        tempArray = checkVelocityData(jsonOdriodData.velocity, velocityDataDict)
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -96,7 +96,7 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw speed type error
-        errorarray.push(sensorTypeError('speed', speedDataDict));
+        errorarray.push(sensorTypeError('velocity', velocityDataDict));
         // console.log(errorarray);
     }
 
@@ -261,7 +261,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[11];
+        deepDataDict['error'] = commonErrorkeyArray[10];
     }
 
     //currentNotFoundError
@@ -269,7 +269,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[12];
+        deepDataDict['error'] = commonErrorkeyArray[11];
     }
 
     //vibrationNotFoundError
@@ -277,7 +277,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[13];
+        deepDataDict['error'] = commonErrorkeyArray[12];
     }
 
     //gapHeightNotFoundError
@@ -285,7 +285,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[14];
+        deepDataDict['error'] = commonErrorkeyArray[13];
     }
 
     //accelerationNotFoundError
@@ -293,7 +293,7 @@ function sensorTypeError(sensorType, dataDict) {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
-        deepDataDict['error'] = commonErrorkeyArray[15];
+        deepDataDict['error'] = commonErrorkeyArray[14];
     }
 
     return deepDataDict
@@ -306,50 +306,50 @@ function sensorTypeError(sensorType, dataDict) {
  * @param {Object} speedDataDict
  * @returns {Object}
  */
-function checkSpeedData(speedDataArray, speedDataDict) {
-    speedArray = [];
+function checkVelocityData(velocityDataArray, velocityDataDict) {
+    velocityArray = [];
     var entityIncrement = 1;
 
-    speedDataArray.forEach(elem => {
+    velocityDataArray.forEach(elem => {
         if ('value' in elem) {
             if (elem.value < 0) {
                 //negativeValueError
-                var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+                var deepVelocityDataDict = lodash.cloneDeep(velocityDataDict);
 
                 incremenErrorId();
-                deepSpeedDataDict['errorId'] = error_id;
-                deepSpeedDataDict['entity'] = entityIncrement;
-                deepSpeedDataDict['error'] = commonErrorkeyArray[0];
+                deepVelocityDataDict['errorId'] = error_id;
+                deepVelocityDataDict['entity'] = entityIncrement;
+                deepVelocityDataDict['error'] = commonErrorkeyArray[0];
 
-                speedArray.push(deepSpeedDataDict);
+                velocityArray.push(deepVelocityDataDict);
             }
         }
         else {
             //valueNotFoundError
-            var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+            var deepVelocityDataDict = lodash.cloneDeep(velocityDataDict);
 
             incremenErrorId();
-            deepSpeedDataDict['errorId'] = error_id;
-            deepSpeedDataDict['entity'] = entityIncrement;
-            deepSpeedDataDict['error'] = commonErrorkeyArray[2];
+            deepVelocityDataDict['errorId'] = error_id;
+            deepVelocityDataDict['entity'] = entityIncrement;
+            deepVelocityDataDict['error'] = commonErrorkeyArray[2];
 
-            speedArray.push(deepSpeedDataDict);
+            velocityArray.push(deepVelocityDataDict);
         }
 
         if (!('name' in elem)) {
             //nameNotFoundError
-            var deepSpeedDataDict = lodash.cloneDeep(speedDataDict);
+            var deepVelocityDataDict = lodash.cloneDeep(velocityDataDict);
 
             incremenErrorId();
-            deepSpeedDataDict['errorId'] = error_id;
-            deepSpeedDataDict['entity'] = entityIncrement;
-            deepSpeedDataDict['error'] = commonErrorkeyArray[3];
+            deepVelocityDataDict['errorId'] = error_id;
+            deepVelocityDataDict['entity'] = entityIncrement;
+            deepVelocityDataDict['error'] = commonErrorkeyArray[3];
 
-            speedArray.push(deepSpeedDataDict);
+            velocityArray.push(deepVelocityDataDict);
         }
 
     });
-    return speedArray;
+    return velocityArray;
 }
 
 /**

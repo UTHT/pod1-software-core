@@ -1,9 +1,21 @@
 {
     "speed": [
         {
-            "value": -8
-        }
-    ],
+            "name":"velocity_x",
+            "value":0.000000
+         },
+         {
+            "name":"velocity_y",
+            "value":0.000000
+         },
+         {
+            "name":"velocity_z",
+            "value":0.000000
+         },
+         {
+            "name":"velocity_inv",
+            "value":0.000000
+         }    ],
     "temperatures": [
         {
             "value": 2300

@@ -7,14 +7,13 @@ commonErrorsDict = {
     "4": "statusNotFoundError",
     "5": "pressureNotFoundError",
     "6": "valueExceedsThresholdError",
-    "7": "speedNotFoundError",
+    "7": "velocityNotFoundError",
     "8": "temperatureNotFoundError",
     "9": "positionNotFoundError",
-    "10": "brakesNotFoundError",
-    "11": "batteryNotFoundError",
-    "12": "currentNotFoundError",
-    "13": "vibrationNotFoundError",
-    "14": "gapHeightNotFoundError",
-    "15": "accelerationNotFoundError"
+    "10": "batteryNotFoundError",
+    "11": "currentNotFoundError",
+    "12": "vibrationNotFoundError",
+    "13": "gapHeightNotFoundError",
+    "14": "accelerationNotFoundError"
 }
 module.exports = commonErrorsDict;
