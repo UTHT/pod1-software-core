@@ -20,6 +20,10 @@ std::string Sensor::bundleSensor(){
     //can add status to string later if we want to
 }
 
+std::string Sensor::bundleStatus(){
+    
+}
+
 std::string Data::bundleData(){
     //initial
     std::string json = "{\"eventType\": \"relay\",\"clientType\": \"odroid\",\"data\": {\"temperature\": [";
