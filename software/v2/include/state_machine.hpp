@@ -28,7 +28,7 @@ class SM : public tinyfsm::Fsm<SM>
 
 
   virtual void entry(void) { };  /* entry actions in some states */
-  void         exit(void)  { };  /* no exit actions */
+  virtual void exit(void)  { };  /* no exit actions */
 };
 
 #endif
