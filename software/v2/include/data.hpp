@@ -29,8 +29,8 @@ struct Data {
     struct Sensor gap_height = Sensor("gap_height");
     struct Sensor position = Sensor("position", std::vector<float> (3, 0.0), true);
     struct Sensor vibration = Sensor("vibration");
-    state_t curr_state = OFF;
-    state_t prev_state = OFF;
+    state_t curr_state = OFF_t;
+    state_t prev_state = OFF_t;
     comm_t curr_command = NO_comm;
     std::string bundleData();
 };
