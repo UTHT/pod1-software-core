@@ -93,6 +93,13 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
+    var positionDataDict = {
+        errorId: error_id,
+        dataArrayName: 'positionDataArray',
+        entity: globalEntityIncrement,
+        error: ''
+    }
+
     if ('velocity' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkVelocityData(jsonOdriodData.velocity, velocityDataDict)
@@ -120,16 +127,20 @@ function validate(jsonOdriodData) {
         errorarray.push(sensorTypeError('temperatures', temperatureDataDict));
         // console.log(errorarray);
     }
-    // NOT CHECKING FOR NOW
-    // if ('position' in jsonOdriodData) {
-    //     // errorarray.push(checkPositionData(jsonOdriodData.position));
-    //     // consol.log(checkPositionData(jsonOdriodData.position));
-    //     // console.log(errorarray);
-    // }
-    // else {
-    //     //throw position type error
-    //     // errorarray.push(new ValidationError('No field: position').message);
-    // }
+    
+    if ('position' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkPositionData(jsonOdriodData.position, positionDataDict);
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        })
+        // console.log(errorarray);
+    }
+    else {
+        //throw brakes type error
+        errorarray.push(sensorTypeError('position', positionDataDict));
+        // console.log(errorarray);
+    }
 
     if ('pressure' in jsonOdriodData) {
         tempArray = [];
@@ -449,26 +460,39 @@ function checkTempData(temperatureArrayData, temperatureDataDict) {
 }
 
 
-//validate position value
-//NOT CHECKING AT THE MOMENT
-// function checkPositionData(positionArrayData) {
-//     var positionErrors = {}
+function checkPositionData(positionDataArray, positionDataDict) {
+    positionArray = [];
+    var entityIncrement = 1;
 
-//     positionArrayData.forEach((elem, index) => {
-//         if (elem > 0) {
-//             // console.log(elem);
-//         }
-//         else if (elem < 0) {
-//             positionErrors[index] = new ValidationError("Position cannot be less than 0").message;
-//         }
-//         else {
-//             positionErrors[index] = new ValidationError("No values provided for position").message;
-//         }
-//     });
+    positionDataArray.forEach(elem => {
+        if (!('value' in elem)) {
+            //valueNotFoundError
+            var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
 
-//     return positionErrors;
-// }
+            incremenErrorId();
+            deepPositionDataDict['errorId'] = error_id;
+            deepPositionDataDict['entity'] = entityIncrement;
+            deepPositionDataDict['error'] = commonErrorkeyArray[2];
 
+            positionArray.push(deepPositionDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
+
+            incremenErrorId();
+            deepPositionDataDict['errorId'] = error_id;
+            deepPositionDataDict['entity'] = entityIncrement;
+            deepPositionDataDict['error'] = commonErrorkeyArray[3];
+
+            positionArray.push(deepPositionDataDict);
+        }
+
+        entityIncrement++;
+    });
+    return positionArray;
+}
 /**
  * Creates an array of brake data error objects by checking name, value, and pressure of the data
  *
@@ -871,32 +895,31 @@ function checkPodStateData(podStateDataArray, podStateDataDict) {
     podStateDataArray.forEach(elem => {
         if (!('value' in elem)) {
             //valueNotFoundError
-            var deeppodStateDataDict = lodash.cloneDeep(podStateDataDict);
+            var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
 
             incremenErrorId();
-            deeppodStateDataDict['errorId'] = error_id;
-            deeppodStateDataDict['entity'] = entityIncrement;
-            deeppodStateDataDict['error'] = commonErrorkeyArray[2];
+            deepPodStateDataDict['errorId'] = error_id;
+            deepPodStateDataDict['entity'] = entityIncrement;
+            deepPodStateDataDict['error'] = commonErrorkeyArray[2];
 
-            podStateArray.push(deeppodStateDataDict);
+            podStateArray.push(deepPodStateDataDict);
         }
 
         if (!('name' in elem)) {
             //nameNotFoundError
-            var deeppodStateDataDict = lodash.cloneDeep(podStateDataDict);
+            var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
 
             incremenErrorId();
-            deeppodStateDataDict['errorId'] = error_id;
-            deeppodStateDataDict['entity'] = entityIncrement;
-            deeppodStateDataDict['error'] = commonErrorkeyArray[3];
+            deepPodStateDataDict['errorId'] = error_id;
+            deepPodStateDataDict['entity'] = entityIncrement;
+            deepPodStateDataDict['error'] = commonErrorkeyArray[3];
 
-            podStateArray.push(deeppodStateDataDict);
+            podStateArray.push(deepPodStateDataDict);
         }
 
         entityIncrement++;
     });
     return podStateArray;
-
 }
 
 var tempdata = fs.readFileSync("./test.json");

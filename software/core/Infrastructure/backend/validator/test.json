@@ -24,10 +24,6 @@
             "value": 23
         }
     ],
-    "position": [
-        127,
-        -46
-    ],
     "pressure": [
         {
             "value": 170.2323
@@ -39,6 +35,14 @@
         {
             "name": "pressure_1000",
             "value": 10000
+        }
+    ],
+    "position": [
+        {
+            "value": 170.2323
+        },
+        {
+            "name": "position_y"
         }
     ],
     "battery": [
@@ -71,7 +75,7 @@
     ],
     "state": [
         {
-            
+            "value": "0"
         }
     ]
 }
