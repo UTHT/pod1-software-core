@@ -1,12 +1,10 @@
 {
-    "speed": [
+    "velocity": [
         {
-            "name":"velocity_x",
             "value":0.000000
          },
          {
-            "name":"velocity_y",
-            "value":0.000000
+            "name":"velocity_y"
          },
          {
             "name":"velocity_z",
@@ -15,7 +13,8 @@
          {
             "name":"velocity_inv",
             "value":0.000000
-         }    ],
+         }
+    ],
     "temperatures": [
         {
             "value": 2300
@@ -34,10 +33,11 @@
             "value": 170.2323
         },
         {
-            "name": "brakes_right"
+            "name": "pressure_200_2",
+            "value": 230
         },
         {
-            "name": "brakes_right",
+            "name": "pressure_1000",
             "value": 10000
         }
     ],

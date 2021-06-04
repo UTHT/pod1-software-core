@@ -479,7 +479,9 @@ function checkPressureData(pressureArrayData, pressureDataDict) {
 
                 pressureArray.push(deepPressureDataDict);
             }
-            else if (element.value > 1000) {
+            else if (element.name == "pressure_1000" && element.value >= 1000) {
+                // check if pressure for 1000 pressure sensor is more than 1000
+
                 var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
 
                 //valueExceedsThresholdError
@@ -487,8 +489,26 @@ function checkPressureData(pressureArrayData, pressureDataDict) {
                 deepPressureDataDict['errorId'] = error_id;
                 deepPressureDataDict['entity'] = entityIncrement;
                 deepPressureDataDict['error'] = commonErrorkeyArray[6];
+                deepPressureDataDict['thresholdValue'] = 1000;
 
                 pressureArray.push(deepPressureDataDict);
+
+            }
+            else if ((element.name == "pressure_200_1" || element.name == "pressure_200_2" )
+                 && element.value >= 200) {
+                // check if pressure for 1000 pressure sensor is more than 1000
+
+                var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
+
+                //valueExceedsThresholdError
+                incremenErrorId();
+                deepPressureDataDict['errorId'] = error_id;
+                deepPressureDataDict['entity'] = entityIncrement;
+                deepPressureDataDict['error'] = commonErrorkeyArray[6];
+                deepPressureDataDict['thresholdValue'] = 200;
+
+                pressureArray.push(deepPressureDataDict);
+
             }
         }
         else {
