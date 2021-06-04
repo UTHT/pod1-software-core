@@ -86,6 +86,13 @@ function validate(jsonOdriodData) {
         error: ''
     }
 
+    var podStateDataDict = {
+        errorId: error_id,
+        dataArrayName: 'podStateDataArray',
+        entity: globalEntityIncrement,
+        error: ''
+    }
+
     if ('velocity' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkVelocityData(jsonOdriodData.velocity, velocityDataDict)
@@ -209,6 +216,18 @@ function validate(jsonOdriodData) {
         // console.log(errorarray);
     }
 
+    if ('state' in jsonOdriodData) {
+        tempArray = [];
+        tempArray = checkPodStateData(jsonOdriodData.state, podStateDataDict)
+        tempArray.forEach(elem => {
+            errorarray.push(elem);
+        });
+    }
+    else {
+        //throw current type error
+        errorarray.push(sensorTypeError('state', podStateDataDict));
+    }
+
     return errorarray;
 }
 
@@ -294,6 +313,14 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['errorId'] = error_id;
         deepDataDict['entity'] = sensorType;
         deepDataDict['error'] = commonErrorkeyArray[14];
+    }
+
+    //accelerationNotFoundError
+    if (sensorType == 'state') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[15];
     }
 
     return deepDataDict
@@ -494,8 +521,8 @@ function checkPressureData(pressureArrayData, pressureDataDict) {
                 pressureArray.push(deepPressureDataDict);
 
             }
-            else if ((element.name == "pressure_200_1" || element.name == "pressure_200_2" )
-                 && element.value >= 200) {
+            else if ((element.name == "pressure_200_1" || element.name == "pressure_200_2")
+                && element.value >= 200) {
                 // check if pressure for 1000 pressure sensor is more than 1000
 
                 var deepPressureDataDict = lodash.cloneDeep(pressureDataDict);
@@ -655,6 +682,9 @@ function checkCurrentData(currentArrayData, currentDataDict) {
 
             currentArray.push(deepCurrentDataDict);
         }
+
+        entityIncrement++;
+
     });
     return currentArray;
 }
@@ -718,6 +748,9 @@ function checkVibrationData(vibrationArrayData, vibrationDataDict) {
 
             vibrationArray.push(deepVibrationDataDict);
         }
+
+        entityIncrement++;
+
     });
     return vibrationArray;
 }
@@ -781,6 +814,9 @@ function checkGapHeightData(gapHeightArrayData, gapHeightDataDict) {
 
             gapHeightArray.push(deepGapHeightDataDict);
         }
+
+        entityIncrement++;
+
     });
     return gapHeightArray;
 }
@@ -821,8 +857,46 @@ function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
 
             accelerationArray.push(deepAccelerationDataDict);
         }
+
+        entityIncrement++;
     });
     return accelerationArray;
+}
+
+
+function checkPodStateData(podStateDataArray, podStateDataDict) {
+    podStateArray = [];
+    var entityIncrement = 1;
+
+    podStateDataArray.forEach(elem => {
+        if (!('value' in elem)) {
+            //valueNotFoundError
+            var deeppodStateDataDict = lodash.cloneDeep(podStateDataDict);
+
+            incremenErrorId();
+            deeppodStateDataDict['errorId'] = error_id;
+            deeppodStateDataDict['entity'] = entityIncrement;
+            deeppodStateDataDict['error'] = commonErrorkeyArray[2];
+
+            podStateArray.push(deeppodStateDataDict);
+        }
+
+        if (!('name' in elem)) {
+            //nameNotFoundError
+            var deeppodStateDataDict = lodash.cloneDeep(podStateDataDict);
+
+            incremenErrorId();
+            deeppodStateDataDict['errorId'] = error_id;
+            deeppodStateDataDict['entity'] = entityIncrement;
+            deeppodStateDataDict['error'] = commonErrorkeyArray[3];
+
+            podStateArray.push(deeppodStateDataDict);
+        }
+
+        entityIncrement++;
+    });
+    return podStateArray;
+
 }
 
 var tempdata = fs.readFileSync("./test.json");

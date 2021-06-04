@@ -14,6 +14,7 @@ commonErrorsDict = {
     "11": "currentNotFoundError",
     "12": "vibrationNotFoundError",
     "13": "gapHeightNotFoundError",
-    "14": "accelerationNotFoundError"
+    "14": "accelerationNotFoundError",
+    "15": "podStateNotFoundError"
 }
 module.exports = commonErrorsDict;
