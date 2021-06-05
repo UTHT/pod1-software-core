@@ -11,12 +11,12 @@
                    {  "name": "battery",  "value": 78} 
                    ], 
     "position" : [127, 46],
-    "brakes":[
+    "pressure":[
         {
-            "name": "brakes_left", "status": 0, "pressure": 321
+            "name": "pressure_1000", "value": 321
         },
         {
-            "name": "brakes_right", "status": 0,"pressure":257
+            "name": "pressure_200_1", "value": 212
         }
     ], 
     "battery":[

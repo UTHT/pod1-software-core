@@ -1,8 +1,19 @@
 {
-    "speed": [
+    "velocity": [
         {
-            "value": -8
-        }
+            "value":0.000000
+         },
+         {
+            "name":"velocity_y"
+         },
+         {
+            "name":"velocity_z",
+            "value":0.000000
+         },
+         {
+            "name":"velocity_inv",
+            "value":0.000000
+         }
     ],
     "temperatures": [
         {
@@ -13,22 +24,25 @@
             "value": 23
         }
     ],
-    "position": [
-        127,
-        -46
+    "pressure": [
+        {
+            "value": 170.2323
+        },
+        {
+            "name": "pressure_200_2",
+            "value": 230
+        },
+        {
+            "name": "pressure_1000",
+            "value": 10000
+        }
     ],
-    "brakes": [
+    "position": [
         {
-            "status": 0,
-            "pressure": 2570.2323
+            "value": 170.2323
         },
         {
-            "name": "brakes_right",
-            "pressure": 243
-        },
-        {
-            "name": "brakes_right",
-            "status": 1
+            "name": "position_y"
         }
     ],
     "battery": [
@@ -37,6 +51,31 @@
         },
         {
             "name": "battery_2"
+        }
+    ],
+    "current": [
+        {
+            "value": "200"
+        }
+    ],
+    "vibration": [
+        {
+            "value": "200"            
+        }
+    ],
+    "gapHeight": [
+        {
+            "value": "233"
+        }
+    ],
+    "acceleration": [
+        {
+            "value": "23"
+        }
+    ],
+    "state": [
+        {
+            "value": "0"
         }
     ]
 }

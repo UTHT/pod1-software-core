@@ -1,8 +1,15 @@
 const BatterySensor = require("../Classes/battery-sensor");
 const PositionSensor = require("../Classes/position-sensor");
-const SpeedSensor = require("../Classes/speed-sensor");
+const VelocitySensor = require("../Classes/velocity-sensor");
 const TempSensor = require("../Classes/temp-sensor");
-const BrakeSensor = require("../Classes/brake-sensor");
+const PressureSensor = require("../Classes/pressure-sensor");
+const AccelerationSensor = require("../Classes/acceleration-sensor");
+const DCcurrentSensor = require("../Classes/dc_current-sensor");
+const GapHeightSensor = require("../Classes/gapHeight-sensor");
+const VibrationSensor = require("../Classes/vibration-sensor");
+
+const validate = require("../validator/validate");
+const corrector = require("../dataCorrector/corrector");
 
 const fs = require("fs");
 
@@ -10,12 +17,14 @@ const fs = require("fs");
  * Breakdown incoming data into corresponding classes.
  * Digestor works as a middle man to ensure data integerity and structure.
  * @param {[Object object] <JSON>} odroid_json
- * @returns {... List<Class>} [Speed, Battery, Position, ...temp_array, Brakes]
+ * @returns {... List<Class>} [Velocity, Battery, Position, ...temp_array, Brakes, Acceleration,
+ * Vibration, dcCurrent, GapHeight]
  */
 function digest(odroid_json) {
-	const { speed, temperatures, battery, position, brakes } = odroid_json;
+	const { velocity, temperatures, battery, position, pressure, dcCurrent, vibration,
+	 gapHeight, acceleration} = odroid_json;
 
-	const Speed = speed.map(({ name, value }) => new SpeedSensor(value, name));
+	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
 	const Battery = battery.map(
 		({ name, value }) => new BatterySensor(value, name)
@@ -27,15 +36,27 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Brakes = brakes.map(({ name, value,status,pressure }) => new BrakeSensor(value, name,status,pressure));
+	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
 
-	return [...Speed, ...Battery, Position, ...temp_array, ...Brakes];
+	const Acceleration = acceleration.map(({ name, value }) => new AccelerationSensor(value, name));
+	const DCcurrent = dcCurrent.map(({ name, value }) => new DCcurrentSensor(value, name));
+	const GapHeight = gapHeight.map(({ name, value }) => new GapHeightSensor(value, name));
+	const Vibration = vibration.map(({ name, value }) => new VibrationSensor(value, name));
+
+	return [...Velocity, ...Battery, Position, ...temp_array, ...Pressure, ...Acceleration,
+	...DCcurrent, ...GapHeight, ...Vibration];
 }
 
 const data = fs.readFileSync("./test.json");
 
-const digester_object = digest(JSON.parse(data));
-console.log(digester_object);
+var  validator_error_array = validate(JSON.parse(data));
+// console.log(validator_error_array);
+
+const correct_object = corrector(JSON.parse(data), validator_error_array)
+console.log(JSON.stringify(correct_object, null, 4));
+
+const digester_object = digest(JSON.parse(correct_object));
+// console.log(digester_object);
 
 module.exports = digest;
 
