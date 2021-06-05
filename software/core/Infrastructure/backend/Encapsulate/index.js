@@ -6,7 +6,7 @@ const TempSensor = require("../Classes/temp-sensor");
 const fs = require("fs");
 
 const digest = require("../Digester");
-
+// const validate = require("../validator/validate");
 /**
  * Change a list of Class Objects into standard Objects model
  * to be manipulated by dashboard
@@ -39,6 +39,8 @@ function encapsulate(digester_obj, error) {
 // console.log(data);
 // const digester_object = digest(JSON.parse(data));
 // console.log(digester_object);
+
+// var errorobj = validate(JSON.parse(data));
 
 // const enc_obj = encapsulate(digester_object);
 // console.log(enc_obj);
