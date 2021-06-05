@@ -14,6 +14,11 @@ ChannelHandler::ChannelHandler() {
     
 }
 
+std::string ChannelHandler::sendBundle(){
+    // implement web socket connection
+    return data.bundleData();
+}
+
 void ChannelHandler::updateData(){
     if (std::getline(sensor_file, line)) {
         std::istringstream iss(line);

@@ -7,6 +7,7 @@ class HealthMonitor {
   public:
     bool health_status = true;
     void healthCheck();
+    std::string sendBundle();
 };
 
 #endif
