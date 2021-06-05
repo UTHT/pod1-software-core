@@ -15,7 +15,7 @@ bool subscribeToChannels() {
 }
 
 void add_to_channel(Channel* temp) {  
-    channel_map[temp->channel_name] = temp;
+    channel_map[temp->getChannelName()] = temp;
 }
 
 void populate_channel_map() {
@@ -31,7 +31,7 @@ void populate_channel_map() {
 int main() {
     subscribeToChannels();
 
-    while(1) {
+    while (true) {
         for (std::pair<string, Channel*> element : channel_map) {
             zcm_handle_nonblock(element.second->getZCM());
             // ChannelStatus status = element.second -> validateCurrentValue();
