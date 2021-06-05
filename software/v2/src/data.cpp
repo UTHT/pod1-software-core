@@ -21,7 +21,7 @@ std::string Sensor::bundleSensor(){
 }
 
 std::string Data::bundleStatus(){
-    std::string json = "\"status\" [";
+    std::string json = "\"status\": [";
     
     json += "{ \"name\": \"" + temp_front.name + "\", \"value\": " + std::to_string(int(temp_front.status)) + "},";
     json += "{ \"name\": \"" + temp_center.name + "\", \"value\": " + std::to_string(int(temp_center.status)) + "},";

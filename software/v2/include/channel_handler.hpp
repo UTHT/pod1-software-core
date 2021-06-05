@@ -10,6 +10,7 @@ class ChannelHandler {
         ChannelHandler();
         void updateData();
         void updateComm();
+        std::string sendBundle();
 
 };
 
