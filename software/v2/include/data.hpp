@@ -33,6 +33,7 @@ struct Data {
     state_t prev_state = OFF_t;
     comm_t curr_command = NO_comm;
     std::string bundleData();
+    std::string bundleStatus();
 };
 
 extern struct Data data;

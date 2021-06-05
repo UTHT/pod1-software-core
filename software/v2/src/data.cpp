@@ -17,11 +17,27 @@ std::string Sensor::bundleSensor(){
     }
     json.pop_back();
     return json;
-    //can add status to string later if we want to
+    
 }
 
-std::string Sensor::bundleStatus(){
+std::string Data::bundleStatus(){
+    std::string json = "\"status\" [";
     
+    json += "{ \"name\": \"" + temp_front.name + "\", \"value\": " + std::to_string(int(temp_front.status)) + "},";
+    json += "{ \"name\": \"" + temp_center.name + "\", \"value\": " + std::to_string(int(temp_center.status)) + "},";
+    json += "{ \"name\": \"" + temp_back.name + "\", \"value\": " + std::to_string(int(temp_back.status)) + "},";
+    json += "{ \"name\": \"" + accel.name + "\", \"value\": " + std::to_string(int(accel.status)) + "},";
+    json += "{ \"name\": \"" + velocity.name + "\", \"value\": " + std::to_string(int(velocity.status)) + "},";
+    json += "{ \"name\": \"" + velocity_inv.name + "\", \"value\": " + std::to_string(int(velocity_inv.status)) + "},";
+    json += "{ \"name\": \"" + DC_curr.name + "\", \"value\": " + std::to_string(int(DC_curr.status)) + "},";
+    json += "{ \"name\": \"" + pressure_1000.name + "\", \"value\": " + std::to_string(int(pressure_1000.status)) + "},";
+    json += "{ \"name\": \"" + pressure_200_1.name + "\", \"value\": " + std::to_string(int(pressure_200_1.status)) + "},";
+    json += "{ \"name\": \"" + pressure_200_2.name + "\", \"value\": " + std::to_string(int(pressure_200_2.status)) + "},";
+    json += "{ \"name\": \"" + gap_height.name + "\", \"value\": " + std::to_string(int(gap_height.status)) + "},";
+    json += "{ \"name\": \"" + position.name + "\", \"value\": " + std::to_string(int(position.status)) + "},";
+    json += "{ \"name\": \"" + vibration.name + "\", \"value\": " + std::to_string(int(vibration.status)) + "}";
+
+    return json;
 }
 
 std::string Data::bundleData(){
@@ -63,6 +79,9 @@ std::string Data::bundleData(){
     //curr state and previous state
     json += "\"state\": [";
     json += "{ \"name\": \"curr_state\", \"value\": " + std::to_string(curr_state) + "}, {\"name\": \"prev_state\",\"value\":" + std::to_string(prev_state) + " }";
+    json += "],";
+    //status
+    json += bundleStatus();
     json += "] } }";
 
     return json;
