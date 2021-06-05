@@ -32,6 +32,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SwitchComponent } from './components/dashboard/switch/switch.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LogsComponent } from './components/logs/logs.component';
+import { GaugeNvibrationComponent } from './components/dashboard/gauge-nvibration/gauge-nvibration.component';
+import { GaugeheightComponent } from './components/dashboard/gauge-nvibration/gaugeheight/gaugeheight.component';
+import { VibrationComponent } from './components/dashboard/gauge-nvibration/vibration/vibration.component';
 
 
 @NgModule({
@@ -60,6 +63,9 @@ import { LogsComponent } from './components/logs/logs.component';
     PositionComponent,
     SwitchComponent,
     LogsComponent,
+    GaugeNvibrationComponent,
+    GaugeheightComponent,
+    VibrationComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@ export class PodstateComponent implements OnInit {
   stateGroupMap: any = {
     startup: {
       title: 'Startup',
-      layout: 'three-row'
+      layout: 'two-row'
     },
     shutdown: {
       title: 'Shutdown',
@@ -22,7 +22,7 @@ export class PodstateComponent implements OnInit {
     },
     active: {
       title: 'Active',
-      layout: 'three-row'
+      layout: 'two-row'
     },
   }
   
@@ -34,19 +34,19 @@ export class PodstateComponent implements OnInit {
     },
     debug: {
       title: 'Debug Mode',
-      position: 'midleft'
-    },
-    comms: {
-      title: 'Comms Check',
       position: 'midright'
     },
-    system: {
-      title: 'System Check',
-      position: 'bottomright'
-    },
+    // comms: {
+    //   title: 'Comms Check',
+    //   position: 'midright'
+    // },
+    // system: {
+    //   title: 'System Check',
+    //   position: 'bottomright'
+    // },
     shutdown: {
       title: 'Shutdown',
-      position: 'topleft'
+      position: 'topright'
     },
     lock: {
       title: 'Lock',
@@ -58,15 +58,15 @@ export class PodstateComponent implements OnInit {
     },
     braking:{
       title: 'Braking',
-      position: 'topleft'
+      position: 'bottomleft'
     },  
     emergency: {
       title: 'Emergency Stop',
-      position: 'midright'
+      position: 'topright'
     },
     drive: {
       title: 'Drive',
-      position: 'bottomleft'
+      position: 'bottomright'
     }
   }
 
@@ -76,8 +76,8 @@ export class PodstateComponent implements OnInit {
     items:  [
       {name: 'off', isActive: false, isError: false, },
       {name: 'debug',  isActive: false, isError: false, },
-      {name: 'comms', isActive: false, isError: false, },
-      {name: 'system',  isActive: false, isError: false, }
+      // {name: 'comms', isActive: false, isError: false, },
+      // {name: 'system',  isActive: false, isError: false, }
     ]},
     {
       name: 'shutdown',
