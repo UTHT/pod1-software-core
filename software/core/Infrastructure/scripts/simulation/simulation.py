@@ -73,7 +73,8 @@ class AppProtocol(WebSocketClientProtocol):
         
         self.count +=1
         if self.count < SEND_COUNT:
-            time.sleep(1)
+            # Change speed
+            time.sleep(0.1)
             self.sendOneOdroidMessage()
 
     def onClose(self, wasClean, code, reason):
