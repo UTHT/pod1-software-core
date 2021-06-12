@@ -26,6 +26,7 @@ function digest(odroid_json) {
 	const { velocity, temperature, battery, position, pressure, DC_current, vibrations,
 		gap_height, acceleration, state} = odroid_json;
 
+
 	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
 	const Battery = battery.map(
@@ -37,6 +38,7 @@ function digest(odroid_json) {
 	const temp_array = temperature.map(
 		({ name, value }) => new TempSensor(name, value)
 	);
+
 
 	const state_array = state.map(
 		({name, value}) => new StateMachineSensor(name, value)
