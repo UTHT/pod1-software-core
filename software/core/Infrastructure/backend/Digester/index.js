@@ -49,13 +49,13 @@ function digest(odroid_json) {
 
 const data = fs.readFileSync("./test.json");
 
-var  validator_error_array = validate(JSON.parse(data));
+// var  validator_error_array = validate(JSON.parse(data));
 // console.log(validator_error_array);
 
-const correct_object = corrector(JSON.parse(data), validator_error_array)
-console.log(JSON.stringify(correct_object, null, 4));
+// const correct_object = corrector(JSON.parse(data), validator_error_array)
+// console.log(JSON.stringify(correct_object, null, 4));
 
-const digester_object = digest(JSON.parse(correct_object));
+// const digester_object = digest(JSON.parse(correct_object));
 // console.log(digester_object);
 
 module.exports = digest;

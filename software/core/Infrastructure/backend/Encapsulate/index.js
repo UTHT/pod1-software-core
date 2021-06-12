@@ -1,6 +1,6 @@
 const BatterySensor = require("../Classes/battery-sensor");
 const PositionSensor = require("../Classes/position-sensor");
-const SpeedSensor = require("../Classes/speed-sensor");
+const SpeedSensor = require("../Classes/velocity-sensor");
 const TempSensor = require("../Classes/temp-sensor");
 
 const fs = require("fs");

@@ -127,7 +127,7 @@ function validate(jsonOdriodData) {
         errorarray.push(sensorTypeError('temperatures', temperatureDataDict));
         // console.log(errorarray);
     }
-    
+
     if ('position' in jsonOdriodData) {
         tempArray = [];
         tempArray = checkPositionData(jsonOdriodData.position, positionDataDict);
@@ -286,6 +286,14 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['error'] = commonErrorkeyArray[5];
     }
 
+    //positionNotFoundError
+    if (sensorType == 'position') {
+        incremenErrorId();
+        deepDataDict['errorId'] = error_id;
+        deepDataDict['entity'] = sensorType;
+        deepDataDict['error'] = commonErrorkeyArray[9];
+    }
+
     //batteryNotFoundError
     if (sensorType == 'battery') {
         incremenErrorId();
@@ -326,7 +334,7 @@ function sensorTypeError(sensorType, dataDict) {
         deepDataDict['error'] = commonErrorkeyArray[14];
     }
 
-    //accelerationNotFoundError
+    //podStateNotFoundError
     if (sensorType == 'state') {
         incremenErrorId();
         deepDataDict['errorId'] = error_id;
@@ -922,9 +930,9 @@ function checkPodStateData(podStateDataArray, podStateDataDict) {
     return podStateArray;
 }
 
-var tempdata = fs.readFileSync("./test.json");
-const validateobject = validate(JSON.parse(tempdata));
-console.log(validateobject);
+// var tempdata = fs.readFileSync("./test.json");
+// const validateobject = validate(JSON.parse(tempdata));
+// console.log(validateobject);
 // return validateobject;
 
 module.exports = validate;
