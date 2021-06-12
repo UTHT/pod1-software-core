@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WebsocketService} from '../../../services/websocket.service';
 
 @Component({
   selector: 'app-gaugenvibration',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GaugeNvibrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
   }
+
+
+  
 
 }

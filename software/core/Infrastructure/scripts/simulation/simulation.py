@@ -27,35 +27,45 @@ class AppProtocol(WebSocketClientProtocol):
         data = raw_data['data']
 
         if self.count < 20:
-            data['speed'][0]['value'] += 30
+            data['velocity'][0]['value'] += 30
 
-            data['temperatures'][0]['value'] += 1
-            data['temperatures'][1]['value'] += 3
-            data['temperatures'][2]['value'] += 1
-            data['temperatures'][3]['value'] += 1
+            data['temperature'][0]['value'] += 1
+            data['temperature'][1]['value'] += 3
+            data['temperature'][2]['value'] += 1
+            # data['temperature'][3]['value'] += 1
 
-            data['battery'][0]['value'] -= 1
-            data['battery'][1]['value'] -= 2
+            data['pressure'][2]['value'] -= 1
+            data['pressure'][1]['value'] -= 2
 
-            data['brakes'][0]['status'] = 1
-            data['brakes'][0]['value'] +=10
-            data['brakes'][1]['status'] = 1
-            data['brakes'][1]['value'] +=20
+            data['pressure'][2]['status'] = 1
+            data['pressure'][2]['value'] +=10
+            data['pressure'][1]['status'] = 1
+            data['pressure'][1]['value'] +=20
+            data['gap_height'][0]['value'] += 0.5
+            data['vibrations'][0]['value'] +=0.5
+
+            data['battery'][0]['value'] -= 0.5
+            data['battery'][1]['value'] -=1
 
         elif  self.count  < 56:
-            data['brakes'][0]['status'] = 1
-            data['brakes'][0]['value'] +=10
-            data['brakes'][1]['status'] = 1
-            data['brakes'][1]['value'] +=10
+            data['pressure'][2]['status'] = 1
+            data['pressure'][2]['value'] +=10
+            data['pressure'][1]['status'] = 1
+            data['pressure'][1]['value'] +=10
 
-            data['speed'][0]['value'] -= 30
+            data['velocity'][0]['value'] -= 30
 
-            data['temperatures'][0]['value'] -= 0.5
-            data['temperatures'][1]['value'] -= 1
-            data['temperatures'][2]['value'] += 1
-            data['temperatures'][3]['value'] += 1
-            data['temperatures'][2]['value'] += 3
-            data['temperatures'][3]['value'] += 3
+            data['temperature'][0]['value'] -= 0.5
+            data['temperature'][1]['value'] -= 1
+            data['temperature'][2]['value'] += 1
+            data['gap_height'][0]['value'] -= 0.5
+            data['vibrations'][0]['value'] += 0.5
+
+            data['battery'][0]['value'] -= 1.5
+            data['battery'][1]['value'] -=0.5
+            # data['temperature'][3]['value'] += 1
+            # data['temperature'][2]['value'] += 3
+            # data['temperature'][3]['value'] += 3
         self.sendMessage(json.dumps(raw_data).encode('utf8'), isBinary = False)
                 
 
@@ -74,7 +84,7 @@ class AppProtocol(WebSocketClientProtocol):
         self.count +=1
         if self.count < SEND_COUNT:
             # Change speed
-            time.sleep(0.1)
+            time.sleep(0.3)
             self.sendOneOdroidMessage()
 
     def onClose(self, wasClean, code, reason):

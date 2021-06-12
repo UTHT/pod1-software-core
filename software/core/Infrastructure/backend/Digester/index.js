@@ -7,6 +7,7 @@ const AccelerationSensor = require("../Classes/acceleration-sensor");
 const DCcurrentSensor = require("../Classes/dc_current-sensor");
 const GapHeightSensor = require("../Classes/gapHeight-sensor");
 const VibrationSensor = require("../Classes/vibration-sensor");
+const StateMachineSensor = require("../Classes/state_machine-sensor");
 
 
 //const validate = require("../validator/validate");
@@ -23,7 +24,7 @@ const fs = require("fs");
  */
 function digest(odroid_json) {
 	const { velocity, temperature, battery, position, pressure, DC_current, vibrations,
-		gap_height, acceleration} = odroid_json;
+		gap_height, acceleration, state} = odroid_json;
 
 	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
@@ -37,6 +38,10 @@ function digest(odroid_json) {
 		({ name, value }) => new TempSensor(name, value)
 	);
 
+	const state_array = state.map(
+		({name, value}) => new StateMachineSensor(name, value)
+	)
+
 	// const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
 	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name));
 
@@ -45,7 +50,7 @@ function digest(odroid_json) {
 	const GapHeight = gap_height.map(({ name, value }) => new GapHeightSensor(value, name));
 	const Vibration = vibrations.map(({ name, value }) => new VibrationSensor(value, name));
 
-	return [...Velocity, ...Battery, Position, ...temp_array, ...Pressure, ...Acceleration,
+	return [...Velocity, ...Battery, Position, ...state_array, ...temp_array, ...Pressure, ...Acceleration,
 	...DCcurrent, ...GapHeight, ...Vibration];
 }
 
