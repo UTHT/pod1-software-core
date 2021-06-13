@@ -21,7 +21,7 @@ VPATH += $(LIBRARIES_FOLDER)/zcm_types/src/
 VPATH += $(LIBRARIES_FOLDER)/../channels/
 
 # Final objects needed to build the channel_class_test executable file
-OBJECTS = channel_class_test.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_msg.o channel.o
+OBJECTS = channel_class_test.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_array_msg.o channel.o
 
 all: $(TARGET)
 
@@ -43,7 +43,7 @@ SerialStream.o: SerialStream.cc
 SerialStreamBuf.o: SerialStreamBuf.cc
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-channel_msg.o: channel_msg.c
+channel_array_msg.o: channel_array_msg.c
 	gcc -c $(CFLAGS) $^ -o $@
 
 zcm.o: zcm.c nonblocking.o
