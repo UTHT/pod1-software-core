@@ -4,7 +4,7 @@
 #include <zcm_utht.h>
 #include <transport.h>
 #include <arduino_cobs_serial_transport.hpp>
-#include <channel_msg.h>
+#include <channel_array_msg.h>
 
 #include "src/Sensor.h"
 #define NUMSENSORS 1 //Or however many
@@ -47,16 +47,19 @@ void setup(){
         // Serial.println("POST failed on one or more sensors, freezing...");
         while(1){delay(1000);}
     }
-      zcm_arduino = create_zcm(0);
+    
+    zcm_arduino = create_zcm(0);
 }
 
-int publishTestToChannel(zcm_t* zcm, double value, String channel) {  
-  channel_msg message;
+int publishTestToChannel(zcm_t* zcm, double values[], String channel, String units, int numData) {  
+  channel_array message;
   message.arduino_id = ARDUINO_ONE;
   message.sensor_id = S_SPTD25_20_0200A;
-  message.sensor_value = value;
+  message.data = values;
+  message.units = (char *) units.c_str();
+  message.sz = numData;
 
-  return channel_msg_publish(zcm, channel.c_str(), &message);
+  return channel_array_publish(zcm, channel.c_str(), &message);
 }
 
 void loop(){
@@ -68,16 +71,15 @@ void loop(){
         bool _new = (state->debug == DS_NEWREAD);
         if(_success){
             if(_new){
-                // Serial.print("Sensor ");
-                // Serial.print(sensors[i]->sensor);
-                // Serial.print(" read success: ");
+                double values[state->numdata];
+
+                String units = "";
                 for(int x = 0; x < state->numdata; x++){
-                    // Serial.print(state->data[x].data);
-                    // Serial.print(' ');
-                    // Serial.print(state->data[x].units);
-                    // if(x < state->numdata-1){Serial.print(", ");}else{Serial.println();}
-                    publishTestToChannel(zcm_arduino, state->data[x].data, "test_sensor");
+                    values[x] = state->data[x].data;
+                    units += state->data[x].units;
+                    units += ", ";
                 }
+                publishTestToChannel(zcm_arduino, values, "test_sensor", units, state->numdata);
             }
         } else {
             // Serial.print("Sensor ");
