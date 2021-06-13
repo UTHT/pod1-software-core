@@ -8,8 +8,6 @@
 
 using namespace std;
 
-unordered_map<string, Channel*> channel_map;
-
 int main(int argc, char** argv) {
     char* serial_port;
 
@@ -24,7 +22,6 @@ int main(int argc, char** argv) {
 
     // Define the sensor and subscribe to the channel
     Channel test_sensor("test_sensor", (string) serial_port, 0, 1000);
-    channel_map["test_sensor"] = &test_sensor;
 
     test_sensor.subscribeToChannel();
 

@@ -2,8 +2,6 @@
 #include "channel_handler.hpp"
 #include "nlohmann/json.hpp"
 
-unordered_map<string, Channel*> channel_map;
-
 bool subscribeToChannels() {
     populate_channel_map();
 
@@ -15,11 +13,8 @@ bool subscribeToChannels() {
     return true;
 }
 
-void add_to_channel(Channel* temp) {  
-    channel_map[temp->getChannelName()] = temp;
-}
-
 void populate_channel_map() {
+<<<<<<< HEAD
 
     //Code to open and read from json file channels.json
     std::ifstream i ("channels.json");
@@ -47,6 +42,11 @@ void populate_channel_map() {
     // add_to_channel(temp); 
     // add_to_channel(temp1); 
     // add_to_channel(temp2); 
+=======
+    Channel *temp = new Channel("temperature_1", "/dev/cu.usbmodem14501", 10, 30);
+    Channel *temp1 = new Channel("voltage_1", "/dev/cu.usbmodem14501", 0, 5);
+    Channel *temp2 = new Channel("resistance_1", "/dev/cu.usbmodem14501", 0, 10);
+>>>>>>> Modified channel class for the new channel_array_msg zcm type. Defining the channel_map global var in channel.cpp now
 }
 
 int main() {

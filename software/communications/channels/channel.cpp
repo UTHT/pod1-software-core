@@ -1,5 +1,7 @@
 #include "channel.hpp"
 
+unordered_map<string, Channel*> channel_map;
+
 Channel::Channel(string channel_name, string serial_port, double min_value, double max_value) {
     this->channel_name = channel_name;
     this->min_value = min_value;
@@ -19,6 +21,8 @@ Channel::Channel(string channel_name, string serial_port, double min_value, doub
 
     // Defaulted this to the current time
     time(&this->last_comm_time);
+
+    channel_map[this->channel_name] = this;
 }
 
 // Should return an ENUM
@@ -39,9 +43,11 @@ int Channel::validateCurrentValue() {
     }
 
     // Check value within range
-    if (this->current_value < this->min_value || this->current_value > this->max_value) {
-        this->lock.unlock();
-        return ChannelStatus::OUT_OF_RANGE;
+    for (int x = 0; x < this->current_values.size(); x++){
+         if (this->current_values.at(x) < this->min_value || this->current_values.at(x) > this->max_value) {
+            this->lock.unlock();
+            return ChannelStatus::OUT_OF_RANGE;
+        }
     }
 
     // TODO: (Maybe) Check the frequency of data 
@@ -53,7 +59,7 @@ int Channel::validateCurrentValue() {
 }
 
 // This is a static function (instead of a method function)
-void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_msg* msg, void* user) {
+void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_array* msg, void* user) {
     // Get the pointer to the channel
     string channelString(channel);
     Channel* channelObj = channel_map[channelString];
@@ -68,33 +74,34 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
 
     // Message type checking
     // Need to double check what typeid.name() returns for double and arrays
-    string sensorType(typeid(msg->sensor_value).name());
-
+    // string sensorType(typeid(msg->sensor_value).name());
+    
     channelObj->lock.lock();
 
-    // d = double and i = int
-    if (sensorType == "d"|| sensorType == "i") {
-        channelObj->current_value = msg->sensor_value;
-        time(&channelObj->last_comm_time);
+    channelObj->current_values.clear();
+    channelObj->current_values.insert(channelObj->current_values.begin(), msg->data, msg->data + msg->sz);
 
-        // Debugging purposes
-        cout << "Current Value: " << channelObj->current_value << endl;
-        cout << "Time received: " << channelObj->last_comm_time << endl;
-    } else {
-        // Returning some string or gibberish
-        // (It should never come her)
-        channelObj->current_value = -1;
+    time(&channelObj->last_comm_time);
+
+    cout << "Current Values: ";
+    for (int i = 0; i < channelObj->current_values.size(); i++) {
+        cout << channelObj->current_values.at(i) << ", ";
     }
+    cout << endl;
+    
+    cout << "Units: " << msg->units << endl;
+    cout << "Time received: " << channelObj->last_comm_time << endl;
+
     
     channelObj->lock.unlock();
 }
 
-double Channel::getCurrentValue() {
+vector<double> Channel::getCurrentValues() {
     this->lock.lock();
-    double current_val = this->current_value;
+    vector<double> current_vals = this->current_values;
     this->lock.unlock();
 
-    return current_val;
+    return current_vals;
 }
 
 zcm_t* Channel::getZCM() {
@@ -104,6 +111,6 @@ string Channel::getChannelName() {
     return this->channel_name;
 }
 
-channel_msg_subscription_t* Channel::subscribeToChannel() { 
-    return channel_msg_subscribe(this->zcm, this->channel_name.c_str(), &callbackHandler, NULL);
+channel_array_subscription_t* Channel::subscribeToChannel() { 
+    return channel_array_subscribe(this->zcm, this->channel_name.c_str(), &callbackHandler, NULL);
 }
