@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as internal from 'events';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-podstate',
@@ -6,6 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./podstate.component.css']
 })
 export class PodstateComponent implements OnInit {
+  // podstate enum
+  Podstates: any = {
+    OFF: 0,
+    LOCK: 1,
+    ARM: 2,
+    DRIVE: 3,
+    BRAKING: 4,
+    SHUTDOWN: 5,
+    DEBUG: 6,
+    ESTOP: 7
+  }
+
   //Fixed display properties for each group of items
   stateGroupMap: any = {
     startup: {
@@ -69,7 +83,7 @@ export class PodstateComponent implements OnInit {
       position: 'bottomright'
     }
   }
-
+  count: number = 0;
   //Pod state data variable to be updated as data comes in
   podstateData: any[] = [{
     name: 'startup', 
@@ -97,14 +111,32 @@ export class PodstateComponent implements OnInit {
       name: 'active',
       items:[
         {name: 'braking', isActive: false, isError: false, },
-        {name: 'emergency', isActive: false, isError: true, },
+        {name: 'emergency', isActive: false, isError: false, },
         {name: 'drive',  isActive: false, isError: false, },
       ]
     }]
 
-  constructor() { }
+    constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
+    this.randomize()
+  }
+
+  randomize(){
+    this.wsService.history.subscribe(historyArray => {
+      if (historyArray && historyArray.length > 0){
+        //console.log(historyArray);
+        this.count++;
+        if (this.count% 7 == 0){
+          this.podstateData[0].items[0].isActive = true
+        }
+        else{
+          this.podstateData[0].items[0].isActive = true
+        }
+        
+        // }
+      }
+    })
   }
 
 }

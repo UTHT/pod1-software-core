@@ -6,9 +6,9 @@ const digest = require("./Digester/index");
 const encapsulate = require("./Encapsulate/index");
 const broadcast = require("./utilities/broadcast");
 const mock = require("./utilities/mock");
-const validate = require("./validator/validate");
-const createErrorObj = require("./validator/createErrorObj");
-const corrector = require("./dataCorrector/corrector");
+//const validate = require("./validator/validate");
+//const createErrorObj = require("./validator/createErrorObj");
+//const corrector = require("./dataCorrector/corrector");
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -20,7 +20,7 @@ wss.on("connection", function connection(ws) {
 		// enforcing sending evenType with every message for easier data manipulation
 		const { eventType, data } = JSONParser(message);
 		// const { eventType, data } = JSON.parse(message);
-		console.log(data, eventType)
+		//console.log(data, eventType)
 		// console.log(JSON.parse(message));
 
 		//switch case is is better for in the future when there are more than 3 eventTypes
@@ -44,25 +44,25 @@ wss.on("connection", function connection(ws) {
 				} else {
 					var error_array = [];
 					var error_obj = {};
-
+					//console.log("comes here")
 					// validate incoming data from the pod
-					var error_array = validate(data);
+					//var error_array = validate(data);
 		
 					// get errors as a nested dictionary
-					error_obj = createErrorObj(error_array);
+					//error_obj = createErrorObj(error_array);
 
 					// corrected json data
 					// var correctedData;
-					correctedData = corrector(data, error_array);
+					//correctedData = corrector(data, error_array);
 
 					// Divide incoming data into multiple components
-					const Digestor = digest(correctedData);
+					const Digestor = digest(data);
 					
 					// pack all the data to be sent to front-end.
-					const encapsulator = encapsulate(Digestor, errorObj);
-					console.log(Digestor)
-					console.log(encapsulator)
-					console.log('------------')
+					const encapsulator = encapsulate(Digestor, {});
+					//console.log(Digestor)
+					//console.log(encapsulator)
+					//console.log('------------')
 					ws.send(JSON.stringify({ eventType: "working" }));
 
 					broadcast(wss, encapsulator, "dashboard");

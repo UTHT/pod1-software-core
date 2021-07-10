@@ -22,8 +22,8 @@ export class SpeedComponent implements OnInit {
 
     this.wsService.history.subscribe(historyArray => {
       if (historyArray && historyArray.length > 0){
-        console.log(historyArray);
-        this.currSpeed = historyArray[historyArray.length-1].obj.SPEED[0]._value;
+        //console.log(historyArray);
+        this.currSpeed = historyArray[historyArray.length-1].obj.VELOCITY[0]._value;
         this.count += 50;
         // if (this.count % 5000 == 0){
           this.speedArray.push([this.count/1000,Math.floor(this.currSpeed)])

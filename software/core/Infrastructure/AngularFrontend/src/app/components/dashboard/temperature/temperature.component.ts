@@ -23,7 +23,7 @@ export class TemperatureComponent implements OnInit {
   updateTemperature() {
     this.wsService.history.subscribe(historyArray => {
       if (historyArray && historyArray.length > 0){
-        console.log(historyArray);
+        //console.log(historyArray);
         this.currTemperature = historyArray[historyArray.length-1].obj.TEMPERATURE[this.idNum]._value;
         this.count += 50;
         // if (this.count % 5000 == 0){

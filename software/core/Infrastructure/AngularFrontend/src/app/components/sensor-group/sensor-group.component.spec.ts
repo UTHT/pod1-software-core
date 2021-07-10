@@ -1,5 +1,5 @@
 import { compileComponentFromMetadata } from '@angular/compiler';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';  
 
 import { SensorGroupComponent } from './sensor-group.component';
 
@@ -9,11 +9,11 @@ const testCases = [
     data: [
       {
         id: 'F1',
-        state: 'inactive'
+        state: 'active'
       },
       {
         id: 'F2',
-        state: 'active'
+        state: 'error'
       },
       {
         id: 'F3',

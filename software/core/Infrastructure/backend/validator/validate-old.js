@@ -50,7 +50,7 @@ let validation = new Validator(data, rules,
      {"required.location": "Without an :attribute we can't reach you!"});
 
 // console.log(validation.passes());
-console.log(validation.rules.speed);
+//console.log(validation.rules.speed);
 // console.log(Object.keys(validation.errors));
 // console.log(Object.values(validation.errors));
 

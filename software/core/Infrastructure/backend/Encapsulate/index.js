@@ -33,16 +33,17 @@ function encapsulate(digester_obj, error) {
 	return { data: {obj, error: error, timeStamp: new Date()} };
 }
 
+const data = require('../Digester/test.js')
 //tests -> will write separate test file later
 // const data = fs.readFileSync("test.json");
 
 // console.log(data);
-// const digester_object = digest(JSON.parse(data));
+const digester_object = digest(data);
 // console.log(digester_object);
 
 // var errorobj = validate(JSON.parse(data));
 
-// const enc_obj = encapsulate(digester_object);
-// console.log(enc_obj);
+const enc_obj = encapsulate(digester_object);
+console.log(enc_obj);
 
 module.exports = encapsulate;

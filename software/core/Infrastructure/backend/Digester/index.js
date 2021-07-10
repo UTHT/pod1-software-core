@@ -7,9 +7,11 @@ const AccelerationSensor = require("../Classes/acceleration-sensor");
 const DCcurrentSensor = require("../Classes/dc_current-sensor");
 const GapHeightSensor = require("../Classes/gapHeight-sensor");
 const VibrationSensor = require("../Classes/vibration-sensor");
+const StateMachineSensor = require("../Classes/state_machine-sensor");
 
-const validate = require("../validator/validate");
-const corrector = require("../dataCorrector/corrector");
+
+//const validate = require("../validator/validate");
+//const corrector = require("../dataCorrector/corrector");
 
 const fs = require("fs");
 
@@ -21,8 +23,9 @@ const fs = require("fs");
  * Vibration, dcCurrent, GapHeight]
  */
 function digest(odroid_json) {
-	const { velocity, temperatures, battery, position, pressure, dcCurrent, vibration,
-	 gapHeight, acceleration} = odroid_json;
+	const { velocity, temperature, battery, position, pressure, DC_current, vibrations,
+		gap_height, acceleration, state} = odroid_json;
+
 
 	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
@@ -32,31 +35,42 @@ function digest(odroid_json) {
 
 	const Position = new PositionSensor(position[0], position[1]);
 
-	const temp_array = temperatures.map(
+	const temp_array = temperature.map(
 		({ name, value }) => new TempSensor(name, value)
 	);
 
-	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
+
+	const state_array = state.map(
+		({name, value}) => new StateMachineSensor(name, value)
+	)
+
+	// const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name,status,pressure));
+	const Pressure = pressure.map(({ name, value }) => new PressureSensor(value, name));
 
 	const Acceleration = acceleration.map(({ name, value }) => new AccelerationSensor(value, name));
-	const DCcurrent = dcCurrent.map(({ name, value }) => new DCcurrentSensor(value, name));
-	const GapHeight = gapHeight.map(({ name, value }) => new GapHeightSensor(value, name));
-	const Vibration = vibration.map(({ name, value }) => new VibrationSensor(value, name));
+	const DCcurrent = DC_current.map(({ name, value }) => new DCcurrentSensor(value, name));
+	const GapHeight = gap_height.map(({ name, value }) => new GapHeightSensor(value, name));
+	const Vibration = vibrations.map(({ name, value }) => new VibrationSensor(value, name));
 
-	return [...Velocity, ...Battery, Position, ...temp_array, ...Pressure, ...Acceleration,
+	return [...Velocity, ...Battery, Position, ...state_array, ...temp_array, ...Pressure, ...Acceleration,
 	...DCcurrent, ...GapHeight, ...Vibration];
 }
 
-const data = fs.readFileSync("./test.json");
+//const data = require('./test.js')
 
-// var  validator_error_array = validate(JSON.parse(data));
+//var  validator_error_array = validate(JSON.parse(data));
 // console.log(validator_error_array);
 
-// const correct_object = corrector(JSON.parse(data), validator_error_array)
-// console.log(JSON.stringify(correct_object, null, 4));
+//const correct_object = corrector(JSON.parse(data), validator_error_array)
+//console.log(JSON.stringify(correct_object, null, 4));
 
 // const digester_object = digest(JSON.parse(correct_object));
-// console.log(digester_object);
+//console.log(digester_object);
+
+// const digester_object = digest(JSON.parse(data));
+//console.log(data)
+//const digester_object = digest(data);
+//console.log(digester_object);
 
 module.exports = digest;
 

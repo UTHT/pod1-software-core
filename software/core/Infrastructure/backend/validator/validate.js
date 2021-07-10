@@ -473,29 +473,29 @@ function checkPositionData(positionDataArray, positionDataDict) {
     var entityIncrement = 1;
 
     positionDataArray.forEach(elem => {
-        if (!('value' in elem)) {
-            //valueNotFoundError
-            var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
+        // if (!('value' in elem)) {
+        //     //valueNotFoundError
+        //     var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
 
-            incremenErrorId();
-            deepPositionDataDict['errorId'] = error_id;
-            deepPositionDataDict['entity'] = entityIncrement;
-            deepPositionDataDict['error'] = commonErrorkeyArray[2];
+        //     incremenErrorId();
+        //     deepPositionDataDict['errorId'] = error_id;
+        //     deepPositionDataDict['entity'] = entityIncrement;
+        //     deepPositionDataDict['error'] = commonErrorkeyArray[2];
 
-            positionArray.push(deepPositionDataDict);
-        }
+        //     positionArray.push(deepPositionDataDict);
+        // }
 
-        if (!('name' in elem)) {
-            //nameNotFoundError
-            var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
+        // if (!('name' in elem)) {
+        //     //nameNotFoundError
+        //     var deepPositionDataDict = lodash.cloneDeep(positionDataDict);
 
-            incremenErrorId();
-            deepPositionDataDict['errorId'] = error_id;
-            deepPositionDataDict['entity'] = entityIncrement;
-            deepPositionDataDict['error'] = commonErrorkeyArray[3];
+        //     incremenErrorId();
+        //     deepPositionDataDict['errorId'] = error_id;
+        //     deepPositionDataDict['entity'] = entityIncrement;
+        //     deepPositionDataDict['error'] = commonErrorkeyArray[3];
 
-            positionArray.push(deepPositionDataDict);
-        }
+        //     positionArray.push(deepPositionDataDict);
+        // }
 
         entityIncrement++;
     });
@@ -866,29 +866,29 @@ function checkAccelerationData(accelerationArrayData, accelerationDataDict) {
 
     accelerationArrayData.forEach(elem => {
         // Acceleration CAN BE NEGATIVE
-        if (!('value' in elem)) {
-            //valueNotFoundError
-            var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
+        // if (!('value' in elem)) {
+        //     //valueNotFoundError
+        //     var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
 
-            incremenErrorId();
-            deepAccelerationDataDict['errorId'] = error_id;
-            deepAccelerationDataDict['entity'] = entityIncrement;
-            deepAccelerationDataDict['error'] = commonErrorkeyArray[2];
+        //     incremenErrorId();
+        //     deepAccelerationDataDict['errorId'] = error_id;
+        //     deepAccelerationDataDict['entity'] = entityIncrement;
+        //     deepAccelerationDataDict['error'] = commonErrorkeyArray[2];
 
-            accelerationArray.push(deepAccelerationDataDict);
-        }
+        //     accelerationArray.push(deepAccelerationDataDict);
+        // }
 
-        if (!('name' in elem)) {
-            //nameNotFoundError
-            var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
+        // if (!('name' in elem)) {
+        //     //nameNotFoundError
+        //     var deepAccelerationDataDict = lodash.cloneDeep(accelerationDataDict);
 
-            incremenErrorId();
-            deepAccelerationDataDict['errorId'] = error_id;
-            deepAccelerationDataDict['entity'] = entityIncrement;
-            deepAccelerationDataDict['error'] = commonErrorkeyArray[3];
+        //     incremenErrorId();
+        //     deepAccelerationDataDict['errorId'] = error_id;
+        //     deepAccelerationDataDict['entity'] = entityIncrement;
+        //     deepAccelerationDataDict['error'] = commonErrorkeyArray[3];
 
-            accelerationArray.push(deepAccelerationDataDict);
-        }
+        //     accelerationArray.push(deepAccelerationDataDict);
+        // }
 
         entityIncrement++;
     });
@@ -901,29 +901,29 @@ function checkPodStateData(podStateDataArray, podStateDataDict) {
     var entityIncrement = 1;
 
     podStateDataArray.forEach(elem => {
-        if (!('value' in elem)) {
-            //valueNotFoundError
-            var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
+        // if (!('value' in elem)) {
+        //     //valueNotFoundError
+        //     var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
 
-            incremenErrorId();
-            deepPodStateDataDict['errorId'] = error_id;
-            deepPodStateDataDict['entity'] = entityIncrement;
-            deepPodStateDataDict['error'] = commonErrorkeyArray[2];
+        //     incremenErrorId();
+        //     deepPodStateDataDict['errorId'] = error_id;
+        //     deepPodStateDataDict['entity'] = entityIncrement;
+        //     deepPodStateDataDict['error'] = commonErrorkeyArray[2];
 
-            podStateArray.push(deepPodStateDataDict);
-        }
+        //     podStateArray.push(deepPodStateDataDict);
+        // }
 
-        if (!('name' in elem)) {
-            //nameNotFoundError
-            var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
+        // if (!('name' in elem)) {
+        //     //nameNotFoundError
+        //     var deepPodStateDataDict = lodash.cloneDeep(podStateDataDict);
 
-            incremenErrorId();
-            deepPodStateDataDict['errorId'] = error_id;
-            deepPodStateDataDict['entity'] = entityIncrement;
-            deepPodStateDataDict['error'] = commonErrorkeyArray[3];
+        //     incremenErrorId();
+        //     deepPodStateDataDict['errorId'] = error_id;
+        //     deepPodStateDataDict['entity'] = entityIncrement;
+        //     deepPodStateDataDict['error'] = commonErrorkeyArray[3];
 
-            podStateArray.push(deepPodStateDataDict);
-        }
+        //     podStateArray.push(deepPodStateDataDict);
+        // }
 
         entityIncrement++;
     });

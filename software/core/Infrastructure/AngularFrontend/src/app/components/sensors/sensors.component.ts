@@ -10,7 +10,7 @@ export class SensorsComponent implements OnInit {
   dataFront = [
     {
       id: 'F1',
-      state: 'inactive'
+      state: 'active'
     },
     {
       id: 'F2',
