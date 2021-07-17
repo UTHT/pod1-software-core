@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_PREFIX@/lib
+includedir=@CMAKE_INSTALL_PREFIX@/include
+
+Name: affinity
+Description: C++ wrappers for POSIX shared memory 
+Version: 1.0 
+Requires: 
+Conflicts: 
+Libs:  -L${libdir} -laffinity @CMAKE_THREAD_LIBS_INIT@
+Libs.private: 
+Cflags: -I${includedir}

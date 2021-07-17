@@ -1,0 +1,79 @@
+/**
+ * raft header file - includes all files within $(prefix)/include/raft dir 
+ * @author: Jonathan Beard
+ * @version: Fri Sep 26 10:00:21 2014
+ * 
+ * Copyright 2014 Jonathan Beard
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+#ifndef _RAFT_HPP_
+#define _RAFT_HPP_  1
+
+/** raft proper includes **/
+#include "./raftinc/allocate.hpp"
+#include "./raftinc/graphtools.hpp"
+#include "./raftinc/kernel.hpp"
+#include "./raftinc/map.hpp"
+#include "./raftinc/port.hpp"
+#include "./raftinc/port_info.hpp"
+#include "./raftinc/port_info_types.hpp"
+#include "./raftinc/schedule.hpp"
+#include "./raftinc/simpleschedule.hpp"
+#include "./raftinc/stdalloc.hpp"
+#include "./raftinc/rafttypes.hpp"
+#include "./raftinc/kernel_all.hpp"
+
+/** parallel headers **/
+#include "./raftinc/parallelk.hpp"
+#include "./raftinc/splitmethod.hpp"
+#include "./raftinc/roundrobin.hpp"
+#include "./raftinc/split.tcc"
+#include "./raftinc/join.tcc"
+
+/** c++stdlib utilities **/
+#include "./raftinc/readeach.tcc"
+#include "./raftinc/writeeach.tcc"
+
+/** c++stdlib like utilities **/
+#include "./raftinc/foreach.tcc"
+
+/** helper functions **/
+#include "./raftinc/select.tcc"
+
+/** fifo includes **/
+#include "./raftinc/blocked.hpp"
+#include "./raftinc/fifo.hpp"
+#include "./raftinc/pointer.hpp"
+#include "./raftinc/ringbuffertypes.hpp"
+#include "./raftinc/signalvars.hpp"
+#include "./raftinc/units.hpp"
+
+/** fifo templates **/
+#include "./raftinc/bufferdata.tcc"
+#include "./raftinc/fifoabstract.tcc"
+//#include "./raftinc/randomstring.tcc"
+#include "./raftinc/ringbuffer.tcc"
+#include "./raftinc/ringbufferbase.tcc"
+#include "./raftinc/ringbufferheap.tcc"
+#include "./raftinc/ringbufferinfinite.tcc"
+
+#include "./raftinc/lambdak.tcc"
+
+/** exceptions **/
+#include "./raftinc/portexception.hpp"
+#include "./raftinc/kernelexception.hpp"
+#include "./raftinc/mapexception.hpp"
+
+
+#endif /* END _RAFT_HPP_ */
