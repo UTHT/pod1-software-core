@@ -28,6 +28,8 @@ class AppProtocol(WebSocketClientProtocol):
 
         if self.count < 20:
             data['velocity'][0]['value'] += 30
+            data['acceleration'][0]['value'] += 3
+            data['DC_current'][0]['value'] +=10
 
             data['temperature'][0]['value'] += 1
             data['temperature'][1]['value'] += 3
@@ -41,6 +43,8 @@ class AppProtocol(WebSocketClientProtocol):
             data['pressure'][2]['value'] +=10
             data['pressure'][1]['status'] = 1
             data['pressure'][1]['value'] +=20
+            data['pressure'][0]['status'] = 1
+            data['pressure'][0]['value'] +=10
             data['gap_height'][0]['value'] += 0.5
             data['vibrations'][0]['value'] +=0.5
 
@@ -48,10 +52,14 @@ class AppProtocol(WebSocketClientProtocol):
             data['battery'][1]['value'] -=1
 
         elif  self.count  < 56:
+            data['acceleration'][0]['value'] = 0
             data['pressure'][2]['status'] = 1
             data['pressure'][2]['value'] +=10
             data['pressure'][1]['status'] = 1
             data['pressure'][1]['value'] +=10
+            data['pressure'][0]['status'] = 1
+            data['pressure'][0]['value'] +=10
+            data['DC_current'][0]['value'] +=10
 
             data['velocity'][0]['value'] -= 30
 
@@ -84,7 +92,7 @@ class AppProtocol(WebSocketClientProtocol):
         self.count +=1
         if self.count < SEND_COUNT:
             # Change speed
-            time.sleep(0.3)
+            time.sleep(0.5)
             self.sendOneOdroidMessage()
 
     def onClose(self, wasClean, code, reason):

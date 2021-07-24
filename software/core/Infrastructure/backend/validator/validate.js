@@ -114,9 +114,9 @@ function validate(jsonOdriodData) {
         // console.log(errorarray);
     }
 
-    if ('temperatures' in jsonOdriodData) {
+    if ('temperature' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkTempData(jsonOdriodData.temperatures, temperatureDataDict);
+        tempArray = checkTempData(jsonOdriodData.temperature, temperatureDataDict);
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -124,7 +124,7 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw temprature type error
-        errorarray.push(sensorTypeError('temperatures', temperatureDataDict));
+        errorarray.push(sensorTypeError('temperature', temperatureDataDict));
         // console.log(errorarray);
     }
     
@@ -171,9 +171,9 @@ function validate(jsonOdriodData) {
 
     }
 
-    if ('current' in jsonOdriodData) {
+    if ('DC_current' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkCurrentData(jsonOdriodData.current, currentDataDict)
+        tempArray = checkCurrentData(jsonOdriodData.DC_current, currentDataDict)
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -181,13 +181,13 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw current type error
-        errorarray.push(sensorTypeError('current', currentDataDict));
+        errorarray.push(sensorTypeError('DC_current', currentDataDict));
         // console.log(errorarray);
     }
 
-    if ('vibration' in jsonOdriodData) {
+    if ('vibrations' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkVibrationData(jsonOdriodData.vibration, vibrationDataDict)
+        tempArray = checkVibrationData(jsonOdriodData.vibrations, vibrationDataDict)
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -195,13 +195,13 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw current type error
-        errorarray.push(sensorTypeError('vibration', currentDataDict));
+        errorarray.push(sensorTypeError('vibrations', currentDataDict));
         // console.log(errorarray);
     }
 
-    if ('gapHeight' in jsonOdriodData) {
+    if ('gap_height' in jsonOdriodData) {
         tempArray = [];
-        tempArray = checkGapHeightData(jsonOdriodData.gapHeight, gapHeightDataDict)
+        tempArray = checkGapHeightData(jsonOdriodData.gap_height, gapHeightDataDict)
         tempArray.forEach(elem => {
             errorarray.push(elem);
         })
@@ -209,7 +209,7 @@ function validate(jsonOdriodData) {
     }
     else {
         //throw current type error
-        errorarray.push(sensorTypeError('gapHeight', gapHeightDataDict));
+        errorarray.push(sensorTypeError('gap_height', gapHeightDataDict));
         // console.log(errorarray);
     }
 

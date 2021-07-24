@@ -35,6 +35,7 @@ import { LogsComponent } from './components/logs/logs.component';
 import { GaugeNvibrationComponent } from './components/dashboard/gauge-nvibration/gauge-nvibration.component';
 import { GaugeheightComponent } from './components/dashboard/gauge-nvibration/gaugeheight/gaugeheight.component';
 import { VibrationComponent } from './components/dashboard/gauge-nvibration/vibration/vibration.component';
+import { AccelerationComponent } from './components/dashboard/acceleration/acceleration.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { VibrationComponent } from './components/dashboard/gauge-nvibration/vibr
     GaugeNvibrationComponent,
     GaugeheightComponent,
     VibrationComponent,
+    AccelerationComponent,
   ],
   imports: [
     BrowserModule,

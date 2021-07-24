@@ -5,7 +5,7 @@ function createErrorObj(error_array) {
     const groupByDataArray = nestGroupsBy(error_array, ['dataArrayName', 'entity', 'error']);
     var nestedObj = JSON.stringify(groupByDataArray, null, 2);
 
-    return nestedObj;
+    return groupByDataArray;
 
 }
 
