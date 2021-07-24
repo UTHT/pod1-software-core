@@ -44,6 +44,8 @@ wss.on("connection", function connection(ws) {
 				} else {
 					var error_array = [];
 					var error_obj = {};
+          console.log(data);
+
 					//console.log("comes here")
 					// validate incoming data from the pod
 					//var error_array = validate(data);

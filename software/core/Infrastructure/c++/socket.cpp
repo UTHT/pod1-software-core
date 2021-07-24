@@ -1,7 +1,9 @@
 #include <iostream>
+#include <stdlib.h> 
 #include <cpprest/ws_client.h>
 #include "./classes/sensor.h"
 #include <vector>
+
 
 using namespace std;
 using namespace web;
@@ -12,7 +14,7 @@ int main()
   try
   {
     websocket_client client;
-    client.connect("ws://107.174.17.4/").wait();
+    client.connect("ws://localhost:8080").wait();
     websocket_outgoing_message out_msg;
 
     out_msg.set_utf8_message("{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }");

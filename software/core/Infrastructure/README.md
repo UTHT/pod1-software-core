@@ -53,6 +53,11 @@ g++ -std=c++11 socket.cpp -I$(brew --prefix openssl)/include -I$(brew --prefix c
 ./a.out
 ```
 
+For Ubuntu, please follow the instruction listed here 
+```sh
+https://github.com/microsoft/cpprestsdk/wiki/How-to-build-for-Linux
+```
+
 <b style="color:red"> NOTE: make sure you have nodejs running before running ./a.out</b>
 
 #### Creating Component for Angular
