@@ -1,7 +1,7 @@
 struct channel_array
 {
     int8_t arduino_id;
-    int8_t sensor_id;
+    string sensor;
     int64_t sz;
     double data[sz];
     string units;

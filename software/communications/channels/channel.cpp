@@ -1,12 +1,14 @@
 #include "channel.hpp"
 
 unordered_map<string, Channel*> channel_map;
+mutex global_lock;
 
-Channel::Channel(string channel_name, string serial_port, double min_value, double max_value) {
+Channel::Channel(string channel_name, string serial_port, string arduino_id, double min_value, double max_value) {
     this->channel_name = channel_name;
     this->min_value = min_value;
     this->max_value = max_value;
     this->serial_port = serial_port;
+    this->arduino_id = arduino_id;
 
     // Convert string to char*
     char* serial_port_c = new char[serial_port.length() + 1];
@@ -60,8 +62,10 @@ int Channel::validateCurrentValue() {
 
 // This is a static function (instead of a method function)
 void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_array* msg, void* user) {
+    string sensorName = msg->sensor;
+
     // Get the pointer to the channel
-    string channelString(channel);
+    string channelString(sensorName);
     Channel* channelObj = channel_map[channelString];
     cout << "Received message on channel: " << channelString << endl;
 
@@ -76,7 +80,7 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     // Need to double check what typeid.name() returns for double and arrays
     // string sensorType(typeid(msg->sensor_value).name());
     
-    channelObj->lock.lock();
+    global_lock.lock();
 
     channelObj->current_values.clear();
     channelObj->current_values.insert(channelObj->current_values.begin(), msg->data, msg->data + msg->sz);
@@ -91,9 +95,8 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     
     cout << "Units: " << msg->units << endl;
     cout << "Time received: " << channelObj->last_comm_time << endl;
-
     
-    channelObj->lock.unlock();
+    global_lock.unlock();
 }
 
 vector<double> Channel::getCurrentValues() {
@@ -112,5 +115,5 @@ string Channel::getChannelName() {
 }
 
 channel_array_subscription_t* Channel::subscribeToChannel() { 
-    return channel_array_subscribe(this->zcm, this->channel_name.c_str(), &callbackHandler, NULL);
+    return channel_array_subscribe(this->zcm, this->arduino_id.c_str(), &callbackHandler, NULL);
 }

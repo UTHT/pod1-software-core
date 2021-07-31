@@ -24,9 +24,9 @@ uint64_t __channel_array_hash_recursive(const __zcm_hash_ptr* p)
     cp.v = (void*)__channel_array_get_hash;
     (void) cp;
 
-    uint64_t hash = (uint64_t)0xbfdfc8f41d85bd16LL
+    uint64_t hash = (uint64_t)0x3e47c8f214f75cbfLL
          + __int8_t_hash_recursive(&cp)
-         + __int8_t_hash_recursive(&cp)
+         + __string_hash_recursive(&cp)
          + __int64_t_hash_recursive(&cp)
          + __double_hash_recursive(&cp)
          + __string_hash_recursive(&cp)
@@ -55,7 +55,7 @@ int __channel_array_encode_array(void* buf, uint32_t offset, uint32_t maxlen, co
         thislen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].arduino_id), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        thislen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor_id), 1);
+        thislen = __string_encode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int64_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].sz), 1);
@@ -93,7 +93,7 @@ uint32_t __channel_array_encoded_array_size(const channel_array* p, uint32_t ele
 
         size += __int8_t_encoded_array_size(&(p[element].arduino_id), 1);
 
-        size += __int8_t_encoded_array_size(&(p[element].sensor_id), 1);
+        size += __string_encoded_array_size(&(p[element].sensor), 1);
 
         size += __int64_t_encoded_array_size(&(p[element].sz), 1);
 
@@ -120,7 +120,7 @@ int __channel_array_decode_array(const void* buf, uint32_t offset, uint32_t maxl
         thislen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].arduino_id), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        thislen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor_id), 1);
+        thislen = __string_decode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int64_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].sz), 1);
@@ -144,7 +144,7 @@ int __channel_array_decode_array_cleanup(channel_array* p, uint32_t elements)
 
         __int8_t_decode_array_cleanup(&(p[element].arduino_id), 1);
 
-        __int8_t_decode_array_cleanup(&(p[element].sensor_id), 1);
+        __string_decode_array_cleanup(&(p[element].sensor), 1);
 
         __int64_t_decode_array_cleanup(&(p[element].sz), 1);
 
@@ -186,7 +186,7 @@ uint32_t __channel_array_clone_array(const channel_array* p, channel_array* q, u
 
         n += __int8_t_clone_array(&(p[element].arduino_id), &(q[element].arduino_id), 1);
 
-        n += __int8_t_clone_array(&(p[element].sensor_id), &(q[element].sensor_id), 1);
+        n += __string_clone_array(&(p[element].sensor), &(q[element].sensor), 1);
 
         n += __int64_t_clone_array(&(p[element].sz), &(q[element].sz), 1);
 

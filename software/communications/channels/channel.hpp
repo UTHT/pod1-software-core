@@ -20,6 +20,7 @@ class Channel {
     private:
         string channel_name;
         string serial_port;
+        string arduino_id;
         zcm_t* zcm;
         mutex lock;
 
@@ -31,7 +32,7 @@ class Channel {
         static void callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_array* msg, void* user);
 
     public:
-        Channel(string channel_name, string serial_port, double min_value, double max_value);
+        Channel(string channel_name, string serial_port, string arduino_id, double min_value, double max_value);
 
         vector<double> getCurrentValues();
         zcm_t* getZCM();

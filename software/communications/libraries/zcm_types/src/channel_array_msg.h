@@ -20,7 +20,7 @@ typedef struct _channel_array channel_array;
 struct _channel_array
 {
     int8_t     arduino_id;
-    int8_t     sensor_id;
+    char*      sensor;
     int64_t    sz;
     double     *data;
     char*      units;
