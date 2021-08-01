@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <math.h>
 
 std::string Sensor::bundleSensor(){
     std::string json = "";
@@ -85,4 +86,12 @@ std::string Data::bundleData(){
     json += "] } }";
 
     return json;
+}
+
+float Data::brakingDistance(){
+    float mass = 140; //kg
+    float fricCoefficient = 0.3; //Unitless
+    float brakeForce = 900; //Newtons
+    float currVelocity = pow(pow(velocity.values[0], 2) + pow(velocity.values[1], 2) + pow(velocity.values[1], 3), 0.5);
+    return ((mass * (pow(currVelocity, 2.0))) / (fricCoefficient * brakeForce));
 }

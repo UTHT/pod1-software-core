@@ -25,6 +25,7 @@ int main() {
     while(1){
         channel_handler.updateData();
         channel_handler.updateComm();
+        channel_handler.sendBundle();
 
         health_monitor.healthCheck();
         if (!health_monitor.health_status) break;
