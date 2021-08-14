@@ -55,7 +55,7 @@ int publishTestToChannel(zcm_t* zcm, double values[], String sensorName, String 
   channel_array message;
   message.arduino_id = ARDUINO_ONE;
   message.sensor = (char *) sensorName.c_str();
-  message.data = values_to_send;
+  message.data = values;
   message.units = (char *) units.c_str();
   message.sz = numData;
 

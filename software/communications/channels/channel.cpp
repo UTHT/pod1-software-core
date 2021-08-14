@@ -1,6 +1,7 @@
 #include "channel.hpp"
 
 unordered_map<string, Channel*> channel_map;
+unordered_map<string, zcm_t*> zcm_transport_map;
 mutex global_lock;
 
 Channel::Channel(string channel_name, string serial_port, string arduino_id, double min_value, double max_value) {
@@ -14,10 +15,18 @@ Channel::Channel(string channel_name, string serial_port, string arduino_id, dou
     char* serial_port_c = new char[serial_port.length() + 1];
     strcpy(serial_port_c, serial_port.c_str());
 
-    // The object should only be created if the serial_port is valid.
-    // Otherwise, an error will be thrown.
-    zcm_trans_t* linux_cobs_serial_transport = linux_cobs_serial_transport_create(serial_port_c);
-    this->zcm = zcm_create_from_trans(linux_cobs_serial_transport);
+    auto find_zcm = zcm_transport_map.find(serial_port);
+
+    // Create zcm object if it has not been created before
+    if (find_zcm == zcm_transport_map.end()) {
+        zcm_trans_t* linux_cobs_serial_transport = linux_cobs_serial_transport_create(serial_port_c);
+        zcm_t* zcm_created = zcm_create_from_trans(linux_cobs_serial_transport);
+
+        this->zcm = zcm_created;
+        zcm_transport_map[serial_port] = zcm_created;
+    } else {
+        this->zcm = find_zcm -> second;
+    }
 
     delete [] serial_port_c;
 
@@ -66,7 +75,14 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
 
     // Get the pointer to the channel
     string channelString(sensorName);
-    Channel* channelObj = channel_map[channelString];
+
+    auto find_channel = channel_map.find(channelString);
+
+    if (find_channel == channel_map.end()) {
+        return;
+    }
+
+    Channel* channelObj = find_channel -> second;
     cout << "Received message on channel: " << channelString << endl;
 
     // TODO: Should we return some ENUM here?

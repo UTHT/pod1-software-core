@@ -8,54 +8,6 @@
 
 using namespace std;
 
-void SPTcallbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_array* msg, void* user) {
-    // Get the pointer to the channel
-    // string channelString(channel);
-    // Channel* channelObj = channel_map[channelString];
-    cout << "Received message on channel: " << channel << endl;
-    cout << "Sensor: " << msg->sensor << endl;
-
-    cout << "Current Values: ";
-    for (int i = 0; i < sizeof(msg->data); i++) {
-        cout << msg->data[i] << ", ";
-    }
-    cout << endl;
-    
-    cout << "Units: " << msg->units << endl;
-    time_t current_comm_time; 
-
-    // Update the current time 
-    time(&current_comm_time); 
-
-    cout << "Time received: " << current_comm_time << endl;
-}
-
-// void TMPcallbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, const channel_array* msg, void* user) {
-//     // Get the pointer to the channel
-//     string channelString(channel);
-//     Channel* channelObj = channel_map[channelString];
-//     cout << "Received message on channel: " << channelString << endl;
-
-//     // TODO: Should we return some ENUM here?
-//     if (channelObj == NULL) {
-//         return;
-//     }
-    
-//     channelObj->current_values.clear();
-//     channelObj->current_values.insert(channelObj->current_values.begin(), msg->data, msg->data + msg->sz);
-
-//     time(&channelObj->last_comm_time);
-
-//     cout << "Current Values: ";
-//     for (int i = 0; i < channelObj->current_values.size(); i++) {
-//         cout << channelObj->current_values.at(i) << ", ";
-//     }
-//     cout << endl;
-    
-//     cout << "Units: " << msg->units << endl;
-//     cout << "Time received: " << channelObj->last_comm_time << endl;
-// }
-
 int main(int argc, char** argv) {
     char* serial_port;
 
@@ -74,12 +26,6 @@ int main(int argc, char** argv) {
 
     SPT.subscribeToChannel();
     TMP.subscribeToChannel();
-
-    // channel_array_subscribe(SPT.getZCM(), "ARDUINO1", &SPTcallbackHandler, NULL);
-    // channel_array_subscribe(TMP.getZCM(), "TMP", &TMPcallbackHandler, NULL);
-
-    // SPT.subscribeToChannel();
-    // TMP.subscribeToChannel();
 
     while (true) {
         for (auto it : channel_map) {
