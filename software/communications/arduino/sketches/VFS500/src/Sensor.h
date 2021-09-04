@@ -14,7 +14,8 @@ typedef enum sensors_t {
   S_DCT500,
   S_SPTD25_20_1000H,
   S_SPTD25_20_0200A,
-  S_CANBUS
+  S_CANBUS,
+  S_VFS500
 } sensors_t;
 
 // Arduino identifiers

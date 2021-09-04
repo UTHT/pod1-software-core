@@ -21,6 +21,8 @@ Sensor* sensors[NUMSENSORS] = {
     //...
 };
 
+zcm_t* zcm_arduino;
+
 // !#!#!#!--- EVERYTHING AFTER HERE DOES NOT NEED TO BE CHANGED FOR SENSOR IMPLEMENTATION ---!#!#!#!
 
 void setup(){
@@ -64,7 +66,7 @@ void loop(){
         SensorState* state = sensors[i]->update();
         // Print/send sensor post-setup state data here. For example:
         bool _success = (state->error == ERR_NONE);
-        bool _new = (state->debug == DS_SUCCESS);
+        bool _new = (state->debug == DS_NEWREAD);
         if(_success) {
 
             if(_new){
