@@ -51,15 +51,15 @@ void setup(){
 
 }
 
-int publishTestToChannel(zcm_t* zcm, double values[], String channel, String units, int numData) {  
+int publishTestToChannel(zcm_t* zcm, double values[], String sensorName, String units, int numData) {  
   channel_array message;
   message.arduino_id = ARDUINO_ONE;
-  message.sensor_id = S_SPTD25_20_0200A;
+  message.sensor = (char *) sensorName.c_str();
   message.data = values;
   message.units = (char *) units.c_str();
   message.sz = numData;
 
-  return channel_array_publish(zcm, channel.c_str(), &message);
+  return channel_array_publish(zcm, sensorName.c_str(), &message);
 }
 
 void loop(){
@@ -85,7 +85,7 @@ void loop(){
                     units += state->data[x].units;
                     units += ", ";
                 }
-                publishTestToChannel(zcm_arduino, values, "test_sensor", units, state->numdata);
+                publishTestToChannel(zcm_arduino, values, "RTD", units, state->numdata);
 
             }
         } else {

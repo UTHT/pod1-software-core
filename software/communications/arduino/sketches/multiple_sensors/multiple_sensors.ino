@@ -22,6 +22,9 @@ Sensor* sensors[NUMSENSORS] = {
     &tmp006, 
     //...
 };
+
+String sensor_names[NUMSENSORS] = {"SPT25-20-0200A", "TMP006"};
+
 zcm_t* zcm_arduino;
 
 void setup(){
@@ -59,15 +62,14 @@ int publishTestToChannel(zcm_t* zcm, double values[], String sensorName, String 
   message.units = (char *) units.c_str();
   message.sz = numData;
 
-  return channel_array_publish(zcm, "ARDUINO1", &message);
+  return channel_array_publish(zcm, sensorName.c_str(), &message);
 }
 
 void loop(){
     zcm_handle_nonblock(zcm_arduino);
     for(int i = 0; i < NUMSENSORS; i++){
         SensorState* state = sensors[i]->update();
-        String names[2] = {"SPT", "TMP"};
-        // sensors_t sensor_enums[2] = {S_SPTD25_20_0200A, S_TMP006};
+
         // Print/send sensor post-setup state data here. For example:
         bool _success = (state->error == ERR_NONE);
         bool _new = (state->debug == DS_NEWREAD);
@@ -82,7 +84,7 @@ void loop(){
                     units += ", ";
                 }
                 
-                publishTestToChannel(zcm_arduino, values, names[i], units, state->numdata);
+                publishTestToChannel(zcm_arduino, values, sensor_names[i], units, state->numdata);
             }
         } else {
             // Serial.println(" failed to update!");

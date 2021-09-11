@@ -131,5 +131,5 @@ string Channel::getChannelName() {
 }
 
 channel_array_subscription_t* Channel::subscribeToChannel() { 
-    return channel_array_subscribe(this->zcm, this->arduino_id.c_str(), &callbackHandler, NULL);
+    return channel_array_subscribe(this->zcm, this->channel_name.c_str(), &callbackHandler, NULL);
 }

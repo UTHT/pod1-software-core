@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
     cout << "Listening on port: " << serial_port << endl;
 
     // Define the sensor and subscribe to the channel
-    Channel SPT("SPT", (string) serial_port, (string) "ARDUINO1", 0, 1000);
-    Channel TMP("TMP", (string) serial_port, (string) "ARDUINO1", 0, 1000); 
+    Channel SPT("SPT25-20-0200A", (string) serial_port, (string) "ARDUINO1", 0, 1000);
+    Channel TMP("TMP006", (string) serial_port, (string) "ARDUINO1", 0, 1000); 
 
     SPT.subscribeToChannel();
     TMP.subscribeToChannel();
