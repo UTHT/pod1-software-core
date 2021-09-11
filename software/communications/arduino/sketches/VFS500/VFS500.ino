@@ -48,6 +48,7 @@ void setup(){
         Serial.println("POST failed on one or more sensors, freezing...");
         while(1){delay(1000);}
     }
+    zcm_arduino = create_zcm(0);
 }
 
 int publishMessageToChannel(zcm_t* zcm, double values[], String channel, String units, int numData) {  
@@ -75,7 +76,7 @@ void loop(){
 
                 for(int x = 0; x < state->numdata; x++){
                     values[x] = state->data[x].data; 
-
+                    
                     units += state->data[x].units;
                     units += ", ";
                 }
