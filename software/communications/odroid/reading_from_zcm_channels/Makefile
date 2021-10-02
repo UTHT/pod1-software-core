@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = $(INCLUDES) -g -Wall
-TARGET = channel_class_test
+TARGET = reading_from_zcm_channels
 
 # Common directories
 LIBRARIES_FOLDER = ../../libraries
@@ -20,15 +20,15 @@ VPATH += $(LIBRARIES_FOLDER)/zcm
 VPATH += $(LIBRARIES_FOLDER)/zcm_types/src/
 VPATH += $(LIBRARIES_FOLDER)/../channels/
 
-# Final objects needed to build the channel_class_test executable file
-OBJECTS = channel_class_test.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_array_msg.o channel.o
+# Final objects needed to build the reading_from_zcm_channels executable file
+OBJECTS = reading_from_zcm_channels.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_array_msg.o channel.o
 
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
 
-channel_class_test.o: channel_class_test.cpp
+reading_from_zcm_channels.o: reading_from_zcm_channels.cpp
 	$(CC) -c  -std=c++11 $(CFLAGS) $^ -o $@
 	
 linux_cobs_serial_transport.o: linux_cobs_serial_transport.cpp
