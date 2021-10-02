@@ -8,7 +8,7 @@
 #include <channel_array_msg.h>
 
 
-#include "src/Sensor.h"
+#include "Sensor.h"
 #define NUMSENSORS 2 //Or however many
 #define BAUDRATE 115200
 #define THISARDUINO ARDUINO_ONE
