@@ -1,7 +1,7 @@
 #include "MPU9250.h"
 
-const char *arr[10] = {"mg [X]", "mg [Y]", "mg [Z]", "deg/sec [X]", "deg/sec [Y]", "deg/sec [Z]", "mG [X]", "mG [Y]", "mG [Z]", "mg/Hz Peak [" FFT_AXIS "]"};
-t_datasetup datasetup = {10, arr};
+const char *arr_MPU[10] = {"mg [X]", "mg [Y]", "mg [Z]", "deg/sec [X]", "deg/sec [Y]", "deg/sec [Z]", "mG [X]", "mG [Y]", "mG [Z]", "mg/Hz Peak [" FFT_AXIS "]"};
+t_datasetup datasetup_MPU = {10, arr_MPU};
 
 arduinoFFT FFT = arduinoFFT();
 double vReal[SAMPLES];
@@ -10,7 +10,7 @@ int count = 0;
 double peak = 0.0;
 double vibrationFreq;
 
-MPU9250::MPU9250(arduino_t arduino) : Sensor(S_MPU9250, arduino, datasetup, 250) {
+MPU9250::MPU9250(arduino_t arduino) : Sensor(S_MPU9250, arduino, datasetup_MPU, 250) {
     this->mpu9250 = MPU9250_Lib(MPU9250_ADDRESS, I2Cport, I2Cclock);
 }
 

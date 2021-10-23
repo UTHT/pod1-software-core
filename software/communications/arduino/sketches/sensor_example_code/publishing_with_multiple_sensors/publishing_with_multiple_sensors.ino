@@ -1,6 +1,7 @@
 // Headers for each sensor type
-#include "src/SPT25-20-0200A.h" 
-#include "src/TMP006.h" 
+#include <sensor_headers.h>
+#include <SPT25-20-0200A/SPT25-20-0200A.h>
+#include <TMP006/TMP006.h>
 //...
 #include <zcm_utht.h>
 #include <transport.h>
@@ -8,7 +9,6 @@
 #include <channel_array_msg.h>
 
 
-#include "Sensor.h"
 #define NUMSENSORS 2 //Or however many
 #define BAUDRATE 115200
 #define THISARDUINO ARDUINO_ONE

@@ -1,5 +1,6 @@
 // Headers for each sensor type
-#include "src/RTD.h" 
+#include <sensor_headers.h>
+#include <RTD/RTD.h>
 //...
 #include <zcm_utht.h>
 #include <transport.h>

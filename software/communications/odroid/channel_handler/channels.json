@@ -3,18 +3,21 @@
         {
             "sensor": "temperature_1",
             "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "1",
             "min_value": 10,
             "max_value": 30
         },
         {
             "sensor": "resistance_1",
             "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "2",
             "min_value": 1,
             "max_value": 5
         },
         {
             "sensor": "voltage_1",
             "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "3",
             "min_value": 1,
             "max_value": 10
         }

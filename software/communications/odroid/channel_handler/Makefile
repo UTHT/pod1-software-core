@@ -11,17 +11,17 @@ INCLUDES += -I$(LIBRARIES_FOLDER)/libserial/src
 INCLUDES += -I$(LIBRARIES_FOLDER)/linux_cobs_serial_transport
 INCLUDES += -I$(LIBRARIES_FOLDER)/zcm
 INCLUDES += -I$(LIBRARIES_FOLDER)/zcm_types/src/
-INCLUDES += -I$(LIBRARIES_FOLDER)/../channels/
+INCLUDES += -I$(LIBRARIES_FOLDER)/channel/src/
 
 # VPATH is used to define where the arguments of each rule are located
 VPATH += $(LIBRARIES_FOLDER)/linux_cobs_serial_transport
 VPATH += $(LIBRARIES_FOLDER)/libserial/src
 VPATH += $(LIBRARIES_FOLDER)/zcm
 VPATH += $(LIBRARIES_FOLDER)/zcm_types/src/
-VPATH += $(LIBRARIES_FOLDER)/../channels/
+VPATH += $(LIBRARIES_FOLDER)/channel/src/
 
 # Final objects needed to build the channel_handler executable file
-OBJECTS = channel_handler.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_msg.o channel.o
+OBJECTS = channel_handler.o linux_cobs_serial_transport.o SerialStream.o SerialStreamBuf.o zcm.o nonblocking.o channel_array_msg.o channel.o
 
 all: $(TARGET)
 
@@ -43,7 +43,7 @@ SerialStream.o: SerialStream.cc
 SerialStreamBuf.o: SerialStreamBuf.cc
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-channel_msg.o: channel_msg.c
+channel_array_msg.o: channel_array_msg.c
 	gcc -c $(CFLAGS) $^ -o $@
 
 zcm.o: zcm.c nonblocking.o

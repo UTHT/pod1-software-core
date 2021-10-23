@@ -1,12 +1,12 @@
 // Headers for each sensor type
-#include "src/TMP006.h" 
+#include <sensor_headers.h>
+#include <TMP006/TMP006.h>
 //...
 #include <zcm_utht.h>
 #include <transport.h>
 #include <arduino_cobs_serial_transport.hpp>
 #include <channel_array_msg.h>
 
-#include "Sensor.h"
 #define NUMSENSORS 1 //Or however many
 #define BAUDRATE 115200
 #define THISARDUINO ARDUINO_ONE

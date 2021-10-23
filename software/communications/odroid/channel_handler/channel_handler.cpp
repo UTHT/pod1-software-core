@@ -1,6 +1,6 @@
 // Implementation of channel handler
 #include "channel_handler.hpp"
-#include "nlohmann/json.hpp"
+#include "json.hpp"
 
 bool subscribeToChannels() {
     populate_channel_map();
@@ -25,11 +25,14 @@ void populate_channel_map() {
 
         std::string name = j["channels"][x]["sensor"];
         std::string port = j["channels"][x]["serial_port"];
+        std::string arduino_id = j["channels"][x]["arduino_id"];
         double min_value = j["channels"][x]["min_value"];
         double max_value = j["channels"][x]["max_value"];
 
-        Channel *temp = new Channel(name ,port,min_value ,max_value);
-        add_to_channel(temp);
+        Channel *temp = new Channel(name, port, arduino_id, min_value, max_value);
+        
+        // TODO: Implement add_to_channel()
+        // add_to_channel(temp);
     }    
 }
 

@@ -1,9 +1,9 @@
 #include "RTD.h"
 
-const char* arr[2] = {"deg F (Raw)", "deg F"};
-t_datasetup datasetup = {2, arr};
+const char* arr_RTD[2] = {"deg F (Raw)", "deg F"};
+t_datasetup datasetup_RTD = {2, arr_RTD};
 
-RTD::RTD(uint8_t pin, arduino_t arduino) : Sensor(S_PROSENSERTD, arduino, datasetup, 500){
+RTD::RTD(uint8_t pin, arduino_t arduino) : Sensor(S_PROSENSERTD, arduino, datasetup_RTD, 500){
     this->pin = pin;
 }
 

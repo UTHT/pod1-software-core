@@ -1,9 +1,9 @@
 #include "SPT25-20-0200A.h"
 
-const char* arr[2] = {"kPa (Raw)", "kPa"};
-t_datasetup datasetup = {2, arr};
+const char* arr_SPT[2] = {"kPa (Raw)", "kPa"};
+t_datasetup datasetup_SPT = {2, arr_SPT};
 
-SPT25_20_0200A::SPT25_20_0200A(uint8_t pin, arduino_t arduino) : Sensor(S_SPTD25_20_0200A, arduino, datasetup, 250){
+SPT25_20_0200A::SPT25_20_0200A(uint8_t pin, arduino_t arduino) : Sensor(S_SPTD25_20_0200A, arduino, datasetup_SPT, 250){
     this->pin = pin;
 }
 
