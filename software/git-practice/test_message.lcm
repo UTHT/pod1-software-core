@@ -1,5 +1,0 @@
-struct test_message
-{
-	string name;
-	string value;
-}
