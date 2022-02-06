@@ -53,6 +53,20 @@ g++ -std=c++11 socket.cpp -I$(brew --prefix openssl)/include -I$(brew --prefix c
 ./a.out
 ```
 
+#### Note for Linux (Works with Arch Linux and any arch-based distro):
+
+Ensure the following dependencies are installed:
+1. websocketpp
+2. cpprestsdk
+3. boost
+4. boost-lib (For arch-based distros)
+
+Please use the following command to compile socket.cpp:
+```sh
+g++ -lcpprest -pthread -lcrypto -lssl -lboost_system -lboost_chrono -g socket.cpp -o socket
+```
+Use node version with <b style="color:turquoise"> long-term support</b> instead of v17.4.0 to avoid compilation errors in Angular
+
 <b style="color:red"> NOTE: make sure you have nodejs running before running ./a.out</b>
 
 #### Creating Component for Angular
