@@ -97,3 +97,11 @@ class ESTOP : public SM {
 
 
 FSM_INITIAL_STATE(SM, OFF)
+#
+
+
+// Send current state to Arduino
+// Arduino sends comamnds using Canbus to inverter (converted to canbus format (8 bytes))
+
+// In a while loop: constantly poll for broadcast messages from inverter
+// Get each message, decode it, and store in hash table/data structure

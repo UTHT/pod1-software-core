@@ -3,9 +3,11 @@
 #include "health_monitor.hpp"
 #include "channel_handler.hpp" 
 #include "data.hpp"      
+#include "inv_data.hpp"      
 #include "en.hpp"                   
 
 struct Data data;
+struct inv_data inv_data;
 
 using fsm_handle = SM;
 
