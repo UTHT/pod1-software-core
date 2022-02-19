@@ -10,7 +10,6 @@ struct Sensor {
     std::vector<float> values;
     bool status;
     std::string bundleSensor();
-  
     Sensor(std::string n){name = n; values.push_back(0.0); status = true;}
     Sensor(std::string n, std::vector<float> v, bool st){ name = n; values = v; status = st;}
 };
@@ -34,6 +33,7 @@ struct Data {
     comm_t curr_command = NO_comm;
     std::string bundleData();
     std::string bundleStatus();
+    float brakingDistance();
 };
 
 extern struct Data data;
