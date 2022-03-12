@@ -1,0 +1,62 @@
+{
+    "speed": [
+        {
+            "value": -8
+        }
+    ],
+    "temperatures": [
+        {
+            "value": 2300
+        },
+        {
+            "name": "helo",
+            "value": 23
+        }
+    ],
+    "position": [
+        127,
+        -46
+    ],
+    "brakes": [
+        {
+            "status": 0,
+            "pressure": 170.2323
+        },
+        {
+            "name": "brakes_right",
+            "pressure": 243
+        },
+        {
+            "name": "brakes_right",
+            "status": 1
+        }
+    ],
+    "battery": [
+        {
+            "value": 670
+        },
+        {
+            "name": "battery_2"
+        }
+    ],
+    "current": [
+        {
+            "value": "200"
+        }
+    ],
+    "vibration": [
+        {
+            "value": "200"            
+        }
+    ],
+    "gapHeight": [
+        {
+            "value": "233"
+        }
+    ],
+    "acceleration": [
+        {
+            "value": "23"
+        }
+    ]
+}

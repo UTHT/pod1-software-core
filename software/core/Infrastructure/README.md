@@ -15,27 +15,25 @@ The Infrastructure carries out data transmission from the Odroid (master compute
 ## Module Breakdown
 _Details coming soon_
 
-
 ## Installation Guide
+There are two parts for installation. You have to install npm libraries independently for Angular and Electron.
 
-There are two parts for installation. You have to install npm libraries independently for frontend and backend. 
+For Angular:
 
-For backend:
-
-``` sh
-cd backend
-npm i           #install npm modules
-npm start       #start nodejs server
-```
-
-For frontend:
 ```sh
-cd AngularFrontend
-npm i           #install npm modules
-npm start       #start react server at port 4200
+cd UTHT/main/view/AngularFrontend
+npm install                         #install npm module
+ng build --base-href "/"            # set base reference for angular
 ```
 
-Now you can open multiple instances in the browser at `localhost:4200/` and each instance will be connected to the WebSocket.
+For electron
+```sh
+cd UTHT
+npm i
+npm start
+```
+
+Now you can open multiple instances in the application at `localhost:4200/` and each instance will be connected to the WebSocket.
 
 #### Compiling C++ socket
 We can succesfully connect to Nodejs Websocket with C++ websocket. You can compile and run C++ as follows:
@@ -64,6 +62,29 @@ https://github.com/microsoft/cpprestsdk/wiki/How-to-build-for-Linux
 If you want to create an independent component in Angular, make sure you create it inside components folder. You can use the following command:
 
 `ng generate component components/<nameOfPackage>`
+
+
+## Installation Guide (LEGACY)
+
+There are two parts for installation. You have to install npm libraries independently for frontend and backend. 
+
+For backend:
+
+``` sh
+cd backend
+npm i           #install npm modules
+npm start       #start nodejs server
+```
+
+For frontend:
+```sh
+cd AngularFrontend
+npm i           #install npm modules
+npm start       #start react server at port 4200
+```
+
+Now you can open multiple instances in the browser at `localhost:4200/` and each instance will be connected to the WebSocket.
+
 
 #### 
 

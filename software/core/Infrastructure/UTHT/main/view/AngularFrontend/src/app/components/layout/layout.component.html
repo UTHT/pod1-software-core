@@ -1,0 +1,70 @@
+<div class='dashboard'>
+    <div class="switch">
+      <switch-component></switch-component>
+    </div>
+    <!-- <div class="battery">
+      <app-widget-array type="BATTERY"></app-widget-array>
+    </div>
+    <div class="pod-state">
+      <app-podstate></app-podstate>
+    </div>
+    <div class="temp">
+      <app-widget-array type="TEMPERATURE"></app-widget-array>
+    </div>
+    <div class="speed">
+      <app-widget-array type="SPEED"></app-widget-array>
+    </div>
+    <div class="position">
+      <position-component></position-component>
+    </div>
+    <div class="brake">
+      <app-widget-array type="BRAKE"></app-widget-array>
+    </div>
+    <div class="control-panel">
+      <app-sensors></app-sensors>
+      <app-controls></app-controls> 
+    </div>-->
+    <div class="battery">
+      <battery-component label="battery-1" idNum=0></battery-component>
+      <battery-component label="battery-2" idNum=1></battery-component>
+    </div>
+    <div class="pod-state">
+      <app-podstate></app-podstate>
+    </div>
+      <div class="speed">
+        <speed-component></speed-component>
+      </div>
+
+      <div class="error-pane">
+      </div>
+      <div class="gauge-h" >
+        <app-gaugenvibration></app-gaugenvibration>
+      </div>
+      <!-- <div class="vibration">
+      </div> -->
+      <!-- <div class="position">
+        <position-component></position-component>
+      </div> -->
+      <div class="temp">
+        <temperature-component label="Motor" idNum=0></temperature-component>
+        <temperature-component label="Sensor" idNum=1></temperature-component>
+        <temperature-component label="Brake" idNum=2></temperature-component>
+        <temperature-component label="Motor_2" idNum=3></temperature-component>
+        <temperature-component label="Sensor_2" idNum=4></temperature-component>
+        <temperature-component label="Brake_2" idNum=5></temperature-component>
+      </div>
+      <div class="brake">
+        <brake-component label="Brake A" idNum = 0></brake-component>
+        <brake-component label="Brake B" idNum = 1></brake-component>
+        <brake-component label="Brake C" idNum = 2></brake-component>
+      </div>
+      <div class="brake_2">
+        <acceleration-component label="DC_CURRENT" idNum = 1></acceleration-component>
+        <acceleration-component label="ACCELERATION" idNum = 1></acceleration-component>
+      </div>
+      <div class="control-panel">
+        <app-sensors></app-sensors>
+        <app-controls></app-controls> 
+      </div>
+    
+  </div>
