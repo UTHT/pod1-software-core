@@ -1,7 +1,0 @@
-package channels;
-
-struct practice
-{
-    string  name;
-    string  message;
-}
