@@ -1,0 +1,94 @@
+{
+    "speedDataArray": {
+      "speed": {
+        "speedNotFoundError": [
+          {
+            "errorId": 1,
+            "entity": "speed",
+            "error": "speedNotFoundError"
+          }
+        ]
+      }
+    },
+    "temperatureDataArray": {
+      "temperatures": {
+        "temperatureNotFoundError": [
+          {
+            "errorId": 2,
+            "entity": "temperatures",
+            "thresholdValue": 1000,
+            "error": "temperatureNotFoundError"
+          }
+        ]
+      }
+    },
+    "brakeDataArray": {
+      "brakes": {
+        "brakesNotFoundError": [
+          {
+            "errorId": 3,
+            "entity": "brakes",
+            "thresholdValue": 200,
+            "error": "brakesNotFoundError"
+          }
+        ]
+      }
+    },
+    "batteryDataArray": {
+      "battery": {
+        "batteryNotFoundError": [
+          {
+            "errorId": 4,
+            "entity": "battery",
+            "thresholdValue": 100,
+            "error": "batteryNotFoundError"
+          }
+        ]
+      }
+    },
+    "currentDataArray": {
+      "current": {
+        "currentNotFoundError": [
+          {
+            "errorId": 5,
+            "entity": "current",
+            "thresholdValue": 100,
+            "error": "currentNotFoundError"
+          }
+        ]
+      },
+      "vibration": {
+        "vibrationNotFoundError": [
+          {
+            "errorId": 6,
+            "entity": "vibration",
+            "thresholdValue": 100,
+            "error": "vibrationNotFoundError"
+          }
+        ]
+      }
+    },
+    "gapHeightDataArray": {
+      "gapHeight": {
+        "gapHeightNotFoundError": [
+          {
+            "errorId": 7,
+            "entity": "gapHeight",
+            "thresholdValue": 100,
+            "error": "gapHeightNotFoundError"
+          }
+        ]
+      }
+    },
+    "accelerationDataArray": {
+      "acceleration": {
+        "accelerationNotFoundError": [
+          {
+            "errorId": 8,
+            "entity": "acceleration",
+            "error": "accelerationNotFoundError"
+          }
+        ]
+      }
+    }
+  }
