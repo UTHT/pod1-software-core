@@ -2,13 +2,13 @@ import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angu
 import {WebsocketService} from '../../../services/websocket.service';
 
 
-@Component({
-  selector: 'acceleration-component',
-  templateUrl: './acceleration.component.html',
-  // styleUrls: ['./acceleration.component.css']
-})
-export class AccelerationComponent implements OnInit {
 
+@Component({
+  selector: 'brake-component',
+  templateUrl: './brake.component.html',
+  //   styleUrls: ['./brake.component.css']
+})
+export class BrakeComponent implements OnInit {
   @Input() label: string;
   @Input() idNum: string;
   @Input() pressure: number;
@@ -28,7 +28,7 @@ export class AccelerationComponent implements OnInit {
     this.wsService.history.subscribe(historyArray => {
       if (historyArray && historyArray.length > 0){
         //console.log(historyArray);
-        this.currBrakePressure = historyArray[historyArray.length-1].obj[this.label][0]._value;
+        this.currBrakePressure = historyArray[historyArray.length-1].obj.PRESSURE[this.idNum]._value;
         this.count += 50;
         // if (this.count % 5000 == 0){
           this.brakePressureArray.push([this.count/1000,Math.floor(this.currBrakePressure)])
@@ -39,7 +39,7 @@ export class AccelerationComponent implements OnInit {
       }
     })
 
-    // setTimeout(() => { this.randomize(); }, 50);
+    setTimeout(() => { this.randomize(); }, 50);
   }
-
+  
 }
