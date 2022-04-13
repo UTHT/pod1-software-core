@@ -28,6 +28,7 @@ wss.on("connection", function connection(ws) {
 			// if the socket is just connected, tag it with the clientType property to be identifiable later
 			// any clients should send this event during initialization of the ws connection
 			case "connection":
+				console.log("comes hhere")
 				//Data should have a clientType to be added to the connection
 				//Todo: maybe add an error event id clienType is undefined
 				const clientType = data.clientType;
@@ -38,6 +39,7 @@ wss.on("connection", function connection(ws) {
 
 			// replay is any messages that just need to be passed to the clientType
 			case "relay":
+				console.log("comes hhere")
 				if (ws.clientType === "dashboard") {
 					//Todo: add encapsulation for the massage to go to the odroid
 					broadcast(wss, message, "odroid");

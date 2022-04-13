@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxGaugeComponent } from './components/icons/speedometer/ngx-gauge/ngx-gauge.component';
-import { Ng2GaugeComponent } from './components/icons/speedometer/ng2-gauge/ng2-gauge.component';
+//import { Ng2GaugeComponent } from './components/icons/speedometer/ng2-gauge/ng2-gauge.component';
 import { NgxGaugeModule } from 'ngx-gauge';
-import { Ng2GaugeModule } from 'ng2-gauge';
+//import { Ng2GaugeModule } from 'ng2-gauge';
 import { BatteryComponent } from './components/dashboard/battery/battery.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SpeedComponent } from './components/dashboard/speed/speed.component';
@@ -42,7 +42,7 @@ import { AccelerationComponent } from './components/dashboard/acceleration/accel
   declarations: [
     AppComponent,
     NgxGaugeComponent,
-    Ng2GaugeComponent,
+    //Ng2GaugeComponent,
     BatteryComponent,
     LayoutComponent,
     SpeedComponent,
@@ -75,7 +75,7 @@ import { AccelerationComponent } from './components/dashboard/acceleration/accel
     ChartsModule,
     BrowserAnimationsModule,
     NgxGaugeModule,
-    Ng2GaugeModule,
+    //Ng2GaugeModule,
     MatProgressBarModule,
     MatButtonModule
   ],
