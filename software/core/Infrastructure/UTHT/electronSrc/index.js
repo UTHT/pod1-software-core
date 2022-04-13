@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron')
 const path = require('path')
-const WebSocketController = require('./main/controller/controller');
+const WebSocketController = require('./controller/controller');
 
 function createWindow () {
     WebSocketController()
@@ -12,7 +12,7 @@ function createWindow () {
     }
   })
 
-  win.loadFile('./main/view/AngularFrontend/dist/AngularFrontend/index.html')
+  win.loadFile('./dist/AngularFrontend/index.html')
   //win.loadURL('http://localhost:8080');
   win.focus();
   // mainWindow.setFullScreen(true);
