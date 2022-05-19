@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
+
 export class WebsocketService {
   websocket: WebSocket;
   private data: any = {}
@@ -52,6 +53,10 @@ export class WebsocketService {
 
   public getMockData(){
     this.websocket.send(JSON.stringify({eventType: 'mock_request'}))
+  }
+
+  public sendButtonData(button){
+    this.websocket.send(JSON.stringify({eventType: 'button_input', data: button}));
   }
 
   public getDataHistory(){
