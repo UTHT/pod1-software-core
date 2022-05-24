@@ -38,9 +38,9 @@ class Sensor {
 };
 
 
-class SpeedSensor: public Sensor{
+class VelocitySensor: public Sensor{
     public:
-        SpeedSensor( string name, int value): Sensor( name, value) {};
+        VelocitySensor( string name, int value): Sensor( name, value) {};
 };
 
 class TemperatureSensor: public Sensor{
@@ -92,18 +92,18 @@ class PositionSensor {
 
 class Bundler {
     protected:
-        vector<SpeedSensor> _speedSensors;
+        vector<VelocitySensor> _velocitySensors;
         vector<TemperatureSensor> _tempSensors;
         vector<BatterySensor> _batteryensors;
         vector<BrakeSensor> _brakesSensors;
         PositionSensor _positionSensors;
     public:
 
-        Bundler(vector<SpeedSensor> speedSensors,vector<TemperatureSensor> tempSensors,
+        Bundler(vector<VelocitySensor> velocitySensors,vector<TemperatureSensor> tempSensors,
         vector<BatterySensor> batteryensors,vector<BrakeSensor> brakesSensors,  PositionSensor positionSensors
         ) 
         {
-            _speedSensors = speedSensors;
+            _velocitySensors = velocitySensors;
             _tempSensors = tempSensors;
             _batteryensors = batteryensors;
             _brakesSensors = brakesSensors;
@@ -116,19 +116,19 @@ class Bundler {
             outputString.push_back("{'eventType':'relay','clientType':'odroid','data':{"); // !!Important
 
             // For Speed Sensors
-            outputString.push_back("'speed':[");
-            for (auto i = 0; i<this->_speedSensors.size(); i++){
+            outputString.push_back("'velocity':[");
+            for (auto i = 0; i<this->_velocitySensors.size(); i++){
                 // If it is the first element, we dont want to append comma in the starting
                 if (i==0){
-                    outputString.push_back(this->_speedSensors[i].toString());
+                    outputString.push_back(this->_velocitySensors[i].toString());
                 }
                 else {
-                    outputString.push_back("," + this->_speedSensors[i].toString());
+                    outputString.push_back("," + this->_velocitySensors[i].toString());
                 }
             }
 
             //Temperature Sensors
-            outputString.push_back("],'temperatures':[");
+            outputString.push_back("],'temperature':[");
             for (int i = 0; i<this->_tempSensors.size(); i++){
                 // If it is the first element, we dont want to append comma in the starting
                 if (i==0){

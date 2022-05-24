@@ -22,12 +22,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include "./classes/sensor.h"
+#include <vector>
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace websocket = beast::websocket; // from <boost/beast/websocket.hpp>
 namespace net = boost::asio;            // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+using namespace std;
 
 // Sends a WebSocket message and prints the response
 int main(int argc, char** argv)
@@ -46,6 +49,12 @@ int main(int argc, char** argv)
         auto const host = argv[1];
         auto const port = argv[2];
         auto const text = "{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }"; // First data for handshake and connection
+
+        /***
+        Initiate Handshake with the websocket server and send the connection string
+        **/
+
+        #pragma region Initiate Handshake
 
         // The io_context is required for all I/O
         net::io_context ioc;
@@ -71,7 +80,10 @@ int main(int argc, char** argv)
 
         // Perform the websocket handshake
         ws.handshake(host, "/");
+        
+        #pragma endregion
 
+        #pragma region Connection string
         // Send the message
         ws.write(net::buffer(std::string(text)));
 
@@ -81,13 +93,55 @@ int main(int argc, char** argv)
         // Read a message into our buffer
         ws.read(buffer);
 
+        #pragma endregion
+
+        #pragma region Data stream
+
+        VelocitySensor sp{"velocity", 200};
+        TemperatureSensor tp1 {"motor", 100};
+        TemperatureSensor tp2 {"brake", 150};
+        BatterySensor b1 {"battery", 40};
+        BatterySensor b2 {"battery", 50};
+        BrakeSensor br1 {"left", 140};
+        BrakeSensor br2 {"ight", 60};
+        PositionSensor p1 {12,16};
+
+        vector<VelocitySensor> vsp;
+        vsp.push_back(sp);
+
+        vector<TemperatureSensor> tp;
+        tp.push_back(tp1);
+        tp.push_back(tp2);
+
+        vector<BatterySensor> b;
+        b.push_back(b1);
+        b.push_back(b2);
+
+        vector<BrakeSensor> br;
+        br.push_back(br1);
+        br.push_back(br2);
+
+        Bundler *bundle = new Bundler {vsp, tp, b, br, p1};
+        cout << bundle->toString()<< endl;
+
+         ws.write(net::buffer(std::string(bundle->toString())));
+
+
+        // Read a message into our buffer
+        ws.read(buffer);
+
+        #pragma endregion
+
+        
+
+
         // Close the WebSocket connection
         ws.close(websocket::close_code::normal);
 
         // If we get here then the connection is closed gracefully
 
         // The make_printable() function helps print a ConstBufferSequence
-        std::cout << beast::make_printable(buffer.data()) << std::endl;
+        //std::cout << beast::make_printable(buffer.data()) << std::endl;
     }
     catch(std::exception const& e)
     {
