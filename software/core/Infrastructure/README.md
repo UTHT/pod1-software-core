@@ -35,6 +35,25 @@ npm start
 
 Now you can open multiple instances in the application at `localhost:4200/` and each instance will be connected to the WebSocket.
 
+## Installation Guide
+Angular resides inside Electron as a framework for displaying data. Electron (build on NodeJs) is the main driving engine behind this software. You can get started with Electron and Angular Development as follows:
+
+
+```sh
+cd UTHT/
+npm i #install all the npm dependecies
+npm build --base-href="./"  # build Angular frontend framework which electron can utilize
+
+npm run electron-start #start the electron framework
+```
+
+Other commans include
+```sh
+npm start # only initializes the Angular fromewoork
+```
+
+Now you can open multiple instances in the application at `localhost:4200/` and each instance will be connected to the WebSocket.
+
 #### Compiling C++ socket
 We can succesfully connect to Nodejs Websocket with C++ websocket. You can compile and run C++ as follows:
 

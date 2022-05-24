@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {WebsocketService} from '../../services/websocket.service';
 
+
+enum ButtonType{
+  Start = 0,
+  Drive = 1,
+  Emergency_button = 2
+}
+
+
 @Component({
   selector: 'app-controls',
   templateUrl: './controls.component.html',
@@ -8,12 +16,21 @@ import {WebsocketService} from '../../services/websocket.service';
 })
 export class ControlsComponent implements OnInit {
 
+
   constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
   }
 
-  onClick(){
-    this.wsService.getMockData()
+  onClickStart(){
+    this.wsService.sendButtonData(ButtonType.Start)
+  }
+
+  onClickDrive(){
+    this.wsService.sendButtonData(ButtonType.Drive)
+  }
+
+  onClickEmergency(){
+    this.wsService.sendButtonData(ButtonType.Emergency_button)
   }
 }

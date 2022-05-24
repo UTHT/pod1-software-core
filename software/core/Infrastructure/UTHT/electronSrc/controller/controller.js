@@ -83,6 +83,11 @@ wss.on("connection", function connection(ws) {
 				broadcast(wss, msg, "dashboard");
 				return;
 
+			case "button_input":
+				const button_msg = { eventType: "mock", data: data};
+				broadcast(wss, button_msg, "odroid");
+				return;
+
 			//If eventType is not given or any of the above case then send an error message
 			default:
 				ws.send(
