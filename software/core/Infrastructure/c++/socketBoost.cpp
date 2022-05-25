@@ -25,6 +25,7 @@
 #include "./classes/sensor.h"
 #include <vector>
 
+
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace websocket = beast::websocket; // from <boost/beast/websocket.hpp>
@@ -50,11 +51,13 @@ int main(int argc, char** argv)
         auto const port = argv[2];
         auto const text = "{ 'eventType':'connection','data':{'clientType':'odroid'},'isNew':1 }"; // First data for handshake and connection
 
+
         /***
         Initiate Handshake with the websocket server and send the connection string
         **/
 
         #pragma region Initiate Handshake
+
 
         // The io_context is required for all I/O
         net::io_context ioc;
@@ -80,10 +83,12 @@ int main(int argc, char** argv)
 
         // Perform the websocket handshake
         ws.handshake(host, "/");
+
         
         #pragma endregion
 
         #pragma region Connection string
+
         // Send the message
         ws.write(net::buffer(std::string(text)));
 
@@ -92,6 +97,7 @@ int main(int argc, char** argv)
 
         // Read a message into our buffer
         ws.read(buffer);
+
 
         #pragma endregion
 
@@ -134,14 +140,15 @@ int main(int argc, char** argv)
 
         
 
-
         // Close the WebSocket connection
         ws.close(websocket::close_code::normal);
 
         // If we get here then the connection is closed gracefully
 
         // The make_printable() function helps print a ConstBufferSequence
+
         //std::cout << beast::make_printable(buffer.data()) << std::endl;
+
     }
     catch(std::exception const& e)
     {
