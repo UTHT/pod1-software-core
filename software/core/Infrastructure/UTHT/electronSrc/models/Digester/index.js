@@ -23,10 +23,20 @@ const fs = require("fs");
  * Vibration, dcCurrent, GapHeight]
  */
 function digest(odroid_json) {
-	const { velocity, temperature, battery, position, pressure, DC_current, vibrations,
-		gap_height, acceleration, state} = odroid_json;
+	// const { velocity, temperature, battery, position, pressure, DC_current, vibrations,
+	// 	gap_height, acceleration, state} = odroid_json;
 
-
+	const velocity = odroid_json["velocity"] || [];
+	const temperature = odroid_json["temperature"] || [];
+	const battery = odroid_json["battery"] || [];
+	const position = odroid_json["position"] || [];
+	const pressure = odroid_json["pressure"] || [];
+	const DC_current = odroid_json["DC_current"] || [];
+	const vibrations = odroid_json["vibrations"] || [];
+	const gap_height = odroid_json["gap_height"] || [];
+	const acceleration = odroid_json["acceleration"] || [];
+	const state = odroid_json["state"] || [];
+	
 	const Velocity = velocity.map(({ name, value }) => new VelocitySensor(value, name));
 
 	const Battery = battery.map(

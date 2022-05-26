@@ -15,25 +15,6 @@ The Infrastructure carries out data transmission from the Odroid (master compute
 ## Module Breakdown
 _Details coming soon_
 
-## Installation Guide
-There are two parts for installation. You have to install npm libraries independently for Angular and Electron.
-
-For Angular:
-
-```sh
-cd UTHT/main/view/AngularFrontend
-npm install                         #install npm module
-ng build --base-href "/"            # set base reference for angular
-```
-
-For electron
-```sh
-cd UTHT
-npm i
-npm start
-```
-
-Now you can open multiple instances in the application at `localhost:4200/` and each instance will be connected to the WebSocket.
 
 ## Installation Guide
 Angular resides inside Electron as a framework for displaying data. Electron (build on NodeJs) is the main driving engine behind this software. You can get started with Electron and Angular Development as follows:
@@ -62,17 +43,10 @@ make
 ./socket
 ```
 
-In some cases, make file will throw error due to SSL (can be reproduced in MacOS Big Sur). In that case, you can run the following to compile:
+The script can be run with the following parameters:
 
 ```sh
-g++ -std=c++11 socket.cpp -I$(brew --prefix openssl)/include -I$(brew --prefix cpprestsdk)/include -L$(brew --prefix openssl)/lib -L$(brew --prefix cpprestsdk)/lib -I$(brew --prefix boost)/include -L$(brew --prefix boost)/lib -lcpprest -lcrypto -lssl -lboost_system -lboost_chrono -lboost_thread-mt
-
-./a.out
-```
-
-For Ubuntu, please follow the instruction listed here 
-```sh
-https://github.com/microsoft/cpprestsdk/wiki/How-to-build-for-Linux
+./socket <IP_Address> <Port> # ./socket 127.0.0.1 8080
 ```
 
 <b style="color:red"> NOTE: make sure you have nodejs running before running ./a.out</b>
@@ -103,6 +77,26 @@ npm start       #start react server at port 4200
 ```
 
 Now you can open multiple instances in the browser at `localhost:4200/` and each instance will be connected to the WebSocket.
+
+## Installation Guide (LEGACY 2)
+There are two parts for installation. You have to install npm libraries independently for Angular and Electron.
+
+For Angular:
+
+```sh
+cd UTHT/main/view/AngularFrontend
+npm install                         #install npm module
+ng build --base-href "/"            # set base reference for angular
+```
+
+For electron
+```sh
+cd UTHT
+npm i
+npm start
+```
+
+Now you can open multiple instances in the application at `localhost:4200/` and each instance will be connected to the WebSocket.
 
 
 #### 

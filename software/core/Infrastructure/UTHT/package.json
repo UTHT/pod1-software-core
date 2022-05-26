@@ -11,7 +11,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron-start": "electron ."
+    "electron-start": "electron .",
+    "build-mac":"ng build --prod --base-href=./ && electron-packager . --overwrite --ignore=(\"e2e|node_modules|src|.browserslistrc|.editorconfig|.gitignore|angular.json|karma.conf.js|package-lock.json|README.md|tsconfig.app.json|tsconfig.json|tsconfig.spec.json|tslint.json\") --platform=darwin --arch=x64 --icon=./dist/AngularFrontend/assets/icons8-connect-256.icns --prune=true --out=./dist/electron-build",
+    "build-win":"",
+    "build-linux":""
   },
   "private": true,
   "dependencies": {
@@ -47,6 +50,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "electron": "^18.0.3",
+    "electron-packager": "^15.5.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
