@@ -1,0 +1,5 @@
+struct channel_msg {
+    int8_t arduino_id;
+    int8_t sensor_id;
+    double sensor_value;
+}

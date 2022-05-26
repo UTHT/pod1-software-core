@@ -1,0 +1,6 @@
+
+#ifndef CHANNELSTATUS_H
+#define CHANNELSTATUS_H
+enum ChannelStatus { NO_VALUE, OUT_OF_RANGE, NO_COMMS, FUNCTIONING };
+
+#endif
