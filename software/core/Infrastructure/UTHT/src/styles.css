@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(/assets/open-sans-v18-latin/open-sans-v18-latin.ttf) format("truetype");
+  font-weight:300;
+}
+
+body {
+  background: #434343;
+  font-family: "Open Sans", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

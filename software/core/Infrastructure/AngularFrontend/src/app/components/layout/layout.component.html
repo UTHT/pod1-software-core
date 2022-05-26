@@ -1,0 +1,62 @@
+<div class='dashboard'>
+    <div class="switch">
+      <switch-component></switch-component>
+    </div>
+    <!-- <div class="battery">
+      <app-widget-array type="BATTERY"></app-widget-array>
+    </div>
+    <div class="pod-state">
+      <app-podstate></app-podstate>
+    </div>
+    <div class="temp">
+      <app-widget-array type="TEMPERATURE"></app-widget-array>
+    </div>
+    <div class="speed">
+      <app-widget-array type="SPEED"></app-widget-array>
+    </div>
+    <div class="position">
+      <position-component></position-component>
+    </div>
+    <div class="brake">
+      <app-widget-array type="BRAKE"></app-widget-array>
+    </div>
+    <div class="control-panel">
+      <app-sensors></app-sensors>
+      <app-controls></app-controls> 
+    </div>-->
+    <div class="battery">
+      <battery-component label="battery-1" idNum=0></battery-component>
+      <battery-component label="battery-2" idNum=1></battery-component>
+    </div>
+    <div class="pod-state">
+      <app-podstate></app-podstate>
+    </div>
+      <div class="speed">
+        <speed-component></speed-component>
+      </div>
+
+      <div class="error-pane">
+      </div>
+      <div class="gauge-h" >
+        <app-gaugenvibration></app-gaugenvibration>
+      </div>
+      <!-- <div class="vibration">
+      </div> -->
+      <!-- <div class="position">
+        <position-component></position-component>
+      </div> -->
+      <div class="temp">
+        <temperature-component label="Motor" idNum=0></temperature-component>
+        <temperature-component label="Sensor" idNum=1></temperature-component>
+        <temperature-component label="Brake" idNum=2></temperature-component>
+      </div>
+      <div class="brake">
+        <brake-component label="Brake A" idNum = 1></brake-component>
+        <brake-component label="Brake B" idNum = 2></brake-component>
+      </div>
+      <div class="control-panel">
+        <app-sensors></app-sensors>
+        <app-controls></app-controls> 
+      </div>
+    
+  </div>
