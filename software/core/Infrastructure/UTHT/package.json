@@ -1,5 +1,5 @@
 {
-  "name": "angular-frontend",
+  "name": "utht",
   "version": "0.0.0",
   "author": "Javaad Akhtar",
   "description": "UTHT main file",
@@ -12,9 +12,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron-start": "electron .",
-    "build-mac":"ng build --prod --base-href=./ && electron-packager . --overwrite --ignore=(\"e2e|node_modules|src|.browserslistrc|.editorconfig|.gitignore|angular.json|karma.conf.js|package-lock.json|README.md|tsconfig.app.json|tsconfig.json|tsconfig.spec.json|tslint.json\") --platform=darwin --arch=x64 --icon=./dist/AngularFrontend/assets/icons8-connect-256.icns --prune=true --out=./dist/electron-build",
-    "build-win":"",
-    "build-linux":""
+    "build-mac": "ng build --prod --base-href=./ && electron-packager . UTHT_Mac --overwrite --platform=darwin --arch=x64 --icon=assets/uthtLogo.ico --prune=true --out=release-builds/Mac",
+    "build-win": "ng build --prod --base-href=./ && electron-packager . UTHT_Win --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/uthtLogo.ico --prune=true --out=release-builds/Win --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"UTHT Dashboard\"",  
+    "build-linux": "ng build --prod --base-href=./ && electron-packager . UTHT_Linux --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/uthtLogo.ico --prune=true --out=release-builds/Lin",
+    "rebuild": "electron-rebuild -f -w .",
+    "build-all": "npm run build-mac && npm run build-win && npm run build-linux"
   },
   "private": true,
   "dependencies": {
@@ -33,12 +35,14 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^0.7.0",
+    "lodash": "^4.17.21",
     "ng2-charts": "^2.4.2",
     "ng2-gauge": "^1.2.0",
     "ngx-gauge": "^1.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "websocket": "^1.0.32",
+    "ws": "^8.7.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
