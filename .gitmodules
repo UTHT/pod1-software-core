@@ -4,3 +4,7 @@
 [submodule "software/communications/libraries/PacketSerial"]
 	path = software/communications/libraries/PacketSerial
 	url = https://github.com/gizatt/PacketSerial.git
+[submodule "software/communications/arduino/pod1-electronics-scripts"]
+	path = software/communications/arduino/pod1-electronics-scripts
+	url = https://github.com/UTHT/pod1-electronics-scripts
+	branch = communications/zcm-integration
