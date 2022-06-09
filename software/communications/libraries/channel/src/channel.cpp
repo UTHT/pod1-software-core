@@ -95,24 +95,31 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     // Message type checking
     // Need to double check what typeid.name() returns for double and arrays
     // string sensorType(typeid(msg->sensor_value).name());
-    
-    global_lock.lock();
 
-    channelObj->current_values.clear();
-    channelObj->current_values.insert(channelObj->current_values.begin(), msg->data, msg->data + msg->sz);
+    string statusMsg = msg->statusMsg;
 
-    time(&channelObj->last_comm_time);
+    if (!statusMsg.empty()) {
+        // TODO: Temporarily output the status. However, we should do something with this message. 
+        cout << statusMsg << endl;
+    } else {
+        global_lock.lock();
 
-    cout << "Current Values: ";
-    for (int i = 0; i < channelObj->current_values.size(); i++) {
-        cout << channelObj->current_values.at(i) << ", ";
+        channelObj->current_values.clear();
+        channelObj->current_values.insert(channelObj->current_values.begin(), msg->data, msg->data + msg->sz);
+
+        time(&channelObj->last_comm_time);
+
+        cout << "Current Values: ";
+        for (int i = 0; i < channelObj->current_values.size(); i++) {
+            cout << channelObj->current_values.at(i) << ", ";
+        }
+        cout << endl;
+        
+        cout << "Units: " << msg->units << endl;
+        cout << "Time received: " << channelObj->last_comm_time << endl;
+        
+        global_lock.unlock();
     }
-    cout << endl;
-    
-    cout << "Units: " << msg->units << endl;
-    cout << "Time received: " << channelObj->last_comm_time << endl;
-    
-    global_lock.unlock();
 }
 
 vector<double> Channel::getCurrentValues() {

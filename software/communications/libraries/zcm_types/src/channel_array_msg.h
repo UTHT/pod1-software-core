@@ -24,6 +24,7 @@ struct _channel_array
     int64_t    sz;
     double     *data;
     char*      units;
+    char*      statusMsg;
 };
 
 /**

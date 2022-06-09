@@ -5,4 +5,5 @@ struct channel_array
     int64_t sz;
     double data[sz];
     string units;
+    string statusMsg;
 }
