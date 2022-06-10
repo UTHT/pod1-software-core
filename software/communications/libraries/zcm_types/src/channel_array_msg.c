@@ -24,11 +24,12 @@ uint64_t __channel_array_hash_recursive(const __zcm_hash_ptr* p)
     cp.v = (void*)__channel_array_get_hash;
     (void) cp;
 
-    uint64_t hash = (uint64_t)0x3e47c8f214f75cbfLL
+    uint64_t hash = (uint64_t)0x7cfe058cc15c527fLL
          + __int8_t_hash_recursive(&cp)
          + __string_hash_recursive(&cp)
          + __int64_t_hash_recursive(&cp)
          + __double_hash_recursive(&cp)
+         + __string_hash_recursive(&cp)
          + __string_hash_recursive(&cp)
         ;
 
@@ -47,28 +48,37 @@ int64_t __channel_array_get_hash(void)
 
 int __channel_array_encode_array(void* buf, uint32_t offset, uint32_t maxlen, const channel_array* p, uint32_t elements)
 {
-    uint32_t pos = 0, element;
+    uint32_t pos_byte = 0, element;
     int thislen;
 
     for (element = 0; element < elements; ++element) {
 
-        thislen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].arduino_id), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* arduino_id */
+        thislen = __int8_t_encode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].arduino_id), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __string_encode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* sensor */
+        thislen = __string_encode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].sensor), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __int64_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].sz), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* sz */
+        thislen = __int64_t_encode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].sz), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __double_encode_array(buf, offset + pos, maxlen - pos, p[element].data, p[element].sz);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* data */
+        thislen = __double_encode_array(buf, offset + pos_byte, maxlen - pos_byte, p[element].data, p[element].sz);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __string_encode_array(buf, offset + pos, maxlen - pos, &(p[element].units), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* units */
+        thislen = __string_encode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].units), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
+
+        /* statusMsg */
+        thislen = __string_encode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].statusMsg), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
     }
-    return pos;
+    return pos_byte;
 }
 
 int channel_array_encode(void* buf, uint32_t offset, uint32_t maxlen, const channel_array* p)
@@ -91,15 +101,17 @@ uint32_t __channel_array_encoded_array_size(const channel_array* p, uint32_t ele
     uint32_t size = 0, element;
     for (element = 0; element < elements; ++element) {
 
-        size += __int8_t_encoded_array_size(&(p[element].arduino_id), 1);
+        size += __int8_t_encoded_array_size(&(p[element].arduino_id), 1); // arduino_id
 
-        size += __string_encoded_array_size(&(p[element].sensor), 1);
+        size += __string_encoded_array_size(&(p[element].sensor), 1); // sensor
 
-        size += __int64_t_encoded_array_size(&(p[element].sz), 1);
+        size += __int64_t_encoded_array_size(&(p[element].sz), 1); // sz
 
-        size += __double_encoded_array_size(p[element].data, p[element].sz);
+        size += __double_encoded_array_size(p[element].data, p[element].sz); // data
 
-        size += __string_encoded_array_size(&(p[element].units), 1);
+        size += __string_encoded_array_size(&(p[element].units), 1); // units
+
+        size += __string_encoded_array_size(&(p[element].statusMsg), 1); // statusMsg
 
     }
     return size;
@@ -112,29 +124,38 @@ uint32_t channel_array_encoded_size(const channel_array* p)
 
 int __channel_array_decode_array(const void* buf, uint32_t offset, uint32_t maxlen, channel_array* p, uint32_t elements)
 {
-    uint32_t pos = 0, element;
+    uint32_t pos_byte = 0, element;
     int thislen;
 
     for (element = 0; element < elements; ++element) {
 
-        thislen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].arduino_id), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* arduino_id */
+        thislen = __int8_t_decode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].arduino_id), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __string_decode_array(buf, offset + pos, maxlen - pos, &(p[element].sensor), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* sensor */
+        thislen = __string_decode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].sensor), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __int64_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].sz), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* sz */
+        thislen = __int64_t_decode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].sz), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
+        /* data */
         p[element].data = (double*) zcm_malloc(sizeof(double) * p[element].sz);
-        thislen = __double_decode_array(buf, offset + pos, maxlen - pos, p[element].data, p[element].sz);
-        if (thislen < 0) return thislen; else pos += thislen;
+        thislen = __double_decode_array(buf, offset + pos_byte, maxlen - pos_byte, p[element].data, p[element].sz);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
-        thislen = __string_decode_array(buf, offset + pos, maxlen - pos, &(p[element].units), 1);
-        if (thislen < 0) return thislen; else pos += thislen;
+        /* units */
+        thislen = __string_decode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].units), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
+
+        /* statusMsg */
+        thislen = __string_decode_array(buf, offset + pos_byte, maxlen - pos_byte, &(p[element].statusMsg), 1);
+        if (thislen < 0) return thislen; else pos_byte += thislen;
 
     }
-    return pos;
+    return pos_byte;
 }
 
 int __channel_array_decode_array_cleanup(channel_array* p, uint32_t elements)
@@ -152,6 +173,8 @@ int __channel_array_decode_array_cleanup(channel_array* p, uint32_t elements)
         if (p[element].data) free(p[element].data);
 
         __string_decode_array_cleanup(&(p[element].units), 1);
+
+        __string_decode_array_cleanup(&(p[element].statusMsg), 1);
 
     }
     return 0;
@@ -194,6 +217,8 @@ uint32_t __channel_array_clone_array(const channel_array* p, channel_array* q, u
         n += __double_clone_array(p[element].data, q[element].data, p[element].sz);
 
         n += __string_clone_array(&(p[element].units), &(q[element].units), 1);
+
+        n += __string_clone_array(&(p[element].statusMsg), &(q[element].statusMsg), 1);
 
     }
     return n;

@@ -1,25 +1,39 @@
 {
     "channels": [
         {
-            "sensor": "temperature_1",
+            "sensor": "SENSOR_RTD",
             "serial_port": "/dev/cu.usbmodem14501",
             "arduino_id": "1",
-            "min_value": 10,
-            "max_value": 30
+            "min_value": -40,
+            "max_value": 150
         },
         {
-            "sensor": "resistance_1",
+            "sensor": "SENSOR_SPT25_20_0200A_1",
             "serial_port": "/dev/cu.usbmodem14501",
-            "arduino_id": "2",
-            "min_value": 1,
-            "max_value": 5
+            "arduino_id": "1",
+            "min_value": 0,
+            "max_value": 200
         },
         {
-            "sensor": "voltage_1",
+            "sensor": "SENSOR_SPT25_20_0200A",
             "serial_port": "/dev/cu.usbmodem14501",
-            "arduino_id": "3",
-            "min_value": 1,
-            "max_value": 10
+            "arduino_id": "1",
+            "min_value": 0,
+            "max_value": 200
+        },
+        {
+            "sensor": "SENSOR_SPTD25_20_1000H",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "1",
+            "min_value": 0,
+            "max_value": 1000
+        },
+        {
+            "sensor": "SENSOR_TMP006",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "1",
+            "min_value": -40,
+            "max_value": 150
         }
     ]
 }

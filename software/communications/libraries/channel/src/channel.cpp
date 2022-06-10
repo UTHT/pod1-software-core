@@ -95,7 +95,7 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     // Message type checking
     // Need to double check what typeid.name() returns for double and arrays
     // string sensorType(typeid(msg->sensor_value).name());
-
+    
     string statusMsg = msg->statusMsg;
 
     if (!statusMsg.empty()) {
@@ -117,6 +117,8 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
         
         cout << "Units: " << msg->units << endl;
         cout << "Time received: " << channelObj->last_comm_time << endl;
+
+        cout << endl;
         
         global_lock.unlock();
     }
