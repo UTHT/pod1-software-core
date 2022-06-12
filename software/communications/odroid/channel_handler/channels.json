@@ -34,6 +34,41 @@
             "arduino_id": "1",
             "min_value": -40,
             "max_value": 150
+        },
+        {
+            "sensor": "SENSOR_OPT2002",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "2",
+            "min_value": 30,
+            "max_value": 80
+        },
+        {
+            "sensor": "SENSOR_DCT200",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "2",
+            "min_value": 0,
+            "max_value": 60
+        },
+        {
+            "sensor": "SENSOR_RTD1",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "3",
+            "min_value": -40,
+            "max_value": 150
+        },
+        {
+            "sensor": "SENSOR_RTD2",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "3",
+            "min_value": -40,
+            "max_value": 150
+        },
+        {
+            "sensor": "SENSOR_VFS500",
+            "serial_port": "/dev/cu.usbmodem14501",
+            "arduino_id": "3",
+            "min_value": 0.26,
+            "max_value": 5.28
         }
     ]
 }
