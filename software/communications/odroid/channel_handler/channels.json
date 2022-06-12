@@ -29,13 +29,6 @@
             "max_value": 1000
         },
         {
-            "sensor": "SENSOR_TMP006",
-            "serial_port": "/dev/cu.usbmodem14501",
-            "arduino_id": "1",
-            "min_value": -40,
-            "max_value": 150
-        },
-        {
             "sensor": "SENSOR_OPT2002",
             "serial_port": "/dev/cu.usbmodem14501",
             "arduino_id": "2",
