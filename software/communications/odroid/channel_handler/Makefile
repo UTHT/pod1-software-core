@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = $(INCLUDES) -g -Wall
+CFLAGS = $(INCLUDES) -g -std=c++11 -Wall
 TARGET = channel_handler
 
 # Common directories
