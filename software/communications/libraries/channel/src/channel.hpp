@@ -9,6 +9,7 @@
 #include <ctime> 
 #include <mutex>
 #include <vector>
+#include<fstream>
 
 #include <linux_cobs_serial_transport.hpp>
 #include <channel_array_msg.h>

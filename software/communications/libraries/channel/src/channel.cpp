@@ -98,6 +98,14 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
     
     string statusMsg = msg->statusMsg;
 
+    // creating the csv file 
+    string fileName = strcat(sensorName, ".csv");
+
+    fstream fout;
+    fout.open(fileName, ios::out);
+    fout<<"Current Value"<<","<<"Unit"<<","<<"Time Recieved"<<"\n";
+
+
     if (!statusMsg.empty()) {
         // TODO: Temporarily output the status. However, we should do something with this message. 
         cout << statusMsg << endl;
@@ -112,7 +120,11 @@ void Channel::callbackHandler(const zcm_recv_buf_t* rbuf, const char* channel, c
         cout << "Current Values: ";
         for (int i = 0; i < channelObj->current_values.size(); i++) {
             cout << channelObj->current_values.at(i) << ", ";
+            // write the values to the csv file 
+            fout << channelObj->current_values.at(i) <<","<< msg->units<<","<< channelObj->last_comm_time <<"\n";
+
         }
+        fout.close();
         cout << endl;
         
         cout << "Units: " << msg->units << endl;
