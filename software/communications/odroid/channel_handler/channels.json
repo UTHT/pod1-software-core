@@ -2,28 +2,28 @@
     "channels": [
         {
             "sensor": "SENSOR_RTD",
-            "serial_port": "/dev/cu.usbmodem14501",
+            "serial_port": "/dev/ttyACM0",
             "arduino_id": "1",
             "min_value": -40,
             "max_value": 150
         },
         {
             "sensor": "SENSOR_SPT25_20_0200A_1",
-            "serial_port": "/dev/cu.usbmodem14501",
+            "serial_port": "/dev/ttyACM0",
             "arduino_id": "1",
             "min_value": 0,
             "max_value": 200
         },
         {
             "sensor": "SENSOR_SPT25_20_0200A",
-            "serial_port": "/dev/cu.usbmodem14501",
+            "serial_port": "/dev/ttyACM0",
             "arduino_id": "1",
             "min_value": 0,
             "max_value": 200
         },
         {
             "sensor": "SENSOR_SPTD25_20_1000H",
-            "serial_port": "/dev/cu.usbmodem14501",
+            "serial_port": "/dev/ttyACM0",
             "arduino_id": "1",
             "min_value": 0,
             "max_value": 1000
