@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bufferutil": "^3.0.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lodash": "^4.17.21",
     "mongoose": "^5.11.8",
     "node": "^14.12.0",
